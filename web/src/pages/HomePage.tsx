@@ -4,9 +4,18 @@ import { Button } from '../components/ui/button';
 import { Container } from '../components/ui/container';
 import { Header } from '../components/ui/header';
 import { Badge } from '../components/ui/badge';
+import { useNavigate } from '@tanstack/react-router';
 
 export function HomePage() {
   const { user } = useAuth();
+  const navigate = useNavigate();
+
+  const handleNavigateToDashboard = () => {
+    if (user?.role === 'instructor') {
+      navigate({ to: '/instructor/dashboard' });
+    }
+    // Add other role-specific navigation here when implemented
+  };
 
   return (
     <div className="min-h-screen bg-background">
@@ -53,9 +62,10 @@ export function HomePage() {
                       Manage your dance classes and view student enrollments.
                     </p>
                     <div className="flex flex-wrap gap-4">
-                      <Button>Create New Class</Button>
-                      <Button variant="outline">View My Classes</Button>
-                      <Button variant="outline">Student Requests</Button>
+                      <Button onClick={handleNavigateToDashboard}>Go to Dashboard</Button>
+                      <Button variant="outline" onClick={() => navigate({ to: '/classes/create' })}>
+                        Create New Class
+                      </Button>
                     </div>
                   </div>
                 </CardContent>
@@ -73,7 +83,6 @@ export function HomePage() {
                     <div className="flex flex-wrap gap-4">
                       <Button>Browse Classes</Button>
                       <Button variant="outline">My Enrollments</Button>
-                      <Button variant="outline">Class Schedule</Button>
                     </div>
                   </div>
                 </CardContent>

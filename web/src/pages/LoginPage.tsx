@@ -7,7 +7,7 @@ import { Label } from '../components/ui/label';
 import { Alert } from '../components/ui/alert';
 import { Container } from '../components/ui/container';
 import { Header } from '../components/ui/header';
-import { ApiClientError } from '../lib/api/config';
+import { AxiosError } from 'axios';
 
 export function LoginPage() {
   const [email, setEmail] = useState('');
@@ -21,8 +21,8 @@ export function LoginPage() {
     try {
       await login(email, password);
     } catch (err) {
-      if (err instanceof ApiClientError) {
-        setError(err.message);
+      if (err instanceof AxiosError) {
+        setError(err.response?.data?.message || 'Invalid email or password');
       } else {
         setError('Invalid email or password');
       }

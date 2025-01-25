@@ -2,9 +2,12 @@ import { Outlet, createRootRoute, createRoute, createRouter } from '@tanstack/re
 import { LoginPage } from './pages/LoginPage';
 import { SignupPage } from './pages/SignupPage';
 import { HomePage } from './pages/HomePage';
+import { CreateClassPage } from './pages/CreateClassPage';
+import { ClassDetailsPage } from './pages/ClassDetailsPage';
+import { InstructorDashboardPage } from './pages/InstructorDashboardPage';
 import { AuthProvider, useAuth } from './lib/auth/AuthContext';
 import { QueryClientProvider } from '@tanstack/react-query';
-import { queryClient } from './lib/api/config';
+import { queryClient } from './lib/api/queryClient';
 
 const rootRoute = createRootRoute({
   component: () => (
@@ -28,7 +31,7 @@ function ProtectedLayout() {
   }
 
   if (!isAuthenticated) {
-    window.location.href = '/login';
+    // window.location.href = '/login';
     return null;
   }
 
@@ -47,6 +50,24 @@ const indexRoute = createRoute({
   component: HomePage,
 });
 
+const instructorDashboardRoute = createRoute({
+  getParentRoute: () => protectedLayout,
+  path: '/instructor/dashboard',
+  component: InstructorDashboardPage,
+});
+
+const createClassRoute = createRoute({
+  getParentRoute: () => protectedLayout,
+  path: '/classes/create',
+  component: CreateClassPage,
+});
+
+const classDetailsRoute = createRoute({
+  getParentRoute: () => protectedLayout,
+  path: '/classes/$classId',
+  component: ClassDetailsPage,
+});
+
 const loginRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: '/login',
@@ -60,7 +81,12 @@ const signupRoute = createRoute({
 });
 
 const routeTree = rootRoute.addChildren([
-  protectedLayout.addChildren([indexRoute]),
+  protectedLayout.addChildren([
+    indexRoute,
+    instructorDashboardRoute,
+    createClassRoute,
+    classDetailsRoute,
+  ]),
   loginRoute,
   signupRoute,
 ]);

@@ -34,10 +34,18 @@ class DanceClassSchema(Schema):
     description: str
     instructor_id: int
     level: str
-    capacity: int
+    max_capacity: int
+    current_capacity: int
     price: float
-    start_time: datetime
-    end_time: datetime
+    created_at: datetime
+    updated_at: datetime
+
+class CreateDanceClassSchema(Schema):
+    name: str
+    description: str
+    level: str
+    max_capacity: int
+    price: float
 
 class ReviewSchema(Schema):
     id: int
@@ -199,16 +207,17 @@ def list_classes(request):
             description=dance_class.description,
             instructor_id=dance_class.instructor.id,
             level=dance_class.level,
-            capacity=dance_class.max_capacity,
+            max_capacity=dance_class.max_capacity,
+            current_capacity=dance_class.current_capacity,
             price=float(dance_class.price),
-            start_time=dance_class.created_at,
-            end_time=dance_class.updated_at,
+            created_at=dance_class.created_at,
+            updated_at=dance_class.updated_at,
         )
         for dance_class in classes
     ]
 
 @api.post("/classes", response=DanceClassSchema)
-def create_class(request, payload: DanceClassSchema):
+def create_class(request, payload: CreateDanceClassSchema):
     if request.auth.role != 'instructor':
         return api.create_response(
             request, {"detail": "Only instructors can create classes"}, status=403
@@ -218,12 +227,21 @@ def create_class(request, payload: DanceClassSchema):
         description=payload.description,
         instructor=request.auth,
         level=payload.level,
-        capacity=payload.capacity,
+        max_capacity=payload.max_capacity,
         price=payload.price,
-        start_time=payload.start_time,
-        end_time=payload.end_time,
     )
-    return dance_class
+    return DanceClassSchema(
+        id=dance_class.id,
+        name=dance_class.name,
+        description=dance_class.description,
+        instructor_id=dance_class.instructor.id,
+        level=dance_class.level,
+        max_capacity=dance_class.max_capacity,
+        current_capacity=dance_class.current_capacity,
+        price=float(dance_class.price),
+        created_at=dance_class.created_at,
+        updated_at=dance_class.updated_at,
+    )
 
 @api.get("/classes/{class_id}", response=DanceClassSchema)
 def get_class(request, class_id: int):
@@ -234,10 +252,11 @@ def get_class(request, class_id: int):
         description=dance_class.description,
         instructor_id=dance_class.instructor.id,
         level=dance_class.level,
-        capacity=dance_class.max_capacity,
+        max_capacity=dance_class.max_capacity,
+        current_capacity=dance_class.current_capacity,
         price=float(dance_class.price),
-        start_time=dance_class.created_at,
-        end_time=dance_class.updated_at,
+        created_at=dance_class.created_at,
+        updated_at=dance_class.updated_at,
     )
 
 @api.put("/classes/{class_id}", response=DanceClassSchema)
@@ -257,10 +276,11 @@ def update_class(request, class_id: int, payload: DanceClassSchema):
         description=dance_class.description,
         instructor_id=dance_class.instructor.id,
         level=dance_class.level,
-        capacity=dance_class.max_capacity,
+        max_capacity=dance_class.max_capacity,
+        current_capacity=dance_class.current_capacity,
         price=float(dance_class.price),
-        start_time=dance_class.created_at,
-        end_time=dance_class.updated_at,
+        created_at=dance_class.created_at,
+        updated_at=dance_class.updated_at,
     )
 
 @api.delete("/classes/{class_id}")
