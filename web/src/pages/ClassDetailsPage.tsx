@@ -1,4 +1,4 @@
-import { useParams } from '@tanstack/react-router';
+import { useParams, useNavigate } from '@tanstack/react-router';
 import { useAuth } from '../lib/auth/AuthContext';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '../components/ui/card';
 import { Button } from '../components/ui/button';
@@ -6,24 +6,13 @@ import { Container } from '../components/ui/container';
 import { Header } from '../components/ui/header';
 import { Badge } from '../components/ui/badge';
 import { useClass } from '../lib/api/classes';
-
-type DanceClass = {
-  id: number;
-  name: string;
-  description: string;
-  instructor_id: number;
-  level: string;
-  capacity: number;
-  price: number;
-  start_time: string;
-  end_time: string;
-};
+import { formatDayOfWeek } from '../lib/api/schedules';
 
 export function ClassDetailsPage() {
   const { classId } = useParams({ from: '/protected/classes/$classId' });
   const { user } = useAuth();
-
-  const { data: classDetails, isLoading, error } = useClass(Number(classId));
+  const navigate = useNavigate();
+  const { data: classDetails, isLoading } = useClass(Number(classId));
 
   if (isLoading) {
     return (
@@ -36,7 +25,7 @@ export function ClassDetailsPage() {
     );
   }
 
-  if (error || !classDetails) {
+  if (!classDetails) {
     return (
       <div className="min-h-screen flex flex-col bg-background">
         <Header />
@@ -52,59 +41,116 @@ export function ClassDetailsPage() {
       <Header />
       <Container>
         <div className="py-8">
-          <Card>
-            <CardHeader>
-              <div className="flex justify-between items-start">
-                <div>
-                  <CardTitle className="text-2xl">{classDetails.name}</CardTitle>
-                  <CardDescription>
-                    <Badge variant="secondary" className="mt-2">
-                      {classDetails.level}
-                    </Badge>
-                  </CardDescription>
-                </div>
-                <div className="text-right">
-                  <div className="text-2xl font-bold">{classDetails.price} PLN</div>
-                  <div className="text-sm text-muted-foreground">per class</div>
-                </div>
-              </div>
-            </CardHeader>
-            <CardContent className="space-y-6">
-              <div>
-                <h3 className="text-lg font-semibold mb-2">Description</h3>
-                <p className="text-muted-foreground">{classDetails.description}</p>
-              </div>
+          <div className="flex justify-between items-center mb-6">
+            <div>
+              <h1 className="text-3xl font-bold">{classDetails.name}</h1>
+              <p className="text-muted-foreground">
+                Level: {classDetails.level.charAt(0).toUpperCase() + classDetails.level.slice(1)}
+              </p>
+            </div>
+            {user?.role === 'instructor' && user?.id === classDetails.instructor_id && (
+              <Button onClick={() => navigate({ to: `/classes/${classId}/schedules` })}>
+                Manage Schedules
+              </Button>
+            )}
+          </div>
 
-              <div className="grid grid-cols-2 gap-4">
+          <div className="grid gap-6 md:grid-cols-2">
+            <Card>
+              <CardHeader>
+                <CardTitle>Class Details</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
                 <div>
-                  <h3 className="font-medium mb-1">Schedule</h3>
+                  <h3 className="text-lg font-semibold mb-2">Description</h3>
+                  <p className="text-muted-foreground">{classDetails.description}</p>
+                </div>
+                <div>
+                  <h3 className="text-lg font-semibold mb-2">Class Period</h3>
                   <p className="text-muted-foreground">
-                    {new Date(classDetails.start_time).toLocaleTimeString()} - 
-                    {new Date(classDetails.end_time).toLocaleTimeString()}
+                    From {new Date(classDetails.start_date).toLocaleDateString()} to{' '}
+                    {new Date(classDetails.end_date).toLocaleDateString()}
                   </p>
                 </div>
                 <div>
-                  <h3 className="font-medium mb-1">Capacity</h3>
+                  <h3 className="text-lg font-semibold mb-2">Capacity</h3>
                   <p className="text-muted-foreground">
-                    {classDetails.capacity} students
+                    {classDetails.current_capacity} / {classDetails.max_capacity} students
                   </p>
                 </div>
-              </div>
-
-              {user?.role === 'student' && (
-                <div className="pt-4">
-                  <Button className="w-full">Enroll in Class</Button>
+                <div>
+                  <h3 className="text-lg font-semibold mb-2">Price</h3>
+                  <p className="text-muted-foreground">${classDetails.price.toFixed(2)} per class</p>
                 </div>
-              )}
+              </CardContent>
+            </Card>
 
-              {user?.id === classDetails.instructor_id && (
-                <div className="pt-4 flex gap-4">
-                  <Button variant="outline" className="flex-1">Edit Class</Button>
-                  <Button variant="destructive" className="flex-1">Cancel Class</Button>
+            <Card>
+              <CardHeader>
+                <CardTitle>Schedule</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-6">
+                  <div>
+                    <h3 className="text-lg font-semibold mb-2">Regular Schedule</h3>
+                    {classDetails.recurring_schedules.length === 0 ? (
+                      <p className="text-muted-foreground">No regular schedules set.</p>
+                    ) : (
+                      <div className="space-y-4">
+                        {classDetails.recurring_schedules.map((schedule) => (
+                          <div key={schedule.id} className="flex justify-between items-start border-b pb-4 last:border-0">
+                            <div>
+                              <p className="font-medium">{formatDayOfWeek(schedule.day_of_week)}</p>
+                              <p className="text-sm text-muted-foreground">
+                                {new Date(`1970-01-01T${schedule.start_time}`).toLocaleTimeString()} - 
+                                {new Date(`1970-01-01T${schedule.end_time}`).toLocaleTimeString()}
+                              </p>
+                            </div>
+                            <Badge variant={schedule.status === 'active' ? 'default' : 'secondary'}>
+                              {schedule.status}
+                            </Badge>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+
+                  <div>
+                    <h3 className="text-lg font-semibold mb-2">Special Sessions</h3>
+                    {classDetails.special_schedules.length === 0 ? (
+                      <p className="text-muted-foreground">No special sessions scheduled.</p>
+                    ) : (
+                      <div className="space-y-4">
+                        {classDetails.special_schedules.map((schedule) => (
+                          <div key={schedule.id} className="flex justify-between items-start border-b pb-4 last:border-0">
+                            <div>
+                              <p className="font-medium">{new Date(schedule.date).toLocaleDateString()}</p>
+                              <p className="text-sm text-muted-foreground">
+                                {new Date(`1970-01-01T${schedule.start_time}`).toLocaleTimeString()} - 
+                                {new Date(`1970-01-01T${schedule.end_time}`).toLocaleTimeString()}
+                              </p>
+                              {schedule.note && (
+                                <p className="text-sm text-muted-foreground mt-1">
+                                  Note: {schedule.note}
+                                </p>
+                              )}
+                            </div>
+                            <Badge variant={
+                              schedule.status === 'scheduled' ? 'default' :
+                              schedule.status === 'cancelled' ? 'destructive' :
+                              schedule.status === 'rescheduled' ? 'secondary' : 'outline'
+                            }>
+                              {schedule.status}
+                            </Badge>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </div>
                 </div>
-              )}
-            </CardContent>
-          </Card>
+              </CardContent>
+            </Card>
+          </div>
         </div>
       </Container>
     </div>

@@ -1,5 +1,5 @@
 from django.db import models
-from django.core.validators import MinValueValidator, MaxValueValidator
+from django.core.validators import MinValueValidator
 from accounts.models import User
 
 
@@ -22,6 +22,8 @@ class DanceClass(models.Model):
     max_capacity = models.IntegerField(validators=[MinValueValidator(1)])
     current_capacity = models.IntegerField(default=0)
     price = models.DecimalField(max_digits=10, decimal_places=2)
+    start_date = models.DateField()  # When the class starts overall
+    end_date = models.DateField()    # When the class ends overall
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -34,37 +36,32 @@ class DanceClass(models.Model):
         return f"{self.name} - {self.level}"
 
 
-class Schedule(models.Model):
-    """Model for class schedules."""
+class RecurringSchedule(models.Model):
+    DAYS_OF_WEEK = [
+        (0, 'Monday'),
+        (1, 'Tuesday'),
+        (2, 'Wednesday'),
+        (3, 'Thursday'),
+        (4, 'Friday'),
+        (5, 'Saturday'),
+        (6, 'Sunday'),
+    ]
 
-    dance_class = models.ForeignKey(
-        DanceClass, on_delete=models.CASCADE, related_name="schedules"
-    )
-    day_of_week = models.IntegerField(
-        validators=[MinValueValidator(0), MaxValueValidator(6)],
-        help_text="0=Monday, 6=Sunday",
-    )
+    STATUS_CHOICES = [
+        ('active', 'Active'),
+        ('cancelled', 'Cancelled'),
+    ]
+
+    dance_class = models.ForeignKey(DanceClass, related_name='recurring_schedules', on_delete=models.CASCADE)
+    day_of_week = models.IntegerField(choices=DAYS_OF_WEEK)
     start_time = models.TimeField()
     end_time = models.TimeField()
-    is_recurring = models.BooleanField(default=True)
-    start_date = models.DateField()
-    end_date = models.DateField(null=True, blank=True)
-    status = models.CharField(
-        max_length=20,
-        choices=[
-            ("active", "Active"),
-            ("cancelled", "Cancelled"),
-            ("full", "Full"),
-        ],
-        default="active",
-    )
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='active')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:
-        db_table = "class_schedules"
-        verbose_name = "Class Schedule"
-        verbose_name_plural = "Class Schedules"
+        ordering = ['day_of_week', 'start_time']
 
     def __str__(self):
         return f"{self.dance_class.name} - {self.get_day_of_week_display()} {self.start_time}"
@@ -80,3 +77,38 @@ class Schedule(models.Model):
             "Sunday",
         ]
         return days[self.day_of_week]
+
+
+class SpecialSchedule(models.Model):
+    STATUS_CHOICES = [
+        ('scheduled', 'Scheduled'),
+        ('rescheduled', 'Rescheduled'),
+        ('cancelled', 'Cancelled'),
+        ('extra', 'Extra Class'),
+    ]
+
+    dance_class = models.ForeignKey(DanceClass, related_name='special_schedules', on_delete=models.CASCADE)
+    date = models.DateField()
+    start_time = models.TimeField()
+    end_time = models.TimeField()
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='scheduled')
+    replaced_schedule = models.ForeignKey('RecurringSchedule', null=True, blank=True, on_delete=models.SET_NULL)
+    replaced_schedule_date = models.DateField(null=True, blank=True, help_text="The specific date of the recurring schedule being replaced")
+    note = models.TextField(blank=True)  # For explaining why this special schedule exists
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ['date', 'start_time']
+
+    def __str__(self):
+        return f"{self.dance_class.name} - Special: {self.date} {self.start_time}"
+
+    def clean(self):
+        from django.core.exceptions import ValidationError
+        # If we have a replaced schedule, we must have a replaced schedule date
+        if self.replaced_schedule and not self.replaced_schedule_date:
+            raise ValidationError("When replacing a schedule, you must specify the date being replaced.")
+        # If we have a replaced schedule date, we must have a replaced schedule
+        if self.replaced_schedule_date and not self.replaced_schedule:
+            raise ValidationError("Cannot specify a replaced schedule date without a replaced schedule.")

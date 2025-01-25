@@ -8,12 +8,15 @@ import { InstructorDashboardPage } from './pages/InstructorDashboardPage';
 import { AuthProvider, useAuth } from './lib/auth/AuthContext';
 import { QueryClientProvider } from '@tanstack/react-query';
 import { queryClient } from './lib/api/queryClient';
+import { ScheduleManagementPage } from './pages/ScheduleManagementPage';
+import { Toaster } from './components/ui/toaster';
 
 const rootRoute = createRootRoute({
   component: () => (
     <QueryClientProvider client={queryClient}>
       <AuthProvider>
         <Outlet />
+        <Toaster />
       </AuthProvider>
     </QueryClientProvider>
   ),
@@ -68,6 +71,12 @@ const classDetailsRoute = createRoute({
   component: ClassDetailsPage,
 });
 
+const classScheduleRoute = createRoute({
+  getParentRoute: () => protectedLayout,
+  path: '/classes/$classId/schedules',
+  component: ScheduleManagementPage,
+});
+
 const loginRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: '/login',
@@ -86,6 +95,7 @@ const routeTree = rootRoute.addChildren([
     instructorDashboardRoute,
     createClassRoute,
     classDetailsRoute,
+    classScheduleRoute,
   ]),
   loginRoute,
   signupRoute,

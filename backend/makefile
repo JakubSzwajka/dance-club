@@ -6,3 +6,6 @@ makemigrations:
 
 migrate: 
 	python3 manage.py migrate
+
+createsuperuser:
+	python3 manage.py createsuperuser
