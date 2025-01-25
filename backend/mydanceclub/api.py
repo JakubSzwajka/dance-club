@@ -385,6 +385,7 @@ def create_recurring_schedule(request, class_id: int, data: CreateRecurringSched
 
 @api.post("/classes/{class_id}/special-schedules", response=SpecialScheduleSchema)
 def create_special_schedule(request, class_id: int, data: CreateSpecialScheduleSchema):
+    print('data', data)
     dance_class = get_object_or_404(DanceClass, id=class_id)
     if request.auth.id != dance_class.instructor.id:
         raise PermissionDenied("Only the class instructor can manage schedules")
@@ -392,8 +393,8 @@ def create_special_schedule(request, class_id: int, data: CreateSpecialScheduleS
     # If this is replacing a recurring schedule, validate the date
     if data.replaced_schedule_id and data.replaced_schedule_date:
         schedule = get_object_or_404(RecurringSchedule, id=data.replaced_schedule_id, dance_class=dance_class)
-        replaced_date = datetime.strptime(data.replaced_schedule_date, '%Y-%m-%d').date()
-
+        # replaced_date = datetime.strptime(data.replaced_schedule_date, '%Y-%m-%d').date()
+        replaced_date = data.replaced_schedule_date
         # Verify this is a valid occurrence of the recurring schedule
         if replaced_date.weekday() != schedule.day_of_week:
             return api.create_response(
@@ -407,9 +408,6 @@ def create_special_schedule(request, class_id: int, data: CreateSpecialScheduleS
             data.start_time = schedule.start_time
         if not data.end_time:
             data.end_time = schedule.end_time
-
-        # Set the date to the replaced schedule's date
-        data.date = data.replaced_schedule_date
 
     schedule = SpecialSchedule.objects.create(
         dance_class=dance_class,

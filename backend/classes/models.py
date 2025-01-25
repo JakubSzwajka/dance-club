@@ -94,7 +94,7 @@ class SpecialSchedule(models.Model):
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='scheduled')
     replaced_schedule = models.ForeignKey('RecurringSchedule', null=True, blank=True, on_delete=models.SET_NULL)
     replaced_schedule_date = models.DateField(null=True, blank=True, help_text="The specific date of the recurring schedule being replaced")
-    note = models.TextField(blank=True)  # For explaining why this special schedule exists
+    note = models.TextField(blank=True, null=True, help_text="For explaining why this special schedule exists")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

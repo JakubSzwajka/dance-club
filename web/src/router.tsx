@@ -8,7 +8,8 @@ import { InstructorDashboardPage } from './pages/InstructorDashboardPage';
 import { AuthProvider, useAuth } from './lib/auth/AuthContext';
 import { QueryClientProvider } from '@tanstack/react-query';
 import { queryClient } from './lib/api/queryClient';
-import { ScheduleManagementPage } from './pages/ScheduleManagementPage';
+// import { ScheduleManagementPage } from './pages/ScheduleManagementPage';
+import { ScheduleManagementPage } from './pages/schedule-management';
 import { Toaster } from './components/ui/toaster';
 
 const rootRoute = createRootRoute({

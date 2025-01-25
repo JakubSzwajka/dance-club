@@ -43,7 +43,7 @@ class RecurringScheduleAdmin(admin.ModelAdmin):
 
 @admin.register(SpecialSchedule)
 class SpecialScheduleAdmin(admin.ModelAdmin):
-    list_display = ('dance_class', 'date', 'start_time', 'end_time', 'status', 'replaced_schedule')
+    list_display = ('dance_class', 'date', 'start_time', 'end_time', 'status', 'replaced_schedule', 'replaced_schedule_date')
     list_filter = ('status', 'date', 'dance_class')
     search_fields = ('dance_class__name', 'note')
     readonly_fields = ('created_at', 'updated_at')
@@ -55,7 +55,7 @@ class SpecialScheduleAdmin(admin.ModelAdmin):
             'fields': ('date', 'start_time', 'end_time', 'status')
         }),
         ('Additional Information', {
-            'fields': ('replaced_schedule', 'note')
+            'fields': ('replaced_schedule', 'replaced_schedule_date', 'note')
         }),
         ('Metadata', {
             'fields': ('created_at', 'updated_at')
