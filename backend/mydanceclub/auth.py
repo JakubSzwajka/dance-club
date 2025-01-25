@@ -1,9 +1,10 @@
-from datetime import datetime, timedelta
+from datetime import UTC, datetime
 from typing import Optional
+
 import jwt
+from accounts.models import User
 from django.conf import settings
 from ninja.security import HttpBearer
-from accounts.models import User
 
 
 def create_token(user: User) -> str:
@@ -12,7 +13,7 @@ def create_token(user: User) -> str:
         'user_id': user.id,
         'email': user.email,
         'role': user.role,
-        'exp': datetime.utcnow() + settings.JWT_LIFETIME
+        'exp': datetime.now(UTC) + settings.JWT_LIFETIME,
     }
     return jwt.encode(payload, settings.JWT_SECRET, algorithm='HS256')
 

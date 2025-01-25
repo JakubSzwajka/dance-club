@@ -9,3 +9,10 @@ migrate:
 
 createsuperuser:
 	python3 manage.py createsuperuser
+
+
+ci:
+	ruff check --fix
+	ruff format 
+	pyright .
+
