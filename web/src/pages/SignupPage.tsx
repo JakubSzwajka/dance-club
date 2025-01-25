@@ -14,6 +14,7 @@ type Role = 'student' | 'instructor';
 export function SignupPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [passwordConfirm, setPasswordConfirm] = useState('');
   const [role, setRole] = useState<Role>('student');
   const [error, setError] = useState('');
   const { signup } = useAuth();
@@ -21,6 +22,12 @@ export function SignupPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
+
+    if (password !== passwordConfirm) {
+      setError('Passwords do not match');
+      return;
+    }
+
     try {
       await signup(email, password, role);
     } catch (err) {
@@ -66,6 +73,16 @@ export function SignupPage() {
                       type="password"
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
+                      required
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="passwordConfirm">Confirm Password</Label>
+                    <Input
+                      id="passwordConfirm"
+                      type="password"
+                      value={passwordConfirm}
+                      onChange={(e) => setPasswordConfirm(e.target.value)}
                       required
                     />
                   </div>

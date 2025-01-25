@@ -2,6 +2,7 @@ import uuid
 from django.contrib.auth.models import AbstractUser, BaseUserManager
 from django.db import models
 from django.utils.translation import gettext_lazy as _
+from mydanceclub.models import generate_uuid
 
 
 class UserManager(BaseUserManager):
@@ -21,7 +22,7 @@ class UserManager(BaseUserManager):
 
 
 class User(AbstractUser):
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    id = models.CharField(primary_key=True, max_length=36, default=generate_uuid)
     username = None
     email = models.EmailField(_('email address'), unique=True)
     """Custom user model for MyDanceClub platform."""

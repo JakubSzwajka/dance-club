@@ -4,22 +4,25 @@ import { SignupPage } from './pages/SignupPage';
 import { HomePage } from './pages/HomePage';
 import { CreateClassPage } from './pages/CreateClassPage';
 import { ClassDetailsPage } from './pages/ClassDetailsPage';
-import { InstructorDashboardPage } from './pages/InstructorDashboardPage';
 import { AuthProvider, useAuth } from './lib/auth/AuthContext';
 import { QueryClientProvider } from '@tanstack/react-query';
 import { queryClient } from './lib/api/queryClient';
-// import { ScheduleManagementPage } from './pages/ScheduleManagementPage';
 import { ScheduleManagementPage } from './pages/schedule-management';
+import { EventManagementPage } from './pages/event-management';
 import { Toaster } from './components/ui/toaster';
+import { APIProvider } from '@vis.gl/react-google-maps';
+import { InstructorDashboardPage } from './pages/instructor-dashboard';
 
 const rootRoute = createRootRoute({
   component: () => (
-    <QueryClientProvider client={queryClient}>
-      <AuthProvider>
-        <Outlet />
-        <Toaster />
-      </AuthProvider>
-    </QueryClientProvider>
+    <APIProvider apiKey={'AIzaSyC7k8QnpwiMJvLbJ39P4yJOHBjIvDPckSk'}>
+      <QueryClientProvider client={queryClient}>
+        <AuthProvider>
+          <Outlet />
+          <Toaster />
+        </AuthProvider>
+      </QueryClientProvider>
+    </APIProvider>
   ),
 });
 
@@ -35,7 +38,7 @@ function ProtectedLayout() {
   }
 
   if (!isAuthenticated) {
-    // window.location.href = '/login';
+    window.location.href = '/login';
     return null;
   }
 
@@ -49,7 +52,8 @@ const protectedLayout = createRoute({
 });
 
 const indexRoute = createRoute({
-  getParentRoute: () => protectedLayout,
+  // WAS PROTECTED LAYOUT
+  getParentRoute: () => rootRoute,
   path: '/',
   component: HomePage,
 });
@@ -58,6 +62,24 @@ const instructorDashboardRoute = createRoute({
   getParentRoute: () => protectedLayout,
   path: '/instructor/dashboard',
   component: InstructorDashboardPage,
+});
+
+// Event management routes
+const eventsRoute = createRoute({
+  getParentRoute: () => protectedLayout,
+  path: '/events',
+});
+
+const createEventRoute = createRoute({
+  getParentRoute: () => eventsRoute,
+  path: '/create',
+  component: EventManagementPage,
+});
+
+const eventDetailsRoute = createRoute({
+  getParentRoute: () => eventsRoute,
+  path: '/$eventId',
+  component: EventManagementPage,
 });
 
 const createClassRoute = createRoute({
@@ -94,6 +116,10 @@ const routeTree = rootRoute.addChildren([
   protectedLayout.addChildren([
     indexRoute,
     instructorDashboardRoute,
+    eventsRoute.addChildren([
+      createEventRoute,
+      eventDetailsRoute,
+    ]),
     createClassRoute,
     classDetailsRoute,
     classScheduleRoute,
@@ -104,6 +130,7 @@ const routeTree = rootRoute.addChildren([
 
 export const router = createRouter({
   routeTree,
+  defaultPreload: 'intent',
 });
 
 declare module '@tanstack/react-router' {
