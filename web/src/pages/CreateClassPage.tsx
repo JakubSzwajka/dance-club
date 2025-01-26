@@ -7,7 +7,7 @@ import { Textarea } from '../components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../components/ui/select';
 import { Container } from '../components/ui/container';
 import { Alert, AlertDescription, AlertTitle } from '../components/ui/alert';
-import { Header } from '../components/ui/header';
+import { Header } from '../components/domain/header';
 import { useAuth } from '../lib/auth/AuthContext';
 import { useCreateClass } from '../lib/api/classes';
 import { useState } from 'react';

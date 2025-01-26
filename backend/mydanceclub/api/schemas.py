@@ -1,9 +1,9 @@
 from datetime import date as Date
 from datetime import datetime, time
 from decimal import Decimal
-from typing import List, Optional
-
+from typing import Optional
 from ninja import Schema
+from classes.schemas.location import LocationSchema
 
 
 class SignupSchema(Schema):
@@ -56,9 +56,11 @@ class CreateDanceClassSchema(Schema):
     description: str
     level: str
     max_capacity: int
-    price: float
+    price: Decimal
     start_date: Date
     end_date: Date
+    location: Optional[LocationSchema] = None
+
 
 
 class CreateRecurringScheduleSchema(Schema):
@@ -119,45 +121,3 @@ class ReviewResponseSchema(Schema):
     instructor_id: str
     response_text: str
     created_at: datetime
-
-
-class SocialLinkSchema(Schema):
-    platform: str
-    url: str
-
-
-class LocationSchema(Schema):
-    id: str
-    name: str
-    address: str
-    latitude: float
-    longitude: float
-    url: Optional[str] = None
-
-
-class CreateLocationSchema(Schema):
-    name: str
-    address: str
-    latitude: float
-    longitude: float
-    google_place_id: str
-    url: str
-
-class CreateSpecialEventSchema(Schema):
-    name: str
-    description: str
-    datetime: datetime
-    capacity: int
-    price: Decimal
-    location: CreateLocationSchema
-    instructor_id: str
-    social_links: List[SocialLinkSchema]
-
-
-class SpecialEventSchema(CreateSpecialEventSchema):
-    id: str
-    instructor_name: str
-    current_capacity: int
-    location: LocationSchema
-    created_at: datetime
-    updated_at: datetime

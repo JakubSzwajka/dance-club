@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { api } from '@/lib/api';
+import { api } from '@/lib/api/api';
 
 interface SocialLink {
   platform: string;
@@ -42,7 +42,7 @@ export function useSpecialEvents() {
     queryFn: () => api.get('/api/special-events/').then((res) => res.data),
   });
 
-  const { mutate: createSpecialEvent, isLoading: isCreating } = useMutation({
+  const { mutate: createSpecialEvent, isPending: isCreating } = useMutation({
     mutationFn: (data: CreateSpecialEventData) =>
       api.post('/api/special-events/', data).then((res) => res.data),
     onSuccess: () => {

@@ -1,7 +1,6 @@
 import { Outlet, createRootRoute, createRoute, createRouter } from '@tanstack/react-router';
 import { LoginPage } from './pages/LoginPage';
 import { SignupPage } from './pages/SignupPage';
-import { HomePage } from './pages/HomePage';
 import { CreateClassPage } from './pages/CreateClassPage';
 import { ClassDetailsPage } from './pages/ClassDetailsPage';
 import { AuthProvider, useAuth } from './lib/auth/AuthContext';
@@ -12,6 +11,11 @@ import { EventManagementPage } from './pages/event-management';
 import { Toaster } from './components/ui/toaster';
 import { APIProvider } from '@vis.gl/react-google-maps';
 import { InstructorDashboardPage } from './pages/instructor-dashboard';
+import { HomePage } from './pages/public-pages';
+import { ClassBrowser } from './pages/public-pages/class-browser';
+import { ClassDetailsPage as PublicClassDetailsPage } from './pages/public-pages/class-details';
+import { EventDetailsPage as PublicEventDetailsPage } from './pages/public-pages/event-details';
+import { EventBrowser } from './pages/public-pages/event-browser';
 
 const rootRoute = createRootRoute({
   component: () => (
@@ -38,7 +42,7 @@ function ProtectedLayout() {
   }
 
   if (!isAuthenticated) {
-    window.location.href = '/login';
+    // window.location.href = '/login';
     return null;
   }
 
@@ -52,10 +56,33 @@ const protectedLayout = createRoute({
 });
 
 const indexRoute = createRoute({
-  // WAS PROTECTED LAYOUT
   getParentRoute: () => rootRoute,
   path: '/',
   component: HomePage,
+});
+
+const classBrowserRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/classes',
+  component: ClassBrowser,
+});
+
+const classBrowserDetailsRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/classes/$classId',
+  component: PublicClassDetailsPage,
+});
+
+const eventBrowseRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/events',
+  component: EventBrowser,
+});
+
+const eventBrowseDetailsRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/events/$eventId',
+  component: PublicEventDetailsPage,
 });
 
 const instructorDashboardRoute = createRoute({
@@ -90,13 +117,13 @@ const createClassRoute = createRoute({
 
 const classDetailsRoute = createRoute({
   getParentRoute: () => protectedLayout,
-  path: '/classes/$classId',
+  path: '/instructor/classes/$classId',
   component: ClassDetailsPage,
 });
 
 const classScheduleRoute = createRoute({
   getParentRoute: () => protectedLayout,
-  path: '/classes/$classId/schedules',
+  path: '/instructor/classes/$classId/schedules',
   component: ScheduleManagementPage,
 });
 
@@ -113,17 +140,21 @@ const signupRoute = createRoute({
 });
 
 const routeTree = rootRoute.addChildren([
-  protectedLayout.addChildren([
-    indexRoute,
-    instructorDashboardRoute,
-    eventsRoute.addChildren([
-      createEventRoute,
-      eventDetailsRoute,
-    ]),
-    createClassRoute,
-    classDetailsRoute,
-    classScheduleRoute,
-  ]),
+  // protectedLayout.addChildren([
+  //   instructorDashboardRoute,
+  //   eventsRoute.addChildren([
+  //     createEventRoute,
+  //     eventDetailsRoute,
+  //   ]),
+  //   createClassRoute,
+  //   classDetailsRoute,
+  //   classScheduleRoute,
+  // ]),
+  indexRoute,
+  classBrowserRoute,
+  classBrowserDetailsRoute,
+  eventBrowseRoute,
+  eventBrowseDetailsRoute,
   loginRoute,
   signupRoute,
 ]);

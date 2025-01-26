@@ -6,7 +6,7 @@ import { Input } from '../components/ui/input';
 import { Label } from '../components/ui/label';
 import { Alert } from '../components/ui/alert';
 import { Container } from '../components/ui/container';
-import { Header } from '../components/ui/header';
+import { Header } from '../components/domain/header';
 import { AxiosError } from 'axios';
 
 export function LoginPage() {

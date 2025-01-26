@@ -1,4 +1,4 @@
-import { Header } from '@/components/ui/header';
+import { Header } from '@/components/domain/header';
 import { Container } from '@/components/ui/container';
 import { useToast } from '@/hooks/use-toast';
 import { SpecialEventForm } from '../event-management/components/special-event-form';
@@ -12,7 +12,6 @@ export function SpecialEventsPage() {
     isLoading,
     error,
     createSpecialEvent,
-    isCreating,
     deleteSpecialEvent,
   } = useSpecialEvents();
 
@@ -21,7 +20,7 @@ export function SpecialEventsPage() {
   }
 
   if (error) {
-    return <div>Error: {error}</div>;
+    return <div>Error: {error.message}</div>;
   }
 
   return (
@@ -55,7 +54,6 @@ export function SpecialEventsPage() {
                 });
               }
             }}
-            isCreating={isCreating}
           />
 
           <SpecialEventList

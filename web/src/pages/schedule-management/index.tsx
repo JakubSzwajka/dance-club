@@ -9,12 +9,12 @@ import { SpecialScheduleList } from './components/special-schedule-list';
 import { ScheduleTimeline } from './components/schedule-timeline';
 import { useToast } from '../../hooks/use-toast';
 import { useClass } from '../../lib/api/classes';
-import { Header } from '@/components/ui/header';
+import { Header } from '@/components/domain/header';
 import { Container } from '@/components/ui/container';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
 export function ScheduleManagementPage() {
-  const { classId } = useParams({ from: '/protected/classes/$classId/schedules' });
+  const { classId } = useParams({ from: '/protected/instructor/classes/$classId/schedules' });
   const { toast } = useToast();
   const { data: classData, isLoading: isLoadingClass } = useClass(Number(classId));
 

@@ -3,13 +3,13 @@ import { useAuth } from '../lib/auth/AuthContext';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '../components/ui/card';
 import { Button } from '../components/ui/button';
 import { Container } from '../components/ui/container';
-import { Header } from '../components/ui/header';
+import { Header } from '../components/domain/header';
 import { Badge } from '../components/ui/badge';
 import { useClass } from '../lib/api/classes';
 import { formatDayOfWeek } from '../lib/api/schedules';
 
 export function ClassDetailsPage() {
-  const { classId } = useParams({ from: '/protected/classes/$classId' });
+  const { classId } = useParams({ from: '/protected/instructor/classes/$classId' });
   const { user } = useAuth();
   const navigate = useNavigate();
   const { data: classDetails, isLoading } = useClass(Number(classId));

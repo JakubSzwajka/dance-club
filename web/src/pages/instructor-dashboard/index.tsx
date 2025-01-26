@@ -1,7 +1,7 @@
 import { useAuth } from '../../lib/auth/AuthContext';
 import { Button } from '@/components/ui/button';
 import { Container } from '@/components/ui/container';
-import { Header } from '@/components/ui/header';
+import { Header } from '@/components/domain/header';
 import { useNavigate } from '@tanstack/react-router';
 import { ClassesList } from './components/classes-list';
 import { EventsList } from './components/events-list';

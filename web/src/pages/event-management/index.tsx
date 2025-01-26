@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Header } from '@/components/ui/header';
+import { Header } from '@/components/domain/header';
 import { Container } from '@/components/ui/container';
 import { SpecialEventForm } from './components/special-event-form';
 import { SpecialEventList } from './components/special-event-list';

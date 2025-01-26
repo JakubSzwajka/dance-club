@@ -1,12 +1,10 @@
-from typing import List, cast
+from typing import List
 
-from accounts.models import User
-from classes.models import DanceClass
+from classes.services.class_search_engine import ClassSearchEngineService
 from django.http import HttpResponse
-from django.shortcuts import get_object_or_404
 from ninja import Router
-
-from .schemas import CreateDanceClassSchema, DanceClassSchema
+from classes.services.class_manager import ClassManager
+from classes.schemas.dance_class import CreateRecurringScheduleSchema, CreateSpecialScheduleSchema, DanceClassSchema, CreateDanceClassSchema, RecurringScheduleSchema, SpecialScheduleSchema
 from .types import AuthenticatedRequest
 
 router = Router()
@@ -14,118 +12,63 @@ router = Router()
 
 @router.get('/', response=List[DanceClassSchema])
 def list_classes(request: AuthenticatedRequest) -> List[DanceClassSchema]:
-    classes = DanceClass.objects.all()
-    if request.auth.role == 'instructor':
-        classes = classes.filter(instructor_id=request.auth.id)
-    return [
-        DanceClassSchema(
-            id=dance_class.id,
-            name=dance_class.name,
-            description=dance_class.description,
-            instructor_id=dance_class.instructor.id,
-            level=dance_class.level,
-            max_capacity=dance_class.max_capacity,
-            current_capacity=dance_class.current_capacity,
-            price=float(dance_class.price),
-            start_date=dance_class.start_date,
-            end_date=dance_class.end_date,
-            created_at=dance_class.created_at,
-            updated_at=dance_class.updated_at,
-        )
-        for dance_class in classes
-    ]
-
+    class_search_engine = ClassSearchEngineService()
+    return class_search_engine.get_classes_by_instructor(
+        instructor_id=request.auth.id,
+    )
 
 @router.post('/', response=DanceClassSchema)
 def create_class(request: AuthenticatedRequest, payload: CreateDanceClassSchema) -> HttpResponse | DanceClassSchema:
-    if request.auth.role != 'instructor':
-        return HttpResponse(
-            '{"detail": "Only instructors can create classes"}',
-            status=403,
-            content_type='application/json',
-        )
-    dance_class = DanceClass.objects.create(
-        name=payload.name,
-        description=payload.description,
-        instructor=cast(User, request.auth),
-        level=payload.level,
-        max_capacity=payload.max_capacity,
-        price=payload.price,
-        start_date=payload.start_date,
-        end_date=payload.end_date,
-    )
-    return DanceClassSchema(
-        id=dance_class.id,
-        name=dance_class.name,
-        description=dance_class.description,
-        instructor_id=dance_class.instructor.id,
-        level=dance_class.level,
-        max_capacity=dance_class.max_capacity,
-        current_capacity=dance_class.current_capacity,
-        price=float(dance_class.price),
-        start_date=dance_class.start_date,
-        end_date=dance_class.end_date,
-        created_at=dance_class.created_at,
-        updated_at=dance_class.updated_at,
-    )
+    class_manager = ClassManager()
+    return class_manager.create_class(request.auth, payload)
 
 
 @router.get('/{class_id}', response=DanceClassSchema)
-def get_class(request: AuthenticatedRequest, class_id: int) -> DanceClassSchema:
-    dance_class = get_object_or_404(DanceClass, id=class_id)
-    return DanceClassSchema(
-        id=dance_class.id,
-        name=dance_class.name,
-        description=dance_class.description,
-        instructor_id=dance_class.instructor.id,
-        level=dance_class.level,
-        max_capacity=dance_class.max_capacity,
-        current_capacity=dance_class.current_capacity,
-        price=float(dance_class.price),
-        start_date=dance_class.start_date,
-        end_date=dance_class.end_date,
-        created_at=dance_class.created_at,
-        updated_at=dance_class.updated_at,
-    )
+def get_class(request: AuthenticatedRequest, class_id: str) -> DanceClassSchema:
+    class_search_engine = ClassSearchEngineService()
+    return class_search_engine.get_class_by_id(class_id)
 
+@router.get('/{class_id}/recurring-schedules', response=List[RecurringScheduleSchema])
+def get_class_recurring_schedules(request: AuthenticatedRequest, class_id: str) -> List[RecurringScheduleSchema]:
+    class_search_engine = ClassSearchEngineService()
+    return class_search_engine.get_class_recurring_schedules(class_id)
+
+@router.get('/{class_id}/special-schedules', response=List[SpecialScheduleSchema])
+def get_class_special_schedules(request: AuthenticatedRequest, class_id: str) -> List[SpecialScheduleSchema]:
+    class_search_engine = ClassSearchEngineService()
+    return class_search_engine.get_class_special_schedules(class_id)
+
+@router.post('/{class_id}/recurring-schedules', response=RecurringScheduleSchema)
+def create_class_recurring_schedule(request: AuthenticatedRequest, class_id: str, payload: CreateRecurringScheduleSchema) -> RecurringScheduleSchema:
+    class_manager = ClassManager()
+    return class_manager.create_recurring_schedule(request.auth, class_id, payload)
+
+@router.post('/{class_id}/special-schedules', response=SpecialScheduleSchema)
+def create_class_special_schedule(request: AuthenticatedRequest, class_id: str, payload: CreateSpecialScheduleSchema) -> SpecialScheduleSchema:
+    class_manager = ClassManager()
+    return class_manager.create_special_schedule(request.auth, class_id, payload)
+
+@router.delete('/{class_id}/recurring-schedules/{schedule_id}')
+def delete_class_recurring_schedule(request: AuthenticatedRequest, class_id: str, schedule_id: str) -> HttpResponse:
+    class_manager = ClassManager()
+    class_manager.delete_recurring_schedule(request.auth, schedule_id)
+    return HttpResponse('{"success": true}', content_type='application/json')
+
+@router.delete('/{class_id}/special-schedules/{schedule_id}')
+def delete_class_special_schedule(request: AuthenticatedRequest, class_id: str, schedule_id: str) -> HttpResponse:
+    class_manager = ClassManager()
+    class_manager.delete_special_schedule(request.auth, schedule_id)
+    return HttpResponse('{"success": true}', content_type='application/json')
 
 @router.put('/{class_id}', response=DanceClassSchema)
-def update_class(request: AuthenticatedRequest, class_id: int, payload: DanceClassSchema) -> HttpResponse | DanceClassSchema:
-    dance_class = get_object_or_404(DanceClass, id=class_id)
-    if request.auth.role != 'instructor' or request.auth.id != dance_class.instructor.id:
-        return HttpResponse(
-            '{"detail": "Only the instructor who created this class can update it"}',
-            status=403,
-            content_type='application/json',
-        )
-    for attr, value in payload.dict().items():
-        if attr not in ['id', 'created_at', 'updated_at']:
-            setattr(dance_class, attr, value)
-    dance_class.save()
-    return DanceClassSchema(
-        id=dance_class.id,
-        name=dance_class.name,
-        description=dance_class.description,
-        instructor_id=dance_class.instructor.id,
-        level=dance_class.level,
-        max_capacity=dance_class.max_capacity,
-        current_capacity=dance_class.current_capacity,
-        price=float(dance_class.price),
-        start_date=dance_class.start_date,
-        end_date=dance_class.end_date,
-        created_at=dance_class.created_at,
-        updated_at=dance_class.updated_at,
-    )
+def update_class(request: AuthenticatedRequest, class_id: str, payload: DanceClassSchema) -> HttpResponse | DanceClassSchema:
+    class_manager = ClassManager()
+    return class_manager.update_class(request.auth, class_id, payload)
 
 
 @router.delete('/{class_id}')
 def delete_class(request: AuthenticatedRequest, class_id: str) -> HttpResponse:
-    dance_class = get_object_or_404(DanceClass, id=class_id)
-    if request.auth.role != 'instructor' or request.auth.id != dance_class.instructor.id:
-        return HttpResponse(
-            '{"detail": "Only the instructor who created this class can delete it"}',
-            status=403,
-            content_type='application/json',
-        )
-    dance_class.delete()
+    class_manager = ClassManager()
+    class_manager.delete_class(request.auth, class_id)
     return HttpResponse('{"success": true}', content_type='application/json')
+
