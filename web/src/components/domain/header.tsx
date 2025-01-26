@@ -1,19 +1,30 @@
 import { Button } from "../ui/button"
 import { Container } from "../ui/container"
 import { useAuth } from "../../lib/auth/AuthContext"
-import { useNavigate } from "@tanstack/react-router";
+import { useNavigate } from "@tanstack/react-router"
+import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar"
+import { 
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "../ui/dropdown-menu"
 
 export function Header() {
-  const { logout, isAuthenticated } = useAuth()
-
-  const { user } = useAuth();
+  const { logout, isAuthenticated, user } = useAuth()
   const navigate = useNavigate();
 
   const handleNavigateToDashboard = () => {
     if (user?.role === 'instructor') {
-      navigate({ to: '/instructor/dashboard' });
+      navigate({ to: '/instructor-dashboard' });
     }
     // Add other role-specific navigation here when implemented
+  };
+
+  // Get user's initials for avatar fallback
+  const getInitials = () => {
+    if (!user?.email) return '?';
+    return user.email.charAt(0).toUpperCase();
   };
 
   return (
@@ -21,7 +32,7 @@ export function Header() {
       <Container>
         <div className="flex h-16 items-center justify-between">
           <div className="flex items-center space-x-4">
-            <div className="font-bold text-xl" onClick={() => navigate({ to: '/' })}>
+            <div className="font-bold text-xl cursor-pointer" onClick={() => navigate({ to: '/' })}>
               🕺 My Dance Club
             </div>
           </div>
@@ -33,9 +44,24 @@ export function Header() {
             )}
             
             {isAuthenticated ? (
-              <Button variant="outline" onClick={logout}>
-                Sign out
-              </Button>
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="ghost" className="relative h-10 w-10 rounded-full">
+                    <Avatar className="h-10 w-10">
+                      <AvatarImage src={user?.profile_picture} alt={user?.email} />
+                      <AvatarFallback>{getInitials()}</AvatarFallback>
+                    </Avatar>
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end" className="w-56">
+                  <DropdownMenuItem onClick={() => navigate({ to: '/profile-settings' })}>
+                    Profile Settings
+                  </DropdownMenuItem>
+                  <DropdownMenuItem onClick={logout}>
+                    Sign out
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
             ) : (
               <>
                 <Button variant="ghost" onClick={() => navigate({ to: '/login' })}>Sign in</Button>

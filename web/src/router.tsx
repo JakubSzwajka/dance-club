@@ -1,16 +1,16 @@
 import { Outlet, createRootRoute, createRoute, createRouter } from '@tanstack/react-router';
 import { LoginPage } from './pages/LoginPage';
 import { SignupPage } from './pages/SignupPage';
-import { CreateClassPage } from './pages/CreateClassPage';
-import { ClassDetailsPage } from './pages/ClassDetailsPage';
+import { CreateClassPage } from './pages/private-pages/instructor-dashboard/class-management/CreateClassPage';
+import { ClassDetailsPage } from './pages/private-pages/instructor-dashboard/class-management/ClassDetailsPage';
 import { AuthProvider, useAuth } from './lib/auth/AuthContext';
 import { QueryClientProvider } from '@tanstack/react-query';
 import { queryClient } from './lib/api/queryClient';
-import { ScheduleManagementPage } from './pages/schedule-management';
-import { EventManagementPage } from './pages/event-management';
+// import { ScheduleManagementPage } from './pages/schedule-management';
+// import { EventManagementPage } from './pages/private-pages/instructor-dashboard/event-management';
 import { Toaster } from './components/ui/toaster';
 import { APIProvider } from '@vis.gl/react-google-maps';
-import { InstructorDashboardPage } from './pages/instructor-dashboard';
+import { InstructorDashboardPage } from './pages/private-pages/instructor-dashboard';
 import { HomePage } from './pages/public-pages/main-page';
 import { ClassBrowser } from './pages/public-pages/class-browser';
 import { ClassDetailsPage as PublicClassDetailsPage } from './pages/public-pages/class-details';
@@ -18,6 +18,8 @@ import { EventDetailsPage as PublicEventDetailsPage } from './pages/public-pages
 import { EventBrowser } from './pages/public-pages/event-browser';
 import { InstructorDetailsPage } from './pages/public-pages/instructor-details';
 import { LocationDetailsPage } from './pages/public-pages/location-details';
+import { SettingsPage } from './pages/private-pages/common/settings';
+import { EditClassPage } from './pages/private-pages/instructor-dashboard/class-management/EditClassPage';
 
 const rootRoute = createRootRoute({
   component: () => (
@@ -101,44 +103,27 @@ const locationDetailsRoute = createRoute({
 
 const instructorDashboardRoute = createRoute({
   getParentRoute: () => protectedLayout,
-  path: '/instructor/dashboard',
+  path: '/instructor-dashboard',
   component: InstructorDashboardPage,
-});
-
-// Event management routes
-const eventsRoute = createRoute({
-  getParentRoute: () => protectedLayout,
-  path: '/events',
-});
-
-const createEventRoute = createRoute({
-  getParentRoute: () => eventsRoute,
-  path: '/create',
-  component: EventManagementPage,
-});
-
-const eventDetailsRoute = createRoute({
-  getParentRoute: () => eventsRoute,
-  path: '/$eventId',
-  component: EventManagementPage,
 });
 
 const createClassRoute = createRoute({
   getParentRoute: () => protectedLayout,
-  path: '/classes/create',
+  path: '/instructor-dashboard/classes/create',
   component: CreateClassPage,
 });
 
 const classDetailsRoute = createRoute({
   getParentRoute: () => protectedLayout,
-  path: '/instructor/classes/$classId',
-  component: ClassDetailsPage,
+  path: '/instructor-dashboard/classes/$classId',
+  component: EditClassPage,
 });
 
-const classScheduleRoute = createRoute({
+
+const settingsRoute = createRoute({
   getParentRoute: () => protectedLayout,
-  path: '/instructor/classes/$classId/schedules',
-  component: ScheduleManagementPage,
+  path: '/profile-settings',
+  component: SettingsPage,
 });
 
 const loginRoute = createRoute({
@@ -154,16 +139,17 @@ const signupRoute = createRoute({
 });
 
 const routeTree = rootRoute.addChildren([
-  // protectedLayout.addChildren([
-  //   instructorDashboardRoute,
-  //   eventsRoute.addChildren([
-  //     createEventRoute,
-  //     eventDetailsRoute,
-  //   ]),
-  //   createClassRoute,
-  //   classDetailsRoute,
-  //   classScheduleRoute,
-  // ]),
+  protectedLayout.addChildren([
+    instructorDashboardRoute,
+    settingsRoute,
+    // eventsRoute.addChildren([
+    //   createEventRoute,
+    //   eventDetailsRoute,
+    // ]),
+    createClassRoute,
+    classDetailsRoute,
+    // classScheduleRoute,
+  ]),
   indexRoute,
   classBrowserRoute,
   classBrowserDetailsRoute,

@@ -5,7 +5,7 @@ from mydanceclub.models import BaseModel
 from decimal import Decimal
 from classes.schemas.event import SpecialEventSchema
 from classes.schemas.location import LocationSchema
-from classes.schemas.dance_class import DanceClassSchema, RecurringScheduleSchema, SpecialScheduleSchema
+from classes.schemas.dance_class import DanceClassSchema, PrivateDanceClassSchema, RecurringScheduleSchema, SpecialScheduleSchema
 
 
 
@@ -212,7 +212,14 @@ class DanceClass(BaseModel):
             updated_at=self.updated_at,
             style=self.style,
             instructor=self.instructor.to_schema(),
-            schedules=[schedule.to_schema() for schedule in self.recurring_schedules.all()],
+            schedule=[schedule.to_schema() for schedule in self.recurring_schedules.all()],
+        )
+
+    def to_private_schema(self) -> PrivateDanceClassSchema:
+        public_schema = self.to_schema()
+        return PrivateDanceClassSchema(
+            **public_schema.model_dump(),
+            schedule_changes=[schedule.to_schema() for schedule in self.special_schedules.all()],
         )
 
 class SpecialEvent(BaseModel):

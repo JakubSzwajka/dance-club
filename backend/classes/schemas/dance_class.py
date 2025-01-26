@@ -3,7 +3,7 @@ from datetime import datetime, time
 from decimal import Decimal
 from typing import List, Optional
 from ninja import Schema
-from classes.schemas.user_public_schema import UserPublicSchema
+from classes.schemas.user_schema import UserPublicSchema
 from classes.schemas.location import LocationSchema
 
 class ScheduleSchema(Schema):
@@ -28,17 +28,6 @@ class CreateScheduleSchema(Schema):
     start_date: datetime
     end_date: Optional[datetime]
 
-
-class CreateDanceClassSchema(Schema):
-    name: str
-    description: str
-    level: str
-    max_capacity: int
-    price: Decimal
-    start_date: Date
-    end_date: Date
-    location: Optional[LocationSchema] = None
-    style: str
 
 
 class CreateRecurringScheduleSchema(Schema):
@@ -71,6 +60,18 @@ class SpecialScheduleSchema(CreateSpecialScheduleSchema):
     updated_at: datetime
 
 
+class CreateDanceClassSchema(Schema):
+    name: str
+    description: str
+    level: str
+    max_capacity: int
+    price: Decimal
+    start_date: Date
+    end_date: Date
+    location: Optional[LocationSchema] = None
+    style: str
+
+
 class DanceClassSchema(CreateDanceClassSchema):
     id: str
     instructor_id: str
@@ -78,4 +79,8 @@ class DanceClassSchema(CreateDanceClassSchema):
     created_at: datetime
     updated_at: datetime
     instructor: UserPublicSchema
-    schedules: List[RecurringScheduleSchema]
+    schedule: List[RecurringScheduleSchema]
+
+
+class PrivateDanceClassSchema(DanceClassSchema):
+    schedule_changes: List[SpecialScheduleSchema]

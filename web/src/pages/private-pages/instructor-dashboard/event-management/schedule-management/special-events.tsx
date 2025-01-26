@@ -1,9 +1,8 @@
 import { Header } from '@/components/domain/header';
 import { Container } from '@/components/ui/container';
 import { useToast } from '@/hooks/use-toast';
-import { SpecialEventForm } from '../event-management/components/special-event-form';
-import { SpecialEventList } from '../event-management/components/special-event-list';
-import { useSpecialEvents } from '../event-management/hooks/use-special-events';
+import { SpecialEventForm } from './components/special-event-form';
+import { SpecialEventList } from './components/special-event-list';
 
 export function SpecialEventsPage() {
   const { toast } = useToast();

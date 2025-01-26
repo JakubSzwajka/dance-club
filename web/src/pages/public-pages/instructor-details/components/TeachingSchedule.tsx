@@ -38,7 +38,7 @@ export function TeachingSchedule({ classes }: TeachingScheduleProps) {
           </div>
 
           <div className="space-y-2 mb-4">
-            {danceClass.schedules.map((schedule) => (
+            {danceClass.schedule.map((schedule) => (
               <div key={schedule.id} className="flex items-center gap-2 text-sm">
                 <ClockIcon className="h-4 w-4 text-muted-foreground" />
                 <span>

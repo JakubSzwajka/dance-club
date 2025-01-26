@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { LocationSchema } from "@/lib/api/public"
+import { LocationSchema } from "@/lib/api/types"
 import { MapPinIcon } from "@heroicons/react/24/outline"
 import { Map, Marker } from '@vis.gl/react-google-maps'
 

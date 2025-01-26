@@ -5,8 +5,10 @@ from django.contrib.auth import authenticate
 from django.http import HttpRequest, HttpResponse
 from ninja import Router
 
-from ..auth import create_token
-from .schemas import LoginSchema, SignupSchema, TokenResponse, UserSchema
+from classes.schemas.user_schema import UserPrivateSchema
+
+from ...auth import create_token
+from ..schemas import LoginSchema, SignupSchema, TokenResponse
 from .types import AuthenticatedRequest
 
 router = Router()
@@ -49,10 +51,10 @@ def login(request: HttpRequest, data: LoginSchema) -> HttpResponse | TokenRespon
             content_type='application/json',
         )
 
-    token = create_token(user)
+    token = create_token(cast(User, user))
     return TokenResponse(access=token, email=user.email)
 
 
-@router.get('/me', response=UserSchema)
-def me(request: AuthenticatedRequest) -> UserSchema:
-    return UserSchema(id=request.auth.id, email=request.auth.email, role=request.auth.role)
+@router.get('/me', response=UserPrivateSchema)
+def me(request: AuthenticatedRequest) -> UserPrivateSchema:
+    return UserPrivateSchema(id=request.auth.id, email=request.auth.email, role=request.auth.role, first_name=request.auth.first_name, last_name=request.auth.last_name, bio=request.auth.bio, profile_picture=request.auth.profile_picture_url)

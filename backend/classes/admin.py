@@ -1,5 +1,6 @@
 from django.contrib import admin
 from django.utils.html import format_html
+from unfold.admin import ModelAdmin
 
 from .models import DanceClass, RecurringSchedule, SpecialSchedule
 from .models import Location, SpecialEvent, EventParticipant
@@ -20,7 +21,7 @@ class SpecialScheduleInline(admin.TabularInline):
 
 
 @admin.register(DanceClass)
-class DanceClassAdmin(admin.ModelAdmin):
+class DanceClassAdmin(ModelAdmin):
     list_display = (
         'name',
         'instructor',
@@ -51,7 +52,7 @@ class DanceClassAdmin(admin.ModelAdmin):
 
 
 @admin.register(RecurringSchedule)
-class RecurringScheduleAdmin(admin.ModelAdmin):
+class RecurringScheduleAdmin(ModelAdmin):
     list_display = ('get_classes', 'day_of_week', 'start_time', 'end_time', 'status')
     list_filter = ('status', 'day_of_week', 'dance_classes')
     search_fields = ('dance_classes__name',)
@@ -67,7 +68,7 @@ class RecurringScheduleAdmin(admin.ModelAdmin):
 
 
 @admin.register(SpecialSchedule)
-class SpecialScheduleAdmin(admin.ModelAdmin):
+class SpecialScheduleAdmin(ModelAdmin):
     list_display = (
         'get_classes',
         'date',
@@ -95,7 +96,7 @@ class SpecialScheduleAdmin(admin.ModelAdmin):
 
 
 @admin.register(Location)
-class LocationAdmin(admin.ModelAdmin):
+class LocationAdmin(ModelAdmin):
     list_display = ('name', 'address', 'show_map_link')
     search_fields = ('name', 'address')
     ordering = ('name',)
@@ -116,7 +117,7 @@ class EventParticipantInline(admin.TabularInline):
 
 
 @admin.register(SpecialEvent)
-class SpecialEventAdmin(admin.ModelAdmin):
+class SpecialEventAdmin(ModelAdmin):
     list_display = ('name', 'instructor', 'datetime', 'location', 'capacity', 'current_capacity', 'price', 'is_full')
     list_filter = ('instructor', 'location', 'datetime')
     search_fields = ('name', 'description', 'instructor__first_name', 'instructor__last_name')
@@ -143,7 +144,7 @@ class SpecialEventAdmin(admin.ModelAdmin):
 
 
 @admin.register(EventParticipant)
-class EventParticipantAdmin(admin.ModelAdmin):
+class EventParticipantAdmin(ModelAdmin):
     list_display = ('user', 'event', 'registered_at', 'attended')
     list_filter = ('attended', 'registered_at', 'event')
     search_fields = ('user__email', 'user__first_name', 'user__last_name', 'event__name')

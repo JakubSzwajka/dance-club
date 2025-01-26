@@ -1,4 +1,4 @@
-import { LocationSchema } from "@/lib/api/public"
+import { LocationSchema } from "@/lib/api/types"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { MapPinIcon, GlobeAltIcon } from "@heroicons/react/24/outline"

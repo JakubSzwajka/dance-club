@@ -22,12 +22,6 @@ class TokenResponse(Schema):
     email: str
 
 
-class UserSchema(Schema):
-    id: str
-    email: str
-    role: str
-
-
 class ScheduleSchema(Schema):
     id: str
     dance_class_id: str

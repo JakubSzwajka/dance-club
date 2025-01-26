@@ -2,11 +2,13 @@ import { useNavigate } from '@tanstack/react-router';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { useInstructorClasses } from '../hooks/use-instructor-classes';
+import { useInstructorClassesQuery, useInstructorStatsQuery } from '@/lib/api/private';
 
-export function ClassesList() {
+
+export function ClassesList({ instructorId }: { instructorId: string }) {
   const navigate = useNavigate();
-  const { classes, isLoading, stats } = useInstructorClasses();
+  const { data: classes, isLoading } = useInstructorClassesQuery(instructorId);
+  const { data: stats, isLoading: statsLoading } = useInstructorStatsQuery(instructorId);
 
   return (
     <>
@@ -19,7 +21,7 @@ export function ClassesList() {
           </CardHeader>
           <CardContent>
             <div className="text-3xl font-bold">
-              {isLoading ? '...' : stats.totalClasses}
+              {statsLoading ? '...' : stats?.total_classes}
             </div>
           </CardContent>
         </Card>
@@ -31,7 +33,7 @@ export function ClassesList() {
           </CardHeader>
           <CardContent>
             <div className="text-3xl font-bold">
-              {isLoading ? '...' : stats.totalStudents}
+              {statsLoading ? '...' : stats?.total_students}
             </div>
           </CardContent>
         </Card>
@@ -43,7 +45,7 @@ export function ClassesList() {
           </CardHeader>
           <CardContent>
             <div className="text-3xl font-bold">
-              {isLoading ? '...' : stats.averageCapacity}
+              {statsLoading ? '...' : stats?.average_capacity}
             </div>
           </CardContent>
         </Card>
@@ -59,7 +61,7 @@ export function ClassesList() {
         <div className="grid gap-4">
           {classes.map((cls) => (
             <Card key={cls.id} className="cursor-pointer hover:bg-accent/50 transition-colors"
-              onClick={() => navigate({ to: `/classes/${cls.id}` })}>
+              onClick={() => navigate({ to: `/instructor-dashboard/classes/${cls.id}` })}>
               <CardHeader>
                 <div className="flex justify-between items-start">
                   <div>
@@ -83,7 +85,7 @@ export function ClassesList() {
         <Card>
           <CardContent className="py-8 text-center">
             <p className="text-muted-foreground mb-4">You haven't created any classes yet.</p>
-            <Button onClick={() => navigate({ to: '/classes/create' })}>
+            <Button onClick={() => navigate({ to: '/instructor-dashboard/classes/create' })}>
               Create Your First Class
             </Button>
           </CardContent>

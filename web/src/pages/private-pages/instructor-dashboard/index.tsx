@@ -1,10 +1,9 @@
-import { useAuth } from '../../lib/auth/AuthContext';
+import { useAuth } from '../../../lib/auth/AuthContext';
 import { Button } from '@/components/ui/button';
 import { Container } from '@/components/ui/container';
 import { Header } from '@/components/domain/header';
 import { useNavigate } from '@tanstack/react-router';
 import { ClassesList } from './components/classes-list';
-import { EventsList } from './components/events-list';
 
 export function InstructorDashboardPage() {
   const { user } = useAuth();
@@ -31,14 +30,14 @@ export function InstructorDashboardPage() {
               <h1 className="text-3xl font-bold">Instructor Dashboard</h1>
               <p className="text-muted-foreground">Manage your dance classes and special events</p>
             </div>
-            <Button onClick={() => navigate({ to: '/classes/create' })}>
+            <Button onClick={() => navigate({ to: '/instructor-dashboard/classes/create' })}>
               Create New Class
             </Button>
           </div>
 
           <div className="space-y-12">
-            <ClassesList />
-            <EventsList />
+            <ClassesList instructorId={user.id} />
+            {/* <EventsList /> */}
           </div>
         </div>
       </Container>

@@ -2,6 +2,7 @@ from datetime import UTC, datetime
 from typing import Optional
 
 import jwt
+from django.contrib.auth.models import AbstractUser
 from accounts.models import User
 from django.conf import settings
 from ninja.security import HttpBearer

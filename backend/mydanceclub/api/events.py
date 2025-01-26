@@ -5,7 +5,7 @@ from classes.services.events_manager import EventsManagerService
 from classes.services.events_search_engine import EventsSearchEngineService
 from classes.schemas.event import CreateSpecialEventSchema, SpecialEventSchema
 from ninja import Router
-from .types import AuthenticatedRequest
+from .private.types import AuthenticatedRequest
 
 router = Router()
 

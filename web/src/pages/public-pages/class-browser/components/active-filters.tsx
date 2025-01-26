@@ -1,7 +1,8 @@
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { XMarkIcon } from "@heroicons/react/24/outline"
-import { LocationSchema, UserPublicSchema } from "@/lib/api/public"
+import { UserPublicSchema } from "@/lib/api/public"
+import { LocationSchema } from "@/lib/api/types"
 
 interface ActiveFiltersProps {
   selectedInstructor?: string

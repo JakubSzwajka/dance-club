@@ -1,10 +1,10 @@
 from typing import List
 from accounts.models import User
 from classes.services.class_search_engine import ClassSearchEngineService
-from classes.schemas.user_public_schema import InstructorPublicSchema
+from classes.schemas.user_schema import InstructorPublicSchema
 
 
-class InstructorManagerService:
+class InstructorPublicManagerService:
     def __init__(self):
         self.class_search_engine = ClassSearchEngineService()
 

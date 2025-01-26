@@ -15,7 +15,7 @@ interface ClassItemProps {
   onDetailsClick?: (classId: string) => void
 }
 
-function getScheduleSummary(schedules: DanceClassPublicSchema['schedules']) {
+function getScheduleSummary(schedules: DanceClassPublicSchema['schedule']) {
   if (!schedules || schedules.length === 0) return 'No schedule available'
   
   const days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
@@ -63,7 +63,7 @@ export function ClassItem({ danceClass, onDetailsClick }: ClassItemProps) {
               </div>
               <div className="flex items-center gap-2 text-sm text-muted-foreground">
                 <CalendarIcon className="h-4 w-4" />
-                <span>{getScheduleSummary(danceClass.schedules)}</span>
+                <span>{getScheduleSummary(danceClass.schedule)}</span>
               </div>
             </div>
             <Button 

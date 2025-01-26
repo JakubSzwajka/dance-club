@@ -1,4 +1,4 @@
-import { LocationSchema } from "@/lib/api/public"
+import { LocationSchema } from "@/lib/api/types"
 import { MapPinIcon } from "@heroicons/react/24/outline"
 import { useNavigate } from "@tanstack/react-router"
 

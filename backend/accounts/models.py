@@ -1,16 +1,17 @@
-from django.contrib.auth.models import AbstractUser, BaseUserManager
+from django.contrib.auth.models import AbstractUser, UserManager as DjangoUserManager
 from django.db import models
 from django.utils.translation import gettext_lazy as _
-from classes.schemas.user_public_schema import InstructorPublicSchema, UserPublicSchema
+from classes.schemas.user_schema import InstructorPublicSchema, UserPublicSchema
 from mydanceclub.models import generate_uuid
 
 
-class UserManager(BaseUserManager):
+class UserManager(DjangoUserManager):
     def create_user(self, email, password=None, **extra_fields):
         if not email:
             raise ValueError('The Email field must be set')
         email = self.normalize_email(email)
-        del extra_fields['username']
+        if 'username' in extra_fields:
+            del extra_fields['username']
         user = self.model(email=email, **extra_fields)
         user.set_password(password)
         user.save(using=self._db)

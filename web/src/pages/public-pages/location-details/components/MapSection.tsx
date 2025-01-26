@@ -1,4 +1,4 @@
-import { LocationSchema } from "@/lib/api/public"
+import { LocationSchema } from "@/lib/api/types"
 import { Card } from "@/components/ui/card"
 import { Map, Marker } from "@vis.gl/react-google-maps"
 

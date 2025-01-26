@@ -5,7 +5,7 @@ from django.http import HttpResponse
 from ninja import Router
 from classes.services.class_manager import ClassManager
 from classes.schemas.dance_class import CreateRecurringScheduleSchema, CreateSpecialScheduleSchema, DanceClassSchema, CreateDanceClassSchema, RecurringScheduleSchema, SpecialScheduleSchema
-from .types import AuthenticatedRequest
+from .private.types import AuthenticatedRequest
 
 router = Router()
 

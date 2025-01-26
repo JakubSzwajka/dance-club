@@ -1,10 +1,9 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-
 from .models import User
+from unfold.admin import ModelAdmin
 
-
-class CustomUserAdmin(UserAdmin):
+class CustomUserAdmin(UserAdmin, ModelAdmin):
     list_display = ('email', 'role', 'is_active', 'is_staff', 'date_joined')
     list_filter = ('role', 'is_active', 'is_staff')
     search_fields = ('email',)

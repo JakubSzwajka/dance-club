@@ -2,15 +2,15 @@ from typing import List, Optional
 from classes.services.location_search_engine import LocationSearchEngineService
 from classes.schemas.location import LocationSchema
 from classes.models import DanceClass
-from classes.services.instructor_manager import InstructorManagerService
-from classes.schemas.user_public_schema import InstructorPublicSchema, UserPublicSchema
+from classes.services.instructor_public_manager import InstructorPublicManagerService
+from classes.schemas.user_schema import InstructorPublicSchema, UserPublicSchema
 from classes.schemas.dance_class import DanceClassSchema, RecurringScheduleSchema
 from classes.services.class_search_engine import ClassSearchEngineService
 from classes.schemas.event import SpecialEventSchema
 from classes.services.events_search_engine import EventsSearchEngineService
 from ninja import Router
 
-from .types import AuthenticatedRequest
+from .private.types import AuthenticatedRequest
 
 router = Router()
 
@@ -52,11 +52,11 @@ def get_class_schedule(request: AuthenticatedRequest, class_id: str) -> List[Rec
 
 @router.get('/instructors', response=List[InstructorPublicSchema], auth=None)
 def get_instructors(request: AuthenticatedRequest) -> List[InstructorPublicSchema]:
-    return InstructorManagerService().get_instructors()
+    return InstructorPublicManagerService().get_instructors()
 
 @router.get('/instructors/{instructor_id}', response=InstructorPublicSchema, auth=None)
 def get_instructor(request: AuthenticatedRequest, instructor_id: str) -> InstructorPublicSchema:
-    return InstructorManagerService().get_instructor_by_id(instructor_id)
+    return InstructorPublicManagerService().get_instructor_by_id(instructor_id)
 
 @router.get('/instructors/{instructor_id}/classes', response=List[DanceClassSchema], auth=None)
 def get_classes_by_instructor(request: AuthenticatedRequest, instructor_id: str) -> List[DanceClassSchema]:

@@ -1,6 +1,3 @@
-
-
-
 from typing import Optional
 from ninja import Schema
 
@@ -11,6 +8,11 @@ class UserPublicSchema(Schema):
     last_name: str
     bio: str
     profile_picture: Optional[str]
+
+
+class UserPrivateSchema(UserPublicSchema):
+    email: str
+    role: str
 
 class InstructorPublicSchema(UserPublicSchema):
     classes_count: int

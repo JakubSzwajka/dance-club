@@ -8,7 +8,7 @@ from ninja import Router
 from reviews.models import Review, ReviewResponse
 
 from .schemas import ReviewResponseSchema, ReviewSchema
-from .types import AuthenticatedRequest
+from .private.types import AuthenticatedRequest
 
 router = Router()
 
