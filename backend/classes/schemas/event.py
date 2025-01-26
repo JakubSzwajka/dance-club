@@ -2,6 +2,7 @@ from ninja import Schema
 from datetime import datetime
 from decimal import Decimal
 from typing import Optional, List
+from classes.schemas.user_public_schema import UserPublicSchema
 from classes.schemas.location import LocationSchema
 
 
@@ -20,13 +21,12 @@ class CreateSpecialEventSchema(Schema):
     capacity: int
     price: Decimal
     location: CreateLocationSchema
-    instructor_id: str
 
 
 class SpecialEventSchema(CreateSpecialEventSchema):
     id: str
-    instructor_name: str
     current_capacity: int
     location: LocationSchema
+    instructor: UserPublicSchema
     created_at: datetime
     updated_at: datetime

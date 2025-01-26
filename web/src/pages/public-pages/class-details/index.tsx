@@ -39,13 +39,29 @@ export function ClassDetailsPage() {
       <div className="bg-muted/30 border-b">
         <Container>
           <div className="py-8">
-            <div className="flex flex-col lg:flex-row gap-8">
+            <div className="grid grid-cols-1 lg:grid-cols-[1fr,320px] gap-8">
               <HeroSection classDetails={classDetails} />
               <QuickInfoCard classDetails={classDetails} />
             </div>
           </div>
         </Container>
       </div>
+
+      {/* Description Section */}
+      <Container>
+        <div className="py-8">
+          <div className="max-w-3xl">
+            <h2 className="text-2xl font-semibold mb-4">About This Class</h2>
+            <div className="prose prose-slate max-w-none">
+              {classDetails.description.split('\n\n').map((paragraph, index) => (
+                <p key={index} className="whitespace-pre-line mb-4">
+                  {paragraph}
+                </p>
+              ))}
+            </div>
+          </div>
+        </div>
+      </Container>
 
       {/* Schedule Section */}
       <Container>

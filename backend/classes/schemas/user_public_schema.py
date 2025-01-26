@@ -11,3 +11,7 @@ class UserPublicSchema(Schema):
     last_name: str
     bio: str
     profile_picture: Optional[str]
+
+class InstructorPublicSchema(UserPublicSchema):
+    classes_count: int
+    students_count: int

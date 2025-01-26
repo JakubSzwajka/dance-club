@@ -52,6 +52,7 @@ class RecurringScheduleSchema(CreateRecurringScheduleSchema):
     status: str
     created_at: datetime
     updated_at: datetime
+    day_of_week_display: str
 
 
 class CreateSpecialScheduleSchema(Schema):

@@ -90,6 +90,7 @@ class RecurringSchedule(BaseModel):
         return RecurringScheduleSchema(
             id=self.id,
             day_of_week=self.day_of_week,
+            day_of_week_display=self.get_day_of_week_display(),
             start_time=self.start_time,
             end_time=self.end_time,
             status=self.status,
@@ -255,9 +256,8 @@ class SpecialEvent(BaseModel):
             capacity=self.capacity,
             price=self.price,
             location=self.location.to_schema(),
-            instructor_id=self.instructor.id,
-            instructor_name=self.instructor.get_full_name(),
             current_capacity=self.current_capacity,
+            instructor=self.instructor.to_schema(),
             created_at=self.created_at,
             updated_at=self.updated_at,
         )

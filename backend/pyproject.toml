@@ -18,6 +18,8 @@ pillow = "11.1.0"
 psycopg2-binary = "2.9.10"
 python-dotenv = "1.0.1"
 pyjwt = "2.8.0"
+faker = "^35.0.0"
+pytz = "^2024.2"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "8.3.4"

@@ -11,11 +11,13 @@ import { EventManagementPage } from './pages/event-management';
 import { Toaster } from './components/ui/toaster';
 import { APIProvider } from '@vis.gl/react-google-maps';
 import { InstructorDashboardPage } from './pages/instructor-dashboard';
-import { HomePage } from './pages/public-pages';
+import { HomePage } from './pages/public-pages/main-page';
 import { ClassBrowser } from './pages/public-pages/class-browser';
 import { ClassDetailsPage as PublicClassDetailsPage } from './pages/public-pages/class-details';
 import { EventDetailsPage as PublicEventDetailsPage } from './pages/public-pages/event-details';
 import { EventBrowser } from './pages/public-pages/event-browser';
+import { InstructorDetailsPage } from './pages/public-pages/instructor-details';
+import { LocationDetailsPage } from './pages/public-pages/location-details';
 
 const rootRoute = createRootRoute({
   component: () => (
@@ -83,6 +85,18 @@ const eventBrowseDetailsRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: '/events/$eventId',
   component: PublicEventDetailsPage,
+});
+
+const instructorProfileDetailsRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/instructors/$instructorId',
+  component: InstructorDetailsPage,
+});
+
+const locationDetailsRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/locations/$locationId',
+  component: LocationDetailsPage,
 });
 
 const instructorDashboardRoute = createRoute({
@@ -155,6 +169,8 @@ const routeTree = rootRoute.addChildren([
   classBrowserDetailsRoute,
   eventBrowseRoute,
   eventBrowseDetailsRoute,
+  instructorProfileDetailsRoute,
+  locationDetailsRoute,
   loginRoute,
   signupRoute,
 ]);

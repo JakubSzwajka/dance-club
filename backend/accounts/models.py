@@ -1,7 +1,7 @@
 from django.contrib.auth.models import AbstractUser, BaseUserManager
 from django.db import models
 from django.utils.translation import gettext_lazy as _
-from classes.schemas.user_public_schema import UserPublicSchema
+from classes.schemas.user_public_schema import InstructorPublicSchema, UserPublicSchema
 from mydanceclub.models import generate_uuid
 
 
@@ -52,6 +52,7 @@ class User(AbstractUser):
     phone = models.CharField(max_length=15, blank=True)
     bio = models.TextField(blank=True)
     profile_picture = models.ImageField(upload_to='profile_pictures/', null=True, blank=True)
+    profile_picture_url = models.CharField(max_length=1000, null=True, blank=True)
     date_of_birth = models.DateField(null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -68,11 +69,12 @@ class User(AbstractUser):
     def __str__(self):
         return self.email
 
+
     def to_schema(self):
         return UserPublicSchema(
             id=self.id,
             first_name=self.first_name,
             last_name=self.last_name,
             bio=self.bio,
-            profile_picture=self.profile_picture.url if self.profile_picture else None,
+            profile_picture=self.profile_picture_url,
         )

@@ -3,7 +3,7 @@ from classes.services.location_search_engine import LocationSearchEngineService
 from classes.schemas.location import LocationSchema
 from classes.models import DanceClass
 from classes.services.instructor_manager import InstructorManagerService
-from classes.schemas.user_public_schema import UserPublicSchema
+from classes.schemas.user_public_schema import InstructorPublicSchema, UserPublicSchema
 from classes.schemas.dance_class import DanceClassSchema, RecurringScheduleSchema
 from classes.services.class_search_engine import ClassSearchEngineService
 from classes.schemas.event import SpecialEventSchema
@@ -50,12 +50,12 @@ def get_class_schedule(request: AuthenticatedRequest, class_id: str) -> List[Rec
 
 # ------------ PUBLIC INSTRUCTORS ------------
 
-@router.get('/instructors', response=List[UserPublicSchema], auth=None)
-def get_instructors(request: AuthenticatedRequest) -> List[UserPublicSchema]:
+@router.get('/instructors', response=List[InstructorPublicSchema], auth=None)
+def get_instructors(request: AuthenticatedRequest) -> List[InstructorPublicSchema]:
     return InstructorManagerService().get_instructors()
 
-@router.get('/instructors/{instructor_id}', response=UserPublicSchema, auth=None)
-def get_instructor(request: AuthenticatedRequest, instructor_id: str) -> UserPublicSchema:
+@router.get('/instructors/{instructor_id}', response=InstructorPublicSchema, auth=None)
+def get_instructor(request: AuthenticatedRequest, instructor_id: str) -> InstructorPublicSchema:
     return InstructorManagerService().get_instructor_by_id(instructor_id)
 
 @router.get('/instructors/{instructor_id}/classes', response=List[DanceClassSchema], auth=None)
@@ -89,3 +89,5 @@ def get_events_by_location(request: AuthenticatedRequest, location_id: str) -> L
 @router.get('/dance-styles', response=List[str], auth=None)
 def get_dance_styles(request: AuthenticatedRequest) -> List[str]:
     return list(DanceClass.objects.values_list('style', flat=True).distinct())
+
+
