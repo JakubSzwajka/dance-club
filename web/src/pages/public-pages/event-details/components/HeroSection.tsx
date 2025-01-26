@@ -1,13 +1,13 @@
 import { Button } from "@/components/ui/button"
 import { 
-  UserIcon, 
-  MapPinIcon, 
   UsersIcon, 
   CurrencyDollarIcon,
   CalendarIcon,
   ClockIcon
 } from "@heroicons/react/24/outline"
 import { SpecialEventPublicSchema } from "@/lib/api/public"
+import { LocationPill } from "@/components/domain/location-pill"
+import { InstructorPill } from "@/components/domain/instructor-pill"
 
 interface HeroSectionProps {
   eventDetails: SpecialEventPublicSchema
@@ -34,12 +34,10 @@ export function HeroSection({ eventDetails }: HeroSectionProps) {
       
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm text-muted-foreground mb-6">
         <div className="flex items-center gap-2">
-          <UserIcon className="h-4 w-4" />
-          <span>{eventDetails.instructor.first_name} {eventDetails.instructor.last_name}</span>
+          <InstructorPill instructor={eventDetails.instructor} />
         </div>
         <div className="flex items-center gap-2">
-          <MapPinIcon className="h-4 w-4" />
-          <span>{eventDetails.location.name}</span>
+          <LocationPill location={eventDetails.location} />
         </div>
         <div className="flex items-center gap-2">
           <CalendarIcon className="h-4 w-4" />

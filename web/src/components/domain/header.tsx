@@ -21,9 +21,9 @@ export function Header() {
       <Container>
         <div className="flex h-16 items-center justify-between">
           <div className="flex items-center space-x-4">
-            <a href="/" className="font-bold text-xl">
+            <div className="font-bold text-xl" onClick={() => navigate({ to: '/' })}>
               🕺 My Dance Club
-            </a>
+            </div>
           </div>
           <nav className="flex items-center space-x-4">
             {user?.role === 'instructor' && (
@@ -38,12 +38,8 @@ export function Header() {
               </Button>
             ) : (
               <>
-                <a href="/login">
-                  <Button variant="ghost">Sign in</Button>
-                </a>
-                <a href="/signup">
-                  <Button>Sign up</Button>
-                </a>
+                <Button variant="ghost" onClick={() => navigate({ to: '/login' })}>Sign in</Button>
+                <Button onClick={() => navigate({ to: '/signup' })}>Sign up</Button>
               </>
             )}
           </nav>

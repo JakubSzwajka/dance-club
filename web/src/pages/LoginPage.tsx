@@ -4,7 +4,7 @@ import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter }
 import { Button } from '../components/ui/button';
 import { Input } from '../components/ui/input';
 import { Label } from '../components/ui/label';
-import { Alert } from '../components/ui/alert';
+import { Alert, AlertDescription } from '../components/ui/alert';
 import { Container } from '../components/ui/container';
 import { Header } from '../components/domain/header';
 import { AxiosError } from 'axios';
@@ -32,25 +32,38 @@ export function LoginPage() {
   return (
     <div className="min-h-screen flex flex-col bg-background">
       <Header />
-      <main className="flex-1 flex items-center justify-center w-full">
-        <Container className="flex items-center justify-center w-full py-16">
+      <main className="flex-1 relative">
+        {/* Background Image */}
+        <div 
+          className="absolute inset-0 z-0"
+          style={{
+            backgroundImage: 'url("/main_page.jpg")',
+            backgroundPosition: 'center',
+            backgroundSize: 'cover',
+            backgroundRepeat: 'no-repeat',
+          }}
+        >
+          <div className="absolute inset-0 bg-black/50" />
+        </div>
+
+        <Container className="relative z-10 flex items-center justify-center min-h-full py-16">
           <div className="w-full max-w-[400px]">
-            <Card>
+            <Card className="backdrop-blur-sm bg-white/90">
               <CardHeader className="space-y-1">
-                <CardTitle className="text-2xl font-bold">Sign in</CardTitle>
-                <CardDescription>
-                  Enter your email and password to access your account
+                <CardTitle className="text-2xl font-bold text-center">Welcome!</CardTitle>
+                <CardDescription className="text-center">
+                  Enter your credentials to access your account
                 </CardDescription>
               </CardHeader>
               <form onSubmit={handleSubmit}>
                 <CardContent className="space-y-4">
                   {error && (
-                    <Alert variant="destructive">
-                      {error}
+                    <Alert variant="destructive" className="text-sm">
+                      <AlertDescription>{error}</AlertDescription>
                     </Alert>
                   )}
                   <div className="space-y-2">
-                    <Label htmlFor="email">Email</Label>
+                    <Label htmlFor="email" className="text-sm font-medium">Email</Label>
                     <Input
                       id="email"
                       type="email"
@@ -58,29 +71,36 @@ export function LoginPage() {
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       required
+                      className="h-11"
                     />
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="password">Password</Label>
+                    <Label htmlFor="password" className="text-sm font-medium">Password</Label>
                     <Input
                       id="password"
                       type="password"
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
                       required
+                      className="h-11"
                     />
                   </div>
                 </CardContent>
                 <CardFooter className="flex flex-col space-y-4">
-                  <Button type="submit" className="w-full">
+                  <Button type="submit" className="w-full h-11 text-base font-semibold">
                     Sign in
                   </Button>
-                  <p className="text-sm text-center text-muted-foreground">
-                    Don't have an account?{' '}
-                    <a href="/signup" className="text-primary hover:underline">
-                      Sign up
+                  <div className="text-sm text-center space-y-2">
+                    <p className="text-muted-foreground">
+                      Don't have an account?
+                    </p>
+                    <a 
+                      href="/signup" 
+                      className="text-primary hover:text-primary/80 font-medium transition-colors"
+                    >
+                      Create an account
                     </a>
-                  </p>
+                  </div>
                 </CardFooter>
               </form>
             </Card>
