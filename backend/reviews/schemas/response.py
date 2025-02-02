@@ -1,5 +1,6 @@
 from datetime import datetime
-from typing import List, Optional
+from decimal import Decimal
+from typing import List, Optional, Dict
 from ninja import Schema
 from pydantic import Field
 
@@ -10,19 +11,37 @@ from .base import (
     FacilitiesSchema
 )
 
+
+class ReviewInstructorStatsSchema(Schema):
+    move_breakdown: float
+
+class ReviewDanceClassStatsSchema(Schema):
+    group_size: float
+    level: float
+    engagement: float
+    teaching_pace: float
+
+class ReviewFacilitiesStatsSchema(Schema):
+    cleanness: float
+
+
+# ------------------------------------------------------------
+
 class ReviewResponseSchema(Schema):
     id: str
     created_at: datetime
     updated_at: datetime
     overall_rating: int
     comment: str
-    teaching: TeachingApproachSchema
-    environment: EnvironmentSchema
-    music: MusicSchema
-    facilities: FacilitiesSchema
+
+    instructor_stats: ReviewInstructorStatsSchema
+    facilities_stats: ReviewFacilitiesStatsSchema
+    dance_class_stats: ReviewDanceClassStatsSchema
+
     author_name: Optional[str]
     verified: bool = Field(False)
-    helpful_votes: int = Field(0)
+
+
 
     def get_relative_time(self) -> str:
         """Returns a human-readable relative time string"""
@@ -46,14 +65,6 @@ class ReviewResponseSchema(Schema):
         else:
             return "just now"
 
-class ReviewStatsSchema(Schema):
-    total_reviews: int
-    average_rating: float
-    verified_reviews: int
-    teaching_stats: dict
-    environment_stats: dict
-    music_stats: dict
-    facilities_stats: dict
 
 class ReviewListSchema(Schema):
     items: List[ReviewResponseSchema]
@@ -62,3 +73,13 @@ class ReviewListSchema(Schema):
     pages: int
     has_next: bool
     has_prev: bool
+
+
+class AggregatedReviewStatsSchema(Schema):
+    total_reviews: int
+    verified_reviews: int
+    average_rating: Decimal
+
+    instructor_stats: ReviewInstructorStatsSchema
+    facilities_stats: ReviewFacilitiesStatsSchema
+    dance_class_stats: ReviewDanceClassStatsSchema

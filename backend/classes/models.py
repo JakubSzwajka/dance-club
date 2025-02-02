@@ -1,23 +1,25 @@
+from enum import StrEnum
 from accounts.models import User
 from django.core.validators import MinValueValidator
 from django.db import models
 from mydanceclub.models import BaseModel
 from classes.schemas.location import LocationSchema
 from classes.schemas.dance_class import DanceClassSchema, PrivateDanceClassSchema
-
+from shared.const import DanceStyle, SkillLevel
 
 DANCE_STYLES = [
-    ('ballroom', 'Ballroom'),
-    ('latin', 'Latin'),
-    ('salsa', 'Salsa'),
-    ('tango', 'Tango'),
-    ('other', 'Other'),
+    (DanceStyle.BALLROOM, 'Ballroom'),
+    (DanceStyle.LATIN, 'Latin'),
+    (DanceStyle.SALSA, 'Salsa'),
+    (DanceStyle.TANGO, 'Tango'),
+    (DanceStyle.OTHER, 'Other'),
 ]
 
+
 SKILL_LEVELS = [
-    ('beginner', 'Beginner'),
-    ('intermediate', 'Intermediate'),
-    ('advanced', 'Advanced'),
+    (SkillLevel.BEGINNER, 'Beginner'),
+    (SkillLevel.INTERMEDIATE, 'Intermediate'),
+    (SkillLevel.ADVANCED, 'Advanced'),
 ]
 
 class Location(BaseModel):
@@ -61,7 +63,7 @@ class DanceClass(BaseModel):
     price = models.DecimalField(max_digits=10, decimal_places=2)
     start_date = models.DateField()  # When the class starts overall
     end_date = models.DateField()  # When the class ends overall
-    location = models.ForeignKey(Location, on_delete=models.PROTECT, null=True, blank=True)
+    location = models.ForeignKey(Location, on_delete=models.PROTECT, null=True, blank=True, related_name='classes')
 
     class Meta:
         db_table = 'dance_classes'

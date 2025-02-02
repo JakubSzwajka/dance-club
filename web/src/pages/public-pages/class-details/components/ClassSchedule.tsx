@@ -1,19 +1,16 @@
-import { Card, CardContent } from "@/components/ui/card"
-import { usePublicClassSchedule } from "@/lib/api/public"
-import { CalendarIcon, ClockIcon } from "@heroicons/react/24/outline"
 
 interface ClassScheduleProps {
   class_id: string
 }
 
 export function ClassSchedule({ class_id }: ClassScheduleProps) {
-  const {data: schedules} = usePublicClassSchedule(class_id)
+  // const {data: schedules} = usePublicClassSchedule(class_id)
 
   return (
     <div className="py-8 border-t">
       <h2 className="text-2xl font-semibold mb-6">🗓️ Class Schedule</h2>
       <div className="grid gap-4 md:grid-cols-2">
-        {schedules?.map((schedule) => (
+        {/* {schedules?.map((schedule) => (
           <Card key={schedule.id}>
             <CardContent className="flex items-center gap-4 py-4">
               <div className="flex items-center gap-2">
@@ -38,7 +35,7 @@ export function ClassSchedule({ class_id }: ClassScheduleProps) {
               </div>
             </CardContent>
           </Card>
-        ))}
+        ))} */}
       </div>
     </div>
   )

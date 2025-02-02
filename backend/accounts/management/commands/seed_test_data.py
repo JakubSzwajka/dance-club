@@ -3,9 +3,10 @@ from django.contrib.auth import get_user_model
 from django.utils import timezone
 from classes.models import DanceClass, Location
 from reviews.models import (
-    Review, TeachingApproachReview, EnvironmentReview,
-    MusicReview, FacilitiesReview, ReviewVerification,
-    Genre, SPORTS_CARDS, MUSIC_GENRES
+    Review,
+    DanceClassReview,
+    InstructorReview,
+    FacilitiesReview
 )
 from faker import Faker
 from random import randint, choice, uniform, sample, random
@@ -219,54 +220,28 @@ def generate_review_comment():
 
     return " ".join(sections)
 
-def create_review_for_class(dance_class, user=None, genres=None):
+def create_review_for_class(dance_class, user=None):
     """Create a complete review with all related models"""
     # Skip if user already reviewed this class
     if user and Review.objects.filter(dance_class=dance_class, user=user).exists():
         return None
 
-    # Create teaching approach review first
-    teaching_approach = TeachingApproachReview.objects.create(
-        teaching_style=randint(0, 100),
-        feedback_approach=randint(0, 100),
-        pace_of_teaching=randint(0, 100),
-        breakdown_quality=randint(3, 5)  # Bias towards positive ratings
+    # Create dance class review
+    dance_class_stats = DanceClassReview.objects.create(
+        group_size=uniform(-10, 10),
+        level=uniform(-10, 10),
+        engagement=randint(1, 10),
+        teaching_pace=uniform(-10, 10)
     )
 
-    # Create environment review
-    environment = EnvironmentReview.objects.create(
-        floor_quality=randint(3, 5),
-        crowdedness=randint(2, 5),
-        ventilation=randint(3, 5),
-        temperature=choice(['cool', 'moderate', 'warm'])
+    # Create instructor review
+    instructor_stats = InstructorReview.objects.create(
+        move_breakdown=uniform(-10, 10)
     )
-
-    # Create music review
-    music = MusicReview.objects.create(
-        volume_level=randint(3, 5),
-        style=randint(0, 100)
-    )
-    # Add 2-3 random genres from the provided genres list
-    if genres:
-        selected_genres = sample(genres, randint(2, 3))
-        music.genres.add(*selected_genres)
 
     # Create facilities review
-    has_changing_room = random() > 0.2  # 80% chance of having changing room
-    waiting_area_available = random() > 0.2  # 80% chance of having waiting area
-
-    # Prepare accepted cards
-    accepted_cards = [card[0] for card in sample(SPORTS_CARDS, randint(2, 3))]
-
-    facilities = FacilitiesReview.objects.create(
-        has_changing_room=has_changing_room,
-        changing_room_quality=randint(3, 5) if has_changing_room else None,
-        changing_room_notes=fake.sentence() if has_changing_room and random() > 0.5 else "",
-        waiting_area_available=waiting_area_available,
-        waiting_area_type=choice(['indoor', 'outdoor', 'both']) if waiting_area_available else None,
-        has_seating=random() > 0.2 if waiting_area_available else False,
-        waiting_area_notes=fake.sentence() if waiting_area_available and random() > 0.5 else "",
-        accepted_cards=accepted_cards  # Set accepted_cards during creation
+    facilities_stats = FacilitiesReview.objects.create(
+        cleanness=randint(1, 10)
     )
 
     # Create main review with all components
@@ -274,25 +249,13 @@ def create_review_for_class(dance_class, user=None, genres=None):
         dance_class=dance_class,
         user=user,
         anonymous_name=fake.name() if not user else None,
-        overall_rating=randint(3, 5),  # Bias towards positive ratings
+        overall_rating=randint(1, 5),
         comment=generate_review_comment(),
         is_verified=bool(user and random() > 0.3),  # 70% chance of verification for logged users
-        teaching_approach=teaching_approach,
-        environment=environment,
-        music=music,
-        facilities=facilities
+        instructor_stats=instructor_stats,
+        dance_class_stats=dance_class_stats,
+        facilities_stats=facilities_stats
     )
-
-    # Create verification for verified reviews
-    if review.is_verified:
-        verification = ReviewVerification.objects.create(
-            verified_by=choice(User.objects.filter(role='admin')) if User.objects.filter(role='admin').exists() else None,
-            verification_method=choice(['attendance', 'purchase', 'manual']),
-            verification_notes=fake.sentence() if random() > 0.7 else ""
-        ).save()
-        # Link verification to review
-        review.verification = verification
-        review.save()
 
     return review
 
@@ -309,22 +272,8 @@ class Command(BaseCommand):
             TaskProgressColumn(),
             console=console
         ) as progress:
-            # Create genres first
-            genre_task = progress.add_task("[cyan]Creating music genres...", total=len(MUSIC_GENRES))
-            genres = []
-            for genre_code, genre_name in MUSIC_GENRES:
-                genre, created = Genre.objects.get_or_create(
-                    code=genre_code,
-                    defaults={
-                        'name': genre_name,
-                        'is_active': True
-                    }
-                )
-                genres.append(genre)
-                progress.advance(genre_task)
-
             # Create admin user if doesn't exist
-            progress.add_task("[cyan]Creating admin user...", total=1)
+            admin_task = progress.add_task("[cyan]Creating admin user...", total=1)
             if not User.objects.filter(role='admin').exists():
                 User.objects.create_user(
                     username='admin',
@@ -336,7 +285,7 @@ class Command(BaseCommand):
                     is_staff=True,
                     is_superuser=True
                 )
-            progress.advance(genre_task)
+            progress.advance(admin_task)
 
             # Create test locations
             location_task = progress.add_task("[cyan]Creating locations...", total=len(TEST_LOCATIONS))
@@ -445,9 +394,9 @@ class Command(BaseCommand):
 
                     for _ in range(num_reviews):
                         reviewer = choice(students) if random() > 0.3 else None
-                        review = create_review_for_class(dance_class, reviewer, genres)
+                        review = create_review_for_class(dance_class, reviewer)
                         if not review and reviewer:
-                            create_review_for_class(dance_class, None, genres)
+                            create_review_for_class(dance_class, None)
                         progress.advance(review_task)
 
         # Show summary
@@ -455,7 +404,6 @@ class Command(BaseCommand):
         table.add_column("Entity", style="cyan")
         table.add_column("Count", justify="right", style="green")
 
-        table.add_row("Genres", str(len(genres)))
         table.add_row("Locations", str(len(locations)))
         table.add_row("Students", str(len(students)))
         table.add_row("Instructors", str(len(instructors)))

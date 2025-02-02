@@ -6,6 +6,13 @@ from reviews.constants import (
     WAITING_AREA_OPTIONS,
     VERIFICATION_METHODS,
 )
+from shared.const import DanceStyle, MusicGenre, SkillLevel, SportsCard
+
+class MetadataSchema(Schema):
+    dance_styles: List[DanceStyle]
+    skill_levels: List[SkillLevel]
+    music_genres: List[MusicGenre]
+    sports_cards: List[SportsCard]
 
 class ReviewMetadataSchema(Schema):
     temperature_options: List[str] = TEMPERATURE_OPTIONS

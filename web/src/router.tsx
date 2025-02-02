@@ -9,8 +9,6 @@ import { APIProvider } from '@vis.gl/react-google-maps';
 import { HomePage } from './pages/public-pages/main-page';
 import { ClassBrowser } from './pages/public-pages/class-browser';
 import { ClassDetailsPage as PublicClassDetailsPage } from './pages/public-pages/class-details';
-import { EventDetailsPage as PublicEventDetailsPage } from './pages/public-pages/event-details';
-import { EventBrowser } from './pages/public-pages/event-browser';
 import { InstructorDetailsPage } from './pages/public-pages/instructor-details';
 import { LocationDetailsPage } from './pages/public-pages/location-details';
 
@@ -70,17 +68,17 @@ const classBrowserDetailsRoute = createRoute({
   component: PublicClassDetailsPage,
 });
 
-const eventBrowseRoute = createRoute({
-  getParentRoute: () => rootRoute,
-  path: '/events',
-  component: EventBrowser,
-});
+// const eventBrowseRoute = createRoute({
+//   getParentRoute: () => rootRoute,
+//   path: '/events',
+//   component: EventBrowser,
+// });
 
-const eventBrowseDetailsRoute = createRoute({
-  getParentRoute: () => rootRoute,
-  path: '/events/$eventId',
-  component: PublicEventDetailsPage,
-});
+// const eventBrowseDetailsRoute = createRoute({
+//   getParentRoute: () => rootRoute,
+//   path: '/events/$eventId',
+//   component: PublicEventDetailsPage,
+// });
 
 const instructorProfileDetailsRoute = createRoute({
   getParentRoute: () => rootRoute,
@@ -122,8 +120,6 @@ const routeTree = rootRoute.addChildren([
   indexRoute,
   classBrowserRoute,
   classBrowserDetailsRoute,
-  eventBrowseRoute,
-  eventBrowseDetailsRoute,
   instructorProfileDetailsRoute,
   locationDetailsRoute,
   loginRoute,

@@ -1,7 +1,7 @@
 import { useParams } from "@tanstack/react-router"
 import { Container } from "@/components/ui/container"
 import { Header } from "@/components/domain/header"
-import { usePublicLocation, usePublicLocationClasses, usePublicLocationEvents } from "@/lib/api/public"
+import { usePublicLocation, usePublicLocationClasses } from "@/lib/api/public"
 import { HeroSection } from "./components/HeroSection"
 import { MapSection } from "./components/MapSection"
 import { ClassesSection } from "./components/ClassesSection"
@@ -11,7 +11,6 @@ export function LocationDetailsPage() {
   const { locationId } = useParams({ from: '/locations/$locationId' })
   const { data: location, isLoading } = usePublicLocation(locationId)
   const { data: locationClasses } = usePublicLocationClasses(locationId)
-  const { data: locationEvents } = usePublicLocationEvents(locationId)
 
   if (isLoading || !location) {
     return (
@@ -53,14 +52,6 @@ export function LocationDetailsPage() {
         <div className="py-8">
           <h2 className="text-2xl font-semibold mb-6">Regular Classes</h2>
           <ClassesSection classes={locationClasses || []} />
-        </div>
-      </Container>
-
-      {/* Events Section */}
-      <Container>
-        <div className="py-8">
-          <h2 className="text-2xl font-semibold mb-6">Upcoming Events</h2>
-          <EventsSection events={locationEvents || []} />
         </div>
       </Container>
     </div>

@@ -2,11 +2,9 @@ from django.contrib import admin
 from unfold.admin import ModelAdmin
 from .models import (
     Review,
-    TeachingApproachReview,
-    EnvironmentReview,
-    MusicReview,
-    FacilitiesReview,
-    ReviewVerification
+    DanceClassReview,
+    InstructorReview,
+    FacilitiesReview
 )
 
 @admin.register(Review)
@@ -27,50 +25,30 @@ class ReviewAdmin(ModelAdmin):
             'fields': ('dance_class', 'user', 'anonymous_name', 'overall_rating', 'comment')
         }),
         ('Verification', {
-            'fields': ('is_verified', 'verification')
+            'fields': ('is_verified',)
         }),
         ('Component Reviews', {
-            'fields': ('teaching_approach', 'environment', 'music', 'facilities')
+            'fields': ('instructor_stats', 'dance_class_stats', 'facilities_stats')
         }),
         ('Metadata', {
             'fields': ('created_at', 'updated_at')
         }),
     )
-    raw_id_fields = ('verification',)
 
-@admin.register(TeachingApproachReview)
-class TeachingApproachReviewAdmin(ModelAdmin):
-    list_display = ('teaching_style', 'feedback_approach', 'pace_of_teaching', 'breakdown_quality')
-    list_filter = ('breakdown_quality',)
+@admin.register(DanceClassReview)
+class DanceClassReviewAdmin(ModelAdmin):
+    list_display = ('group_size', 'level', 'engagement', 'teaching_pace')
+    list_filter = ('level', 'engagement')
     readonly_fields = ('created_at', 'updated_at')
 
-@admin.register(EnvironmentReview)
-class EnvironmentReviewAdmin(ModelAdmin):
-    list_display = ('floor_quality', 'crowdedness', 'ventilation', 'temperature')
-    list_filter = ('temperature', 'floor_quality')
-    readonly_fields = ('created_at', 'updated_at')
-
-@admin.register(MusicReview)
-class MusicReviewAdmin(ModelAdmin):
-    list_display = ('volume_level', 'style')
-    list_filter = ('volume_level',)
+@admin.register(InstructorReview)
+class InstructorReviewAdmin(ModelAdmin):
+    list_display = ('move_breakdown',)
+    list_filter = ('move_breakdown',)
     readonly_fields = ('created_at', 'updated_at')
 
 @admin.register(FacilitiesReview)
 class FacilitiesReviewAdmin(ModelAdmin):
-    list_display = (
-        'has_changing_room',
-        'changing_room_quality',
-        'waiting_area_available',
-        'waiting_area_type'
-    )
-    list_filter = ('has_changing_room', 'waiting_area_available', 'waiting_area_type')
+    list_display = ('cleanness',)
+    list_filter = ('cleanness',)
     readonly_fields = ('created_at', 'updated_at')
-
-@admin.register(ReviewVerification)
-class ReviewVerificationAdmin(ModelAdmin):
-    list_display = ('verified_review', 'verified_by', 'verification_date', 'verification_method')
-    list_filter = ('verification_method', 'verification_date', 'verified_by')
-    search_fields = ('verified_review__comment', 'verification_notes', 'verified_by__email')
-    readonly_fields = ('created_at', 'updated_at', 'verification_date')
-    raw_id_fields = ('verified_by',)

@@ -1,6 +1,6 @@
 import { Container } from "@/components/ui/container"
 import { InstructorCard } from "@/components/domain/instructor-card"
-import { usePublicInstructors } from "@/lib/api/public"
+import { usePublicInstructors } from "@/lib/api/public/index"
 import {
   Carousel,
   CarouselContent,

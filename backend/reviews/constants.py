@@ -1,5 +1,6 @@
 from typing import Literal
 
+
 # Teaching Approach Constants
 TEACHING_STYLE_MIN = 0
 TEACHING_STYLE_MAX = 100

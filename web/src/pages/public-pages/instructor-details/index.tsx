@@ -4,7 +4,6 @@ import { Header } from "@/components/domain/header"
 import { usePublicInstructor, usePublicInstructorClasses } from "@/lib/api/public"
 import { HeroSection } from "./components/HeroSection"
 import { TeachingSchedule } from "./components/TeachingSchedule"
-import { UpcomingEvents } from "./components/UpcomingEvents"
 import { Card } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { useState } from "react"
@@ -30,7 +29,7 @@ export function InstructorDetailsPage() {
     )
   }
 
-  const bioSections = instructor.bio.split('\n\n')
+  const bioSections = instructor.bio?.split('\n\n') || []
 
   return (
     <div className="min-h-screen bg-background">
@@ -77,12 +76,12 @@ export function InstructorDetailsPage() {
       </Container>
 
       {/* Upcoming Events */}
-      <Container>
+      {/* <Container>
         <div className="py-8">
           <h2 className="text-2xl font-semibold mb-6">Upcoming Events</h2>
           <UpcomingEvents instructorId={instructorId} />
         </div>
-      </Container>
+      </Container> */}
 
       {/* Reviews Section */}
       {/* <Container>

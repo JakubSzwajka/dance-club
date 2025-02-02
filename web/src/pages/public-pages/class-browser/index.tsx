@@ -9,7 +9,7 @@ import { Container } from "@/components/ui/container"
 import { Header } from "@/components/domain/header"
 import { ClassItem } from "./components/class-item"
 import { ActiveFilters } from "./components/active-filters"
-import { usePublicClasses, usePublicDanceStyles, usePublicInstructors, usePublicLocations } from "@/lib/api/public"
+import { usePublicClasses, useMetadata, usePublicInstructors, usePublicLocations } from "@/lib/api/public/index"
 import { useNavigate, useSearch } from "@tanstack/react-router"
 
 interface ClassSearchParams {
@@ -60,7 +60,8 @@ export function ClassBrowser() {
     undefined
   )
   const { data: locations } = usePublicLocations()
-  const { data: danceStyles } = usePublicDanceStyles()
+  const { data: metadata } = useMetadata()
+  const danceStyles = metadata?.dance_styles;
 
   return (
     <div className="min-h-screen bg-background">
