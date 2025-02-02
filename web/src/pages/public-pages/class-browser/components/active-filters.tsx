@@ -1,16 +1,14 @@
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { XMarkIcon } from "@heroicons/react/24/outline"
-import { UserPublicSchema } from "@/lib/api/public"
-import { LocationSchema } from "@/lib/api/types"
-
+import { components } from "@/lib/api/schema"
 interface ActiveFiltersProps {
   selectedInstructor?: string
   selectedStyle?: string
   selectedLevel?: string
   selectedLocation?: string
-  instructors: UserPublicSchema[]
-  locations: LocationSchema[]
+  instructors: components["schemas"]["UserPublicSchema"][]
+  locations: components["schemas"]["LocationSchema"][]
   onClearInstructor: () => void
   onClearStyle: () => void
   onClearLevel: () => void

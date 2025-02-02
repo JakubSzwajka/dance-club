@@ -1,10 +1,10 @@
-import { LocationSchema } from "@/lib/api/types"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { MapPinIcon, GlobeAltIcon } from "@heroicons/react/24/outline"
+import { components } from "@/lib/api/schema"
 
 interface HeroSectionProps {
-  location: LocationSchema
+  location: components["schemas"]["LocationSchema"]
 }
 
 export function HeroSection({ location }: HeroSectionProps) {
@@ -46,7 +46,7 @@ export function HeroSection({ location }: HeroSectionProps) {
             Get Directions
           </Button>
           {location.url && (
-            <Button variant="outline" onClick={() => window.open(location.url, '_blank')}>
+            <Button variant="outline" onClick={() => window.open(location.url || '', '_blank')}>
               Visit Website
             </Button>
           )}

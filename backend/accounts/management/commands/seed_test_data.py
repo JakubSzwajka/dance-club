@@ -285,12 +285,14 @@ def create_review_for_class(dance_class, user=None, genres=None):
 
     # Create verification for verified reviews
     if review.is_verified:
-        ReviewVerification.objects.create(
-            review=review,
+        verification = ReviewVerification.objects.create(
             verified_by=choice(User.objects.filter(role='admin')) if User.objects.filter(role='admin').exists() else None,
             verification_method=choice(['attendance', 'purchase', 'manual']),
             verification_notes=fake.sentence() if random() > 0.7 else ""
-        )
+        ).save()
+        # Link verification to review
+        review.verification = verification
+        review.save()
 
     return review
 

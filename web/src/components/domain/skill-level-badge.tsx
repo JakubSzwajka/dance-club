@@ -1,8 +1,8 @@
 import { Badge } from "@/components/ui/badge"
-import { DanceClassPublicSchema } from "@/lib/api/public"
+import { components } from "@/lib/api/schema"
 
 interface SkillLevelBadgeProps {
-  level: DanceClassPublicSchema["level"]
+  level: components["schemas"]["DanceClassSchema"]["level"]
 }
 
 export function SkillLevelBadge({ level }: SkillLevelBadgeProps) {

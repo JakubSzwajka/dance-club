@@ -1,13 +1,13 @@
-import { DanceClassPublicSchema } from "@/lib/api/public"
 import { Card } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { useNavigate } from "@tanstack/react-router"
 import { SkillLevelBadge } from "@/components/domain/skill-level-badge"
 import { InstructorPill } from "@/components/domain/instructor-pill"
 import { ClockIcon } from "@heroicons/react/24/outline"
+import { components } from "@/lib/api/schema"
 
 interface ClassesSectionProps {
-  classes: DanceClassPublicSchema[]
+  classes: components["schemas"]["DanceClassSchema"][]
 }
 
 export function ClassesSection({ classes }: ClassesSectionProps) {

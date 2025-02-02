@@ -1,9 +1,9 @@
 import { Badge } from "@/components/ui/badge"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { DanceClassPublicSchema } from "@/lib/api/public"
+import { components } from "@/lib/api/schema"
 
 interface QuickInfoCardProps {
-  classDetails: DanceClassPublicSchema
+  classDetails: components["schemas"]["DanceClassSchema"]
 }
 
 export function QuickInfoCard({ classDetails }: QuickInfoCardProps) {
@@ -27,7 +27,7 @@ export function QuickInfoCard({ classDetails }: QuickInfoCardProps) {
         </div>
         <div className="flex justify-between items-center">
           <span className="text-muted-foreground">Capacity</span>
-          <span>{classDetails.current_capacity}/{classDetails.capacity}</span>
+          <span>{classDetails.current_capacity}/{classDetails.max_capacity}</span>
         </div>
       </CardContent>
     </Card>

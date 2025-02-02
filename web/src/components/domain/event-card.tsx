@@ -1,12 +1,12 @@
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
-import { SpecialEventPublicSchema } from "@/lib/api/public"
 import { CalendarIcon, ClockIcon, UsersIcon } from "@heroicons/react/24/outline"
 import { InstructorPill } from "./instructor-pill"
 import { LocationPill } from "./location-pill"
+import { components } from "@/lib/api/schema"
 
 interface EventCardProps {
-  event: SpecialEventPublicSchema
+  event: components["schemas"]["SpecialEventSchema"]
   onDetailsClick?: () => void
 }
 

@@ -1,11 +1,29 @@
-from typing import List, Optional, Dict
+from typing import List, Optional
 from django.db.models import Avg, Count, Q
 from django.core.paginator import Paginator
-from reviews.models import Review, TeachingApproachReview, EnvironmentReview, MusicReview, FacilitiesReview
-from reviews.schemas.review import ReviewSchema, ReviewStatsSchema, ReviewCreateSchema, ReviewListSchema
+from reviews.models import (
+    Review,
+    TeachingApproachReview,
+    EnvironmentReview,
+    MusicReview,
+    FacilitiesReview,
+    ReviewVerification
+)
+from reviews.constants import VERIFICATION_METHODS
+from reviews.schemas.base import (
+    TeachingApproachSchema,
+    EnvironmentSchema,
+    MusicSchema,
+    FacilitiesSchema
+)
+from reviews.schemas.response import (
+    ReviewResponseSchema,
+    ReviewStatsSchema,
+    ReviewListSchema
+)
+from reviews.schemas.create import ReviewCreateSchema
 from classes.models import DanceClass
 from accounts.models import User
-
 
 class ReviewManagerService:
     def get_class_reviews_paginated(
@@ -16,41 +34,102 @@ class ReviewManagerService:
         sort_by: Optional[str] = None,
         verified_only: bool = False,
         min_rating: Optional[int] = None,
-        max_rating: Optional[int] = None
+        max_rating: Optional[int] = None,
+        teaching_style_min: Optional[int] = None,
+        teaching_style_max: Optional[int] = None,
+        feedback_approach_min: Optional[int] = None,
+        feedback_approach_max: Optional[int] = None,
+        pace_min: Optional[int] = None,
+        pace_max: Optional[int] = None,
+        temperature: Optional[str] = None,
+        music_genres: Optional[List[str]] = None,
+        has_changing_room: Optional[bool] = None,
+        has_waiting_area: Optional[bool] = None,
+        accepted_cards: Optional[List[str]] = None,
     ) -> ReviewListSchema:
-        """Get paginated reviews for a class with filters"""
-        # Base query
-        reviews = Review.objects.filter(dance_class_id=class_id)
+        """Get paginated reviews for a class with enhanced filters"""
+        queryset = Review.objects.filter(dance_class_id=class_id)
 
         # Apply filters
         if verified_only:
-            reviews = reviews.filter(is_verified=True)
+            queryset = queryset.filter(is_verified=True)
+
         if min_rating is not None:
-            reviews = reviews.filter(overall_rating__gte=min_rating)
+            queryset = queryset.filter(overall_rating__gte=min_rating)
+
         if max_rating is not None:
-            reviews = reviews.filter(overall_rating__lte=max_rating)
+            queryset = queryset.filter(overall_rating__lte=max_rating)
+
+        # Teaching approach filters
+        if teaching_style_min is not None:
+            queryset = queryset.filter(teaching_approach__teaching_style__gte=teaching_style_min)
+
+        if teaching_style_max is not None:
+            queryset = queryset.filter(teaching_approach__teaching_style__lte=teaching_style_max)
+
+        if feedback_approach_min is not None:
+            queryset = queryset.filter(teaching_approach__feedback_approach__gte=feedback_approach_min)
+
+        if feedback_approach_max is not None:
+            queryset = queryset.filter(teaching_approach__feedback_approach__lte=feedback_approach_max)
+
+        if pace_min is not None:
+            queryset = queryset.filter(teaching_approach__pace_of_teaching__gte=pace_min)
+
+        if pace_max is not None:
+            queryset = queryset.filter(teaching_approach__pace_of_teaching__lte=pace_max)
+
+        # Environment filters
+        if temperature is not None:
+            queryset = queryset.filter(environment__temperature=temperature)
+
+        # Music filters
+        if music_genres:
+            genre_q = Q()
+            for genre in music_genres:
+                genre_q |= Q(music__genres__contains=genre)
+            queryset = queryset.filter(genre_q)
+
+        # Facilities filters
+        if has_changing_room is not None:
+            queryset = queryset.filter(facilities__changing_room__available=has_changing_room)
+
+        if has_waiting_area is not None:
+            queryset = queryset.filter(facilities__waiting_area__available=has_waiting_area)
+
+        if accepted_cards:
+            cards_q = Q()
+            for card in accepted_cards:
+                cards_q |= Q(facilities__accepted_cards__contains=card)
+            queryset = queryset.filter(cards_q)
 
         # Apply sorting
-        if sort_by == 'date_desc':
-            reviews = reviews.order_by('-created_at')
-        elif sort_by == 'rating_desc':
-            reviews = reviews.order_by('-overall_rating', '-created_at')
-        elif sort_by == 'rating_asc':
-            reviews = reviews.order_by('overall_rating', '-created_at')
-        else:
-            reviews = reviews.order_by('-created_at')  # Default sorting
+        if sort_by:
+            if sort_by == 'date_desc':
+                queryset = queryset.order_by('-created_at')
+            elif sort_by == 'date_asc':
+                queryset = queryset.order_by('created_at')
+            elif sort_by == 'rating_desc':
+                queryset = queryset.order_by('-overall_rating')
+            elif sort_by == 'rating_asc':
+                queryset = queryset.order_by('overall_rating')
 
-        # Paginate results
-        paginator = Paginator(reviews, page_size)
-        page_obj = paginator.get_page(page)
+        # Calculate pagination
+        total = queryset.count()
+        total_pages = (total + page_size - 1) // page_size
+        start = (page - 1) * page_size
+        end = start + page_size
+
+        reviews = list(queryset[start:end])
+        response_items = [ReviewResponseSchema.from_orm(review) for review in reviews]
 
         return ReviewListSchema(
-            items=[review.to_schema() for review in page_obj],
-            total=paginator.count,
+            items=response_items,
+            total=total,
             page=page,
-            pages=paginator.num_pages,
-            has_next=page_obj.has_next(),
-            has_prev=page_obj.has_previous()
+            pages=total_pages,
+            has_next=page < total_pages,
+            has_prev=page > 1
         )
 
     def get_class_reviews(
@@ -58,7 +137,7 @@ class ReviewManagerService:
         class_id: str,
         limit: int = 3,
         sort_by: str = 'date_desc'
-    ) -> List[ReviewSchema]:
+    ) -> List[ReviewResponseSchema]:
         """Get a limited number of reviews for a class"""
         reviews = Review.objects.filter(dance_class_id=class_id)
 
@@ -137,14 +216,13 @@ class ReviewManagerService:
             average_rating=round(avg_rating, 1),
             total_reviews=total_reviews,
             verified_reviews=verified_reviews,
-            rating_distribution=rating_distribution,
             teaching_stats=teaching_stats,
             environment_stats=environment_stats,
             music_stats=music_stats,
             facilities_stats=facilities_stats
         )
 
-    def create_review(self, class_id: str, review_data: ReviewCreateSchema) -> ReviewSchema:
+    def create_review(self, class_id: str, review_data: ReviewCreateSchema) -> ReviewResponseSchema:
         """Create a new review with all related components"""
         # Validate class exists
         dance_class = DanceClass.objects.get(id=class_id)
@@ -152,8 +230,6 @@ class ReviewManagerService:
         # Create main review
         review = Review.objects.create(
             dance_class=dance_class,
-            user_id=review_data.user_id,
-            anonymous_name=review_data.anonymous_name,
             overall_rating=review_data.overall_rating,
             comment=review_data.comment,
             is_verified=False  # Will be verified through a separate process
@@ -162,7 +238,7 @@ class ReviewManagerService:
         # Create teaching approach review
         TeachingApproachReview.objects.create(
             review=review,
-            **review_data.teaching_approach.dict()
+            **review_data.teaching.dict()
         )
 
         # Create environment review
@@ -177,15 +253,67 @@ class ReviewManagerService:
             volume_level=review_data.music.volume_level,
             style=review_data.music.style
         )
-        music_review.set_genres(review_data.music.genres)
+        music_review.genres = review_data.music.genres
         music_review.save()
 
         # Create facilities review
         facilities_review = FacilitiesReview.objects.create(
             review=review,
-            **{k: v for k, v in review_data.facilities.dict().items() if k != 'accepted_cards'}
+            changing_room=review_data.facilities.changing_room.dict(),
+            waiting_area=review_data.facilities.waiting_area.dict(),
         )
-        facilities_review.set_accepted_cards(review_data.facilities.accepted_cards)
+        facilities_review.accepted_cards = review_data.facilities.accepted_cards
         facilities_review.save()
 
-        return review.to_schema()
+        return ReviewResponseSchema.from_orm(review)
+
+    def get_review_teaching(self, review_id: str) -> TeachingApproachSchema:
+        """Get teaching approach component of a review"""
+        review = Review.objects.get(id=review_id)
+        return TeachingApproachSchema.from_orm(review.teaching_approach)
+
+    def get_review_environment(self, review_id: str) -> EnvironmentSchema:
+        """Get environment component of a review"""
+        review = Review.objects.get(id=review_id)
+        return EnvironmentSchema.from_orm(review.environment)
+
+    def get_review_music(self, review_id: str) -> MusicSchema:
+        """Get music component of a review"""
+        review = Review.objects.get(id=review_id)
+        return MusicSchema.from_orm(review.music)
+
+    def get_review_facilities(self, review_id: str) -> FacilitiesSchema:
+        """Get facilities component of a review"""
+        review = Review.objects.get(id=review_id)
+        return FacilitiesSchema.from_orm(review.facilities)
+
+    def verify_review(
+        self,
+        review_id: str,
+        verifier: User,
+        method: str,
+        notes: Optional[str] = None
+    ) -> ReviewResponseSchema:
+        """Verify a review using specified method"""
+        if method not in VERIFICATION_METHODS:
+            raise ValueError(f"Invalid verification method. Must be one of: {', '.join(VERIFICATION_METHODS)}")
+
+
+        review = Review.objects.get(id=review_id)
+        # Create verification record
+        verification = ReviewVerification.objects.create(
+            verified_by=verifier,
+            verification_method=method,
+            verification_notes=notes
+        ).save()
+
+        # Link verification to review
+        review.verification = verification
+        review.is_verified = True
+        review.save()
+
+        return ReviewResponseSchema.from_orm(review)
+
+    def get_verification_methods(self) -> List[str]:
+        """Get available review verification methods"""
+        return VERIFICATION_METHODS

@@ -1,11 +1,11 @@
 import { ClassItem } from "../../class-browser/components/class-item"
-import { DanceClassPublicSchema } from "@/lib/api/public"
 import { useNavigate } from "@tanstack/react-router"
 import { InstructorCard } from "@/components/domain/instructor-card"
+import { components } from "@/lib/api/schema"
 
 interface InstructorTabProps {
-  instructor: DanceClassPublicSchema['instructor']
-  otherClasses: DanceClassPublicSchema[]
+  instructor: components["schemas"]["InstructorPublicSchema"]
+  otherClasses: components["schemas"]["DanceClassSchema"][]
 }
 
 export function InstructorTab({ instructor, otherClasses }: InstructorTabProps) {

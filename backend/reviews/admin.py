@@ -24,7 +24,10 @@ class ReviewAdmin(ModelAdmin):
     readonly_fields = ('created_at', 'updated_at')
     fieldsets = (
         ('Basic Information', {
-            'fields': ('dance_class', 'user', 'anonymous_name', 'overall_rating', 'comment', 'is_verified')
+            'fields': ('dance_class', 'user', 'anonymous_name', 'overall_rating', 'comment')
+        }),
+        ('Verification', {
+            'fields': ('is_verified', 'verification')
         }),
         ('Component Reviews', {
             'fields': ('teaching_approach', 'environment', 'music', 'facilities')
@@ -33,6 +36,7 @@ class ReviewAdmin(ModelAdmin):
             'fields': ('created_at', 'updated_at')
         }),
     )
+    raw_id_fields = ('verification',)
 
 @admin.register(TeachingApproachReview)
 class TeachingApproachReviewAdmin(ModelAdmin):
@@ -65,7 +69,8 @@ class FacilitiesReviewAdmin(ModelAdmin):
 
 @admin.register(ReviewVerification)
 class ReviewVerificationAdmin(ModelAdmin):
-    list_display = ('review', 'verified_by', 'verification_date', 'verification_method')
-    list_filter = ('verification_method', 'verification_date')
-    search_fields = ('review__comment', 'verification_notes')
+    list_display = ('verified_review', 'verified_by', 'verification_date', 'verification_method')
+    list_filter = ('verification_method', 'verification_date', 'verified_by')
+    search_fields = ('verified_review__comment', 'verification_notes', 'verified_by__email')
     readonly_fields = ('created_at', 'updated_at', 'verification_date')
+    raw_id_fields = ('verified_by',)

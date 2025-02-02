@@ -1,9 +1,9 @@
-import { UserPublicSchema } from "@/lib/api/public"
+import { components } from "@/lib/api/schema"
 import { UserIcon } from "@heroicons/react/24/outline"
 import { useNavigate } from "@tanstack/react-router"
 
 interface InstructorPillProps {
-  instructor: UserPublicSchema
+  instructor: components["schemas"]["UserPublicSchema"]
   className?: string
 }
 

@@ -5,12 +5,12 @@ import {
   CalendarIcon,
   ClockIcon
 } from "@heroicons/react/24/outline"
-import { SpecialEventPublicSchema } from "@/lib/api/public"
 import { LocationPill } from "@/components/domain/location-pill"
 import { InstructorPill } from "@/components/domain/instructor-pill"
+import { components } from "@/lib/api/schema"
 
 interface HeroSectionProps {
-  eventDetails: SpecialEventPublicSchema
+  eventDetails: components["schemas"]["SpecialEventSchema"]
 }
 
 export function HeroSection({ eventDetails }: HeroSectionProps) {

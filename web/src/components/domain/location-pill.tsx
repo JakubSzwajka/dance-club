@@ -1,9 +1,9 @@
-import { LocationSchema } from "@/lib/api/types"
 import { MapPinIcon } from "@heroicons/react/24/outline"
 import { useNavigate } from "@tanstack/react-router"
+import { components } from "@/lib/api/schema"
 
 interface LocationPillProps {
-  location: LocationSchema
+  location: components["schemas"]["LocationSchema"]
   className?: string
 }
 

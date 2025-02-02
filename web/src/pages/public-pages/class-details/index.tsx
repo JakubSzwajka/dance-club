@@ -1,4 +1,4 @@
-import { useParams } from "@tanstack/react-router"
+import { useParams, useNavigate } from "@tanstack/react-router"
 import { Container } from "@/components/ui/container"
 import { Header } from "@/components/domain/header"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
@@ -9,11 +9,21 @@ import { ClassSchedule } from "./components/ClassSchedule"
 import { InstructorTab } from "./components/InstructorTab"
 import { LocationTab } from "./components/LocationTab"
 import { ReviewsTab } from "./components/ReviewsTab"
+import { useAuth } from "@/lib/auth/AuthContext"
+import { Button } from "@/components/ui/button"
+import { PencilIcon } from "@heroicons/react/24/outline"
+import { useState } from "react"
+import { Card } from "@/components/ui/card"
+import { ReviewStatsSection } from "./components/ReviewStatsSection"
+import { FacilitiesSection } from "./components/FacilitiesSection"
 
 export function ClassDetailsPage() {
   const { classId } = useParams({ from: '/classes/$classId' })
   const { data: classDetails, isLoading } = usePublicClass(classId)
   const { data: instructorClasses } = usePublicInstructorClasses(classDetails?.instructor.id || '')
+  const { user } = useAuth()
+  const navigate = useNavigate()
+  const [isExpanded, setIsExpanded] = useState(false)
 
   if (isLoading || !classDetails) {
     return (
@@ -30,6 +40,7 @@ export function ClassDetailsPage() {
   }
 
   const otherClasses = instructorClasses?.filter(c => c.id !== classId) || []
+  const isOwner = user?.role === 'instructor' && user.id === classDetails.instructor.id
 
   return (
     <div className="min-h-screen bg-background">
@@ -39,6 +50,22 @@ export function ClassDetailsPage() {
       <div className="bg-muted/30 border-b">
         <Container>
           <div className="py-8">
+            {isOwner && (
+              <div className="flex justify-end mb-4">
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="gap-2"
+                  onClick={() => navigate({ 
+                    to: '/instructor-dashboard/classes/$classId',
+                    params: { classId }
+                  })}
+                >
+                  <PencilIcon className="h-4 w-4" />
+                  Edit Class
+                </Button>
+              </div>
+            )}
             <div className="grid grid-cols-1 lg:grid-cols-[1fr,320px] gap-8">
               <HeroSection classDetails={classDetails} />
               <QuickInfoCard classDetails={classDetails} />
@@ -50,17 +77,38 @@ export function ClassDetailsPage() {
       {/* Description Section */}
       <Container>
         <div className="py-8">
-          <div className="max-w-3xl">
-            <h2 className="text-2xl font-semibold mb-4">About This Class</h2>
-            <div className="prose prose-slate max-w-none">
+          <h2 className="text-2xl font-semibold mb-4">About This Class</h2>
+          <Card className="p-6 bg-muted/30">
+            <div className={`prose prose-slate max-w-none ${!isExpanded ? 'line-clamp-4' : ''}`}>
               {classDetails.description.split('\n\n').map((paragraph, index) => (
-                <p key={index} className="whitespace-pre-line mb-4">
+                <p key={index} className="whitespace-pre-line mb-4 last:mb-0">
                   {paragraph}
                 </p>
               ))}
             </div>
-          </div>
+            <Button 
+              variant="ghost" 
+              className="mt-4 w-full hover:bg-muted"
+              onClick={() => setIsExpanded(!isExpanded)}
+            >
+              {isExpanded ? 'Show Less' : 'Read More'}
+            </Button>
+          </Card>
         </div>
+      </Container>
+
+      {/* <Container>
+      <ClassDetailsContent />
+      </Container> */}
+
+      {/* Review Stats Section */}
+      <Container>
+        <ReviewStatsSection />
+      </Container>
+
+      {/* Facilities Section */}
+      <Container>
+        <FacilitiesSection />
       </Container>
 
       {/* Schedule Section */}

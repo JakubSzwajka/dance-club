@@ -4,11 +4,20 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 from mydanceclub.models import BaseModel
 from typing import TYPE_CHECKING
-from .schemas.review import (
+from .schemas.base import (
     TeachingApproachSchema,
     EnvironmentSchema,
     MusicSchema,
-    FacilitiesSchema
+    FacilitiesSchema,
+    ChangingRoomSchema,
+    WaitingAreaSchema
+)
+from .schemas.response import ReviewResponseSchema
+from .constants import (
+    TemperatureType,
+    WaitingAreaType,
+    TEMPERATURE_OPTIONS,
+    WAITING_AREA_OPTIONS
 )
 
 if TYPE_CHECKING:
@@ -116,11 +125,14 @@ class EnvironmentReview(BaseModel):
         return f"Floor: {self.floor_quality}/5, Space: {self.crowdedness}/5, Air: {self.ventilation}/5, Temp: {self.temperature}"
 
     def to_schema(self) -> EnvironmentSchema:
+        if self.temperature not in TEMPERATURE_OPTIONS:
+            raise ValueError(f"Invalid temperature value: {self.temperature}")
+
         return EnvironmentSchema(
             floor_quality=self.floor_quality,
             crowdedness=self.crowdedness,
             ventilation=self.ventilation,
-            temperature=self.temperature
+            temperature=self.temperature  # type: ignore # We validated it's one of the allowed values
         )
 
 
@@ -197,7 +209,7 @@ class MusicReview(BaseModel):
         return MusicSchema(
             volume_level=self.volume_level,
             style=self.style,
-            genres=[genre.code for genre in self.genres.all()]
+            genres=list(self.genres.all())
         )
 
 
@@ -305,14 +317,21 @@ class FacilitiesReview(BaseModel):
         self.accepted_cards = [card for card in card_list if card in valid_cards]
 
     def to_schema(self) -> FacilitiesSchema:
+        if self.waiting_area_type and self.waiting_area_type not in WAITING_AREA_OPTIONS:
+            raise ValueError(f"Invalid waiting area type: {self.waiting_area_type}")
+
         return FacilitiesSchema(
-            has_changing_room=self.has_changing_room,
-            changing_room_quality=self.changing_room_quality,
-            changing_room_notes=self.changing_room_notes,
-            waiting_area_available=self.waiting_area_available,
-            waiting_area_type=self.waiting_area_type,
-            has_seating=self.has_seating,
-            waiting_area_notes=self.waiting_area_notes,
+            changing_room=ChangingRoomSchema(
+                available=self.has_changing_room,
+                quality=self.changing_room_quality if self.has_changing_room else None,
+                notes=self.changing_room_notes
+            ),
+            waiting_area=WaitingAreaSchema(
+                available=self.waiting_area_available,
+                type=self.waiting_area_type,  # type: ignore # We validated it's one of the allowed values
+                seating=self.has_seating,
+                notes=self.waiting_area_notes
+            ),
             accepted_cards=self.accepted_cards
         )
 
@@ -368,6 +387,14 @@ class Review(BaseModel):
         default=False,
         help_text="Indicates whether the review has been verified by staff"
     )
+    verification = models.OneToOneField(
+        'ReviewVerification',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name='verified_review',
+        help_text="Verification details for this review"
+    )
     teaching_approach = models.OneToOneField(
         TeachingApproachReview,
         on_delete=models.CASCADE,
@@ -419,6 +446,7 @@ class Review(BaseModel):
         self.full_clean()
         super().save(*args, **kwargs)
 
+
     class Meta:
         ordering = ['-created_at']
         indexes = [
@@ -440,23 +468,21 @@ class Review(BaseModel):
     def __str__(self):
         return f"Review for {self.dance_class.name} by {self.user.email if self.user else self.anonymous_name}"
 
-    def to_schema(self) -> 'ReviewSchema':
+    def to_schema(self) -> ReviewResponseSchema:
         """Convert the entire review with all its components to a schema"""
-        from .schemas.review import ReviewSchema
-
-        return ReviewSchema(
+        return ReviewResponseSchema(
             id=str(self.id),
-            dance_class_id=str(self.dance_class.id),
-            user_id=str(self.user.id) if self.user else None,
-            user_name=self.user.get_full_name() if self.user else self.anonymous_name or "Anonymous",
+            created_at=self.created_at,
+            updated_at=self.updated_at,
             overall_rating=self.overall_rating,
             comment=self.comment,
-            is_verified=self.is_verified,
-            created_at=self.created_at,
-            teaching_approach=self.teaching_approach.to_schema(),
+            teaching=self.teaching_approach.to_schema(),
             environment=self.environment.to_schema(),
             music=self.music.to_schema(),
-            facilities=self.facilities.to_schema()
+            facilities=self.facilities.to_schema(),
+            author_name=self.user.get_full_name() if self.user else self.anonymous_name or "Anonymous",
+            verified=self.is_verified,
+            helpful_votes=0,  # TODO: Implement helpful votes feature
         )
 
 
@@ -474,13 +500,6 @@ class ReviewVerification(BaseModel):
         ('manual', 'Manual Verification'),
     ]
 
-    review = models.OneToOneField(
-        Review,
-        on_delete=models.CASCADE,
-        related_name='verification',
-        verbose_name="Verified Review",
-        help_text="The review being verified"
-    )
     verified_by = models.ForeignKey(
         User,
         on_delete=models.SET_NULL,
@@ -511,7 +530,7 @@ class ReviewVerification(BaseModel):
 
     def __str__(self):
         method_dict = dict(self.VERIFICATION_METHODS)
-        return f"Review #{self.review.id} verified by {self.verified_by.get_full_name() if self.verified_by else 'Unknown'} " \
+        return f"Review verified by {self.verified_by.get_full_name() if self.verified_by else 'Unknown'} " \
                f"via {method_dict.get(self.verification_method, 'Unknown Method')}"
 
     class Meta:

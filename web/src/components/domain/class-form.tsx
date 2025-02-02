@@ -8,8 +8,8 @@ import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { useState } from 'react';
 import { AxiosError } from 'axios';
 import { CreateDanceClassSchema, PrivateDanceClassSchema, useCreateClassMutation, useUpdateClassMutation } from '@/lib/api/private';
-import { LocationSchema } from '@/lib/api/types';
 import { usePublicDanceStyles } from '@/lib/api/public';
+import { components } from '@/lib/api/schema';
 import { Separator } from '@/components/ui/separator';
 import { PencilIcon } from '@heroicons/react/24/outline';
 
@@ -27,7 +27,7 @@ export function ClassForm({ mode, initialData, onSuccess, instructorId, isOwner,
   const [error, setError] = useState<string | null>(null);
   const { mutate: createClass, isPending: isCreating } = useCreateClassMutation(instructorId);
   const { mutate: updateClass, isPending: isUpdating } = useUpdateClassMutation(instructorId);
-  const [location, setLocation] = useState<LocationSchema | null>(initialData?.location ?? null);
+  const [location, setLocation] = useState<components["schemas"]["LocationSchema"] | null>(initialData?.location ?? null);
   const { data: danceStyles } = usePublicDanceStyles();
   
   const isReadOnly = mode === 'view';

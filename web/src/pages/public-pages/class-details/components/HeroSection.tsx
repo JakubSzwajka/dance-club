@@ -1,12 +1,12 @@
 import { Button } from "@/components/ui/button"
 import { UsersIcon, CurrencyDollarIcon } from "@heroicons/react/24/outline"
 import { SkillLevelBadge } from "../../../../components/domain/skill-level-badge"
-import { DanceClassPublicSchema } from "@/lib/api/public"
 import { LocationPill } from "@/components/domain/location-pill"
 import { InstructorPill } from "@/components/domain/instructor-pill"
+import { components } from "@/lib/api/schema"
 
 interface HeroSectionProps {
-  classDetails: DanceClassPublicSchema
+  classDetails: components["schemas"]["DanceClassSchema"]
 }
 
 export function HeroSection({ classDetails }: HeroSectionProps) {
@@ -22,11 +22,11 @@ export function HeroSection({ classDetails }: HeroSectionProps) {
           <InstructorPill instructor={classDetails.instructor} />
         </div>
         <div className="flex items-center gap-2">
-          <LocationPill location={classDetails.location} />
+          <LocationPill location={classDetails.location || { id: '', name: '', address: '', latitude: 0, longitude: 0, url: '' }} />
         </div>
         <div className="flex items-center gap-2">
           <UsersIcon className="h-4 w-4" />
-          <span>{classDetails.current_capacity}/{classDetails.capacity} students</span>
+          <span>{classDetails.current_capacity}/{classDetails.max_capacity} students</span>
         </div>
         <div className="flex items-center gap-2">
           <CurrencyDollarIcon className="h-4 w-4" />

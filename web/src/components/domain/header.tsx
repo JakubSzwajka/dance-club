@@ -14,13 +14,6 @@ export function Header() {
   const { logout, isAuthenticated, user } = useAuth()
   const navigate = useNavigate();
 
-  const handleNavigateToDashboard = () => {
-    if (user?.role === 'instructor') {
-      navigate({ to: '/instructor-dashboard' });
-    }
-    // Add other role-specific navigation here when implemented
-  };
-
   // Get user's initials for avatar fallback
   const getInitials = () => {
     if (!user?.email) return '?';
@@ -33,16 +26,10 @@ export function Header() {
         <div className="flex h-16 items-center justify-between">
           <div className="flex items-center space-x-4">
             <div className="font-bold text-xl cursor-pointer" onClick={() => navigate({ to: '/' })}>
-              🕺 My Dance Club
+              🕺 My Dance DNA
             </div>
           </div>
-          <nav className="flex items-center space-x-4">
-            {user?.role === 'instructor' && (
-              <Button variant="outline" onClick={handleNavigateToDashboard}>
-                Dashboard
-              </Button>
-            )}
-            
+          <nav className="flex items-center space-x-4">            
             {isAuthenticated ? (
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
@@ -54,9 +41,9 @@ export function Header() {
                   </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end" className="w-56">
-                  <DropdownMenuItem onClick={() => navigate({ to: '/profile-settings' })}>
+                  {/* <DropdownMenuItem onClick={() => navigate({ to: '/profile-settings' })}>
                     Profile Settings
-                  </DropdownMenuItem>
+                  </DropdownMenuItem> */}
                   <DropdownMenuItem onClick={logout}>
                     Sign out
                   </DropdownMenuItem>

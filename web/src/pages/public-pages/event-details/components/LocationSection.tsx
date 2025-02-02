@@ -1,11 +1,11 @@
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { LocationSchema } from "@/lib/api/types"
 import { MapPinIcon } from "@heroicons/react/24/outline"
 import { Map, Marker } from '@vis.gl/react-google-maps'
+import { components } from "@/lib/api/schema"
 
 interface LocationSectionProps {
-  location: LocationSchema
+  location: components["schemas"]["LocationSchema"]
 }
 
 export function LocationSection({ location }: LocationSectionProps) {
@@ -26,7 +26,7 @@ export function LocationSection({ location }: LocationSectionProps) {
               </div>
             </div>
             {location.url && (
-              <Button variant="outline" className="w-full" onClick={() => window.open(location.url, '_blank')}>
+              <Button variant="outline" className="w-full" onClick={() => window.open(location.url ?? '', '_blank')}>
                 Visit Venue Website
               </Button>
             )}

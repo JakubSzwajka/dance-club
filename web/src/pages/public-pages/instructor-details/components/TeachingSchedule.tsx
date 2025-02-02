@@ -1,12 +1,12 @@
-import { DanceClassPublicSchema } from "@/lib/api/public"
 import { Card } from "@/components/ui/card"
 import { SkillLevelBadge } from "@/components/domain/skill-level-badge"
 import { Button } from "@/components/ui/button"
 import { useNavigate } from "@tanstack/react-router"
 import { MapPinIcon, ClockIcon } from "@heroicons/react/24/outline"
+import { components } from "@/lib/api/schema"
 
 interface TeachingScheduleProps {
-  classes: DanceClassPublicSchema[]
+  classes: components["schemas"]["DanceClassSchema"][]
 }
 
 export function TeachingSchedule({ classes }: TeachingScheduleProps) {
@@ -31,7 +31,7 @@ export function TeachingSchedule({ classes }: TeachingScheduleProps) {
               <h3 className="font-semibold mb-1">{danceClass.name}</h3>
               <div className="flex items-center gap-2 text-sm text-muted-foreground">
                 <MapPinIcon className="h-4 w-4" />
-                <span>{danceClass.location.name}</span>
+                <span>{danceClass.location?.name}</span>
               </div>
             </div>
             <SkillLevelBadge level={danceClass.level} />

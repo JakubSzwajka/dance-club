@@ -1,11 +1,11 @@
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
-import { SpecialEventPublicSchema } from "@/lib/api/public"
 import { CalendarIcon, MapPinIcon, UserIcon } from "@heroicons/react/24/outline"
 import { format } from "date-fns"
+import { components } from "@/lib/api/schema"
 
 interface EventListItemProps {
-  event: SpecialEventPublicSchema
+  event: components["schemas"]["SpecialEventSchema"]
   onDetailsClick?: () => void
 }
 

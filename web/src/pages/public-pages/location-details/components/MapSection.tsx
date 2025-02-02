@@ -1,9 +1,9 @@
-import { LocationSchema } from "@/lib/api/types"
 import { Card } from "@/components/ui/card"
 import { Map, Marker } from "@vis.gl/react-google-maps"
+import { components } from "@/lib/api/schema"
 
 interface MapSectionProps {
-  location: LocationSchema
+  location: components["schemas"]["LocationSchema"]
 }
 
 export function MapSection({ location }: MapSectionProps) {

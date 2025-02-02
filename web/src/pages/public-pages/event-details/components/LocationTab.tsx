@@ -1,11 +1,11 @@
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { LocationSchema } from "@/lib/api/types"
+import { components } from "@/lib/api/schema"
 import { MapPinIcon } from "@heroicons/react/24/outline"
 import { Map, Marker } from "@vis.gl/react-google-maps"
 
 interface LocationTabProps {
-  location: LocationSchema
+  location: components["schemas"]["LocationSchema"]
 }
 
 export function LocationTab({ location }: LocationTabProps) {

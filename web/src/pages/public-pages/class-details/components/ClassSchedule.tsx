@@ -11,7 +11,7 @@ export function ClassSchedule({ class_id }: ClassScheduleProps) {
 
   return (
     <div className="py-8 border-t">
-      <h2 className="text-2xl font-semibold mb-6">Class Schedule</h2>
+      <h2 className="text-2xl font-semibold mb-6">🗓️ Class Schedule</h2>
       <div className="grid gap-4 md:grid-cols-2">
         {schedules?.map((schedule) => (
           <Card key={schedule.id}>

@@ -8,14 +8,14 @@ import {
 import { Button } from "@/components/ui/button"
 import { UserIcon, CalendarIcon } from "@heroicons/react/24/outline"
 import { SkillLevelBadge } from "../../../../components/domain/skill-level-badge"
-import { DanceClassPublicSchema } from "@/lib/api/public"
+import { components } from "@/lib/api/schema"
 
 interface ClassItemProps {
-  danceClass: DanceClassPublicSchema
+  danceClass: components["schemas"]["DanceClassSchema"]
   onDetailsClick?: (classId: string) => void
 }
 
-function getScheduleSummary(schedules: DanceClassPublicSchema['schedule']) {
+function getScheduleSummary(schedules: components["schemas"]["DanceClassSchema"]['schedule']) {
   if (!schedules || schedules.length === 0) return 'No schedule available'
   
   const days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
@@ -44,7 +44,7 @@ export function ClassItem({ danceClass, onDetailsClick }: ClassItemProps) {
             <CardDescription className="mt-2 flex items-center gap-2">
               {danceClass.style}
               <span className="inline-block w-1 h-1 rounded-full bg-muted-foreground" />
-              <span>{danceClass.location.name}</span>
+              <span>{danceClass.location?.name}</span>
             </CardDescription>
           </div>
           <SkillLevelBadge level={danceClass.level} />

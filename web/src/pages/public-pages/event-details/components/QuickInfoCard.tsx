@@ -1,8 +1,8 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { SpecialEventPublicSchema } from "@/lib/api/public"
+import { components } from "@/lib/api/schema"
 
 interface QuickInfoCardProps {
-  eventDetails: SpecialEventPublicSchema
+  eventDetails: components["schemas"]["SpecialEventSchema"]
 }
 
 export function QuickInfoCard({ eventDetails }: QuickInfoCardProps) {
