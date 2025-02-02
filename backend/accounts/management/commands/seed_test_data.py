@@ -1,27 +1,39 @@
 from django.core.management.base import BaseCommand
 from django.contrib.auth import get_user_model
-from classes.models import DanceClass, Location, SpecialEvent, RecurringSchedule
+from django.utils import timezone
+from classes.models import DanceClass, Location
+from reviews.models import (
+    Review, TeachingApproachReview, EnvironmentReview,
+    MusicReview, FacilitiesReview, ReviewVerification,
+    Genre, SPORTS_CARDS, MUSIC_GENRES
+)
 from faker import Faker
-from random import randint, choice, uniform
-from datetime import datetime, timedelta, time
+from random import randint, choice, uniform, sample, random
+from datetime import datetime, timedelta
 import pytz
+from rich.console import Console
+from rich.progress import Progress, SpinnerColumn, TextColumn, BarColumn, TaskProgressColumn
+from rich.table import Table
+from rich.panel import Panel
 
 User = get_user_model()
 fake = Faker()
+console = Console()
 
-DANCE_STYLES = [
-    'ballroom',
-    'latin',
-    'salsa',
-    'tango',
-    'other',
-]
+# Constants moved to the top for better organization
+DANCE_STYLES = [style[0] for style in [
+    ('ballroom', 'Ballroom'),
+    ('latin', 'Latin'),
+    ('salsa', 'Salsa'),
+    ('tango', 'Tango'),
+    ('other', 'Other'),
+]]
 
-SKILL_LEVELS = [
-    'beginner',
-    'intermediate',
-    'advanced',
-]
+SKILL_LEVELS = [level[0] for level in [
+    ('beginner', 'Beginner'),
+    ('intermediate', 'Intermediate'),
+    ('advanced', 'Advanced'),
+]]
 
 TEST_LOCATIONS = [
     {
@@ -59,25 +71,6 @@ TEST_LOCATIONS = [
         'lat_base': 37.7520,
         'lng_base': -122.4156,
     },
-]
-
-TIME_SLOTS = [
-    (time(9, 0), time(10, 30)),   # Morning
-    (time(11, 0), time(12, 30)),  # Late morning
-    (time(14, 0), time(15, 30)),  # Afternoon
-    (time(16, 0), time(17, 30)),  # Late afternoon
-    (time(18, 0), time(19, 30)),  # Evening
-    (time(20, 0), time(21, 30)),  # Late evening
-]
-
-DAYS_OF_WEEK = [
-    (0, 'Monday'),
-    (1, 'Tuesday'),
-    (2, 'Wednesday'),
-    (3, 'Thursday'),
-    (4, 'Friday'),
-    (5, 'Saturday'),
-    (6, 'Sunday'),
 ]
 
 def generate_long_description():
@@ -200,104 +193,273 @@ def generate_avatar_url(name: str) -> str:
     style = "avataaars"
     return f"https://api.dicebear.com/7.x/{style}/svg?seed={name.replace(' ', '')}"
 
+def generate_review_comment():
+    """Generate a detailed review comment"""
+    sections = []
+
+    # Overall impression
+    sections.append(fake.paragraph(nb_sentences=randint(2, 4)))
+
+    # Specific aspects
+    aspects = [
+        "The instructor's teaching style",
+        "The class atmosphere",
+        "The music selection",
+        "The facility",
+        "The pace of learning",
+        "The value for money"
+    ]
+    selected_aspects = sample(aspects, randint(2, 4))
+    for aspect in selected_aspects:
+        sections.append(f"{aspect} {fake.sentence()}")
+
+    # Recommendation
+    if random() > 0.2:  # 80% chance of including a recommendation
+        sections.append(f"Would {choice(['definitely', 'probably', 'absolutely'])} recommend this class to {choice(['beginners', 'intermediate dancers', 'everyone', 'those interested in improving their technique'])}.")
+
+    return " ".join(sections)
+
+def create_review_for_class(dance_class, user=None, genres=None):
+    """Create a complete review with all related models"""
+    # Skip if user already reviewed this class
+    if user and Review.objects.filter(dance_class=dance_class, user=user).exists():
+        return None
+
+    # Create teaching approach review first
+    teaching_approach = TeachingApproachReview.objects.create(
+        teaching_style=randint(0, 100),
+        feedback_approach=randint(0, 100),
+        pace_of_teaching=randint(0, 100),
+        breakdown_quality=randint(3, 5)  # Bias towards positive ratings
+    )
+
+    # Create environment review
+    environment = EnvironmentReview.objects.create(
+        floor_quality=randint(3, 5),
+        crowdedness=randint(2, 5),
+        ventilation=randint(3, 5),
+        temperature=choice(['cool', 'moderate', 'warm'])
+    )
+
+    # Create music review
+    music = MusicReview.objects.create(
+        volume_level=randint(3, 5),
+        style=randint(0, 100)
+    )
+    # Add 2-3 random genres from the provided genres list
+    if genres:
+        selected_genres = sample(genres, randint(2, 3))
+        music.genres.add(*selected_genres)
+
+    # Create facilities review
+    has_changing_room = random() > 0.2  # 80% chance of having changing room
+    waiting_area_available = random() > 0.2  # 80% chance of having waiting area
+
+    # Prepare accepted cards
+    accepted_cards = [card[0] for card in sample(SPORTS_CARDS, randint(2, 3))]
+
+    facilities = FacilitiesReview.objects.create(
+        has_changing_room=has_changing_room,
+        changing_room_quality=randint(3, 5) if has_changing_room else None,
+        changing_room_notes=fake.sentence() if has_changing_room and random() > 0.5 else "",
+        waiting_area_available=waiting_area_available,
+        waiting_area_type=choice(['indoor', 'outdoor', 'both']) if waiting_area_available else None,
+        has_seating=random() > 0.2 if waiting_area_available else False,
+        waiting_area_notes=fake.sentence() if waiting_area_available and random() > 0.5 else "",
+        accepted_cards=accepted_cards  # Set accepted_cards during creation
+    )
+
+    # Create main review with all components
+    review = Review.objects.create(
+        dance_class=dance_class,
+        user=user,
+        anonymous_name=fake.name() if not user else None,
+        overall_rating=randint(3, 5),  # Bias towards positive ratings
+        comment=generate_review_comment(),
+        is_verified=bool(user and random() > 0.3),  # 70% chance of verification for logged users
+        teaching_approach=teaching_approach,
+        environment=environment,
+        music=music,
+        facilities=facilities
+    )
+
+    # Create verification for verified reviews
+    if review.is_verified:
+        ReviewVerification.objects.create(
+            review=review,
+            verified_by=choice(User.objects.filter(role='admin')) if User.objects.filter(role='admin').exists() else None,
+            verification_method=choice(['attendance', 'purchase', 'manual']),
+            verification_notes=fake.sentence() if random() > 0.7 else ""
+        )
+
+    return review
+
 class Command(BaseCommand):
     help = 'Seeds the database with test data'
 
     def handle(self, *args, **kwargs):
-        self.stdout.write('Seeding database...')
+        console.print(Panel.fit("🌱 Starting Database Seeding", style="bold green"))
 
-        # Create test locations
-        locations = []
-        for loc_data in TEST_LOCATIONS:
-            location = Location.objects.create(
-                name=loc_data['name'],
-                address=loc_data['address'],
-                latitude=loc_data['lat_base'] + uniform(-0.01, 0.01),
-                longitude=loc_data['lng_base'] + uniform(-0.01, 0.01),
-                url=fake.url()
-            )
-            locations.append(location)
-
-        # Create instructors
-        instructors = []
-        for i in range(10):
-            first_name = fake.first_name()
-            last_name = fake.last_name()
-            full_name = f"{first_name} {last_name}"
-            instructor = User.objects.create(
-                email=f"instructor{i}@example.com",
-                first_name=first_name,
-                last_name=last_name,
-                role='instructor',
-                bio=generate_instructor_bio(),
-                profile_picture_url=generate_avatar_url(full_name)
-            )
-            instructor.set_password("password123")
-            instructor.save()
-            instructors.append(instructor)
-
-        # Create classes for each instructor
-        for instructor in instructors:
-            for _ in range(3):
-                location = choice(locations)
-                max_capacity = randint(10, 30)
-
-                dance_class = DanceClass.objects.create(
-                    name=f"{choice(['Beginner', 'Intermediate', 'Advanced'])} {choice(DANCE_STYLES).title()} with {instructor.first_name}",
-                    description=generate_long_description(),
-                    instructor=instructor,
-                    level=choice(SKILL_LEVELS),
-                    style=choice(DANCE_STYLES),
-                    max_capacity=max_capacity,
-                    current_capacity=randint(0, max_capacity),
-                    price=randint(15, 50) * 100 / 100,
-                    start_date=datetime.now(pytz.UTC).date(),
-                    end_date=(datetime.now(pytz.UTC) + timedelta(days=90)).date(),
-                    location=location
+        with Progress(
+            SpinnerColumn(),
+            TextColumn("[progress.description]{task.description}"),
+            BarColumn(),
+            TaskProgressColumn(),
+            console=console
+        ) as progress:
+            # Create genres first
+            genre_task = progress.add_task("[cyan]Creating music genres...", total=len(MUSIC_GENRES))
+            genres = []
+            for genre_code, genre_name in MUSIC_GENRES:
+                genre, created = Genre.objects.get_or_create(
+                    code=genre_code,
+                    defaults={
+                        'name': genre_name,
+                        'is_active': True
+                    }
                 )
+                genres.append(genre)
+                progress.advance(genre_task)
 
-                # Create 2-3 recurring schedules for each class
-                num_schedules = randint(2, 3)
-                used_days = set()  # To ensure no duplicate days for the same class
+            # Create admin user if doesn't exist
+            progress.add_task("[cyan]Creating admin user...", total=1)
+            if not User.objects.filter(role='admin').exists():
+                User.objects.create_user(
+                    username='admin',
+                    email='admin@example.com',
+                    password='admin123',
+                    first_name='Admin',
+                    last_name='User',
+                    role='admin',
+                    is_staff=True,
+                    is_superuser=True
+                )
+            progress.advance(genre_task)
 
-                schedules = []
-                for _ in range(num_schedules):
-                    # Pick a day that hasn't been used for this class
-                    available_days = [(day, name) for day, name in DAYS_OF_WEEK if day not in used_days]
-                    if not available_days:  # If no more days available, break
-                        break
+            # Create test locations
+            location_task = progress.add_task("[cyan]Creating locations...", total=len(TEST_LOCATIONS))
+            locations = []
+            for loc_data in TEST_LOCATIONS:
+                location, _ = Location.objects.get_or_create(
+                    name=loc_data['name'],
+                    defaults={
+                        'address': loc_data['address'],
+                        'latitude': loc_data['lat_base'] + uniform(-0.01, 0.01),
+                        'longitude': loc_data['lng_base'] + uniform(-0.01, 0.01),
+                        'url': fake.url()
+                    }
+                )
+                locations.append(location)
+                progress.advance(location_task)
 
-                    day, _ = choice(available_days)
-                    used_days.add(day)
+            # Create students
+            student_count = 30
+            student_task = progress.add_task("[cyan]Creating students...", total=student_count)
+            students = []
+            for i in range(student_count):
+                first_name = fake.first_name()
+                last_name = fake.last_name()
+                full_name = f"{first_name} {last_name}"
+                student, created = User.objects.get_or_create(
+                    email=f"student{i}@example.com",
+                    defaults={
+                        'first_name': first_name,
+                        'last_name': last_name,
+                        'role': 'student',
+                        'profile_picture_url': generate_avatar_url(full_name),
+                        'date_of_birth': fake.date_of_birth(minimum_age=16, maximum_age=60),
+                        'phone': fake.phone_number()[:15],
+                        'is_active': True
+                    }
+                )
+                if created:
+                    student.set_password("password123")
+                    student.save()
+                students.append(student)
+                progress.advance(student_task)
 
-                    # Pick a time slot
-                    start_time, end_time = choice(TIME_SLOTS)
+            # Create instructors
+            instructor_count = 10
+            instructor_task = progress.add_task("[cyan]Creating instructors...", total=instructor_count)
+            instructors = []
+            for i in range(instructor_count):
+                first_name = fake.first_name()
+                last_name = fake.last_name()
+                full_name = f"{first_name} {last_name}"
+                instructor, created = User.objects.get_or_create(
+                    email=f"instructor{i}@example.com",
+                    defaults={
+                        'first_name': first_name,
+                        'last_name': last_name,
+                        'role': 'instructor',
+                        'bio': generate_instructor_bio(),
+                        'profile_picture_url': generate_avatar_url(full_name),
+                        'date_of_birth': fake.date_of_birth(minimum_age=25, maximum_age=60),
+                        'phone': fake.phone_number()[:15],
+                        'is_active': True
+                    }
+                )
+                if created:
+                    instructor.set_password("password123")
+                    instructor.save()
+                instructors.append(instructor)
+                progress.advance(instructor_task)
 
-                    schedule = RecurringSchedule.objects.create(
-                        day_of_week=day,
-                        start_time=start_time,
-                        end_time=end_time,
-                        status='active'
+            # Create classes and reviews
+            total_classes = len(instructors) * 3
+            class_task = progress.add_task("[cyan]Creating dance classes...", total=total_classes)
+            total_reviews = 0
+
+            for instructor in instructors:
+                for _ in range(3):
+                    location = choice(locations)
+                    max_capacity = randint(10, 30)
+                    current_capacity = randint(0, max_capacity)
+                    start_date = timezone.now().date()
+                    end_date = start_date + timedelta(days=90)
+
+                    dance_class = DanceClass.objects.create(
+                        name=f"{choice(['Beginner', 'Intermediate', 'Advanced'])} {choice(DANCE_STYLES).title()} with {instructor.first_name}",
+                        description=generate_long_description(),
+                        instructor=instructor,
+                        level=choice(SKILL_LEVELS),
+                        style=choice(DANCE_STYLES),
+                        max_capacity=max_capacity,
+                        current_capacity=current_capacity,
+                        price=randint(1500, 5000) / 100,
+                        start_date=start_date,
+                        end_date=end_date,
+                        location=location
                     )
-                    schedules.append(schedule)
+                    progress.advance(class_task)
 
-                dance_class.recurring_schedules.set(schedules)
+                    # Create reviews for the class
+                    num_reviews = randint(5, 15)
+                    total_reviews += num_reviews
+                    review_task = progress.add_task(
+                        f"[cyan]Creating reviews for {dance_class.name}...",
+                        total=num_reviews
+                    )
 
-        # Create special events
-        for _ in range(10):
-            instructor = choice(instructors)
-            location = choice(locations)
-            capacity = randint(20, 100)
-            event_date = datetime.now(pytz.UTC) + timedelta(days=randint(1, 60))
+                    for _ in range(num_reviews):
+                        reviewer = choice(students) if random() > 0.3 else None
+                        review = create_review_for_class(dance_class, reviewer, genres)
+                        if not review and reviewer:
+                            create_review_for_class(dance_class, None, genres)
+                        progress.advance(review_task)
 
-            SpecialEvent.objects.create(
-                name=f"{choice(['Workshop', 'Masterclass', 'Intensive', 'Showcase'])} - {choice(DANCE_STYLES).title()} with {instructor.first_name}",
-                description=generate_long_description(),
-                datetime=event_date,
-                capacity=capacity,
-                price=randint(30, 150) * 100 / 100,
-                location=location,
-                instructor=instructor
-            )
+        # Show summary
+        table = Table(title="Seeding Summary", show_header=True, header_style="bold magenta")
+        table.add_column("Entity", style="cyan")
+        table.add_column("Count", justify="right", style="green")
 
-        self.stdout.write(self.style.SUCCESS('Successfully seeded database'))
+        table.add_row("Genres", str(len(genres)))
+        table.add_row("Locations", str(len(locations)))
+        table.add_row("Students", str(len(students)))
+        table.add_row("Instructors", str(len(instructors)))
+        table.add_row("Dance Classes", str(total_classes))
+        table.add_row("Reviews", str(total_reviews))
+
+        console.print("\n")
+        console.print(table)
+        console.print("\n✨ [bold green]Database seeding completed successfully![/bold green]")

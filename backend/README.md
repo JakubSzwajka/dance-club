@@ -1,6 +1,6 @@
-# My Dance Club - Backend
+# Dance DNA - Backend
 
-Backend service for My Dance Club application built with Django.
+Backend service for Dance DNA application built with Django.
 
 ## Prerequisites
 

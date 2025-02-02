@@ -1,14 +1,14 @@
 serve:
-	python3 manage.py runserver
+	uv run manage.py runserver
 
 makemigrations:
-	python3 manage.py makemigrations
+	uv run manage.py makemigrations
 
 migrate: 
-	python3 manage.py migrate
+	uv run manage.py migrate
 
 createsuperuser:
-	python3 manage.py createsuperuser
+	uv run manage.py createsuperuser
 
 
 ci:
@@ -18,5 +18,7 @@ ci:
 
 reseed: 
 	rm -f db.sqlite3
-	python3 manage.py migrate
-	python3 manage.py seed_test_data
+	uv run manage.py makemigrations
+	uv run manage.py migrate
+	DJANGO_SUPERUSER_PASSWORD=Test1234! DJANGO_SUPERUSER_EMAIL=szwajkajakub@gmail.com uv run manage.py createsuperuser --noinput
+	uv run manage.py seed_test_data

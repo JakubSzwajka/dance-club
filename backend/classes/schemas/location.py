@@ -8,7 +8,8 @@ class LocationSchema(Schema):
     id: str
     name: str
     address: str
-    latitude: Decimal
-    longitude: Decimal
+    latitude: Optional[float] = None
+    longitude: Optional[float] = None
     url: Optional[str] = None
+
 

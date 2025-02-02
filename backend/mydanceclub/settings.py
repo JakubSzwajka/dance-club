@@ -49,7 +49,7 @@ INSTALLED_APPS = [
     'ninja',
     'accounts',
     'classes',
-    # 'reviews',
+    'reviews',
     'corsheaders',
 ]
 

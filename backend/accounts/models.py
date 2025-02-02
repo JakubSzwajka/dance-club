@@ -79,3 +79,16 @@ class User(AbstractUser):
             bio=self.bio,
             profile_picture=self.profile_picture_url,
         )
+
+    def to_instructor_schema(self):
+        return InstructorPublicSchema(
+            id=self.id,
+            first_name=self.first_name,
+            last_name=self.last_name,
+            bio=self.bio,
+            profile_picture=self.profile_picture_url,
+            classes_count=0,
+            students_count=0,
+            rating=0,
+            reviews_count=0,
+        )

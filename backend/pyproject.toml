@@ -1,69 +1,26 @@
-[tool.poetry]
-name = "my-dance-club"
+[project]
+name = "backend"
 version = "0.1.0"
-description = "Backend for My Dance Club application"
-authors = ["Jakub Szwajka"]
-packages = [
-    { include = "accounts" },
-    { include = "classes" },
-    { include = "mydanceclub" }
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "django>=5.1.5",
+    "django-cors-headers>=4.6.0",
+    "django-ninja>=1.3.0",
+    "django-unfold>=0.46.0",
+    "faker>=35.2.0",
+    "pillow>=11.1.0",
+    "psycopg2-binary>=2.9.10",
+    "pyjwt>=2.10.1",
+    "python-dotenv>=1.0.1",
+    "pytz>=2025.1",
+    "rich>=13.9.4",
 ]
 
-[tool.poetry.dependencies]
-python = ">=3.11"
-django = "5.1.5"
-django-cors-headers = "4.6.0"
-django-ninja = "1.3.0"
-pillow = "11.1.0"
-psycopg2-binary = "2.9.10"
-python-dotenv = "1.0.1"
-pyjwt = "2.8.0"
-faker = "^35.0.0"
-pytz = "^2024.2"
-django-unfold = "^0.45.0"
-
-[tool.poetry.group.dev.dependencies]
-pytest = "8.3.4"
-pytest-django = "4.9.0"
-ruff = "0.9.3"
-
-[build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
-
-[tool.ruff]
-src = ["backend"]
-target-version = "py312"
-line-length = 120
-
-[tool.ruff.lint]
-extend-select = ["I"]
-
-[tool.ruff.format]
-quote-style = "single"
-indent-style = "space"
-docstring-code-format = true
-
-[tool.pyright]
-python_version = "3.12"
-venv = ".venv"
-venvPath = "."
-reportIncompatibleVariableOverride = false
-
-exclude = [
-    '**/alembic/*',
-    '.aws-sam',
-    '.venv',
-    'backend/mydanceclub/migrations',
+[dependency-groups]
+dev = [
+    "pytest>=8.3.4",
+    "pytest-django>=4.9.0",
+    "ruff>=0.9.4",
 ]
- 
-extraPaths = [
-    ".",
-]
-
-[tool.pytest.ini_options]
-testpaths = ["tests"]
-addopts = "-v -s --cov-report term:skip-covered --cov-report=html:htmlcov --cov-branch --cov-fail-under=70 --no-cov-on-fail"
-pythonpath = ["."]
-
-
