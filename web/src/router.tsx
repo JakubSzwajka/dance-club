@@ -11,6 +11,7 @@ import { ClassBrowser } from './pages/public-pages/class-browser';
 import { ClassDetailsPage as PublicClassDetailsPage } from './pages/public-pages/class-details';
 import { InstructorDetailsPage } from './pages/public-pages/instructor-details';
 import { LocationDetailsPage } from './pages/public-pages/location-details';
+import { ReviewPage } from './pages/public-pages/review';
 
 const rootRoute = createRootRoute({
   component: () => (
@@ -92,6 +93,19 @@ const locationDetailsRoute = createRoute({
   component: LocationDetailsPage,
 });
 
+export const reviewFlowRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/reviews',
+  component: ReviewPage,
+  validateSearch: (search: Record<string, unknown>) => {
+    return {
+      classId: search.classId as string | undefined,
+      instructorId: search.instructorId as string | undefined,
+      locationId: search.locationId as string | undefined,
+    }
+  }
+});
+
 
 const loginRoute = createRoute({
   getParentRoute: () => rootRoute,
@@ -124,6 +138,7 @@ const routeTree = rootRoute.addChildren([
   locationDetailsRoute,
   loginRoute,
   signupRoute,
+  reviewFlowRoute,
 ]);
 
 export const router = createRouter({

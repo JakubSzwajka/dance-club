@@ -12,24 +12,24 @@ class DanceClassAdmin(ModelAdmin):
         'instructor',
         'level',
         'style',
-        'current_capacity',
-        'max_capacity',
+        'formation_type',
+        'duration',
         'price',
         'start_date',
         'end_date',
     )
-    list_filter = ('level', 'style', 'instructor', 'location')
+    list_filter = ('level', 'style', 'formation_type', 'instructor', 'location')
     search_fields = ('name', 'description', 'instructor__email')
     date_hierarchy = 'start_date'
     readonly_fields = ('created_at', 'updated_at')
     fieldsets = (
         (
             'Basic Information',
-            {'fields': ('name', 'description', 'instructor', 'level', 'style', 'location')},
+            {'fields': ('name', 'description', 'instructor', 'level', 'style', 'formation_type', 'location')},
         ),
         (
-            'Capacity & Pricing',
-            {'fields': ('max_capacity', 'current_capacity', 'price')},
+            'Class Details',
+            {'fields': ('duration', 'price')},
         ),
         ('Dates', {'fields': ('start_date', 'end_date', 'created_at', 'updated_at')}),
     )
@@ -37,9 +37,21 @@ class DanceClassAdmin(ModelAdmin):
 
 @admin.register(Location)
 class LocationAdmin(ModelAdmin):
-    list_display = ('name', 'address', 'show_map_link')
+    list_display = ('name', 'address', 'facilities', 'sports_card', 'show_map_link')
+    list_filter = ('facilities', 'sports_card')
     search_fields = ('name', 'address')
     ordering = ('name',)
+    fieldsets = (
+        ('Basic Information', {
+            'fields': ('name', 'address', 'url')
+        }),
+        ('Coordinates', {
+            'fields': ('latitude', 'longitude')
+        }),
+        ('Features', {
+            'fields': ('facilities', 'sports_card')
+        }),
+    )
 
     def show_map_link(self, obj):
         if obj.latitude and obj.longitude:

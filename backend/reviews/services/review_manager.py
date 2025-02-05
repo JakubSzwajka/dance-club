@@ -3,8 +3,10 @@ from django.db.models import Avg, Count, Q
 from django.core.paginator import Paginator
 from reviews.models import (
     Review,
+    DanceClassReview
 )
 from reviews.schemas.response import (
+    ReviewDanceClassStatsSchema,
     ReviewListSchema
 )
 class ReviewManagerService:
@@ -16,7 +18,7 @@ class ReviewManagerService:
         sort_by: Optional[str] = None,
     ) -> ReviewListSchema:
         """Get paginated reviews for a class with enhanced filters"""
-        queryset = Review.objects.filter(dance_class_id=class_id)
+        queryset = DanceClassReview.objects.filter(dance_class_id=class_id)
 
         # Apply sorting
         if sort_by:
@@ -38,7 +40,7 @@ class ReviewManagerService:
         reviews = list(queryset[start:end])
         response_items = [review.to_schema() for review in reviews]
 
-        return ReviewListSchema(
+        return ReviewListSchema[ReviewDanceClassStatsSchema](
             items=response_items,
             total=total,
             page=page,

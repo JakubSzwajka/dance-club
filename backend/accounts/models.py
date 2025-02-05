@@ -88,7 +88,6 @@ class User(AbstractUser):
             bio=self.bio,
             profile_picture=self.profile_picture_url,
             classes_count=0,
-            students_count=0,
             rating=0,
             reviews_count=0,
         )

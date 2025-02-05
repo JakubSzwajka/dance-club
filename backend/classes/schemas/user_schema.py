@@ -18,6 +18,5 @@ class UserPrivateSchema(UserPublicSchema):
 class InstructorPublicSchema(UserPublicSchema):
     """Public instructor information with stats"""
     classes_count: int
-    students_count: int
     rating: float
     reviews_count: int

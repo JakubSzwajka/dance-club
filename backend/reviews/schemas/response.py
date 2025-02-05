@@ -1,28 +1,36 @@
 from datetime import datetime
-from decimal import Decimal
-from typing import List, Optional, Dict
+from typing import List, Optional, TypeVar
 from ninja import Schema
 from pydantic import Field
 
-from .base import (
-    TeachingApproachSchema,
-    EnvironmentSchema,
-    MusicSchema,
-    FacilitiesSchema
-)
 
+class ReviewLocationStatsSchema(Schema):
+    cleanness: float
+    general_look: float
+    acustic_quality: float
+    additional_facilities: float
+    temperature: float
+    lighting: float
+    avg_rating: float
 
-class ReviewInstructorStatsSchema(Schema):
-    move_breakdown: float
 
 class ReviewDanceClassStatsSchema(Schema):
     group_size: float
     level: float
     engagement: float
     teaching_pace: float
+    avg_rating: float
 
-class ReviewFacilitiesStatsSchema(Schema):
-    cleanness: float
+
+class ReviewInstructorStatsSchema(Schema):
+    move_breakdown: float
+    individual_approach: float
+    posture_correction_ability: float
+    communication_and_feedback: float
+    patience_and_encouragement: float
+    motivation_and_energy: float
+    avg_rating: float
+
 
 
 # ------------------------------------------------------------
@@ -35,11 +43,12 @@ class ReviewResponseSchema(Schema):
     comment: str
 
     instructor_stats: ReviewInstructorStatsSchema
-    facilities_stats: ReviewFacilitiesStatsSchema
+    location_stats: ReviewLocationStatsSchema
     dance_class_stats: ReviewDanceClassStatsSchema
 
     author_name: Optional[str]
     verified: bool = Field(False)
+
 
 
 
@@ -65,21 +74,11 @@ class ReviewResponseSchema(Schema):
         else:
             return "just now"
 
-
-class ReviewListSchema(Schema):
-    items: List[ReviewResponseSchema]
+class ReviewListSchema[T](Schema):
+    items: List[T]
     total: int
     page: int
     pages: int
     has_next: bool
     has_prev: bool
 
-
-class AggregatedReviewStatsSchema(Schema):
-    total_reviews: int
-    verified_reviews: int
-    average_rating: Decimal
-
-    instructor_stats: ReviewInstructorStatsSchema
-    facilities_stats: ReviewFacilitiesStatsSchema
-    dance_class_stats: ReviewDanceClassStatsSchema

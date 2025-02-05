@@ -1,17 +1,16 @@
 from typing import List
 from ninja import Schema
 
+from classes.models import DanceStyle, SkillLevel, SportsCard
 from reviews.constants import (
     TEMPERATURE_OPTIONS,
     WAITING_AREA_OPTIONS,
     VERIFICATION_METHODS,
 )
-from shared.const import DanceStyle, MusicGenre, SkillLevel, SportsCard
 
 class MetadataSchema(Schema):
     dance_styles: List[DanceStyle]
     skill_levels: List[SkillLevel]
-    music_genres: List[MusicGenre]
     sports_cards: List[SportsCard]
 
 class ReviewMetadataSchema(Schema):

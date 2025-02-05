@@ -1,12 +1,12 @@
 from django.core.management.base import BaseCommand
 from django.contrib.auth import get_user_model
 from django.utils import timezone
-from classes.models import DanceClass, Location
+from classes.models import DanceClass, Location, DanceStyle, ClassType, Facilities, SportsCard
 from reviews.models import (
     Review,
     DanceClassReview,
     InstructorReview,
-    FacilitiesReview
+    LocationReview
 )
 from faker import Faker
 from random import randint, choice, uniform, sample, random
@@ -22,19 +22,13 @@ fake = Faker()
 console = Console()
 
 # Constants moved to the top for better organization
-DANCE_STYLES = [style[0] for style in [
-    ('ballroom', 'Ballroom'),
-    ('latin', 'Latin'),
-    ('salsa', 'Salsa'),
-    ('tango', 'Tango'),
-    ('other', 'Other'),
-]]
-
+DANCE_STYLES = [style[0] for style in DanceStyle.choices]
 SKILL_LEVELS = [level[0] for level in [
     ('beginner', 'Beginner'),
     ('intermediate', 'Intermediate'),
     ('advanced', 'Advanced'),
 ]]
+CLASS_TYPES = [type[0] for type in ClassType.choices]
 
 TEST_LOCATIONS = [
     {
@@ -223,34 +217,50 @@ def generate_review_comment():
 def create_review_for_class(dance_class, user=None):
     """Create a complete review with all related models"""
     # Skip if user already reviewed this class
-    if user and Review.objects.filter(dance_class=dance_class, user=user).exists():
+    if user and Review.objects.filter(dance_class_stats__dance_class=dance_class, user=user).exists():
         return None
 
     # Create dance class review
     dance_class_stats = DanceClassReview.objects.create(
+        dance_class=dance_class,
         group_size=uniform(-10, 10),
         level=uniform(-10, 10),
         engagement=randint(1, 10),
-        teaching_pace=uniform(-10, 10)
+        teaching_pace=uniform(-10, 10),
+        overall_rating=randint(1, 5),
+        comment=generate_review_comment()
     )
 
     # Create instructor review
     instructor_stats = InstructorReview.objects.create(
-        move_breakdown=uniform(-10, 10)
+        instructor=dance_class.instructor,
+        move_breakdown=uniform(-10, 10),
+        individual_approach=uniform(-10, 10),
+        posture_correction_ability=randint(1, 10),
+        communication_and_feedback=randint(1, 10),
+        patience_and_encouragement=randint(1, 10),
+        motivation_and_energy=randint(1, 10),
+        overall_rating=randint(1, 5),
+        comment=generate_review_comment()
     )
 
     # Create facilities review
-    facilities_stats = FacilitiesReview.objects.create(
-        cleanness=randint(1, 10)
+    facilities_stats = LocationReview.objects.create(
+        location=dance_class.location,
+        cleanness=randint(1, 10),
+        general_look=randint(1, 10),
+        acustic_quality=randint(1, 10),
+        additional_facilities=randint(1, 10),
+        temperature=uniform(-10, 10),
+        lighting=uniform(-10, 10),
+        overall_rating=randint(1, 5),
+        comment=generate_review_comment()
     )
 
     # Create main review with all components
     review = Review.objects.create(
-        dance_class=dance_class,
         user=user,
         anonymous_name=fake.name() if not user else None,
-        overall_rating=randint(1, 5),
-        comment=generate_review_comment(),
         is_verified=bool(user and random() > 0.3),  # 70% chance of verification for logged users
         instructor_stats=instructor_stats,
         dance_class_stats=dance_class_stats,
@@ -297,9 +307,22 @@ class Command(BaseCommand):
                         'address': loc_data['address'],
                         'latitude': loc_data['lat_base'] + uniform(-0.01, 0.01),
                         'longitude': loc_data['lng_base'] + uniform(-0.01, 0.01),
-                        'url': fake.url()
+                        'url': fake.url(),
                     }
                 )
+                # Set multiple random facilities (3 to max available)
+                available_facilities = list(Facilities)
+                num_facilities = randint(3, len(available_facilities))
+                selected_facilities = sample(available_facilities, num_facilities)
+                location.set_facilities(selected_facilities)
+
+                # Set multiple random sports cards (3 to max available)
+                available_cards = list(SportsCard)
+                num_cards = randint(3, len(available_cards))
+                selected_cards = sample(available_cards, num_cards)
+                location.set_sports_card(selected_cards)
+
+                location.save()
                 locations.append(location)
                 progress.advance(location_task)
 
@@ -364,8 +387,6 @@ class Command(BaseCommand):
             for instructor in instructors:
                 for _ in range(3):
                     location = choice(locations)
-                    max_capacity = randint(10, 30)
-                    current_capacity = randint(0, max_capacity)
                     start_date = timezone.now().date()
                     end_date = start_date + timedelta(days=90)
 
@@ -375,8 +396,8 @@ class Command(BaseCommand):
                         instructor=instructor,
                         level=choice(SKILL_LEVELS),
                         style=choice(DANCE_STYLES),
-                        max_capacity=max_capacity,
-                        current_capacity=current_capacity,
+                        formation_type=choice(CLASS_TYPES),
+                        duration=choice([45, 60, 90, 120]),  # Common class durations in minutes
                         price=randint(1500, 5000) / 100,
                         start_date=start_date,
                         end_date=end_date,

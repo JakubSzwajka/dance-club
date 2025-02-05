@@ -1,60 +1,42 @@
-from decimal import Decimal
-from django.db.models import Avg, Count, Q
-from reviews.models import Review
+from django.db.models import Avg
+from reviews.models import Review, InstructorReview, DanceClassReview, LocationReview
 from reviews.schemas.response import (
     ReviewDanceClassStatsSchema,
-    ReviewFacilitiesStatsSchema,
     ReviewInstructorStatsSchema,
-    AggregatedReviewStatsSchema,
+    ReviewLocationStatsSchema,
 )
-from django.db.models import QuerySet
 
 class ReviewStatsService:
-    @staticmethod
-    def get_class_stats(class_id: str) -> AggregatedReviewStatsSchema:
-        """Get comprehensive review statistics for a class"""
-        reviews = Review.objects.filter(dance_class_id=class_id)
-
-        # Get basic stats
-        basic_stats = reviews.aggregate(
-            total=Count('id'),
-            avg_rating=Avg('overall_rating'),
-            verified_count=Count('id', filter=Q(is_verified=True))
+    def get_location_stats(self, location_id: str) -> ReviewLocationStatsSchema:
+        location_reviews = LocationReview.objects.filter(location_id=location_id)
+        return ReviewLocationStatsSchema(
+            cleanness=location_reviews.aggregate(Avg('cleanness'))['cleanness__avg'] or 0.0,
+            general_look=location_reviews.aggregate(Avg('general_look'))['general_look__avg'] or 0.0,
+            acustic_quality=location_reviews.aggregate(Avg('acustic_quality'))['acustic_quality__avg'] or 0.0,
+            additional_facilities=location_reviews.aggregate(Avg('additional_facilities'))['additional_facilities__avg'] or 0.0,
+            temperature=location_reviews.aggregate(Avg('temperature'))['temperature__avg'] or 0.0,
+            lighting=location_reviews.aggregate(Avg('lighting'))['lighting__avg'] or 0.0,
+            avg_rating=location_reviews.aggregate(Avg('overall_rating'))['overall_rating__avg'] or 0.0
         )
 
-        return AggregatedReviewStatsSchema(
-            total_reviews=basic_stats['total'],
-            average_rating=basic_stats['avg_rating'] or Decimal(0.0),
-            verified_reviews=basic_stats['verified_count'],
-            instructor_stats=ReviewStatsService._calculate_instructor_stats(reviews),
-            facilities_stats=ReviewStatsService._calculate_facilities_stats(reviews),
-            dance_class_stats=ReviewStatsService._calculate_dance_class_stats(reviews)
-        )
-
-    @staticmethod
-    def _calculate_instructor_stats(reviews: QuerySet[Review]) -> ReviewInstructorStatsSchema:
-        return ReviewInstructorStatsSchema(
-            move_breakdown=reviews.aggregate(Avg('instructor_stats__move_breakdown'))['instructor_stats__move_breakdown__avg'] or 0.0
-        )
-
-    @staticmethod
-    def _calculate_facilities_stats(reviews: QuerySet[Review]) -> ReviewFacilitiesStatsSchema:
-        return ReviewFacilitiesStatsSchema(
-            cleanness=reviews.aggregate(Avg('facilities_stats__cleanness'))['facilities_stats__cleanness__avg'] or 0.0
-        )
-
-    @staticmethod
-    def _calculate_dance_class_stats(reviews: QuerySet[Review]) -> ReviewDanceClassStatsSchema:
-        stats = reviews.aggregate(
-            group_size_avg=Avg('dance_class_stats__group_size'),
-            level_avg=Avg('dance_class_stats__level'),
-            engagement_avg=Avg('dance_class_stats__engagement'),
-            teaching_pace_avg=Avg('dance_class_stats__teaching_pace')
-        )
+    def get_dance_class_stats(self, dance_class_id: str) -> ReviewDanceClassStatsSchema:
+        dance_class_reviews = DanceClassReview.objects.filter(dance_class_id=dance_class_id)
         return ReviewDanceClassStatsSchema(
-            group_size=stats['group_size_avg'] or 0.0,
-            level=stats['level_avg'] or 0.0,
-            engagement=stats['engagement_avg'] or 0.0,
-            teaching_pace=stats['teaching_pace_avg'] or 0.0
+            group_size=dance_class_reviews.aggregate(Avg('group_size'))['group_size__avg'] or 0.0,
+            level=dance_class_reviews.aggregate(Avg('level'))['level__avg'] or 0.0,
+            engagement=dance_class_reviews.aggregate(Avg('engagement'))['engagement__avg'] or 0.0,
+            teaching_pace=dance_class_reviews.aggregate(Avg('teaching_pace'))['teaching_pace__avg'] or 0.0,
+            avg_rating=dance_class_reviews.aggregate(Avg('overall_rating'))['overall_rating__avg'] or 0.0
         )
 
+    def get_instructor_stats(self, instructor_id: str) -> ReviewInstructorStatsSchema:
+        instructor_reviews = InstructorReview.objects.filter(instructor_id=instructor_id)
+        return ReviewInstructorStatsSchema(
+            move_breakdown=instructor_reviews.aggregate(Avg('move_breakdown'))['move_breakdown__avg'] or 0.0,
+            individual_approach=instructor_reviews.aggregate(Avg('individual_approach'))['individual_approach__avg'] or 0.0,
+            posture_correction_ability=instructor_reviews.aggregate(Avg('posture_correction_ability'))['posture_correction_ability__avg'] or 0.0,
+            communication_and_feedback=instructor_reviews.aggregate(Avg('communication_and_feedback'))['communication_and_feedback__avg'] or 0.0,
+            patience_and_encouragement=instructor_reviews.aggregate(Avg('patience_and_encouragement'))['patience_and_encouragement__avg'] or 0.0,
+            motivation_and_energy=instructor_reviews.aggregate(Avg('motivation_and_energy'))['motivation_and_energy__avg'] or 0.0,
+            avg_rating=instructor_reviews.aggregate(Avg('overall_rating'))['overall_rating__avg'] or 0.0
+        )

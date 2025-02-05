@@ -1,4 +1,4 @@
-import { useParams } from "@tanstack/react-router"
+import { useParams, useNavigate } from "@tanstack/react-router"
 import { Container } from "@/components/ui/container"
 import { Header } from "@/components/domain/header"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
@@ -17,6 +17,7 @@ export function ClassDetailsPage() {
   const { classId } = useParams({ from: '/classes/$classId' })
   const { data: classDetails, isLoading } = usePublicClass(classId)
   const [isExpanded, setIsExpanded] = useState(false)
+  const navigate = useNavigate()
 
   if (isLoading || !classDetails || !classDetails.instructor || !classDetails.location) {
     return (
@@ -32,6 +33,17 @@ export function ClassDetailsPage() {
     )
   }
 
+  const handleStartReview = () => {
+    navigate({
+      to: '/reviews',
+      search: {
+        classId: classId,
+        instructorId: classDetails.instructor?.id,
+        locationId: classDetails.location?.id
+      }
+    })
+  }
+
   return (
     <div className="min-h-screen bg-background">
       <Header />
@@ -42,7 +54,16 @@ export function ClassDetailsPage() {
           <div className="py-8">
             <div className="grid grid-cols-1 lg:grid-cols-[1fr,320px] gap-8">
               <HeroSection classDetails={classDetails} />
-              <QuickInfoCard classDetails={classDetails} />
+              <div className="space-y-4">
+                <QuickInfoCard classDetails={classDetails} />
+                <Button 
+                  className="w-full" 
+                  size="lg"
+                  onClick={handleStartReview}
+                >
+                  Write a Review
+                </Button>
+              </div>
             </div>
           </div>
         </Container>

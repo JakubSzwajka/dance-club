@@ -1,26 +1,12 @@
 from enum import StrEnum
+from typing import List
 from accounts.models import User
-from django.core.validators import MinValueValidator
 from django.db import models
 from mydanceclub.models import BaseModel
 from classes.schemas.location import LocationSchema
-from classes.schemas.dance_class import DanceClassSchema, PrivateDanceClassSchema
-from shared.const import DanceStyle, SkillLevel
+from classes.schemas.dance_class import DanceClassSchema
+from shared.const import ClassType, DanceStyle, Facilities, SkillLevel, SportsCard
 
-DANCE_STYLES = [
-    (DanceStyle.BALLROOM, 'Ballroom'),
-    (DanceStyle.LATIN, 'Latin'),
-    (DanceStyle.SALSA, 'Salsa'),
-    (DanceStyle.TANGO, 'Tango'),
-    (DanceStyle.OTHER, 'Other'),
-]
-
-
-SKILL_LEVELS = [
-    (SkillLevel.BEGINNER, 'Beginner'),
-    (SkillLevel.INTERMEDIATE, 'Intermediate'),
-    (SkillLevel.ADVANCED, 'Advanced'),
-]
 
 class Location(BaseModel):
     """Model for storing locations where events can take place"""
@@ -30,6 +16,32 @@ class Location(BaseModel):
     latitude = models.DecimalField(max_digits=9, decimal_places=6, null=True, blank=True)
     longitude = models.DecimalField(max_digits=9, decimal_places=6, null=True, blank=True)
     url = models.URLField(null=True, blank=True)
+
+    facilities = models.CharField(
+        max_length=1000,
+        choices=Facilities.choices,
+        blank=True,
+        null=True,
+    )
+
+    def set_facilities(self, facilities: List[Facilities]):
+        self.facilities = ','.join(facilities)
+
+    def get_facilities(self)-> List[Facilities]:
+        return [Facilities(facility) for facility in self.facilities.split(',')] if self.facilities else []
+
+    sports_card = models.CharField(
+        max_length=1000,
+        choices=SportsCard.choices,
+        blank=True,
+        null=True,
+    )
+
+    def set_sports_card(self, sports_cards: List[SportsCard]):
+        self.sports_card = ','.join(sports_cards)
+
+    def get_sports_card(self)-> List[SportsCard]:
+        return [SportsCard(card) for card in self.sports_card.split(',')] if self.sports_card else []
 
     def __str__(self):
         return f"{self.name} ({self.address})"
@@ -42,6 +54,8 @@ class Location(BaseModel):
             latitude=float(self.latitude) if self.latitude else float(0),
             longitude=float(self.longitude) if self.longitude else float(0),
             url=self.url,
+            facilities=self.get_facilities(),
+            sports_card=self.get_sports_card(),
         )
 
 class DanceClass(BaseModel):
@@ -50,16 +64,25 @@ class DanceClass(BaseModel):
     name = models.CharField(max_length=100)
     description = models.TextField()
     instructor = models.ForeignKey(User, on_delete=models.CASCADE, related_name='classes')
+
     level = models.CharField(
         max_length=20,
-        choices=SKILL_LEVELS,
+        choices=SkillLevel.choices,
     )
 
-    style = models.CharField(max_length=100,
-                             choices=DANCE_STYLES)
+    style = models.CharField(
+        max_length=100,
+        choices=DanceStyle.choices,
+    )
+    formation_type = models.CharField(
+        max_length=100,
+        choices=ClassType.choices,
+    )
 
-    max_capacity = models.IntegerField(validators=[MinValueValidator(1)])
-    current_capacity = models.IntegerField(default=0)
+    duration = models.IntegerField(
+        help_text="Duration of the class in minutes"
+    )
+
     price = models.DecimalField(max_digits=10, decimal_places=2)
     start_date = models.DateField()  # When the class starts overall
     end_date = models.DateField()  # When the class ends overall
@@ -80,9 +103,8 @@ class DanceClass(BaseModel):
             description=self.description,
             instructor_id=self.instructor.id,
             level=self.level,
-            max_capacity=self.max_capacity,
-            current_capacity=self.current_capacity,
             price=self.price,
+            duration=self.duration,
             start_date=self.start_date,
             end_date=self.end_date,
             location=self.location.to_schema() if self.location else None,
@@ -90,10 +112,4 @@ class DanceClass(BaseModel):
             updated_at=self.updated_at,
             style=self.style,
             instructor=self.instructor.to_instructor_schema(),
-        )
-
-    def to_private_schema(self) -> PrivateDanceClassSchema:
-        public_schema = self.to_schema()
-        return PrivateDanceClassSchema(
-            **public_schema.model_dump(),
         )

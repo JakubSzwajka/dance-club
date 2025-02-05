@@ -1,16 +1,15 @@
 from datetime import date as Date
-from datetime import datetime, time
+from datetime import datetime
 from decimal import Decimal
-from typing import List, Optional
+from typing import Optional
 from ninja import Schema
-from classes.schemas.user_schema import UserPublicSchema, InstructorPublicSchema
+from classes.schemas.user_schema import InstructorPublicSchema
 from classes.schemas.location import LocationSchema
 
 class CreateDanceClassSchema(Schema):
     name: str
     description: str
     level: str
-    max_capacity: int
     price: Decimal
     start_date: Date
     end_date: Date
@@ -20,10 +19,8 @@ class CreateDanceClassSchema(Schema):
 class DanceClassSchema(CreateDanceClassSchema):
     id: str
     instructor_id: str
-    current_capacity: int
     created_at: datetime
     updated_at: datetime
     instructor: Optional[InstructorPublicSchema]
-
-class PrivateDanceClassSchema(DanceClassSchema):
-    pass
+    location: Optional[LocationSchema]
+    duration: int

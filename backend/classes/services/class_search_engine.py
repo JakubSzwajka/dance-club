@@ -43,7 +43,7 @@ class ClassSearchEngineService:
         # Base query with review stats
         classes = DanceClass.objects.annotate(
             avg_rating=Avg('reviews__overall_rating'),
-            review_count=Count('reviews')
+            review_count=Count('reviews__review')
         )
 
         # Apply filters

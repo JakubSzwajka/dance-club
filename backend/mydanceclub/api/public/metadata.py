@@ -1,6 +1,6 @@
 from ninja import Router
 from reviews.schemas.metadata import MetadataSchema
-from shared.const import DanceStyle, MusicGenre, SkillLevel, SportsCard
+from classes.models import DanceStyle, SkillLevel, SportsCard
 
 router = Router()
 
@@ -10,8 +10,8 @@ def get_metadata(request) -> MetadataSchema:
     return MetadataSchema(
         dance_styles=[style for style in DanceStyle],
         skill_levels=[level for level in SkillLevel],
-        music_genres=[genre for genre in MusicGenre],
         sports_cards=[card for card in SportsCard],
+
     )
 
 

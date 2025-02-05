@@ -19,7 +19,6 @@ class InstructorPublicManagerService:
             bio=instructor_schema.bio,
             profile_picture=instructor_schema.profile_picture,
             classes_count=len(instructor_classes),
-            students_count=sum([class_.current_capacity for class_ in instructor_classes]),
             rating=0,
             reviews_count=0,
         )
@@ -33,10 +32,10 @@ class InstructorPublicManagerService:
         """Get instructors with optional filters and sorting"""
         # Base query with aggregated stats
         instructors = User.objects.filter(role='instructor').annotate(
-            avg_rating=Avg('classes__reviews__overall_rating'),
+            # Get average rating from reviews that reference this instructor through instructor_stats
+            avg_rating=Avg('instructor_reviews__overall_rating'),
             classes_count=Count('classes', distinct=True),
-            active_students=Count('classes__reviews__user', distinct=True),
-            total_reviews=Count('classes__reviews', distinct=True)
+            total_reviews=Count('instructor_reviews', distinct=True)
         )
 
         # Apply filters
@@ -53,30 +52,15 @@ class InstructorPublicManagerService:
         else:
             instructors = instructors.order_by('-avg_rating', '-classes_count')
 
-        return [self._instructor_to_schema(instructor) for instructor in instructors.distinct()]
+        return [self._get_instructor_public_profile(instructor) for instructor in instructors.distinct()]
 
     def get_instructor_by_id(self, instructor_id: str) -> InstructorPublicSchema:
         """Get instructor details with aggregated stats"""
         instructor = User.objects.filter(role='instructor').annotate(
-            avg_rating=Avg('classes__reviews__overall_rating'),
+            # Get average rating from reviews that reference this instructor through instructor_stats
+            avg_rating=Avg('instructor_reviews__overall_rating'),
             classes_count=Count('classes', distinct=True),
-            active_students=Count('classes__reviews__user', distinct=True),
-            total_reviews=Count('classes__reviews', distinct=True)
+            total_reviews=Count('instructor_reviews', distinct=True)
         ).get(id=instructor_id)
 
-        return self._instructor_to_schema(instructor)
-
-    def _instructor_to_schema(self, instructor: User) -> InstructorPublicSchema:
-        """Convert instructor model to schema with stats"""
-        return InstructorPublicSchema(
-            id=str(instructor.id),
-            first_name=instructor.first_name,
-            last_name=instructor.last_name,
-            bio=instructor.bio,
-            profile_picture=instructor.profile_picture_url,
-            classes_count=getattr(instructor, 'classes_count', 0),
-            students_count=getattr(instructor, 'active_students', 0),
-            rating=round(float(getattr(instructor, 'avg_rating', 0) or 0), 1),
-            reviews_count=getattr(instructor, 'total_reviews', 0)
-        )
-
+        return self._get_instructor_public_profile(instructor)

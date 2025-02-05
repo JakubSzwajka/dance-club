@@ -4,7 +4,7 @@ from ninja import Router
 from classes.schemas.dance_class import DanceClassSchema
 from classes.services.class_search_engine import ClassSearchEngineService
 from reviews.services.stats_service import ReviewStatsService
-from reviews.schemas.response import AggregatedReviewStatsSchema, ReviewListSchema
+from reviews.schemas.response import ReviewDanceClassStatsSchema, ReviewListSchema
 from reviews.services.review_manager import ReviewManagerService
 
 router = Router()
@@ -41,10 +41,10 @@ def get_class(request, class_id: str) -> DanceClassSchema:
     """Get a class by ID"""
     return class_search_engine.get_class_by_id(class_id)
 
-@router.get('/classes/{class_id}/stats', response=AggregatedReviewStatsSchema, auth=None)
-def get_class_stats(request, class_id: str) -> AggregatedReviewStatsSchema:
+@router.get('/classes/{class_id}/stats', response=ReviewDanceClassStatsSchema, auth=None)
+def get_class_stats(request, class_id: str) -> ReviewDanceClassStatsSchema:
     """Get comprehensive review statistics for a class"""
-    return stats_service.get_class_stats(class_id)
+    return stats_service.get_dance_class_stats(class_id)
 
 @router.get('/classes/{class_id}/reviews', response=ReviewListSchema, auth=None)
 def get_class_reviews(
