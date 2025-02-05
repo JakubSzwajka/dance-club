@@ -195,6 +195,26 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/public/instructors/{instructor_id}/stats": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Get Instructor Stats
+         * @description Get stats for an instructor
+         */
+        get: operations["mydanceclub_api_public_instructors_get_instructor_stats"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/public/locations": {
         parameters: {
             query?: never;
@@ -244,6 +264,26 @@ export interface paths {
          * @description Get all classes at a location
          */
         get: operations["mydanceclub_api_public_locations_get_location_classes"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/public/locations/{location_id}/stats": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Get Location Stats
+         * @description Get stats for a location
+         */
+        get: operations["mydanceclub_api_public_locations_get_location_stats"];
         put?: never;
         post?: never;
         delete?: never;
@@ -428,18 +468,6 @@ export interface components {
          * @enum {string}
          */
         SportsCard: "multisport" | "medicover" | "ok_system" | "benefit" | "fitprofit" | "other";
-        /** AggregatedReviewStatsSchema */
-        AggregatedReviewStatsSchema: {
-            /** Total Reviews */
-            total_reviews: number;
-            /** Verified Reviews */
-            verified_reviews: number;
-            /** Average Rating */
-            average_rating: number;
-            instructor_stats: components["schemas"]["ReviewInstructorStatsSchema"];
-            facilities_stats: components["schemas"]["ReviewFacilitiesStatsSchema"];
-            dance_class_stats: components["schemas"]["ReviewDanceClassStatsSchema"];
-        };
         /** ReviewDanceClassStatsSchema */
         ReviewDanceClassStatsSchema: {
             /** Group Size */
@@ -450,21 +478,8 @@ export interface components {
             engagement: number;
             /** Teaching Pace */
             teaching_pace: number;
-        };
-        /** ReviewFacilitiesStatsSchema */
-        ReviewFacilitiesStatsSchema: {
-            /** Cleanness */
-            cleanness: number;
-            /** General Look */
-            general_look: number;
-            /** Acustic Quality */
-            acustic_quality: number;
-            /** Additional Facilities */
-            additional_facilities: number;
-            /** Temperature */
-            temperature: number;
-            /** Lighting */
-            lighting: number;
+            /** Avg Rating */
+            avg_rating: number;
         };
         /** ReviewInstructorStatsSchema */
         ReviewInstructorStatsSchema: {
@@ -480,6 +495,8 @@ export interface components {
             patience_and_encouragement: number;
             /** Motivation And Energy */
             motivation_and_energy: number;
+            /** Avg Rating */
+            avg_rating: number;
         };
         /** ReviewListSchema */
         ReviewListSchema: {
@@ -495,6 +512,23 @@ export interface components {
             has_next: boolean;
             /** Has Prev */
             has_prev: boolean;
+        };
+        /** ReviewLocationStatsSchema */
+        ReviewLocationStatsSchema: {
+            /** Cleanness */
+            cleanness: number;
+            /** General Look */
+            general_look: number;
+            /** Acustic Quality */
+            acustic_quality: number;
+            /** Additional Facilities */
+            additional_facilities: number;
+            /** Temperature */
+            temperature: number;
+            /** Lighting */
+            lighting: number;
+            /** Avg Rating */
+            avg_rating: number;
         };
         /** ReviewResponseSchema */
         ReviewResponseSchema: {
@@ -515,7 +549,7 @@ export interface components {
             /** Comment */
             comment: string;
             instructor_stats: components["schemas"]["ReviewInstructorStatsSchema"];
-            facilities_stats: components["schemas"]["ReviewFacilitiesStatsSchema"];
+            location_stats: components["schemas"]["ReviewLocationStatsSchema"];
             dance_class_stats: components["schemas"]["ReviewDanceClassStatsSchema"];
             /** Author Name */
             author_name: string | null;
@@ -782,7 +816,7 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["AggregatedReviewStatsSchema"];
+                    "application/json": components["schemas"]["ReviewDanceClassStatsSchema"];
                 };
             };
         };
@@ -879,6 +913,28 @@ export interface operations {
             };
         };
     };
+    mydanceclub_api_public_instructors_get_instructor_stats: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                instructor_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ReviewInstructorStatsSchema"];
+                };
+            };
+        };
+    };
     mydanceclub_api_public_locations_get_locations: {
         parameters: {
             query?: {
@@ -943,6 +999,28 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["DanceClassSchema"][];
+                };
+            };
+        };
+    };
+    mydanceclub_api_public_locations_get_location_stats: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                location_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ReviewLocationStatsSchema"];
                 };
             };
         };

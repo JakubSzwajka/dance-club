@@ -18,7 +18,7 @@ export function ClassDetailsPage() {
   const { data: classDetails, isLoading } = usePublicClass(classId)
   const [isExpanded, setIsExpanded] = useState(false)
 
-  if (isLoading || !classDetails) {
+  if (isLoading || !classDetails || !classDetails.instructor || !classDetails.location) {
     return (
       <div className="min-h-screen bg-background">
         <Header />
@@ -74,17 +74,17 @@ export function ClassDetailsPage() {
 
       {/* Review Stats Section */}
       <Container>
-        <ReviewStatsSection classId={classId} />
+        <ReviewStatsSection classId={classId} instructorId={classDetails.instructor?.id} locationId={classDetails.location?.id} />
       </Container>
 
       {/* Facilities Section */}
-      <Container>
-        <FacilitiesSection 
-          location={classDetails.location}
-          facilities={classDetails.location?.facilities || []}
-          sportsCards={classDetails.location?.sports_card || []}
-        />
-      </Container>
+      {/* <Container>
+        {classDetails.location && (
+          <FacilitiesSection 
+            locationId={classDetails.location.id}
+          />
+        )}
+      </Container> */}
 
 
       {/* Tabs Section */}

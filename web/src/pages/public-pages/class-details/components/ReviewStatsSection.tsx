@@ -3,45 +3,10 @@ import { Badge } from "@/components/ui/badge"
 import { StarIcon } from "@heroicons/react/24/solid"
 import { cn } from "@/lib/utils"
 import { 
-  UserGroupIcon, 
-  ClockIcon,
   ChartBarIcon,
-  UserIcon
 } from "@heroicons/react/24/outline"
-import { useClassReviews, useClassStats } from "@/lib/api/public/index"
-import { PolarAngleAxis, PolarGrid, Radar } from "recharts"
-import { ChartConfig, ChartContainer, ChartTooltip } from "@/components/ui/chart"
-import { RadarChart } from "recharts"
-import { ChartTooltipContent } from "@/components/ui/chart"
-import { useEffect, useState } from "react"
+import { useClassReviews, useClassStats, usePublicInstructorStats, usePublicLocationStats } from "@/lib/api/public/index"
 
-
-function DistributionBadges({ distribution }: { distribution: Record<string, number> }) {
-  const totalVotes = Object.values(distribution).reduce((acc, value) => acc + value, 0)
-  
-  function getPercentage(value: number) {
-    return Math.round((value / totalVotes) * 100)
-  }
-
-  return (
-    <div className="flex flex-wrap gap-4">
-      {Object.entries(distribution).map(([key, value]) => (
-        <div key={key} className="min-w-[120px] flex-1 basis-[calc(33.333%-1rem)]">
-          <div className="flex items-center justify-between">
-            <span className="font-medium truncate mr-2">{key}</span>
-            <Badge variant="secondary" className="shrink-0">{getPercentage(value)}%</Badge>
-          </div>
-          <div className="h-2 bg-muted rounded-full mt-2">
-            <div 
-              className="h-full bg-primary rounded-full"
-              style={{ width: `${getPercentage(value)}%` }}
-            />
-          </div>
-        </div>
-      ))}
-    </div>
-  )
-}
 function Slider({ value, leftLabel, rightLabel, middleLabel, className, label }: { 
   value: number, 
   label: string,
@@ -102,40 +67,17 @@ function StarRating({ rating, label }: { rating: number, label: string }) {
   )
 }
 
-function MetricWithIcon({ icon: Icon, label, value }: { 
-  icon: React.ComponentType<{ className?: string }>,
-  label: string, 
-  value: string | number,
-}) {
- 
-  return (
-    <div className="flex items-center gap-3">
-      <div className="p-2 bg-muted rounded-lg">
-        <Icon className="h-4 w-4 text-muted-foreground" />
-      </div>
-      <div className="flex-1">
-        <p className="text-sm text-muted-foreground">{label}</p>
-        <p className="font-medium">{value}</p>
-      </div>
-    </div>
-  )
-}
-
-
-export function ReviewStatsSection({ classId }:{ classId: string }) {
+export function ReviewStatsSection({ classId, instructorId, locationId }:{ classId: string, instructorId: string, locationId: string }) {
 
   const { data: reviews } = useClassReviews(classId)
-  const { data: stats } = useClassStats(classId)
-
-  const instructorStats = stats?.instructor_stats
-  const facilitiesStats = stats?.facilities_stats
-  const danceClassStats = stats?.dance_class_stats
-
+  const { data: classStats } = useClassStats(classId)
+  const { data: instructorStats } = usePublicInstructorStats(instructorId)
+  const { data: locationStats } = usePublicLocationStats(locationId)
 
   return (
     <div className="py-8 border-t">
       <div className="flex items-center justify-between mb-6">
-        <h2 className="text-2xl font-semibold">Class Experience <StarRating rating={stats?.average_rating || 0} label="Average rating" /></h2>
+        <h2 className="text-2xl font-semibold">Class Experience <StarRating rating={classStats?.avg_rating || 0} label="Average rating" /></h2>
         <div className="flex items-center gap-2">
           <Badge variant="outline" className="font-normal">
             Based on {reviews?.items.length} reviews
@@ -181,28 +123,28 @@ export function ReviewStatsSection({ classId }:{ classId: string }) {
             <div className="space-y-4">
                 <Slider
                   label="Group size"
-                  value={danceClassStats?.group_size || 0}
+                  value={classStats?.group_size || 0}
                   leftLabel="Too small"
                   middleLabel="Perfect"
                   rightLabel="Too big"
                 />
                 <Slider
                   label="Level"
-                  value={danceClassStats?.level || 0}
+                  value={classStats?.level || 0}
                   leftLabel="Too easy"
                   middleLabel="Perfect"
                   rightLabel="Too hard"
                 />
                 <Slider
                   label="Engagement"
-                  value={danceClassStats?.engagement || 0}
+                  value={classStats?.engagement || 0}
                   leftLabel="Not engaged"
                   middleLabel="Perfect"
                   rightLabel="Too engaged"
                 />
                 <Slider
                   label="Teaching pace"
-                  value={danceClassStats?.teaching_pace || 0}
+                  value={classStats?.teaching_pace || 0}
                   leftLabel="Too slow"
                   middleLabel="Perfect"
                   rightLabel="Too fast"
@@ -211,25 +153,25 @@ export function ReviewStatsSection({ classId }:{ classId: string }) {
           </CardContent>
         </Card>
 
-        {/* Facilities Stats Card */}
+        {/* Location Stats Card */}
         <Card>
           <CardContent className="p-6 space-y-6">
-            <h3 className="text-lg font-medium">🏢 Facilities</h3>
+            <h3 className="text-lg font-medium">🏢 Location</h3>
             <div className="space-y-6">
-              <StarRating rating={facilitiesStats?.cleanness || 0} label="Cleanness" />
-              <StarRating rating={facilitiesStats?.general_look || 0} label="General look" />
-              <StarRating rating={facilitiesStats?.acustic_quality || 0} label="Acustic quality" />
-              <StarRating rating={facilitiesStats?.additional_facilities || 0} label="Additional facilities" />
+              <StarRating rating={locationStats?.cleanness || 0} label="Cleanness" />
+              <StarRating rating={locationStats?.general_look || 0} label="General look" />
+              <StarRating rating={locationStats?.acustic_quality || 0} label="Acustic quality" />
+              <StarRating rating={locationStats?.additional_facilities || 0} label="Additional facilities" />
               <Slider
                 label="Temperature"
-                value={facilitiesStats?.temperature || 0}
+                value={locationStats?.temperature || 0}
                 leftLabel="Too cold"
                 middleLabel="Perfect"
                 rightLabel="Too hot"
               />
               <Slider
                 label="Lighting"
-                value={facilitiesStats?.lighting || 0}
+                value={locationStats?.lighting || 0}
                 leftLabel="Too dark"
                 middleLabel="Perfect"
                 rightLabel="Too bright"

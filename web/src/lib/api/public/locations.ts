@@ -20,6 +20,16 @@ export function usePublicLocation(id: string) {
   });
 }
 
+
+export function usePublicLocationStats(id: string) {
+  return $api.useQuery('get', '/api/public/locations/{location_id}/stats', {
+    params: {
+      path: {
+        location_id: id
+      }
+    }
+  });
+}
 export function usePublicLocationClasses(id: string, includePast: boolean = false) {
   return $api.useQuery('get', '/api/public/locations/{location_id}/classes', {
     params: {

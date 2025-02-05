@@ -26,3 +26,13 @@ export function usePublicInstructorClasses(id: string, includePast: boolean = fa
     }
   });
 } 
+
+export function usePublicInstructorStats(id: string) {
+  return $api.useQuery('get', '/api/public/instructors/{instructor_id}/stats', {
+    params: {
+      path: {
+        instructor_id: id
+      }
+    }
+  });
+}

@@ -5,8 +5,8 @@ import {
   CreditCardIcon,
   MapPinIcon
 } from "@heroicons/react/24/outline"
-import { components } from "@/lib/api/schema"
 import { Map, Marker } from '@vis.gl/react-google-maps';
+import { usePublicLocation, usePublicLocationStats } from "@/lib/api/public/index";
 
 
 
@@ -29,16 +29,15 @@ function MetricWithIcon({ icon: Icon, label, children }: {
 }
 
 interface FacilitiesSectionProps {
-  facilities: components['schemas']['Facilities'][]
-  sportsCards: components['schemas']['SportsCard'][]
-  location: components["schemas"]["LocationSchema"] | null
+  locationId: string
 }
 
 export function FacilitiesSection({
-  facilities,
-  sportsCards,
-  location
+  locationId
 }: FacilitiesSectionProps) {
+  const { data: location } = usePublicLocation(locationId)
+  const { data: locationStats } = usePublicLocationStats(locationId)
+  
   return (
     <div className="space-y-6">
       <h2 className="text-2xl font-semibold">Facilities & Amenities</h2>
