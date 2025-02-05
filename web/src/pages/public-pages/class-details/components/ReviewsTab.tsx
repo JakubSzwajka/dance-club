@@ -5,6 +5,8 @@ import { Badge } from "@/components/ui/badge"
 import { ChevronDownIcon, ChevronUpIcon } from "@heroicons/react/24/outline"
 import { useState } from "react"
 import { cn } from "@/lib/utils"
+import { useClassReviews } from "@/lib/api/public/classes"
+import { components } from "@/lib/api/schema"
 
 interface ReviewData {
   id: number
@@ -177,8 +179,7 @@ function FacilityInfo({ label, available, children }: {
   )
 }
 
-function ReviewCard({ review }: { review: ReviewData }) {
-  const [isExpanded, setIsExpanded] = useState(false)
+function ReviewCard({ review }: { review: components["schemas"]["ReviewResponseSchema"] }) {
 
   return (
     <Card>
@@ -187,179 +188,22 @@ function ReviewCard({ review }: { review: ReviewData }) {
           {/* Header */}
           <div className="flex justify-between items-start">
             <div>
-              <div className="font-medium">{review.userName}</div>
-              <div className="text-sm text-muted-foreground">{review.date}</div>
+              <div className="font-medium">{review.author_name}</div>
+              <div className="text-sm text-muted-foreground">{review.created_at}</div>
             </div>
-            <StarRating rating={review.overallRating} />
+            <StarRating rating={review.overall_rating} />
           </div>
-
-          {/* Main Comment */}
           <p className="text-sm">{review.comment}</p>
 
-          {/* Expand/Collapse Button */}
-          <Button
-            variant="ghost"
-            className="w-full flex items-center justify-center gap-2"
-            onClick={() => setIsExpanded(!isExpanded)}
-          >
-            {isExpanded ? (
-              <>
-                <span>Show less</span>
-                <ChevronUpIcon className="h-4 w-4" />
-              </>
-            ) : (
-              <>
-                <span>Show detailed review</span>
-                <ChevronDownIcon className="h-4 w-4" />
-              </>
-            )}
-          </Button>
-
-          {/* Detailed Review */}
-          {isExpanded && (
-            <div className="space-y-6 pt-4 border-t">
-              {/* Teaching Approach */}
-              <div className="space-y-4">
-                <h4 className="font-medium">Teaching Approach</h4>
-                <div className="space-y-4">
-                  <Slider 
-                    value={review.teachingStyle}
-                    leftLabel="Structured"
-                    rightLabel="Casual"
-                  />
-                  <Slider 
-                    value={review.feedbackApproach}
-                    leftLabel="Verbal"
-                    rightLabel="Hands-on"
-                  />
-                  <Slider 
-                    value={review.paceOfTeaching}
-                    leftLabel="Methodical"
-                    rightLabel="Fast-paced"
-                  />
-                  <div className="flex items-center justify-between">
-                    <span className="text-sm">Move Breakdown</span>
-                    <StarRating rating={review.breakdownQuality} />
-                  </div>
-                </div>
-              </div>
-
-              {/* Environment */}
-              <div className="space-y-4">
-                <h4 className="font-medium">Environment</h4>
-                <div className="space-y-3">
-                  <div className="flex items-center justify-between">
-                    <span className="text-sm">Floor Quality</span>
-                    <StarRating rating={review.environment.floorQuality} />
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <span className="text-sm">Space Comfort</span>
-                    <StarRating rating={review.environment.crowdedness} />
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <span className="text-sm">Ventilation</span>
-                    <StarRating rating={review.environment.ventilation} />
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <span className="text-sm">Temperature</span>
-                    <Badge variant="secondary" className="capitalize">
-                      {review.environment.temperature}
-                    </Badge>
-                  </div>
-                </div>
-              </div>
-
-              {/* Music */}
-              <div className="space-y-4">
-                <h4 className="font-medium">Music</h4>
-                <div className="space-y-3">
-                  <div className="flex items-center justify-between">
-                    <span className="text-sm">Volume Level</span>
-                    <StarRating rating={review.music.volumeLevel} />
-                  </div>
-                  <Slider 
-                    value={review.music.style}
-                    leftLabel="Classical"
-                    rightLabel="Modern"
-                  />
-                  <div className="flex items-center justify-between">
-                    <span className="text-sm">Genres</span>
-                    <div className="flex gap-2">
-                      {review.music.genres.map((genre) => (
-                        <Badge key={genre} variant="secondary">
-                          {genre}
-                        </Badge>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* New Facilities section */}
-              <div className="space-y-4">
-                <h4 className="font-medium">Facilities</h4>
-                <div className="space-y-4">
-                  <FacilityInfo label="Changing Room" available={review.facilities.changingRoom.available}>
-                    {review.facilities.changingRoom.quality && (
-                      <div className="space-y-2">
-                        <div className="flex items-center justify-between">
-                          <span className="text-sm">Quality</span>
-                          <StarRating rating={review.facilities.changingRoom.quality} />
-                        </div>
-                        {review.facilities.changingRoom.notes && (
-                          <p className="text-sm text-muted-foreground">
-                            {review.facilities.changingRoom.notes}
-                          </p>
-                        )}
-                      </div>
-                    )}
-                  </FacilityInfo>
-
-                  <FacilityInfo label="Waiting Area" available={review.facilities.waitingArea.available}>
-                    {review.facilities.waitingArea.type && (
-                      <div className="space-y-2">
-                        <div className="flex items-center justify-between">
-                          <span className="text-sm">Location</span>
-                          <Badge variant="secondary" className="capitalize">
-                            {review.facilities.waitingArea.type}
-                          </Badge>
-                        </div>
-                        <div className="flex items-center justify-between">
-                          <span className="text-sm">Seating</span>
-                          <Badge variant={review.facilities.waitingArea.seating ? "secondary" : "outline"}>
-                            {review.facilities.waitingArea.seating ? "Available" : "Not Available"}
-                          </Badge>
-                        </div>
-                        {review.facilities.waitingArea.notes && (
-                          <p className="text-sm text-muted-foreground">
-                            {review.facilities.waitingArea.notes}
-                          </p>
-                        )}
-                      </div>
-                    )}
-                  </FacilityInfo>
-
-                  <div className="space-y-2">
-                    <span className="text-sm font-medium">Accepted Sports Cards</span>
-                    <div className="flex flex-wrap gap-2">
-                      {review.facilities.acceptedCards.map((card) => (
-                        <Badge key={card} variant="secondary">
-                          {card}
-                        </Badge>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          )}
         </div>
       </CardContent>
     </Card>
   )
 }
 
-export function ReviewsTab() {
+export function ReviewsTab({ classId }: { classId: string }) {
+  const { data: reviews } = useClassReviews(classId, 1, 1000)
+
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between mb-6">
@@ -368,7 +212,7 @@ export function ReviewsTab() {
       </div>
 
       <div className="grid gap-6">
-        {mockReviews.map((review) => (
+        {reviews?.items.map((review) => (
           <ReviewCard key={review.id} review={review} />
         ))}
       </div>

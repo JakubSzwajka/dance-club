@@ -292,58 +292,6 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/api/private/instructors/{instructor_id}/classes": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /** Get Classes By Instructor */
-        get: operations["mydanceclub_api_private_private_get_classes_by_instructor"];
-        put?: never;
-        /** Create Class */
-        post: operations["mydanceclub_api_private_private_create_class"];
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/api/private/instructors/{instructor_id}/classes/{class_id}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /** Get Class By Id */
-        get: operations["mydanceclub_api_private_private_get_class_by_id"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/api/private/instructors/{instructor_id}/stats": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /** Get Instructor Stats */
-        get: operations["mydanceclub_api_private_private_get_instructor_stats"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
 }
 export type webhooks = Record<string, never>;
 export interface components {
@@ -396,8 +344,6 @@ export interface components {
             description: string;
             /** Level */
             level: string;
-            /** Max Capacity */
-            max_capacity: number;
             /** Price */
             price: number | string;
             /**
@@ -417,8 +363,6 @@ export interface components {
             id: string;
             /** Instructor Id */
             instructor_id: string;
-            /** Current Capacity */
-            current_capacity: number;
             /**
              * Created At
              * Format: date-time
@@ -430,7 +374,14 @@ export interface components {
              */
             updated_at: string;
             instructor: components["schemas"]["InstructorPublicSchema"] | null;
+            /** Duration */
+            duration: number;
         };
+        /**
+         * Facilities
+         * @enum {string}
+         */
+        Facilities: "parking" | "changing_room" | "lockers" | "toilets" | "shower" | "air_conditioning" | "mirrors" | "led_lights" | "ballet_barre" | "poles" | "chairs_available" | "water_dispenser" | "wifi_available" | "floor_type_wood" | "floor_type_marble" | "floor_type_tile" | "floor_type_concrete" | "floor_type_carpet" | "floor_type_soft" | "high_ceiling" | "low_ceiling" | "good_acoustics" | "audio_system__bluetooth" | "audio_system__usb_c" | "audio_system__mini_jack" | "audio_system__other";
         /**
          * InstructorPublicSchema
          * @description Public instructor information with stats
@@ -448,8 +399,6 @@ export interface components {
             profile_picture: string | null;
             /** Classes Count */
             classes_count: number;
-            /** Students Count */
-            students_count: number;
             /** Rating */
             rating: number;
             /** Reviews Count */
@@ -469,7 +418,16 @@ export interface components {
             longitude?: number | null;
             /** Url */
             url?: string | null;
+            /** Facilities */
+            facilities: components["schemas"]["Facilities"][];
+            /** Sports Card */
+            sports_card: components["schemas"]["SportsCard"][];
         };
+        /**
+         * SportsCard
+         * @enum {string}
+         */
+        SportsCard: "multisport" | "medicover" | "ok_system" | "benefit" | "fitprofit" | "other";
         /** AggregatedReviewStatsSchema */
         AggregatedReviewStatsSchema: {
             /** Total Reviews */
@@ -477,7 +435,7 @@ export interface components {
             /** Verified Reviews */
             verified_reviews: number;
             /** Average Rating */
-            average_rating: number | string;
+            average_rating: number;
             instructor_stats: components["schemas"]["ReviewInstructorStatsSchema"];
             facilities_stats: components["schemas"]["ReviewFacilitiesStatsSchema"];
             dance_class_stats: components["schemas"]["ReviewDanceClassStatsSchema"];
@@ -497,11 +455,31 @@ export interface components {
         ReviewFacilitiesStatsSchema: {
             /** Cleanness */
             cleanness: number;
+            /** General Look */
+            general_look: number;
+            /** Acustic Quality */
+            acustic_quality: number;
+            /** Additional Facilities */
+            additional_facilities: number;
+            /** Temperature */
+            temperature: number;
+            /** Lighting */
+            lighting: number;
         };
         /** ReviewInstructorStatsSchema */
         ReviewInstructorStatsSchema: {
             /** Move Breakdown */
             move_breakdown: number;
+            /** Individual Approach */
+            individual_approach: number;
+            /** Posture Correction Ability */
+            posture_correction_ability: number;
+            /** Communication And Feedback */
+            communication_and_feedback: number;
+            /** Patience And Encouragement */
+            patience_and_encouragement: number;
+            /** Motivation And Energy */
+            motivation_and_energy: number;
         };
         /** ReviewListSchema */
         ReviewListSchema: {
@@ -651,104 +629,14 @@ export interface components {
             dance_styles: components["schemas"]["DanceStyle"][];
             /** Skill Levels */
             skill_levels: components["schemas"]["SkillLevel"][];
-            /** Music Genres */
-            music_genres: components["schemas"]["MusicGenre"][];
             /** Sports Cards */
             sports_cards: components["schemas"]["SportsCard"][];
         };
-        /**
-         * MusicGenre
-         * @enum {string}
-         */
-        MusicGenre: "pop" | "rock" | "jazz" | "blues" | "country" | "hip_hop" | "electronic" | "classical" | "other" | "latin" | "ballroom" | "contemporary" | "fusion";
         /**
          * SkillLevel
          * @enum {string}
          */
         SkillLevel: "beginner" | "intermediate" | "advanced";
-        /**
-         * SportsCard
-         * @enum {string}
-         */
-        SportsCard: "multisport" | "medicover" | "ok_system" | "benefit" | "fitprofit" | "other";
-        /** PrivateDanceClassSchema */
-        PrivateDanceClassSchema: {
-            /** Name */
-            name: string;
-            /** Description */
-            description: string;
-            /** Level */
-            level: string;
-            /** Max Capacity */
-            max_capacity: number;
-            /** Price */
-            price: number | string;
-            /**
-             * Start Date
-             * Format: date
-             */
-            start_date: string;
-            /**
-             * End Date
-             * Format: date
-             */
-            end_date: string;
-            location: components["schemas"]["LocationSchema"] | null;
-            /** Style */
-            style: string;
-            /** Id */
-            id: string;
-            /** Instructor Id */
-            instructor_id: string;
-            /** Current Capacity */
-            current_capacity: number;
-            /**
-             * Created At
-             * Format: date-time
-             */
-            created_at: string;
-            /**
-             * Updated At
-             * Format: date-time
-             */
-            updated_at: string;
-            instructor: components["schemas"]["InstructorPublicSchema"] | null;
-        };
-        /** CreateDanceClassSchema */
-        CreateDanceClassSchema: {
-            /** Name */
-            name: string;
-            /** Description */
-            description: string;
-            /** Level */
-            level: string;
-            /** Max Capacity */
-            max_capacity: number;
-            /** Price */
-            price: number | string;
-            /**
-             * Start Date
-             * Format: date
-             */
-            start_date: string;
-            /**
-             * End Date
-             * Format: date
-             */
-            end_date: string;
-            location: components["schemas"]["LocationSchema"] | null;
-            /** Style */
-            style: string;
-        };
-        /** InstructorStatsSchema */
-        InstructorStatsSchema: {
-            /** Total Classes */
-            total_classes: number;
-            /** Total Students */
-            total_students: number;
-            /** Average Capacity */
-            average_capacity: number;
-        };
     };
     responses: never;
     parameters: never;
@@ -1095,99 +983,6 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["MetadataSchema"];
-                };
-            };
-        };
-    };
-    mydanceclub_api_private_private_get_classes_by_instructor: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                instructor_id: string;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description OK */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["PrivateDanceClassSchema"][];
-                };
-            };
-        };
-    };
-    mydanceclub_api_private_private_create_class: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                instructor_id: string;
-            };
-            cookie?: never;
-        };
-        requestBody: {
-            content: {
-                "application/json": components["schemas"]["CreateDanceClassSchema"];
-            };
-        };
-        responses: {
-            /** @description OK */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["PrivateDanceClassSchema"];
-                };
-            };
-        };
-    };
-    mydanceclub_api_private_private_get_class_by_id: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                instructor_id: string;
-                class_id: string;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description OK */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["PrivateDanceClassSchema"];
-                };
-            };
-        };
-    };
-    mydanceclub_api_private_private_get_instructor_stats: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                instructor_id: string;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description OK */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["InstructorStatsSchema"];
                 };
             };
         };

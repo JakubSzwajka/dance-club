@@ -121,45 +121,21 @@ function MetricWithIcon({ icon: Icon, label, value }: {
   )
 }
 
-const chartConfig = {
-  property: {
-    label: "Property",
-    color: "hsl(var(--chart-1))",
-  },
-} satisfies ChartConfig
-
-interface ChartData {
-  property: string
-  absoluteValue: number
-}
 
 export function ReviewStatsSection({ classId }:{ classId: string }) {
 
   const { data: reviews } = useClassReviews(classId)
   const { data: stats } = useClassStats(classId)
-  const [chartData, setChartData] = useState<ChartData[]>([])
 
   const instructorStats = stats?.instructor_stats
   const facilitiesStats = stats?.facilities_stats
   const danceClassStats = stats?.dance_class_stats
 
-  useEffect(() => {
-    if (stats) {
-      setChartData([
-        { property: "Move breakdown quality", absoluteValue: stats.instructor_stats.move_breakdown },
-        { property: "Group size", absoluteValue: stats.dance_class_stats.group_size },
-        { property: "Level", absoluteValue: stats.dance_class_stats.level },
-        { property: "Engagement", absoluteValue: stats.dance_class_stats.engagement },
-        { property: "Teaching pace", absoluteValue: stats.dance_class_stats.teaching_pace },
-        { property: "Cleanness", absoluteValue: stats.facilities_stats.cleanness },
-      ])
-    }
-  }, [stats])
 
   return (
     <div className="py-8 border-t">
       <div className="flex items-center justify-between mb-6">
-        <h2 className="text-2xl font-semibold">Class Experience</h2>
+        <h2 className="text-2xl font-semibold">Class Experience <StarRating rating={stats?.average_rating || 0} label="Average rating" /></h2>
         <div className="flex items-center gap-2">
           <Badge variant="outline" className="font-normal">
             Based on {reviews?.items.length} reviews
@@ -174,7 +150,7 @@ export function ReviewStatsSection({ classId }:{ classId: string }) {
         {/* Instructor Stats Card */}
         <Card>
           <CardContent className="p-6 space-y-6">
-            <h3 className="text-lg font-medium">Teaching Approach</h3>
+            <h3 className="text-lg font-medium">👩‍🏫 Teaching Approach</h3>
             <div className="space-y-6">
               <Slider
                 label="Move breakdown quality"
@@ -183,17 +159,17 @@ export function ReviewStatsSection({ classId }:{ classId: string }) {
                 middleLabel="Good"
                 rightLabel="Too much details"
               />
-              {/* <Slider 
-                value={teachingStats?.avg_feedback_approach || 0}
-                leftLabel="Verbal Guidance"
-                rightLabel="Hands-on Corrections"
+              <Slider
+                label="Individual approach"
+                value={instructorStats?.individual_approach || 0}
+                leftLabel="Not at all"
+                middleLabel="Good"
+                rightLabel="Too much details"
               />
-              <Slider 
-                value={teachingStats?.avg_pace || 0}
-                leftLabel="Methodical"
-                rightLabel="Fast-paced"
-              />
-              <StarRating rating={teachingStats?.avg_breakdown_quality || 0} label="Move Breakdown Quality" /> */}
+              <StarRating rating={instructorStats?.posture_correction_ability || 0} label="Posture correction ability" />
+              <StarRating rating={instructorStats?.communication_and_feedback || 0} label="Communication and feedback" />
+              <StarRating rating={instructorStats?.patience_and_encouragement || 0} label="Patience and encouragement" />
+              <StarRating rating={instructorStats?.motivation_and_energy || 0} label="Motivation and energy" />
             </div>
           </CardContent>
         </Card>
@@ -201,7 +177,7 @@ export function ReviewStatsSection({ classId }:{ classId: string }) {
         {/* Dance Class Stats Card */}
         <Card>
           <CardContent className="p-6 space-y-4">
-            <h3 className="text-lg font-medium">Dance Class</h3>
+            <h3 className="text-lg font-medium">🧑‍🎓 Class</h3>
             <div className="space-y-4">
                 <Slider
                   label="Group size"
@@ -238,40 +214,43 @@ export function ReviewStatsSection({ classId }:{ classId: string }) {
         {/* Facilities Stats Card */}
         <Card>
           <CardContent className="p-6 space-y-6">
-            <h3 className="text-lg font-medium">Facilities</h3>
+            <h3 className="text-lg font-medium">🏢 Facilities</h3>
             <div className="space-y-6">
               <StarRating rating={facilitiesStats?.cleanness || 0} label="Cleanness" />
+              <StarRating rating={facilitiesStats?.general_look || 0} label="General look" />
+              <StarRating rating={facilitiesStats?.acustic_quality || 0} label="Acustic quality" />
+              <StarRating rating={facilitiesStats?.additional_facilities || 0} label="Additional facilities" />
+              <Slider
+                label="Temperature"
+                value={facilitiesStats?.temperature || 0}
+                leftLabel="Too cold"
+                middleLabel="Perfect"
+                rightLabel="Too hot"
+              />
+              <Slider
+                label="Lighting"
+                value={facilitiesStats?.lighting || 0}
+                leftLabel="Too dark"
+                middleLabel="Perfect"
+                rightLabel="Too bright"
+              />
             </div>
           </CardContent>
         </Card> 
 
         <Card>
           <CardContent className="p-6 space-y-6">
-            <h3 className="text-lg font-medium">Class DNA</h3>
-            <ChartContainer
-          config={chartConfig}
-          className="mx-auto aspect-square max-h-[250px]"
-        >
-
-            <RadarChart
-              data={chartData}
-              className="w-full h-64"
-              >
-              <ChartTooltip
-              cursor={false}
-              content={<ChartTooltipContent indicator="line" />}
-            />
-            <PolarAngleAxis dataKey="property" />
-            <PolarGrid radialLines={false} />
-            <Radar
-              dataKey="absoluteValue"
-              fill="var(--color-property)"
-              fillOpacity={0}
-              stroke="var(--color-property)"
-              strokeWidth={2}
-              />
-            </RadarChart>
-              </ChartContainer>
+            <h3 className="text-lg font-medium">🧬 DNA</h3>
+            <div className="flex flex-col items-center justify-center text-center space-y-4 py-8">
+              <div className="p-3 bg-muted rounded-full">
+                <ChartBarIcon className="w-6 h-6 text-muted-foreground" />
+              </div>
+              <div className="max-w-sm">
+                <p className="text-sm text-muted-foreground">
+                  More reviews are needed to generate detailed dance DNA insights for this class. Check back later!
+                </p>
+              </div>
+            </div>
           </CardContent>
         </Card>
 

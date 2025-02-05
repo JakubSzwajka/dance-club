@@ -5,9 +5,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { usePublicClass } from "@/lib/api/public/index"
 import { HeroSection } from "./components/HeroSection"
 import { QuickInfoCard } from "./components/QuickInfoCard"
-import { ClassSchedule } from "./components/ClassSchedule"
 import { InstructorTab } from "./components/InstructorTab"
-import { LocationTab } from "./components/LocationTab"
 import { ReviewsTab } from "./components/ReviewsTab"
 import { Button } from "@/components/ui/button"
 import { useState } from "react"
@@ -81,13 +79,13 @@ export function ClassDetailsPage() {
 
       {/* Facilities Section */}
       <Container>
-        <FacilitiesSection />
+        <FacilitiesSection 
+          location={classDetails.location}
+          facilities={classDetails.location?.facilities || []}
+          sportsCards={classDetails.location?.sports_card || []}
+        />
       </Container>
 
-      {/* Schedule Section */}
-      <Container>
-        <ClassSchedule class_id={classId} />
-      </Container>
 
       {/* Tabs Section */}
       <Container>
@@ -95,7 +93,6 @@ export function ClassDetailsPage() {
           <Tabs defaultValue="instructor" className="space-y-8">
             <TabsList className="w-full justify-start">
               <TabsTrigger value="instructor">Instructor</TabsTrigger>
-              <TabsTrigger value="location">Location</TabsTrigger>
               <TabsTrigger value="reviews">Reviews</TabsTrigger>
             </TabsList>
 
@@ -105,14 +102,9 @@ export function ClassDetailsPage() {
               )}
             </TabsContent>
 
-            <TabsContent value="location">
-              {classDetails.location && (
-                <LocationTab location={classDetails.location} />
-              )}
-            </TabsContent>
 
             <TabsContent value="reviews">
-              <ReviewsTab />
+              <ReviewsTab classId={classId} />
             </TabsContent>
           </Tabs>
         </div>

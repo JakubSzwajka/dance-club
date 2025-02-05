@@ -1,12 +1,12 @@
 import { useParams } from "@tanstack/react-router"
 import { Container } from "@/components/ui/container"
 import { Header } from "@/components/domain/header"
-import { usePublicInstructor, usePublicInstructorClasses } from "@/lib/api/public"
 import { HeroSection } from "./components/HeroSection"
 import { TeachingSchedule } from "./components/TeachingSchedule"
 import { Card } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { useState } from "react"
+import { usePublicInstructor, usePublicInstructorClasses } from "@/lib/api/public/index"
 // import { ReviewsSection } from "./components/ReviewsSection"
 
 export function InstructorDetailsPage() {
@@ -74,22 +74,6 @@ export function InstructorDetailsPage() {
           <TeachingSchedule classes={instructorClasses || []} />
         </div>
       </Container>
-
-      {/* Upcoming Events */}
-      {/* <Container>
-        <div className="py-8">
-          <h2 className="text-2xl font-semibold mb-6">Upcoming Events</h2>
-          <UpcomingEvents instructorId={instructorId} />
-        </div>
-      </Container> */}
-
-      {/* Reviews Section */}
-      {/* <Container>
-        <div className="py-8">
-          <h2 className="text-2xl font-semibold mb-6">Student Reviews</h2>
-          <ReviewsSection instructorId={instructorId} />
-        </div>
-      </Container> */}
     </div>
   )
 }

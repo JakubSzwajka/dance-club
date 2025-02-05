@@ -19,15 +19,11 @@ export function QuickInfoCard({ classDetails }: QuickInfoCardProps) {
         </div>
         <div className="flex justify-between items-center">
           <span className="text-muted-foreground">Duration</span>
-          <span>90 minutes</span>
+          <span>{classDetails.duration} minutes</span>
         </div>
         <div className="flex justify-between items-center">
           <span className="text-muted-foreground">Skill Level</span>
           <span className="capitalize">{classDetails.level}</span>
-        </div>
-        <div className="flex justify-between items-center">
-          <span className="text-muted-foreground">Capacity</span>
-          <span>{classDetails.current_capacity}/{classDetails.max_capacity}</span>
         </div>
       </CardContent>
     </Card>

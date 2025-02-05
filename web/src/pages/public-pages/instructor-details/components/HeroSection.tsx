@@ -28,13 +28,11 @@ export function HeroSection({ instructor }: HeroSectionProps) {
         <div className="flex items-center gap-2 text-sm text-muted-foreground mb-4">
           <div className="flex items-center">
             <StarIcon className="h-5 w-5 text-yellow-400 mr-1" />
-            <span className="font-medium">4.8</span>
-            <span className="ml-1">(124 reviews)</span>
+            <span className="font-medium">{instructor.rating || 0}</span>
+            <span className="ml-1">({instructor.reviews_count || 0} reviews)</span>
           </div>
           <span>•</span>
           <span>{instructor.classes_count || 0} active classes</span>
-          <span>•</span>
-          <span>{instructor.students_count || 0} students</span>
         </div>
       </div>
     </div>

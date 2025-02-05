@@ -1,5 +1,6 @@
 import { $api } from '../queryClient';
 
+
 export function usePublicClasses(
   instructorId?: string | null,
   locationId?: string | null,
@@ -54,10 +55,6 @@ export function useClassReviews(
       }
     }
   });
-}
-
-export function useCreateReview() {
-  return $api.useMutation('post', '/api/public/classes/{class_id}/reviews');
 }
 
 export function useClassStats(id: string) {

@@ -2,7 +2,7 @@ import { Card } from "@/components/ui/card"
 import { SkillLevelBadge } from "@/components/domain/skill-level-badge"
 import { Button } from "@/components/ui/button"
 import { useNavigate } from "@tanstack/react-router"
-import { MapPinIcon, ClockIcon } from "@heroicons/react/24/outline"
+import { MapPinIcon } from "@heroicons/react/24/outline"
 import { components } from "@/lib/api/schema"
 
 interface TeachingScheduleProps {
@@ -37,7 +37,7 @@ export function TeachingSchedule({ classes }: TeachingScheduleProps) {
             <SkillLevelBadge level={danceClass.level} />
           </div>
 
-          <div className="space-y-2 mb-4">
+          {/* <div className="space-y-2 mb-4">
             {danceClass.schedule.map((schedule) => (
               <div key={schedule.id} className="flex items-center gap-2 text-sm">
                 <ClockIcon className="h-4 w-4 text-muted-foreground" />
@@ -46,7 +46,7 @@ export function TeachingSchedule({ classes }: TeachingScheduleProps) {
                 </span>
               </div>
             ))}
-          </div>
+          </div> */}
 
           <Button 
             variant="outline" 

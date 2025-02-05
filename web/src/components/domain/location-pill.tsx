@@ -3,16 +3,19 @@ import { useNavigate } from "@tanstack/react-router"
 import { components } from "@/lib/api/schema"
 
 interface LocationPillProps {
-  location: components["schemas"]["LocationSchema"]
-  className?: string
+  location: components["schemas"]["LocationSchema"] | null
 }
 
-export function LocationPill({ location, className = "" }: LocationPillProps) {
+export function LocationPill({ location }: LocationPillProps) {
   const navigate = useNavigate()
+
+  if (!location) {
+    return null
+  }
 
   return (
     <div 
-      className={`flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground cursor-pointer ${className}`}
+      className={`flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground cursor-pointer`}
       onClick={() => navigate({
         to: '/locations/$locationId',
         params: { locationId: location.id }
