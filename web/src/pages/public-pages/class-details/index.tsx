@@ -1,17 +1,17 @@
-import { useParams, useNavigate } from "@tanstack/react-router"
-import { Container } from "@/components/ui/container"
-import { Header } from "@/components/domain/header"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { usePublicClass } from "@/lib/api/public/index"
-import { HeroSection } from "./components/HeroSection"
-import { QuickInfoCard } from "./components/QuickInfoCard"
-import { InstructorTab } from "./components/InstructorTab"
-import { ReviewsTab } from "./components/ReviewsTab"
-import { Button } from "@/components/ui/button"
-import { useState } from "react"
-import { Card } from "@/components/ui/card"
-import { ReviewStatsSection } from "./components/ReviewStatsSection"
-import { FacilitiesSection } from "./components/FacilitiesSection"
+import { useParams, useNavigate } from '@tanstack/react-router'
+import { Container } from '@/components/ui/container'
+import { Header } from '@/components/domain/header'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { usePublicClass } from '@/lib/api/public/index'
+import { HeroSection } from './components/HeroSection'
+import { QuickInfoCard } from './components/QuickInfoCard'
+import { InstructorTab } from './components/InstructorTab'
+import { ReviewsTab } from './components/ReviewsTab'
+import { Button } from '@/components/ui/button'
+import { useState } from 'react'
+import { Card } from '@/components/ui/card'
+import { ReviewStatsSection } from './components/ReviewStatsSection'
+import { FacilitiesSection } from './components/FacilitiesSection'
 
 export function ClassDetailsPage() {
   const { classId } = useParams({ from: '/classes/$classId' })
@@ -39,8 +39,8 @@ export function ClassDetailsPage() {
       search: {
         classId: classId,
         instructorId: classDetails.instructor?.id,
-        locationId: classDetails.location?.id
-      }
+        locationId: classDetails.location?.id,
+      },
     })
   }
 
@@ -56,11 +56,7 @@ export function ClassDetailsPage() {
               <HeroSection classDetails={classDetails} />
               <div className="space-y-4">
                 <QuickInfoCard classDetails={classDetails} />
-                <Button 
-                  className="w-full" 
-                  size="lg"
-                  onClick={handleStartReview}
-                >
+                <Button className="w-full" size="lg" onClick={handleStartReview}>
                   Write a Review
                 </Button>
               </div>
@@ -81,8 +77,8 @@ export function ClassDetailsPage() {
                 </p>
               ))}
             </div>
-            <Button 
-              variant="ghost" 
+            <Button
+              variant="ghost"
               className="mt-4 w-full hover:bg-muted"
               onClick={() => setIsExpanded(!isExpanded)}
             >
@@ -92,10 +88,13 @@ export function ClassDetailsPage() {
         </div>
       </Container>
 
-
       {/* Review Stats Section */}
       <Container>
-        <ReviewStatsSection classId={classId} instructorId={classDetails.instructor?.id} locationId={classDetails.location?.id} />
+        <ReviewStatsSection
+          classId={classId}
+          instructorId={classDetails.instructor?.id}
+          locationId={classDetails.location?.id}
+        />
       </Container>
 
       {/* Facilities Section */}
@@ -107,7 +106,6 @@ export function ClassDetailsPage() {
         )}
       </Container> */}
 
-
       {/* Tabs Section */}
       <Container>
         <div className="py-8">
@@ -118,11 +116,8 @@ export function ClassDetailsPage() {
             </TabsList>
 
             <TabsContent value="instructor">
-              {classDetails.instructor && (
-                <InstructorTab instructor={classDetails.instructor} />
-              )}
+              {classDetails.instructor && <InstructorTab instructor={classDetails.instructor} />}
             </TabsContent>
-
 
             <TabsContent value="reviews">
               <ReviewsTab classId={classId} />

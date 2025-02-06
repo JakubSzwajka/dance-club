@@ -1,5 +1,5 @@
-import { $api } from '../queryClient';
+import { $api } from '../queryClient'
 
 export function useMetadata() {
-  return $api.useQuery('get', '/api/public/metadata');
-} 
+  return $api.useQuery('get', '/api/public/metadata')
+}

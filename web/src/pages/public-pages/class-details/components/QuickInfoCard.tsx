@@ -1,9 +1,9 @@
-import { Badge } from "@/components/ui/badge"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { components } from "@/lib/api/schema"
+import { Badge } from '@/components/ui/badge'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { components } from '@/lib/api/schema'
 
 interface QuickInfoCardProps {
-  classDetails: components["schemas"]["DanceClassSchema"]
+  classDetails: components['schemas']['DanceClassSchema']
 }
 
 export function QuickInfoCard({ classDetails }: QuickInfoCardProps) {
@@ -15,7 +15,9 @@ export function QuickInfoCard({ classDetails }: QuickInfoCardProps) {
       <CardContent className="space-y-4">
         <div className="flex justify-between items-center">
           <span className="text-muted-foreground">Style</span>
-          <Badge variant="outline" className="capitalize">{classDetails.style}</Badge>
+          <Badge variant="outline" className="capitalize">
+            {classDetails.style}
+          </Badge>
         </div>
         <div className="flex justify-between items-center">
           <span className="text-muted-foreground">Duration</span>
@@ -28,4 +30,4 @@ export function QuickInfoCard({ classDetails }: QuickInfoCardProps) {
       </CardContent>
     </Card>
   )
-} 
+}

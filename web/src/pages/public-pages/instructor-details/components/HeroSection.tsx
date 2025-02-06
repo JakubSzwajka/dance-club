@@ -1,18 +1,24 @@
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { Badge } from "@/components/ui/badge"
-import { StarIcon } from "@heroicons/react/24/solid"
-import { components } from "@/lib/api/schema"
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
+import { Badge } from '@/components/ui/badge'
+import { StarIcon } from '@heroicons/react/24/solid'
+import { components } from '@/lib/api/schema'
 
 interface HeroSectionProps {
-  instructor: components["schemas"]["InstructorPublicSchema"]
+  instructor: components['schemas']['InstructorPublicSchema']
 }
 
 export function HeroSection({ instructor }: HeroSectionProps) {
   return (
     <div className="flex flex-col md:flex-row gap-8 items-start">
       <Avatar className="w-32 h-32">
-        <AvatarImage src={instructor.profile_picture || undefined} alt={`${instructor.first_name} ${instructor.last_name}`} />
-        <AvatarFallback>{instructor.first_name[0]}{instructor.last_name[0]}</AvatarFallback>
+        <AvatarImage
+          src={instructor.profile_picture || undefined}
+          alt={`${instructor.first_name} ${instructor.last_name}`}
+        />
+        <AvatarFallback>
+          {instructor.first_name[0]}
+          {instructor.last_name[0]}
+        </AvatarFallback>
       </Avatar>
 
       <div className="flex-1">
@@ -37,4 +43,4 @@ export function HeroSection({ instructor }: HeroSectionProps) {
       </div>
     </div>
   )
-} 
+}

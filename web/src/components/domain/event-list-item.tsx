@@ -1,11 +1,11 @@
-import { Button } from "@/components/ui/button"
-import { Card, CardContent } from "@/components/ui/card"
-import { CalendarIcon, MapPinIcon, UserIcon } from "@heroicons/react/24/outline"
-import { format } from "date-fns"
-import { components } from "@/lib/api/schema"
+import { Button } from '@/components/ui/button'
+import { Card, CardContent } from '@/components/ui/card'
+import { CalendarIcon, MapPinIcon, UserIcon } from '@heroicons/react/24/outline'
+import { format } from 'date-fns'
+import { components } from '@/lib/api/schema'
 
 interface EventListItemProps {
-  event: components["schemas"]["SpecialEventSchema"]
+  event: components['schemas']['SpecialEventSchema']
   onDetailsClick?: () => void
 }
 
@@ -18,8 +18,8 @@ export function EventListItem({ event, onDetailsClick }: EventListItemProps) {
         <div className="flex items-center gap-6 p-6">
           {/* Date Box */}
           <div className="flex-shrink-0 w-20 h-20 bg-primary/5 rounded-lg flex flex-col items-center justify-center">
-            <span className="text-2xl font-bold">{format(eventDate, "dd")}</span>
-            <span className="text-sm text-muted-foreground">{format(eventDate, "MMM")}</span>
+            <span className="text-2xl font-bold">{format(eventDate, 'dd')}</span>
+            <span className="text-sm text-muted-foreground">{format(eventDate, 'MMM')}</span>
           </div>
 
           {/* Event Info */}
@@ -28,7 +28,7 @@ export function EventListItem({ event, onDetailsClick }: EventListItemProps) {
             <div className="flex flex-col gap-2">
               <div className="flex items-center gap-2 text-sm text-muted-foreground">
                 <CalendarIcon className="h-4 w-4" />
-                <span>{format(eventDate, "EEEE, MMMM d, yyyy • h:mm a")}</span>
+                <span>{format(eventDate, 'EEEE, MMMM d, yyyy • h:mm a')}</span>
               </div>
               <div className="flex items-center gap-2 text-sm text-muted-foreground">
                 <MapPinIcon className="h-4 w-4" />
@@ -36,7 +36,9 @@ export function EventListItem({ event, onDetailsClick }: EventListItemProps) {
               </div>
               <div className="flex items-center gap-2 text-sm text-muted-foreground">
                 <UserIcon className="h-4 w-4" />
-                <span>{event.instructor.first_name} {event.instructor.last_name}</span>
+                <span>
+                  {event.instructor.first_name} {event.instructor.last_name}
+                </span>
               </div>
             </div>
           </div>
@@ -53,4 +55,4 @@ export function EventListItem({ event, onDetailsClick }: EventListItemProps) {
       </CardContent>
     </Card>
   )
-} 
+}

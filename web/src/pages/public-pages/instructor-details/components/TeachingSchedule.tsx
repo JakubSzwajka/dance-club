@@ -1,12 +1,12 @@
-import { Card } from "@/components/ui/card"
-import { SkillLevelBadge } from "@/components/domain/skill-level-badge"
-import { Button } from "@/components/ui/button"
-import { useNavigate } from "@tanstack/react-router"
-import { MapPinIcon } from "@heroicons/react/24/outline"
-import { components } from "@/lib/api/schema"
+import { Card } from '@/components/ui/card'
+import { SkillLevelBadge } from '@/components/domain/skill-level-badge'
+import { Button } from '@/components/ui/button'
+import { useNavigate } from '@tanstack/react-router'
+import { MapPinIcon } from '@heroicons/react/24/outline'
+import { components } from '@/lib/api/schema'
 
 interface TeachingScheduleProps {
-  classes: components["schemas"]["DanceClassSchema"][]
+  classes: components['schemas']['DanceClassSchema'][]
 }
 
 export function TeachingSchedule({ classes }: TeachingScheduleProps) {
@@ -24,7 +24,7 @@ export function TeachingSchedule({ classes }: TeachingScheduleProps) {
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      {classes.map((danceClass) => (
+      {classes.map(danceClass => (
         <Card key={danceClass.id} className="p-6">
           <div className="flex items-start justify-between mb-4">
             <div>
@@ -48,13 +48,15 @@ export function TeachingSchedule({ classes }: TeachingScheduleProps) {
             ))}
           </div> */}
 
-          <Button 
-            variant="outline" 
+          <Button
+            variant="outline"
             className="w-full"
-            onClick={() => navigate({
-              to: '/classes/$classId',
-              params: { classId: danceClass.id }
-            })}
+            onClick={() =>
+              navigate({
+                to: '/classes/$classId',
+                params: { classId: danceClass.id },
+              })
+            }
           >
             View Details
           </Button>
@@ -62,4 +64,4 @@ export function TeachingSchedule({ classes }: TeachingScheduleProps) {
       ))}
     </div>
   )
-} 
+}

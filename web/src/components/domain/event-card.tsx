@@ -1,12 +1,12 @@
-import { Button } from "@/components/ui/button"
-import { Card, CardContent } from "@/components/ui/card"
-import { CalendarIcon, ClockIcon, UsersIcon } from "@heroicons/react/24/outline"
-import { InstructorPill } from "./instructor-pill"
-import { LocationPill } from "./location-pill"
-import { components } from "@/lib/api/schema"
+import { Button } from '@/components/ui/button'
+import { Card, CardContent } from '@/components/ui/card'
+import { CalendarIcon, ClockIcon, UsersIcon } from '@heroicons/react/24/outline'
+import { InstructorPill } from './instructor-pill'
+import { LocationPill } from './location-pill'
+import { components } from '@/lib/api/schema'
 
 interface EventCardProps {
-  event: components["schemas"]["SpecialEventSchema"]
+  event: components['schemas']['SpecialEventSchema']
   onDetailsClick?: () => void
 }
 
@@ -16,18 +16,18 @@ export function EventCard({ event, onDetailsClick }: EventCardProps) {
     weekday: 'long',
     year: 'numeric',
     month: 'long',
-    day: 'numeric'
+    day: 'numeric',
   })
   const formattedTime = eventDate.toLocaleTimeString('en-US', {
     hour: '2-digit',
-    minute: '2-digit'
+    minute: '2-digit',
   })
 
   return (
     <Card>
       <CardContent className="p-6">
         <h3 className="text-xl font-semibold mb-4">{event.name}</h3>
-        
+
         <div className="space-y-2 mb-6">
           <InstructorPill instructor={event.instructor} />
           <LocationPill location={event.location} />
@@ -41,15 +41,13 @@ export function EventCard({ event, onDetailsClick }: EventCardProps) {
           </div>
           <div className="flex items-center gap-2 text-sm text-muted-foreground">
             <UsersIcon className="h-4 w-4" />
-            <span>{event.current_capacity}/{event.capacity} spots</span>
+            <span>
+              {event.current_capacity}/{event.capacity} spots
+            </span>
           </div>
         </div>
 
-        <Button 
-          variant="default" 
-          className="w-full"
-          onClick={onDetailsClick}
-        >
+        <Button variant="default" className="w-full" onClick={onDetailsClick}>
           View Details
         </Button>
       </CardContent>

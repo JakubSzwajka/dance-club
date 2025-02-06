@@ -1,16 +1,14 @@
-import { Card, CardContent } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import {
-  BuildingOffice2Icon,
-  CreditCardIcon,
-  MapPinIcon
-} from "@heroicons/react/24/outline"
-import { Map, Marker } from '@vis.gl/react-google-maps';
-import { usePublicLocation, usePublicLocationStats } from "@/lib/api/public/index";
+import { Card, CardContent } from '@/components/ui/card'
+import { Badge } from '@/components/ui/badge'
+import { BuildingOffice2Icon, CreditCardIcon, MapPinIcon } from '@heroicons/react/24/outline'
+import { Map, Marker } from '@vis.gl/react-google-maps'
+import { usePublicLocation, usePublicLocationStats } from '@/lib/api/public/index'
 
-
-
-function MetricWithIcon({ icon: Icon, label, children }: {
+function MetricWithIcon({
+  icon: Icon,
+  label,
+  children,
+}: {
   icon: React.ComponentType<{ className?: string }>
   label: string
   children: React.ReactNode
@@ -32,12 +30,10 @@ interface FacilitiesSectionProps {
   locationId: string
 }
 
-export function FacilitiesSection({
-  locationId
-}: FacilitiesSectionProps) {
+export function FacilitiesSection({ locationId }: FacilitiesSectionProps) {
   const { data: location } = usePublicLocation(locationId)
-  const { data: locationStats } = usePublicLocationStats(locationId)
-  
+  const { data: _locationStats } = usePublicLocationStats(locationId)
+
   return (
     <div className="space-y-6">
       <h2 className="text-2xl font-semibold">Facilities & Amenities</h2>
@@ -49,7 +45,7 @@ export function FacilitiesSection({
             <MetricWithIcon icon={BuildingOffice2Icon} label="Facilities">
               <div className="space-y-3 mt-2">
                 <div className="flex flex-wrap gap-2">
-                  {facilities.map((feature) => (
+                  {facilities.map(feature => (
                     <Badge key={feature} variant="outline">
                       {feature}
                     </Badge>
@@ -57,17 +53,15 @@ export function FacilitiesSection({
                 </div>
               </div>
             </MetricWithIcon>
-
           </CardContent>
           <CardContent>
             <MetricWithIcon icon={CreditCardIcon} label="Accepted Sports Cards">
               <div className="flex flex-wrap gap-4 mt-4">
-                {sportsCards.map((card) => (
+                {sportsCards.map(card => (
                   <Badge key={card} variant="outline">
                     {card}
                   </Badge>
                 ))}
-
               </div>
             </MetricWithIcon>
           </CardContent>
@@ -86,15 +80,20 @@ export function FacilitiesSection({
         </Card>
 
         <Card className="p-4">
-            {location && (
-                <div className="h-full bg-muted rounded-lg">
-                  <Map zoom={12} center={{ lat: Number(location.latitude), lng: Number(location.longitude) }}>
-                    <Marker position={{ lat: Number(location.latitude), lng: Number(location.longitude) }} />
-                  </Map>
-                </div>
-            )}
+          {location && (
+            <div className="h-full bg-muted rounded-lg">
+              <Map
+                zoom={12}
+                center={{ lat: Number(location.latitude), lng: Number(location.longitude) }}
+              >
+                <Marker
+                  position={{ lat: Number(location.latitude), lng: Number(location.longitude) }}
+                />
+              </Map>
+            </div>
+          )}
         </Card>
       </div>
     </div>
   )
-} 
+}

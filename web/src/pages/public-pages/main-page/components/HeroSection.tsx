@@ -1,6 +1,6 @@
-import { Button } from "@/components/ui/button"
-import { Container } from "@/components/ui/container"
-import { useNavigate } from "@tanstack/react-router"
+import { Button } from '@/components/ui/button'
+import { Container } from '@/components/ui/container'
+import { useNavigate } from '@tanstack/react-router'
 
 export function HeroSection() {
   const navigate = useNavigate()
@@ -8,7 +8,7 @@ export function HeroSection() {
   return (
     <section className="relative min-h-[600px] flex items-center">
       {/* Background Image */}
-      <div 
+      <div
         className="absolute inset-0 z-0"
         style={{
           backgroundImage: 'url("/main_page_2.jpg")',
@@ -28,19 +28,19 @@ export function HeroSection() {
             Discover Dance Classes Near You
           </h1>
           <p className="mt-6 text-lg text-gray-200">
-            Join our vibrant dance community. Find local classes, special events, and connect with talented instructors. 
-            Start your dance journey today!
+            Join our vibrant dance community. Find local classes, special events, and connect with
+            talented instructors. Start your dance journey today!
           </p>
           <div className="mt-12 flex gap-6">
-            <Button 
-              size="lg" 
+            <Button
+              size="lg"
               className="text-lg px-8 py-6 shadow-lg hover:shadow-xl transition-all hover:scale-105"
               onClick={() => navigate({ to: '/signup' })}
             >
               Join Now
             </Button>
-            <Button 
-              size="lg" 
+            <Button
+              size="lg"
               variant="secondary"
               className="text-lg px-8 py-6 bg-white hover:bg-white/90 text-primary shadow-lg hover:shadow-xl transition-all hover:scale-105"
               onClick={() => navigate({ to: '/classes' })}
@@ -52,4 +52,4 @@ export function HeroSection() {
       </Container>
     </section>
   )
-} 
+}

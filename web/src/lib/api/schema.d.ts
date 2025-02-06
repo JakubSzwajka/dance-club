@@ -4,1065 +4,1091 @@
  */
 
 export interface paths {
-    "/api/auth/signup": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        /** Signup */
-        post: operations["mydanceclub_api_private_auth_signup"];
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/api/auth/login": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        /** Login */
-        post: operations["mydanceclub_api_private_auth_login"];
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/api/auth/me": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /** Me */
-        get: operations["mydanceclub_api_private_auth_me"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/api/public/classes": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Get Classes
-         * @description Get all classes with filters
-         */
-        get: operations["mydanceclub_api_public_classes_get_classes"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/api/public/classes/{class_id}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Get Class
-         * @description Get a class by ID
-         */
-        get: operations["mydanceclub_api_public_classes_get_class"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/api/public/classes/{class_id}/stats": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Get Class Stats
-         * @description Get comprehensive review statistics for a class
-         */
-        get: operations["mydanceclub_api_public_classes_get_class_stats"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/api/public/classes/{class_id}/reviews": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Get Class Reviews
-         * @description Get paginated reviews for a specific class
-         */
-        get: operations["mydanceclub_api_public_classes_get_class_reviews"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/api/public/instructors": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Get Instructors
-         * @description Get all instructors
-         */
-        get: operations["mydanceclub_api_public_instructors_get_instructors"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/api/public/instructors/{instructor_id}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Get Instructor
-         * @description Get an instructor by ID
-         */
-        get: operations["mydanceclub_api_public_instructors_get_instructor"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/api/public/instructors/{instructor_id}/classes": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Get Instructor Classes
-         * @description Get all classes by an instructor
-         */
-        get: operations["mydanceclub_api_public_instructors_get_instructor_classes"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/api/public/instructors/{instructor_id}/stats": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Get Instructor Stats
-         * @description Get stats for an instructor
-         */
-        get: operations["mydanceclub_api_public_instructors_get_instructor_stats"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/api/public/locations": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Get Locations
-         * @description Get locations, optionally filtered to those with active classes
-         */
-        get: operations["mydanceclub_api_public_locations_get_locations"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/api/public/locations/{location_id}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /** Get Location */
-        get: operations["mydanceclub_api_public_locations_get_location"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/api/public/locations/{location_id}/classes": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Get Location Classes
-         * @description Get all classes at a location
-         */
-        get: operations["mydanceclub_api_public_locations_get_location_classes"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/api/public/locations/{location_id}/stats": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Get Location Stats
-         * @description Get stats for a location
-         */
-        get: operations["mydanceclub_api_public_locations_get_location_stats"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/api/public/reviews/metadata": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Get Review Metadata
-         * @description Get all metadata related to reviews
-         */
-        get: operations["mydanceclub_api_public_reviews_get_review_metadata"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/api/public/metadata": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Get Metadata
-         * @description Get all metadata for the frontend
-         */
-        get: operations["mydanceclub_api_public_metadata_get_metadata"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
+  '/api/auth/signup': {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    put?: never
+    /** Signup */
+    post: operations['mydanceclub_api_private_auth_signup']
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  '/api/auth/login': {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    get?: never
+    put?: never
+    /** Login */
+    post: operations['mydanceclub_api_private_auth_login']
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  '/api/auth/me': {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /** Me */
+    get: operations['mydanceclub_api_private_auth_me']
+    put?: never
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  '/api/public/classes': {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /**
+     * Get Classes
+     * @description Get all classes with filters
+     */
+    get: operations['mydanceclub_api_public_classes_get_classes']
+    put?: never
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  '/api/public/classes/{class_id}': {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /**
+     * Get Class
+     * @description Get a class by ID
+     */
+    get: operations['mydanceclub_api_public_classes_get_class']
+    put?: never
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  '/api/public/classes/{class_id}/stats': {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /**
+     * Get Class Stats
+     * @description Get comprehensive review statistics for a class
+     */
+    get: operations['mydanceclub_api_public_classes_get_class_stats']
+    put?: never
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  '/api/public/classes/{class_id}/reviews': {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /**
+     * Get Class Reviews
+     * @description Get paginated reviews for a specific class
+     */
+    get: operations['mydanceclub_api_public_classes_get_class_reviews']
+    put?: never
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  '/api/public/instructors': {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /**
+     * Get Instructors
+     * @description Get all instructors
+     */
+    get: operations['mydanceclub_api_public_instructors_get_instructors']
+    put?: never
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  '/api/public/instructors/{instructor_id}': {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /**
+     * Get Instructor
+     * @description Get an instructor by ID
+     */
+    get: operations['mydanceclub_api_public_instructors_get_instructor']
+    put?: never
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  '/api/public/instructors/{instructor_id}/classes': {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /**
+     * Get Instructor Classes
+     * @description Get all classes by an instructor
+     */
+    get: operations['mydanceclub_api_public_instructors_get_instructor_classes']
+    put?: never
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  '/api/public/instructors/{instructor_id}/stats': {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /**
+     * Get Instructor Stats
+     * @description Get stats for an instructor
+     */
+    get: operations['mydanceclub_api_public_instructors_get_instructor_stats']
+    put?: never
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  '/api/public/locations': {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /**
+     * Get Locations
+     * @description Get locations, optionally filtered to those with active classes
+     */
+    get: operations['mydanceclub_api_public_locations_get_locations']
+    put?: never
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  '/api/public/locations/{location_id}': {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /** Get Location */
+    get: operations['mydanceclub_api_public_locations_get_location']
+    put?: never
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  '/api/public/locations/{location_id}/classes': {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /**
+     * Get Location Classes
+     * @description Get all classes at a location
+     */
+    get: operations['mydanceclub_api_public_locations_get_location_classes']
+    put?: never
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  '/api/public/locations/{location_id}/stats': {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /**
+     * Get Location Stats
+     * @description Get stats for a location
+     */
+    get: operations['mydanceclub_api_public_locations_get_location_stats']
+    put?: never
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  '/api/public/reviews/metadata': {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /**
+     * Get Review Metadata
+     * @description Get all metadata related to reviews
+     */
+    get: operations['mydanceclub_api_public_reviews_get_review_metadata']
+    put?: never
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
+  '/api/public/metadata': {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    /**
+     * Get Metadata
+     * @description Get all metadata for the frontend
+     */
+    get: operations['mydanceclub_api_public_metadata_get_metadata']
+    put?: never
+    post?: never
+    delete?: never
+    options?: never
+    head?: never
+    patch?: never
+    trace?: never
+  }
 }
-export type webhooks = Record<string, never>;
+export type webhooks = Record<string, never>
 export interface components {
-    schemas: {
-        /** TokenResponse */
-        TokenResponse: {
-            /** Access */
-            access: string;
-            /** Email */
-            email: string;
-        };
-        /** SignupSchema */
-        SignupSchema: {
-            /** Email */
-            email: string;
-            /** Password */
-            password: string;
-            /** Role */
-            role: string;
-        };
-        /** LoginSchema */
-        LoginSchema: {
-            /** Email */
-            email: string;
-            /** Password */
-            password: string;
-        };
-        /** UserPrivateSchema */
-        UserPrivateSchema: {
-            /** Id */
-            id: string;
-            /** First Name */
-            first_name: string;
-            /** Last Name */
-            last_name: string;
-            /** Bio */
-            bio: string | null;
-            /** Profile Picture */
-            profile_picture: string | null;
-            /** Email */
-            email: string;
-            /** Role */
-            role: string;
-        };
-        /** DanceClassSchema */
-        DanceClassSchema: {
-            /** Name */
-            name: string;
-            /** Description */
-            description: string;
-            /** Level */
-            level: string;
-            /** Price */
-            price: number | string;
-            /**
-             * Start Date
-             * Format: date
-             */
-            start_date: string;
-            /**
-             * End Date
-             * Format: date
-             */
-            end_date: string;
-            location: components["schemas"]["LocationSchema"] | null;
-            /** Style */
-            style: string;
-            /** Id */
-            id: string;
-            /** Instructor Id */
-            instructor_id: string;
-            /**
-             * Created At
-             * Format: date-time
-             */
-            created_at: string;
-            /**
-             * Updated At
-             * Format: date-time
-             */
-            updated_at: string;
-            instructor: components["schemas"]["InstructorPublicSchema"] | null;
-            /** Duration */
-            duration: number;
-        };
-        /**
-         * Facilities
-         * @enum {string}
-         */
-        Facilities: "parking" | "changing_room" | "lockers" | "toilets" | "shower" | "air_conditioning" | "mirrors" | "led_lights" | "ballet_barre" | "poles" | "chairs_available" | "water_dispenser" | "wifi_available" | "floor_type_wood" | "floor_type_marble" | "floor_type_tile" | "floor_type_concrete" | "floor_type_carpet" | "floor_type_soft" | "high_ceiling" | "low_ceiling" | "good_acoustics" | "audio_system__bluetooth" | "audio_system__usb_c" | "audio_system__mini_jack" | "audio_system__other";
-        /**
-         * InstructorPublicSchema
-         * @description Public instructor information with stats
-         */
-        InstructorPublicSchema: {
-            /** Id */
-            id: string;
-            /** First Name */
-            first_name: string;
-            /** Last Name */
-            last_name: string;
-            /** Bio */
-            bio: string | null;
-            /** Profile Picture */
-            profile_picture: string | null;
-            /** Classes Count */
-            classes_count: number;
-            /** Rating */
-            rating: number;
-            /** Reviews Count */
-            reviews_count: number;
-        };
-        /** LocationSchema */
-        LocationSchema: {
-            /** Id */
-            id: string;
-            /** Name */
-            name: string;
-            /** Address */
-            address: string;
-            /** Latitude */
-            latitude?: number | null;
-            /** Longitude */
-            longitude?: number | null;
-            /** Url */
-            url?: string | null;
-            /** Facilities */
-            facilities: components["schemas"]["Facilities"][];
-            /** Sports Card */
-            sports_card: components["schemas"]["SportsCard"][];
-        };
-        /**
-         * SportsCard
-         * @enum {string}
-         */
-        SportsCard: "multisport" | "medicover" | "ok_system" | "benefit" | "fitprofit" | "other";
-        /** ReviewDanceClassStatsSchema */
-        ReviewDanceClassStatsSchema: {
-            /** Group Size */
-            group_size: number;
-            /** Level */
-            level: number;
-            /** Engagement */
-            engagement: number;
-            /** Teaching Pace */
-            teaching_pace: number;
-            /** Avg Rating */
-            avg_rating: number;
-        };
-        /** ReviewInstructorStatsSchema */
-        ReviewInstructorStatsSchema: {
-            /** Move Breakdown */
-            move_breakdown: number;
-            /** Individual Approach */
-            individual_approach: number;
-            /** Posture Correction Ability */
-            posture_correction_ability: number;
-            /** Communication And Feedback */
-            communication_and_feedback: number;
-            /** Patience And Encouragement */
-            patience_and_encouragement: number;
-            /** Motivation And Energy */
-            motivation_and_energy: number;
-            /** Avg Rating */
-            avg_rating: number;
-        };
-        /** ReviewListSchema */
-        ReviewListSchema: {
-            /** Items */
-            items: components["schemas"]["ReviewResponseSchema"][];
-            /** Total */
-            total: number;
-            /** Page */
-            page: number;
-            /** Pages */
-            pages: number;
-            /** Has Next */
-            has_next: boolean;
-            /** Has Prev */
-            has_prev: boolean;
-        };
-        /** ReviewLocationStatsSchema */
-        ReviewLocationStatsSchema: {
-            /** Cleanness */
-            cleanness: number;
-            /** General Look */
-            general_look: number;
-            /** Acustic Quality */
-            acustic_quality: number;
-            /** Additional Facilities */
-            additional_facilities: number;
-            /** Temperature */
-            temperature: number;
-            /** Lighting */
-            lighting: number;
-            /** Avg Rating */
-            avg_rating: number;
-        };
-        /** ReviewResponseSchema */
-        ReviewResponseSchema: {
-            /** Id */
-            id: string;
-            /**
-             * Created At
-             * Format: date-time
-             */
-            created_at: string;
-            /**
-             * Updated At
-             * Format: date-time
-             */
-            updated_at: string;
-            /** Overall Rating */
-            overall_rating: number;
-            /** Comment */
-            comment: string;
-            instructor_stats: components["schemas"]["ReviewInstructorStatsSchema"];
-            location_stats: components["schemas"]["ReviewLocationStatsSchema"];
-            dance_class_stats: components["schemas"]["ReviewDanceClassStatsSchema"];
-            /** Author Name */
-            author_name: string | null;
-            /**
-             * Verified
-             * @default false
-             */
-            verified: boolean;
-        };
-        /** ReviewMetadataSchema */
-        ReviewMetadataSchema: {
-            /**
-             * Temperature Options
-             * @default [
-             *       "cool",
-             *       "moderate",
-             *       "warm"
-             *     ]
-             */
-            temperature_options: string[];
-            /**
-             * Waiting Area Types
-             * @default [
-             *       "indoor",
-             *       "outdoor",
-             *       "both"
-             *     ]
-             */
-            waiting_area_types: string[];
-            /**
-             * Verification Methods
-             * @default [
-             *       "in_person",
-             *       "video",
-             *       "photo"
-             *     ]
-             */
-            verification_methods: string[];
-            /**
-             * Rating Scale
-             * @default {
-             *       "min": 1,
-             *       "max": 5,
-             *       "labels": {
-             *         "1": "Poor",
-             *         "2": "Fair",
-             *         "3": "Good",
-             *         "4": "Very Good",
-             *         "5": "Excellent"
-             *       }
-             *     }
-             */
-            rating_scale: Record<string, never>;
-            /**
-             * Teaching Style Scale
-             * @default {
-             *       "min": 0,
-             *       "max": 100,
-             *       "labels": {
-             *         "left": "Structured",
-             *         "right": "Casual"
-             *       }
-             *     }
-             */
-            teaching_style_scale: Record<string, never>;
-            /**
-             * Feedback Approach Scale
-             * @default {
-             *       "min": 0,
-             *       "max": 100,
-             *       "labels": {
-             *         "left": "Verbal",
-             *         "right": "Hands-on"
-             *       }
-             *     }
-             */
-            feedback_approach_scale: Record<string, never>;
-            /**
-             * Pace Scale
-             * @default {
-             *       "min": 0,
-             *       "max": 100,
-             *       "labels": {
-             *         "left": "Methodical",
-             *         "right": "Fast-paced"
-             *       }
-             *     }
-             */
-            pace_scale: Record<string, never>;
-            /**
-             * Music Style Scale
-             * @default {
-             *       "min": 0,
-             *       "max": 100,
-             *       "labels": {
-             *         "left": "Classical",
-             *         "right": "Modern"
-             *       }
-             *     }
-             */
-            music_style_scale: Record<string, never>;
-        };
-        /**
-         * DanceStyle
-         * @enum {string}
-         */
-        DanceStyle: "ballroom" | "latin" | "salsa" | "tango" | "other";
-        /** MetadataSchema */
-        MetadataSchema: {
-            /** Dance Styles */
-            dance_styles: components["schemas"]["DanceStyle"][];
-            /** Skill Levels */
-            skill_levels: components["schemas"]["SkillLevel"][];
-            /** Sports Cards */
-            sports_cards: components["schemas"]["SportsCard"][];
-        };
-        /**
-         * SkillLevel
-         * @enum {string}
-         */
-        SkillLevel: "beginner" | "intermediate" | "advanced";
-    };
-    responses: never;
-    parameters: never;
-    requestBodies: never;
-    headers: never;
-    pathItems: never;
+  schemas: {
+    /** TokenResponse */
+    TokenResponse: {
+      /** Access */
+      access: string
+      /** Email */
+      email: string
+    }
+    /** SignupSchema */
+    SignupSchema: {
+      /** Email */
+      email: string
+      /** Password */
+      password: string
+      /** Role */
+      role: string
+    }
+    /** LoginSchema */
+    LoginSchema: {
+      /** Email */
+      email: string
+      /** Password */
+      password: string
+    }
+    /** UserPrivateSchema */
+    UserPrivateSchema: {
+      /** Id */
+      id: string
+      /** First Name */
+      first_name: string
+      /** Last Name */
+      last_name: string
+      /** Bio */
+      bio: string | null
+      /** Profile Picture */
+      profile_picture: string | null
+      /** Email */
+      email: string
+      /** Role */
+      role: string
+    }
+    /** DanceClassSchema */
+    DanceClassSchema: {
+      /** Name */
+      name: string
+      /** Description */
+      description: string
+      /** Level */
+      level: string
+      /** Price */
+      price: number | string
+      /**
+       * Start Date
+       * Format: date
+       */
+      start_date: string
+      /**
+       * End Date
+       * Format: date
+       */
+      end_date: string
+      location: components['schemas']['LocationSchema'] | null
+      /** Style */
+      style: string
+      /** Id */
+      id: string
+      /** Instructor Id */
+      instructor_id: string
+      /**
+       * Created At
+       * Format: date-time
+       */
+      created_at: string
+      /**
+       * Updated At
+       * Format: date-time
+       */
+      updated_at: string
+      instructor: components['schemas']['InstructorPublicSchema'] | null
+      /** Duration */
+      duration: number
+    }
+    /**
+     * Facilities
+     * @enum {string}
+     */
+    Facilities:
+      | 'parking'
+      | 'changing_room'
+      | 'lockers'
+      | 'toilets'
+      | 'shower'
+      | 'air_conditioning'
+      | 'mirrors'
+      | 'led_lights'
+      | 'ballet_barre'
+      | 'poles'
+      | 'chairs_available'
+      | 'water_dispenser'
+      | 'wifi_available'
+      | 'floor_type_wood'
+      | 'floor_type_marble'
+      | 'floor_type_tile'
+      | 'floor_type_concrete'
+      | 'floor_type_carpet'
+      | 'floor_type_soft'
+      | 'high_ceiling'
+      | 'low_ceiling'
+      | 'good_acoustics'
+      | 'audio_system__bluetooth'
+      | 'audio_system__usb_c'
+      | 'audio_system__mini_jack'
+      | 'audio_system__other'
+    /**
+     * InstructorPublicSchema
+     * @description Public instructor information with stats
+     */
+    InstructorPublicSchema: {
+      /** Id */
+      id: string
+      /** First Name */
+      first_name: string
+      /** Last Name */
+      last_name: string
+      /** Bio */
+      bio: string | null
+      /** Profile Picture */
+      profile_picture: string | null
+      /** Classes Count */
+      classes_count: number
+      /** Rating */
+      rating: number
+      /** Reviews Count */
+      reviews_count: number
+    }
+    /** LocationSchema */
+    LocationSchema: {
+      /** Id */
+      id: string
+      /** Name */
+      name: string
+      /** Address */
+      address: string
+      /** Latitude */
+      latitude?: number | null
+      /** Longitude */
+      longitude?: number | null
+      /** Url */
+      url?: string | null
+      /** Facilities */
+      facilities: components['schemas']['Facilities'][]
+      /** Sports Card */
+      sports_card: components['schemas']['SportsCard'][]
+    }
+    /**
+     * SportsCard
+     * @enum {string}
+     */
+    SportsCard: 'multisport' | 'medicover' | 'ok_system' | 'benefit' | 'fitprofit' | 'other'
+    /** ReviewDanceClassStatsSchema */
+    ReviewDanceClassStatsSchema: {
+      /** Group Size */
+      group_size: number
+      /** Level */
+      level: number
+      /** Engagement */
+      engagement: number
+      /** Teaching Pace */
+      teaching_pace: number
+      /** Avg Rating */
+      avg_rating: number
+    }
+    /** ReviewInstructorStatsSchema */
+    ReviewInstructorStatsSchema: {
+      /** Move Breakdown */
+      move_breakdown: number
+      /** Individual Approach */
+      individual_approach: number
+      /** Posture Correction Ability */
+      posture_correction_ability: number
+      /** Communication And Feedback */
+      communication_and_feedback: number
+      /** Patience And Encouragement */
+      patience_and_encouragement: number
+      /** Motivation And Energy */
+      motivation_and_energy: number
+      /** Avg Rating */
+      avg_rating: number
+    }
+    /** ReviewListSchema */
+    ReviewListSchema: {
+      /** Items */
+      items: components['schemas']['ReviewResponseSchema'][]
+      /** Total */
+      total: number
+      /** Page */
+      page: number
+      /** Pages */
+      pages: number
+      /** Has Next */
+      has_next: boolean
+      /** Has Prev */
+      has_prev: boolean
+    }
+    /** ReviewLocationStatsSchema */
+    ReviewLocationStatsSchema: {
+      /** Cleanness */
+      cleanness: number
+      /** General Look */
+      general_look: number
+      /** Acustic Quality */
+      acustic_quality: number
+      /** Additional Facilities */
+      additional_facilities: number
+      /** Temperature */
+      temperature: number
+      /** Lighting */
+      lighting: number
+      /** Avg Rating */
+      avg_rating: number
+    }
+    /** ReviewResponseSchema */
+    ReviewResponseSchema: {
+      /** Id */
+      id: string
+      /**
+       * Created At
+       * Format: date-time
+       */
+      created_at: string
+      /**
+       * Updated At
+       * Format: date-time
+       */
+      updated_at: string
+      /** Overall Rating */
+      overall_rating: number
+      /** Comment */
+      comment: string
+      instructor_stats: components['schemas']['ReviewInstructorStatsSchema']
+      location_stats: components['schemas']['ReviewLocationStatsSchema']
+      dance_class_stats: components['schemas']['ReviewDanceClassStatsSchema']
+      /** Author Name */
+      author_name: string | null
+      /**
+       * Verified
+       * @default false
+       */
+      verified: boolean
+    }
+    /** ReviewMetadataSchema */
+    ReviewMetadataSchema: {
+      /**
+       * Temperature Options
+       * @default [
+       *       "cool",
+       *       "moderate",
+       *       "warm"
+       *     ]
+       */
+      temperature_options: string[]
+      /**
+       * Waiting Area Types
+       * @default [
+       *       "indoor",
+       *       "outdoor",
+       *       "both"
+       *     ]
+       */
+      waiting_area_types: string[]
+      /**
+       * Verification Methods
+       * @default [
+       *       "in_person",
+       *       "video",
+       *       "photo"
+       *     ]
+       */
+      verification_methods: string[]
+      /**
+       * Rating Scale
+       * @default {
+       *       "min": 1,
+       *       "max": 5,
+       *       "labels": {
+       *         "1": "Poor",
+       *         "2": "Fair",
+       *         "3": "Good",
+       *         "4": "Very Good",
+       *         "5": "Excellent"
+       *       }
+       *     }
+       */
+      rating_scale: Record<string, never>
+      /**
+       * Teaching Style Scale
+       * @default {
+       *       "min": 0,
+       *       "max": 100,
+       *       "labels": {
+       *         "left": "Structured",
+       *         "right": "Casual"
+       *       }
+       *     }
+       */
+      teaching_style_scale: Record<string, never>
+      /**
+       * Feedback Approach Scale
+       * @default {
+       *       "min": 0,
+       *       "max": 100,
+       *       "labels": {
+       *         "left": "Verbal",
+       *         "right": "Hands-on"
+       *       }
+       *     }
+       */
+      feedback_approach_scale: Record<string, never>
+      /**
+       * Pace Scale
+       * @default {
+       *       "min": 0,
+       *       "max": 100,
+       *       "labels": {
+       *         "left": "Methodical",
+       *         "right": "Fast-paced"
+       *       }
+       *     }
+       */
+      pace_scale: Record<string, never>
+      /**
+       * Music Style Scale
+       * @default {
+       *       "min": 0,
+       *       "max": 100,
+       *       "labels": {
+       *         "left": "Classical",
+       *         "right": "Modern"
+       *       }
+       *     }
+       */
+      music_style_scale: Record<string, never>
+    }
+    /**
+     * DanceStyle
+     * @enum {string}
+     */
+    DanceStyle: 'ballroom' | 'latin' | 'salsa' | 'tango' | 'other'
+    /** MetadataSchema */
+    MetadataSchema: {
+      /** Dance Styles */
+      dance_styles: components['schemas']['DanceStyle'][]
+      /** Skill Levels */
+      skill_levels: components['schemas']['SkillLevel'][]
+      /** Sports Cards */
+      sports_cards: components['schemas']['SportsCard'][]
+    }
+    /**
+     * SkillLevel
+     * @enum {string}
+     */
+    SkillLevel: 'beginner' | 'intermediate' | 'advanced'
+  }
+  responses: never
+  parameters: never
+  requestBodies: never
+  headers: never
+  pathItems: never
 }
-export type $defs = Record<string, never>;
+export type $defs = Record<string, never>
 export interface operations {
-    mydanceclub_api_private_auth_signup: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody: {
-            content: {
-                "application/json": components["schemas"]["SignupSchema"];
-            };
-        };
-        responses: {
-            /** @description OK */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["TokenResponse"];
-                };
-            };
-        };
-    };
-    mydanceclub_api_private_auth_login: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody: {
-            content: {
-                "application/json": components["schemas"]["LoginSchema"];
-            };
-        };
-        responses: {
-            /** @description OK */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["TokenResponse"];
-                };
-            };
-        };
-    };
-    mydanceclub_api_private_auth_me: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description OK */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["UserPrivateSchema"];
-                };
-            };
-        };
-    };
-    mydanceclub_api_public_classes_get_classes: {
-        parameters: {
-            query?: {
-                instructor_id?: string | null;
-                location_id?: string | null;
-                style?: string | null;
-                level?: string | null;
-                start_date?: string | null;
-                end_date?: string | null;
-                min_rating?: number | null;
-                sort_by?: string | null;
-            };
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description OK */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["DanceClassSchema"][];
-                };
-            };
-        };
-    };
-    mydanceclub_api_public_classes_get_class: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                class_id: string;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description OK */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["DanceClassSchema"];
-                };
-            };
-        };
-    };
-    mydanceclub_api_public_classes_get_class_stats: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                class_id: string;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description OK */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ReviewDanceClassStatsSchema"];
-                };
-            };
-        };
-    };
-    mydanceclub_api_public_classes_get_class_reviews: {
-        parameters: {
-            query?: {
-                page?: number;
-                page_size?: number;
-                sort_by?: string | null;
-            };
-            header?: never;
-            path: {
-                class_id: string;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description OK */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ReviewListSchema"];
-                };
-            };
-        };
-    };
-    mydanceclub_api_public_instructors_get_instructors: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description OK */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["InstructorPublicSchema"][];
-                };
-            };
-        };
-    };
-    mydanceclub_api_public_instructors_get_instructor: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                instructor_id: string;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description OK */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["InstructorPublicSchema"];
-                };
-            };
-        };
-    };
-    mydanceclub_api_public_instructors_get_instructor_classes: {
-        parameters: {
-            query?: {
-                include_past?: boolean;
-            };
-            header?: never;
-            path: {
-                instructor_id: string;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description OK */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["DanceClassSchema"][];
-                };
-            };
-        };
-    };
-    mydanceclub_api_public_instructors_get_instructor_stats: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                instructor_id: string;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description OK */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ReviewInstructorStatsSchema"];
-                };
-            };
-        };
-    };
-    mydanceclub_api_public_locations_get_locations: {
-        parameters: {
-            query?: {
-                has_active_classes?: boolean;
-            };
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description OK */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["LocationSchema"][];
-                };
-            };
-        };
-    };
-    mydanceclub_api_public_locations_get_location: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                location_id: string;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description OK */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["LocationSchema"];
-                };
-            };
-        };
-    };
-    mydanceclub_api_public_locations_get_location_classes: {
-        parameters: {
-            query?: {
-                include_past?: boolean;
-            };
-            header?: never;
-            path: {
-                location_id: string;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description OK */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["DanceClassSchema"][];
-                };
-            };
-        };
-    };
-    mydanceclub_api_public_locations_get_location_stats: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                location_id: string;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description OK */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ReviewLocationStatsSchema"];
-                };
-            };
-        };
-    };
-    mydanceclub_api_public_reviews_get_review_metadata: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description OK */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ReviewMetadataSchema"];
-                };
-            };
-        };
-    };
-    mydanceclub_api_public_metadata_get_metadata: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description OK */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["MetadataSchema"];
-                };
-            };
-        };
-    };
+  mydanceclub_api_private_auth_signup: {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['SignupSchema']
+      }
+    }
+    responses: {
+      /** @description OK */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          'application/json': components['schemas']['TokenResponse']
+        }
+      }
+    }
+  }
+  mydanceclub_api_private_auth_login: {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['LoginSchema']
+      }
+    }
+    responses: {
+      /** @description OK */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          'application/json': components['schemas']['TokenResponse']
+        }
+      }
+    }
+  }
+  mydanceclub_api_private_auth_me: {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description OK */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          'application/json': components['schemas']['UserPrivateSchema']
+        }
+      }
+    }
+  }
+  mydanceclub_api_public_classes_get_classes: {
+    parameters: {
+      query?: {
+        instructor_id?: string | null
+        location_id?: string | null
+        style?: string | null
+        level?: string | null
+        start_date?: string | null
+        end_date?: string | null
+        min_rating?: number | null
+        sort_by?: string | null
+      }
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description OK */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          'application/json': components['schemas']['DanceClassSchema'][]
+        }
+      }
+    }
+  }
+  mydanceclub_api_public_classes_get_class: {
+    parameters: {
+      query?: never
+      header?: never
+      path: {
+        class_id: string
+      }
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description OK */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          'application/json': components['schemas']['DanceClassSchema']
+        }
+      }
+    }
+  }
+  mydanceclub_api_public_classes_get_class_stats: {
+    parameters: {
+      query?: never
+      header?: never
+      path: {
+        class_id: string
+      }
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description OK */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          'application/json': components['schemas']['ReviewDanceClassStatsSchema']
+        }
+      }
+    }
+  }
+  mydanceclub_api_public_classes_get_class_reviews: {
+    parameters: {
+      query?: {
+        page?: number
+        page_size?: number
+        sort_by?: string | null
+      }
+      header?: never
+      path: {
+        class_id: string
+      }
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description OK */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          'application/json': components['schemas']['ReviewListSchema']
+        }
+      }
+    }
+  }
+  mydanceclub_api_public_instructors_get_instructors: {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description OK */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          'application/json': components['schemas']['InstructorPublicSchema'][]
+        }
+      }
+    }
+  }
+  mydanceclub_api_public_instructors_get_instructor: {
+    parameters: {
+      query?: never
+      header?: never
+      path: {
+        instructor_id: string
+      }
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description OK */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          'application/json': components['schemas']['InstructorPublicSchema']
+        }
+      }
+    }
+  }
+  mydanceclub_api_public_instructors_get_instructor_classes: {
+    parameters: {
+      query?: {
+        include_past?: boolean
+      }
+      header?: never
+      path: {
+        instructor_id: string
+      }
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description OK */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          'application/json': components['schemas']['DanceClassSchema'][]
+        }
+      }
+    }
+  }
+  mydanceclub_api_public_instructors_get_instructor_stats: {
+    parameters: {
+      query?: never
+      header?: never
+      path: {
+        instructor_id: string
+      }
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description OK */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          'application/json': components['schemas']['ReviewInstructorStatsSchema']
+        }
+      }
+    }
+  }
+  mydanceclub_api_public_locations_get_locations: {
+    parameters: {
+      query?: {
+        has_active_classes?: boolean
+      }
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description OK */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          'application/json': components['schemas']['LocationSchema'][]
+        }
+      }
+    }
+  }
+  mydanceclub_api_public_locations_get_location: {
+    parameters: {
+      query?: never
+      header?: never
+      path: {
+        location_id: string
+      }
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description OK */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          'application/json': components['schemas']['LocationSchema']
+        }
+      }
+    }
+  }
+  mydanceclub_api_public_locations_get_location_classes: {
+    parameters: {
+      query?: {
+        include_past?: boolean
+      }
+      header?: never
+      path: {
+        location_id: string
+      }
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description OK */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          'application/json': components['schemas']['DanceClassSchema'][]
+        }
+      }
+    }
+  }
+  mydanceclub_api_public_locations_get_location_stats: {
+    parameters: {
+      query?: never
+      header?: never
+      path: {
+        location_id: string
+      }
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description OK */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          'application/json': components['schemas']['ReviewLocationStatsSchema']
+        }
+      }
+    }
+  }
+  mydanceclub_api_public_reviews_get_review_metadata: {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description OK */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          'application/json': components['schemas']['ReviewMetadataSchema']
+        }
+      }
+    }
+  }
+  mydanceclub_api_public_metadata_get_metadata: {
+    parameters: {
+      query?: never
+      header?: never
+      path?: never
+      cookie?: never
+    }
+    requestBody?: never
+    responses: {
+      /** @description OK */
+      200: {
+        headers: {
+          [name: string]: unknown
+        }
+        content: {
+          'application/json': components['schemas']['MetadataSchema']
+        }
+      }
+    }
+  }
 }

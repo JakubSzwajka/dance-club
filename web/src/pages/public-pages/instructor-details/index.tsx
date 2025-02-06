@@ -1,12 +1,12 @@
-import { useParams } from "@tanstack/react-router"
-import { Container } from "@/components/ui/container"
-import { Header } from "@/components/domain/header"
-import { HeroSection } from "./components/HeroSection"
-import { TeachingSchedule } from "./components/TeachingSchedule"
-import { Card } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { useState } from "react"
-import { usePublicInstructor, usePublicInstructorClasses } from "@/lib/api/public/index"
+import { useParams } from '@tanstack/react-router'
+import { Container } from '@/components/ui/container'
+import { Header } from '@/components/domain/header'
+import { HeroSection } from './components/HeroSection'
+import { TeachingSchedule } from './components/TeachingSchedule'
+import { Card } from '@/components/ui/card'
+import { Button } from '@/components/ui/button'
+import { useState } from 'react'
+import { usePublicInstructor, usePublicInstructorClasses } from '@/lib/api/public/index'
 // import { ReviewsSection } from "./components/ReviewsSection"
 
 export function InstructorDetailsPage() {
@@ -47,24 +47,24 @@ export function InstructorDetailsPage() {
       {/* Bio Section */}
       <Container>
         <div className="py-8">
-            <h2 className="text-2xl font-semibold mb-4">About {instructor.first_name}</h2>
-            <Card className="p-6 bg-muted/30">
-              <div className={`prose prose-slate max-w-none ${!isExpanded ? 'line-clamp-4' : ''}`}>
-                {bioSections.map((paragraph, index) => (
-                  <p key={index} className="whitespace-pre-line mb-4 last:mb-0">
-                    {paragraph}
-                  </p>
-                ))}
-              </div>
-              <Button 
-                variant="ghost" 
-                className="mt-4 w-full hover:bg-muted"
-                onClick={() => setIsExpanded(!isExpanded)}
-              >
-                {isExpanded ? 'Show Less' : 'Read More'}
-              </Button>
-            </Card>
-          </div>
+          <h2 className="text-2xl font-semibold mb-4">About {instructor.first_name}</h2>
+          <Card className="p-6 bg-muted/30">
+            <div className={`prose prose-slate max-w-none ${!isExpanded ? 'line-clamp-4' : ''}`}>
+              {bioSections.map((paragraph, index) => (
+                <p key={index} className="whitespace-pre-line mb-4 last:mb-0">
+                  {paragraph}
+                </p>
+              ))}
+            </div>
+            <Button
+              variant="ghost"
+              className="mt-4 w-full hover:bg-muted"
+              onClick={() => setIsExpanded(!isExpanded)}
+            >
+              {isExpanded ? 'Show Less' : 'Read More'}
+            </Button>
+          </Card>
+        </div>
       </Container>
 
       {/* Teaching Schedule */}

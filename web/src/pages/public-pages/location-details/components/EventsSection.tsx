@@ -1,12 +1,12 @@
-import { Card } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { useNavigate } from "@tanstack/react-router"
-import { InstructorPill } from "@/components/domain/instructor-pill"
-import { CalendarIcon, ClockIcon, UsersIcon } from "@heroicons/react/24/outline"
-import { components } from "@/lib/api/schema"
+import { Card } from '@/components/ui/card'
+import { Button } from '@/components/ui/button'
+import { useNavigate } from '@tanstack/react-router'
+import { InstructorPill } from '@/components/domain/instructor-pill'
+import { CalendarIcon, ClockIcon, UsersIcon } from '@heroicons/react/24/outline'
+import { components } from '@/lib/api/schema'
 
 interface EventsSectionProps {
-  events: components["schemas"]["SpecialEventSchema"][]
+  events: components['schemas']['SpecialEventSchema'][]
 }
 
 export function EventsSection({ events }: EventsSectionProps) {
@@ -24,17 +24,17 @@ export function EventsSection({ events }: EventsSectionProps) {
 
   return (
     <div className="grid gap-4">
-      {events.map((event) => {
+      {events.map(event => {
         const eventDate = new Date(event.datetime)
         const formattedDate = eventDate.toLocaleDateString('en-US', {
           weekday: 'long',
           year: 'numeric',
           month: 'long',
-          day: 'numeric'
+          day: 'numeric',
         })
         const formattedTime = eventDate.toLocaleTimeString('en-US', {
           hour: '2-digit',
-          minute: '2-digit'
+          minute: '2-digit',
         })
 
         return (
@@ -55,7 +55,9 @@ export function EventsSection({ events }: EventsSectionProps) {
                   </div>
                   <div className="flex items-center gap-2 text-sm text-muted-foreground">
                     <UsersIcon className="h-4 w-4" />
-                    <span>{event.current_capacity}/{event.capacity} spots</span>
+                    <span>
+                      {event.current_capacity}/{event.capacity} spots
+                    </span>
                   </div>
                 </div>
 
@@ -69,12 +71,14 @@ export function EventsSection({ events }: EventsSectionProps) {
                   <div className="font-semibold">{event.price} PLN</div>
                   <div className="text-sm text-muted-foreground">per person</div>
                 </div>
-                <Button 
+                <Button
                   className="w-full md:w-auto"
-                  onClick={() => navigate({
-                    to: '/events/$eventId',
-                    params: { eventId: event.id }
-                  })}
+                  onClick={() =>
+                    navigate({
+                      to: '/events/$eventId',
+                      params: { eventId: event.id },
+                    })
+                  }
                 >
                   View Details
                 </Button>
@@ -85,4 +89,4 @@ export function EventsSection({ events }: EventsSectionProps) {
       })}
     </div>
   )
-} 
+}

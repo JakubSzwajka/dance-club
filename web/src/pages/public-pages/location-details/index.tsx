@@ -1,11 +1,11 @@
-import { useParams } from "@tanstack/react-router"
-import { Container } from "@/components/ui/container"
-import { Header } from "@/components/domain/header"
-import { usePublicLocation, usePublicLocationClasses } from "@/lib/api/public"
-import { HeroSection } from "./components/HeroSection"
-import { MapSection } from "./components/MapSection"
-import { ClassesSection } from "./components/ClassesSection"
-import { EventsSection } from "./components/EventsSection"
+import { useParams } from '@tanstack/react-router'
+import { Container } from '@/components/ui/container'
+import { Header } from '@/components/domain/header'
+import { usePublicLocation, usePublicLocationClasses } from '@/lib/api/public'
+import { HeroSection } from './components/HeroSection'
+import { MapSection } from './components/MapSection'
+import { ClassesSection } from './components/ClassesSection'
+import { EventsSection } from './components/EventsSection'
 
 export function LocationDetailsPage() {
   const { locationId } = useParams({ from: '/locations/$locationId' })

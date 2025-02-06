@@ -1,14 +1,14 @@
-import { Button } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
-import { XMarkIcon } from "@heroicons/react/24/outline"
-import { components } from "@/lib/api/schema"
+import { Button } from '@/components/ui/button'
+import { Badge } from '@/components/ui/badge'
+import { XMarkIcon } from '@heroicons/react/24/outline'
+import { components } from '@/lib/api/schema'
 interface ActiveFiltersProps {
   selectedInstructor?: string
   selectedStyle?: string
   selectedLevel?: string
   selectedLocation?: string
-  instructors: components["schemas"]["UserPublicSchema"][]
-  locations: components["schemas"]["LocationSchema"][]
+  instructors: components['schemas']['UserPublicSchema'][]
+  locations: components['schemas']['LocationSchema'][]
   onClearInstructor: () => void
   onClearStyle: () => void
   onClearLevel: () => void
@@ -38,7 +38,8 @@ export function ActiveFilters({
       <span className="text-sm text-muted-foreground">Active filters:</span>
       {selectedInstructor && (
         <Badge variant="secondary" className="flex items-center gap-1">
-          {instructors.find(i => i.id === selectedInstructor)?.first_name} {instructors.find(i => i.id === selectedInstructor)?.last_name}
+          {instructors.find(i => i.id === selectedInstructor)?.first_name}{' '}
+          {instructors.find(i => i.id === selectedInstructor)?.last_name}
           <XMarkIcon className="h-3 w-3 cursor-pointer" onClick={onClearInstructor} />
         </Badge>
       )}
@@ -65,4 +66,4 @@ export function ActiveFilters({
       </Button>
     </div>
   )
-} 
+}

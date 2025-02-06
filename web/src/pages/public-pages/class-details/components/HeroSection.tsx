@@ -1,11 +1,11 @@
-import { CurrencyDollarIcon } from "@heroicons/react/24/outline"
-import { SkillLevelBadge } from "../../../../components/domain/skill-level-badge"
-import { LocationPill } from "@/components/domain/location-pill"
-import { InstructorPill } from "@/components/domain/instructor-pill"
-import { components } from "@/lib/api/schema"
+import { CurrencyDollarIcon } from '@heroicons/react/24/outline'
+import { SkillLevelBadge } from '../../../../components/domain/skill-level-badge'
+import { LocationPill } from '@/components/domain/location-pill'
+import { InstructorPill } from '@/components/domain/instructor-pill'
+import { components } from '@/lib/api/schema'
 
 interface HeroSectionProps {
-  classDetails: components["schemas"]["DanceClassSchema"]
+  classDetails: components['schemas']['DanceClassSchema']
 }
 
 export function HeroSection({ classDetails }: HeroSectionProps) {
@@ -15,7 +15,7 @@ export function HeroSection({ classDetails }: HeroSectionProps) {
         <h1 className="text-4xl font-bold">{classDetails.name}</h1>
         <SkillLevelBadge level={classDetails.level} />
       </div>
-      
+
       <div className="grid grid-cols-1 sm:grid-cols-1 gap-4 text-sm text-muted-foreground mb-6">
         <div className="flex items-center gap-2">
           <InstructorPill instructor={classDetails.instructor} />
@@ -34,4 +34,4 @@ export function HeroSection({ classDetails }: HeroSectionProps) {
       </Button> */}
     </div>
   )
-} 
+}

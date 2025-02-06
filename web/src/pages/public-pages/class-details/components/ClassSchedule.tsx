@@ -1,4 +1,3 @@
-
 interface ClassScheduleProps {
   class_id: string
 }
@@ -39,4 +38,4 @@ export function ClassSchedule({ class_id }: ClassScheduleProps) {
       </div>
     </div>
   )
-} 
+}

@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/button"
+import { Button } from '@/components/ui/button'
 import {
   Dialog,
   DialogContent,
@@ -6,9 +6,9 @@ import {
   DialogTitle,
   DialogDescription,
   DialogFooter,
-} from "@/components/ui/dialog"
-import { CheckCircle2, Info } from "lucide-react"
-import { cn } from "@/lib/utils"
+} from '@/components/ui/dialog'
+import { CheckCircle2, Info } from 'lucide-react'
+import { cn } from '@/lib/utils'
 
 interface Step {
   id: string
@@ -29,7 +29,7 @@ export function ConfirmationModal({
   onOpenChange,
   steps,
   completedSteps,
-  onConfirm
+  onConfirm,
 }: ConfirmationModalProps) {
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
@@ -42,30 +42,29 @@ export function ConfirmationModal({
         </DialogHeader>
 
         <div className="py-6 space-y-4">
-          {steps.slice(0, 3).map((step) => {
+          {steps.slice(0, 3).map(step => {
             const isCompleted = completedSteps.has(step.id)
             const Icon = step.icon
             return (
-              <div 
-                key={step.id} 
+              <div
+                key={step.id}
                 className={cn(
-                  "flex items-center gap-3 p-3 rounded-lg border",
-                  isCompleted ? "border-primary/20 bg-primary/5" : "border-muted bg-muted/5"
+                  'flex items-center gap-3 p-3 rounded-lg border',
+                  isCompleted ? 'border-primary/20 bg-primary/5' : 'border-muted bg-muted/5'
                 )}
               >
-                <div className={cn(
-                  "p-2 rounded-lg",
-                  isCompleted ? "bg-primary/10" : "bg-muted"
-                )}>
-                  <Icon className={cn(
-                    "w-4 h-4",
-                    isCompleted ? "text-primary" : "text-muted-foreground"
-                  )} />
+                <div className={cn('p-2 rounded-lg', isCompleted ? 'bg-primary/10' : 'bg-muted')}>
+                  <Icon
+                    className={cn(
+                      'w-4 h-4',
+                      isCompleted ? 'text-primary' : 'text-muted-foreground'
+                    )}
+                  />
                 </div>
                 <div className="flex-1">
                   <div className="font-medium">{step.title}</div>
                   <div className="text-sm text-muted-foreground">
-                    {isCompleted ? "Review completed" : "Not reviewed"}
+                    {isCompleted ? 'Review completed' : 'Not reviewed'}
                   </div>
                 </div>
                 {isCompleted ? (
@@ -86,7 +85,8 @@ export function ConfirmationModal({
                 <span>You haven't completed all sections</span>
               </div>
               <p className="mt-1 pl-6">
-                That's okay! Your feedback is still valuable. You can always come back later to review the remaining sections.
+                That's okay! Your feedback is still valuable. You can always come back later to
+                review the remaining sections.
               </p>
             </div>
           )}
@@ -96,10 +96,7 @@ export function ConfirmationModal({
           <Button variant="outline" onClick={() => onOpenChange(false)}>
             Go Back
           </Button>
-          <Button 
-            onClick={onConfirm}
-            className="gap-2"
-          >
+          <Button onClick={onConfirm} className="gap-2">
             <CheckCircle2 className="w-4 h-4" />
             Submit {completedSteps.size} Review{completedSteps.size !== 1 ? 's' : ''}
           </Button>
@@ -107,4 +104,4 @@ export function ConfirmationModal({
       </DialogContent>
     </Dialog>
   )
-} 
+}

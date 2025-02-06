@@ -4,26 +4,27 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select"
-import { Container } from "@/components/ui/container"
-import { Header } from "@/components/domain/header"
-import { ClassItem } from "./components/class-item"
-import { ActiveFilters } from "./components/active-filters"
-import { usePublicClasses, useMetadata, usePublicInstructors, usePublicLocations } from "@/lib/api/public/index"
-import { useNavigate, useSearch } from "@tanstack/react-router"
-import { Card } from "@/components/ui/card"
-import { Calendar } from "@/components/ui/calendar"
-import { Button } from "@/components/ui/button"
-import { CalendarIcon, SlidersHorizontal } from "lucide-react"
+} from '@/components/ui/select'
+import { Container } from '@/components/ui/container'
+import { Header } from '@/components/domain/header'
+import { ClassItem } from './components/class-item'
+import { ActiveFilters } from './components/active-filters'
 import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover"
-import { format } from "date-fns"
-import { Label } from "@/components/ui/label"
-import { Input } from "@/components/ui/input"
-import { cn } from "@/lib/utils"
+  usePublicClasses,
+  useMetadata,
+  usePublicInstructors,
+  usePublicLocations,
+} from '@/lib/api/public/index'
+import { useNavigate, useSearch } from '@tanstack/react-router'
+import { Card } from '@/components/ui/card'
+import { Calendar } from '@/components/ui/calendar'
+import { Button } from '@/components/ui/button'
+import { CalendarIcon, SlidersHorizontal } from 'lucide-react'
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
+import { format } from 'date-fns'
+import { Label } from '@/components/ui/label'
+import { Input } from '@/components/ui/input'
+import { cn } from '@/lib/utils'
 
 interface ClassSearchParams {
   instructor?: string
@@ -40,7 +41,7 @@ interface ClassSearchParams {
 export function ClassBrowser() {
   const navigate = useNavigate()
   const search = useSearch({ from: '/classes' }) as ClassSearchParams
-  
+
   // Get filters from URL query params
   const selectedInstructor = search.instructor
   const selectedStyle = search.style
@@ -84,19 +85,20 @@ export function ClassBrowser() {
   )
   const { data: locations } = usePublicLocations()
   const { data: metadata } = useMetadata()
-  const danceStyles = metadata?.dance_styles;
+  const danceStyles = metadata?.dance_styles
 
   return (
     <div className="min-h-screen bg-background">
-      <Header />      
+      <Header />
       <div className="bg-muted/30 border-b">
         <Container>
           <div className="py-12">
             <div className="max-w-2xl">
               <h1 className="text-3xl font-bold mb-3">Find Your Perfect Dance Class</h1>
               <p className="text-muted-foreground text-lg">
-                Whether you're a beginner taking your first steps or an advanced dancer looking to perfect your moves, 
-                use our filters to discover classes that match your style, level, and schedule.
+                Whether you're a beginner taking your first steps or an advanced dancer looking to
+                perfect your moves, use our filters to discover classes that match your style,
+                level, and schedule.
               </p>
             </div>
           </div>
@@ -118,9 +120,9 @@ export function ClassBrowser() {
                   <div className="space-y-4">
                     <div className="space-y-2">
                       <label className="text-sm font-medium">Sort By</label>
-                      <Select 
-                        value={selectedSortBy} 
-                        onValueChange={(value) => updateFilters({ sort_by: value })}
+                      <Select
+                        value={selectedSortBy}
+                        onValueChange={value => updateFilters({ sort_by: value })}
                       >
                         <SelectTrigger>
                           <SelectValue placeholder="Sort classes" />
@@ -137,15 +139,15 @@ export function ClassBrowser() {
 
                     <div className="space-y-2">
                       <label className="text-sm font-medium">Instructor</label>
-                      <Select 
-                        value={selectedInstructor} 
-                        onValueChange={(value) => updateFilters({ instructor: value })}
+                      <Select
+                        value={selectedInstructor}
+                        onValueChange={value => updateFilters({ instructor: value })}
                       >
                         <SelectTrigger>
                           <SelectValue placeholder="Select instructor" />
                         </SelectTrigger>
                         <SelectContent>
-                          {instructors?.map((instructor) => (
+                          {instructors?.map(instructor => (
                             <SelectItem key={instructor.id} value={instructor.id}>
                               {instructor.first_name} {instructor.last_name}
                             </SelectItem>
@@ -156,15 +158,15 @@ export function ClassBrowser() {
 
                     <div className="space-y-2">
                       <label className="text-sm font-medium">Location</label>
-                      <Select 
-                        value={selectedLocation} 
-                        onValueChange={(value) => updateFilters({ location: value })}
+                      <Select
+                        value={selectedLocation}
+                        onValueChange={value => updateFilters({ location: value })}
                       >
                         <SelectTrigger>
                           <SelectValue placeholder="Select location" />
                         </SelectTrigger>
                         <SelectContent>
-                          {locations?.map((location) => (
+                          {locations?.map(location => (
                             <SelectItem key={location.id} value={location.id}>
                               {location.name}
                             </SelectItem>
@@ -175,15 +177,15 @@ export function ClassBrowser() {
 
                     <div className="space-y-2">
                       <label className="text-sm font-medium">Dance Style</label>
-                      <Select 
-                        value={selectedStyle} 
-                        onValueChange={(value) => updateFilters({ style: value })}
+                      <Select
+                        value={selectedStyle}
+                        onValueChange={value => updateFilters({ style: value })}
                       >
                         <SelectTrigger>
                           <SelectValue placeholder="Select style" />
                         </SelectTrigger>
                         <SelectContent>
-                          {danceStyles?.map((style) => (
+                          {danceStyles?.map(style => (
                             <SelectItem key={style} value={style}>
                               {style}
                             </SelectItem>
@@ -194,9 +196,9 @@ export function ClassBrowser() {
 
                     <div className="space-y-2">
                       <label className="text-sm font-medium">Level</label>
-                      <Select 
-                        value={selectedLevel} 
-                        onValueChange={(value) => updateFilters({ level: value })}
+                      <Select
+                        value={selectedLevel}
+                        onValueChange={value => updateFilters({ level: value })}
                       >
                         <SelectTrigger>
                           <SelectValue placeholder="Select level" />
@@ -217,21 +219,21 @@ export function ClassBrowser() {
                             <Button
                               variant="outline"
                               className={cn(
-                                "w-full justify-start text-left font-normal",
-                                !selectedStartDate && "text-muted-foreground"
+                                'w-full justify-start text-left font-normal',
+                                !selectedStartDate && 'text-muted-foreground'
                               )}
                             >
                               <CalendarIcon className="mr-2 h-4 w-4" />
-                              {selectedStartDate ? format(new Date(selectedStartDate), "PPP") : "Start date"}
+                              {selectedStartDate
+                                ? format(new Date(selectedStartDate), 'PPP')
+                                : 'Start date'}
                             </Button>
                           </PopoverTrigger>
                           <PopoverContent className="w-auto p-0" align="start">
                             <Calendar
                               mode="single"
                               selected={selectedStartDate ? new Date(selectedStartDate) : undefined}
-                              onSelect={(date) => 
-                                updateFilters({ start_date: date?.toISOString() })
-                              }
+                              onSelect={date => updateFilters({ start_date: date?.toISOString() })}
                               initialFocus
                             />
                           </PopoverContent>
@@ -241,21 +243,21 @@ export function ClassBrowser() {
                             <Button
                               variant="outline"
                               className={cn(
-                                "w-full justify-start text-left font-normal",
-                                !selectedEndDate && "text-muted-foreground"
+                                'w-full justify-start text-left font-normal',
+                                !selectedEndDate && 'text-muted-foreground'
                               )}
                             >
                               <CalendarIcon className="mr-2 h-4 w-4" />
-                              {selectedEndDate ? format(new Date(selectedEndDate), "PPP") : "End date"}
+                              {selectedEndDate
+                                ? format(new Date(selectedEndDate), 'PPP')
+                                : 'End date'}
                             </Button>
                           </PopoverTrigger>
                           <PopoverContent className="w-auto p-0" align="start">
                             <Calendar
                               mode="single"
                               selected={selectedEndDate ? new Date(selectedEndDate) : undefined}
-                              onSelect={(date) => 
-                                updateFilters({ end_date: date?.toISOString() })
-                              }
+                              onSelect={date => updateFilters({ end_date: date?.toISOString() })}
                               initialFocus
                             />
                           </PopoverContent>
@@ -271,7 +273,7 @@ export function ClassBrowser() {
                         max="5"
                         step="0.5"
                         value={selectedMinRating || ''}
-                        onChange={(e) => updateFilters({ min_rating: e.target.value })}
+                        onChange={e => updateFilters({ min_rating: e.target.value })}
                         placeholder="e.g. 4.5"
                       />
                     </div>
@@ -298,11 +300,11 @@ export function ClassBrowser() {
 
             {/* Classes List */}
             <div className="space-y-6">
-              {classes?.map((danceClass) => (
+              {classes?.map(danceClass => (
                 <ClassItem
                   key={danceClass.id}
                   danceClass={danceClass}
-                  onDetailsClick={(id) => {
+                  onDetailsClick={id => {
                     navigate({
                       to: '/classes/$classId',
                       params: { classId: id },

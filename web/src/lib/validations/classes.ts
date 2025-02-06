@@ -33,4 +33,4 @@ export interface DanceClassPublicSchema {
     end_time: string
     status: string
   }>
-} 
+}

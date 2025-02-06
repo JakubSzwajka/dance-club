@@ -1,5 +1,4 @@
-import { $api } from '../queryClient';
-
+import { $api } from '../queryClient'
 
 export function usePublicClasses(
   instructorId?: string | null,
@@ -21,20 +20,20 @@ export function usePublicClasses(
         start_date: startDate,
         end_date: endDate,
         min_rating: minRating,
-        sort_by: sortBy
-      }
-    }
-  });
+        sort_by: sortBy,
+      },
+    },
+  })
 }
 
 export function usePublicClass(id: string) {
   return $api.useQuery('get', '/api/public/classes/{class_id}', {
     params: {
       path: {
-        class_id: id
-      }
-    }
-  });
+        class_id: id,
+      },
+    },
+  })
 }
 
 export function useClassReviews(
@@ -46,23 +45,23 @@ export function useClassReviews(
   return $api.useQuery('get', '/api/public/classes/{class_id}/reviews', {
     params: {
       path: {
-        class_id: classId
+        class_id: classId,
       },
       query: {
         page,
         page_size: pageSize,
-        sort_by: sortBy
-      }
-    }
-  });
+        sort_by: sortBy,
+      },
+    },
+  })
 }
 
 export function useClassStats(id: string) {
   return $api.useQuery('get', '/api/public/classes/{class_id}/stats', {
     params: {
       path: {
-        class_id: id
-      }
-    }
-  });
+        class_id: id,
+      },
+    },
+  })
 }

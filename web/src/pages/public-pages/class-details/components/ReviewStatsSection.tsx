@@ -1,41 +1,52 @@
-import { Card, CardContent } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { StarIcon } from "@heroicons/react/24/solid"
-import { cn } from "@/lib/utils"
-import { 
-  ChartBarIcon,
-} from "@heroicons/react/24/outline"
-import { useClassReviews, useClassStats, usePublicInstructorStats, usePublicLocationStats } from "@/lib/api/public/index"
+import { Card, CardContent } from '@/components/ui/card'
+import { Badge } from '@/components/ui/badge'
+import { StarIcon } from '@heroicons/react/24/solid'
+import { cn } from '@/lib/utils'
+import { ChartBarIcon } from '@heroicons/react/24/outline'
+import {
+  useClassReviews,
+  useClassStats,
+  usePublicInstructorStats,
+  usePublicLocationStats,
+} from '@/lib/api/public/index'
 
-function Slider({ value, leftLabel, rightLabel, middleLabel, className, label }: { 
-  value: number, 
-  label: string,
-  leftLabel: string, 
-  rightLabel: string,
-  middleLabel: string,
+function Slider({
+  value,
+  leftLabel,
+  rightLabel,
+  middleLabel,
+  className,
+  label,
+}: {
+  value: number
+  label: string
+  leftLabel: string
+  rightLabel: string
+  middleLabel: string
   className?: string
 }) {
   // By design values here should be between -10 and 10. Where 0 is a sweet spot.
   // Color of the slider should be green for values close to 0 and red for values further away from 0.
   // Slider should be 0% for value -10 and 100% for value 10.
-  const normalizedValue = ((value + 10) / 20) * 100 
-  
+  const normalizedValue = ((value + 10) / 20) * 100
+
   // Calculate color based on distance from 0
   const absValue = Math.abs(value)
-  const color = absValue <= 2 ? 'bg-green-500' : 
-                absValue <= 5 ? 'bg-yellow-500' : 
-                'bg-red-500'
+  const color = absValue <= 2 ? 'bg-green-500' : absValue <= 5 ? 'bg-yellow-500' : 'bg-red-500'
 
   return (
-    <div className={cn("space-y-2", className)}>
+    <div className={cn('space-y-2', className)}>
       <div className="text-sm font-medium mb-2">{label}</div>
       <div className="h-2 bg-muted rounded-full relative">
-        <div 
-          className={cn("absolute top-0 left-0 h-full rounded-full", color)}
+        <div
+          className={cn('absolute top-0 left-0 h-full rounded-full', color)}
           style={{ width: `${normalizedValue}%` }}
         />
-        <div 
-          className={cn("absolute top-1/2 -translate-y-1/2 w-3 h-3 rounded-full border-2 border-background", color)}
+        <div
+          className={cn(
+            'absolute top-1/2 -translate-y-1/2 w-3 h-3 rounded-full border-2 border-background',
+            color
+          )}
           style={{ left: `${normalizedValue}%`, transform: `translateX(-50%) translateY(-50%)` }}
         />
       </div>
@@ -48,18 +59,15 @@ function Slider({ value, leftLabel, rightLabel, middleLabel, className, label }:
   )
 }
 
-function StarRating({ rating, label }: { rating: number, label: string }) {
+function StarRating({ rating, label }: { rating: number; label: string }) {
   return (
     <div className="flex items-center gap-4 justify-between">
       <span className="text-sm">{label}</span>
       <div className="flex items-center gap-1">
         {Array.from({ length: 10 }).map((_, i) => (
-          <StarIcon 
+          <StarIcon
             key={i}
-            className={cn(
-              "h-4 w-4",
-              i < rating ? "text-yellow-500" : "text-muted"
-            )}
+            className={cn('h-4 w-4', i < rating ? 'text-yellow-500' : 'text-muted')}
           />
         ))}
       </div>
@@ -67,8 +75,15 @@ function StarRating({ rating, label }: { rating: number, label: string }) {
   )
 }
 
-export function ReviewStatsSection({ classId, instructorId, locationId }:{ classId: string, instructorId: string, locationId: string }) {
-
+export function ReviewStatsSection({
+  classId,
+  instructorId,
+  locationId,
+}: {
+  classId: string
+  instructorId: string
+  locationId: string
+}) {
   const { data: reviews } = useClassReviews(classId)
   const { data: classStats } = useClassStats(classId)
   const { data: instructorStats } = usePublicInstructorStats(instructorId)
@@ -77,13 +92,19 @@ export function ReviewStatsSection({ classId, instructorId, locationId }:{ class
   return (
     <div className="py-8 border-t">
       <div className="flex items-center justify-between mb-6">
-        <h2 className="text-2xl font-semibold">Class Experience <StarRating rating={classStats?.avg_rating || 0} label="Average rating" /></h2>
+        <h2 className="text-2xl font-semibold">
+          Class Experience{' '}
+          <StarRating rating={classStats?.avg_rating || 0} label="Average rating" />
+        </h2>
         <div className="flex items-center gap-2">
           <Badge variant="outline" className="font-normal">
             Based on {reviews?.items.length} reviews
           </Badge>
           <Badge variant="secondary" className="font-normal">
-            Last updated {reviews?.items[0]?.updated_at ? new Date(reviews.items[0].updated_at).toLocaleDateString() : 'N/A'}
+            Last updated{' '}
+            {reviews?.items[0]?.updated_at
+              ? new Date(reviews.items[0].updated_at).toLocaleDateString()
+              : 'N/A'}
           </Badge>
         </div>
       </div>
@@ -108,10 +129,22 @@ export function ReviewStatsSection({ classId, instructorId, locationId }:{ class
                 middleLabel="Good"
                 rightLabel="Too much details"
               />
-              <StarRating rating={instructorStats?.posture_correction_ability || 0} label="Posture correction ability" />
-              <StarRating rating={instructorStats?.communication_and_feedback || 0} label="Communication and feedback" />
-              <StarRating rating={instructorStats?.patience_and_encouragement || 0} label="Patience and encouragement" />
-              <StarRating rating={instructorStats?.motivation_and_energy || 0} label="Motivation and energy" />
+              <StarRating
+                rating={instructorStats?.posture_correction_ability || 0}
+                label="Posture correction ability"
+              />
+              <StarRating
+                rating={instructorStats?.communication_and_feedback || 0}
+                label="Communication and feedback"
+              />
+              <StarRating
+                rating={instructorStats?.patience_and_encouragement || 0}
+                label="Patience and encouragement"
+              />
+              <StarRating
+                rating={instructorStats?.motivation_and_energy || 0}
+                label="Motivation and energy"
+              />
             </div>
           </CardContent>
         </Card>
@@ -121,35 +154,35 @@ export function ReviewStatsSection({ classId, instructorId, locationId }:{ class
           <CardContent className="p-6 space-y-4">
             <h3 className="text-lg font-medium">🧑‍🎓 Class</h3>
             <div className="space-y-4">
-                <Slider
-                  label="Group size"
-                  value={classStats?.group_size || 0}
-                  leftLabel="Too small"
-                  middleLabel="Perfect"
-                  rightLabel="Too big"
-                />
-                <Slider
-                  label="Level"
-                  value={classStats?.level || 0}
-                  leftLabel="Too easy"
-                  middleLabel="Perfect"
-                  rightLabel="Too hard"
-                />
-                <Slider
-                  label="Engagement"
-                  value={classStats?.engagement || 0}
-                  leftLabel="Not engaged"
-                  middleLabel="Perfect"
-                  rightLabel="Too engaged"
-                />
-                <Slider
-                  label="Teaching pace"
-                  value={classStats?.teaching_pace || 0}
-                  leftLabel="Too slow"
-                  middleLabel="Perfect"
-                  rightLabel="Too fast"
-                />
-            </div> 
+              <Slider
+                label="Group size"
+                value={classStats?.group_size || 0}
+                leftLabel="Too small"
+                middleLabel="Perfect"
+                rightLabel="Too big"
+              />
+              <Slider
+                label="Level"
+                value={classStats?.level || 0}
+                leftLabel="Too easy"
+                middleLabel="Perfect"
+                rightLabel="Too hard"
+              />
+              <Slider
+                label="Engagement"
+                value={classStats?.engagement || 0}
+                leftLabel="Not engaged"
+                middleLabel="Perfect"
+                rightLabel="Too engaged"
+              />
+              <Slider
+                label="Teaching pace"
+                value={classStats?.teaching_pace || 0}
+                leftLabel="Too slow"
+                middleLabel="Perfect"
+                rightLabel="Too fast"
+              />
+            </div>
           </CardContent>
         </Card>
 
@@ -161,7 +194,10 @@ export function ReviewStatsSection({ classId, instructorId, locationId }:{ class
               <StarRating rating={locationStats?.cleanness || 0} label="Cleanness" />
               <StarRating rating={locationStats?.general_look || 0} label="General look" />
               <StarRating rating={locationStats?.acustic_quality || 0} label="Acustic quality" />
-              <StarRating rating={locationStats?.additional_facilities || 0} label="Additional facilities" />
+              <StarRating
+                rating={locationStats?.additional_facilities || 0}
+                label="Additional facilities"
+              />
               <Slider
                 label="Temperature"
                 value={locationStats?.temperature || 0}
@@ -178,7 +214,7 @@ export function ReviewStatsSection({ classId, instructorId, locationId }:{ class
               />
             </div>
           </CardContent>
-        </Card> 
+        </Card>
 
         <Card>
           <CardContent className="p-6 space-y-6">
@@ -189,14 +225,14 @@ export function ReviewStatsSection({ classId, instructorId, locationId }:{ class
               </div>
               <div className="max-w-sm">
                 <p className="text-sm text-muted-foreground">
-                  More reviews are needed to generate detailed dance DNA insights for this class. Check back later!
+                  More reviews are needed to generate detailed dance DNA insights for this class.
+                  Check back later!
                 </p>
               </div>
             </div>
           </CardContent>
         </Card>
-
       </div>
     </div>
   )
-} 
+}

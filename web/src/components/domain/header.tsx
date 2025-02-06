@@ -1,16 +1,16 @@
-import { Button } from "../ui/button"
-import { Container } from "../ui/container"
-import { useAuth } from "../../lib/auth/AuthContext"
-import { useNavigate } from "@tanstack/react-router"
-import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar"
-import { 
+import { Button } from '../ui/button'
+import { Container } from '../ui/container'
+import { useAuth } from '../../lib/auth/AuthContext'
+import { useNavigate } from '@tanstack/react-router'
+import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar'
+import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "../ui/dropdown-menu"
-import { useEffect, useState } from "react"
-import { cn } from "@/lib/utils"
+} from '../ui/dropdown-menu'
+import { useEffect, useState } from 'react'
+import { cn } from '@/lib/utils'
 
 export function Header() {
   const { logout, isAuthenticated, user } = useAuth()
@@ -22,13 +22,13 @@ export function Header() {
     const controlNavbar = () => {
       if (typeof window !== 'undefined') {
         const currentScrollY = window.scrollY
-        
+
         // Show header when:
         // 1. Scrolling up
         // 2. At the top of the page
         if (currentScrollY < lastScrollY || currentScrollY < 10) {
           setIsVisible(true)
-        } 
+        }
         // Hide header when scrolling down and not at the top
         else if (currentScrollY > 10 && currentScrollY > lastScrollY) {
           setIsVisible(false)
@@ -52,11 +52,13 @@ export function Header() {
   }
 
   return (
-    <header className={cn(
-      "sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60",
-      "transition-transform duration-200",
-      !isVisible && "-translate-y-full"
-    )}>
+    <header
+      className={cn(
+        'sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60',
+        'transition-transform duration-200',
+        !isVisible && '-translate-y-full'
+      )}
+    >
       <Container>
         <div className="flex h-16 items-center justify-between">
           <div className="flex items-center space-x-4">
@@ -64,7 +66,7 @@ export function Header() {
               🕺 My Dance DNA
             </div>
           </div>
-          <nav className="flex items-center space-x-4">            
+          <nav className="flex items-center space-x-4">
             {isAuthenticated ? (
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
@@ -79,14 +81,14 @@ export function Header() {
                   {/* <DropdownMenuItem onClick={() => navigate({ to: '/profile-settings' })}>
                     Profile Settings
                   </DropdownMenuItem> */}
-                  <DropdownMenuItem onClick={logout}>
-                    Sign out
-                  </DropdownMenuItem>
+                  <DropdownMenuItem onClick={logout}>Sign out</DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
             ) : (
               <>
-                <Button variant="ghost" onClick={() => navigate({ to: '/login' })}>Sign in</Button>
+                <Button variant="ghost" onClick={() => navigate({ to: '/login' })}>
+                  Sign in
+                </Button>
                 <Button onClick={() => navigate({ to: '/signup' })}>Sign up</Button>
               </>
             )}
@@ -95,4 +97,4 @@ export function Header() {
       </Container>
     </header>
   )
-} 
+}

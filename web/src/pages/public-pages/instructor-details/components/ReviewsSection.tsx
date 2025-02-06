@@ -50,28 +50,28 @@
 //             <Avatar>
 //               <AvatarFallback>{review.student_name[0]}</AvatarFallback>
 //             </Avatar>
-            
+
 //             <div className="flex-1">
 //               <div className="flex items-center justify-between mb-2">
 //                 <h4 className="font-medium">{review.student_name}</h4>
 //                 <div className="flex items-center gap-1">
 //                   {[...Array(5)].map((_, i) => (
-//                     <StarIcon 
+//                     <StarIcon
 //                       key={i}
 //                       className={`h-4 w-4 ${
-//                         i < review.rating 
-//                           ? 'text-yellow-400' 
+//                         i < review.rating
+//                           ? 'text-yellow-400'
 //                           : 'text-gray-200'
 //                       }`}
 //                     />
 //                   ))}
 //                 </div>
 //               </div>
-              
+
 //               <div className="text-sm text-muted-foreground mb-2">
 //                 {new Date(review.created_at).toLocaleDateString()}
 //               </div>
-              
+
 //               <p className="text-sm">{review.comment}</p>
 //             </div>
 //           </div>
@@ -79,4 +79,4 @@
 //       ))}
 //     </div>
 //   )
-// } 
+// }

@@ -1,8 +1,8 @@
-import { Card } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { ReviewSlider, StarRatingInput, CommentField } from "./ReviewFormComponents"
-import { useState } from "react"
-import { School } from "lucide-react"
+import { Card } from '@/components/ui/card'
+import { Button } from '@/components/ui/button'
+import { ReviewSlider, StarRatingInput, CommentField } from './ReviewFormComponents'
+import { useState } from 'react'
+import { School } from 'lucide-react'
 
 interface ClassReviewBlockProps {
   onSubmit: () => void
@@ -27,7 +27,7 @@ export function ClassReviewBlock({ onSubmit, onSkip, classId, isActive }: ClassR
     engagement: 0,
     teaching_pace: 0,
     overall_rating: 0,
-    comment: ""
+    comment: '',
   })
 
   const handleSubmit = () => {
@@ -43,7 +43,9 @@ export function ClassReviewBlock({ onSubmit, onSkip, classId, isActive }: ClassR
         </div>
         <div>
           <h2 className="text-2xl font-semibold">Class Review</h2>
-          <p className="text-muted-foreground">Share your experience about the class structure and teaching methods</p>
+          <p className="text-muted-foreground">
+            Share your experience about the class structure and teaching methods
+          </p>
         </div>
       </div>
 
@@ -51,7 +53,7 @@ export function ClassReviewBlock({ onSubmit, onSkip, classId, isActive }: ClassR
         <ReviewSlider
           label="Group Size"
           value={form.group_size}
-          onChange={(value) => setForm(prev => ({ ...prev, group_size: value }))}
+          onChange={value => setForm(prev => ({ ...prev, group_size: value }))}
           leftLabel="Too small"
           middleLabel="Perfect"
           rightLabel="Too big"
@@ -61,7 +63,7 @@ export function ClassReviewBlock({ onSubmit, onSkip, classId, isActive }: ClassR
         <ReviewSlider
           label="Level"
           value={form.level}
-          onChange={(value) => setForm(prev => ({ ...prev, level: value }))}
+          onChange={value => setForm(prev => ({ ...prev, level: value }))}
           leftLabel="Too easy"
           middleLabel="Perfect"
           rightLabel="Too hard"
@@ -71,7 +73,7 @@ export function ClassReviewBlock({ onSubmit, onSkip, classId, isActive }: ClassR
         <ReviewSlider
           label="Engagement"
           value={form.engagement}
-          onChange={(value) => setForm(prev => ({ ...prev, engagement: value }))}
+          onChange={value => setForm(prev => ({ ...prev, engagement: value }))}
           leftLabel="Not engaged"
           middleLabel="Perfect"
           rightLabel="Too engaged"
@@ -81,7 +83,7 @@ export function ClassReviewBlock({ onSubmit, onSkip, classId, isActive }: ClassR
         <ReviewSlider
           label="Teaching Pace"
           value={form.teaching_pace}
-          onChange={(value) => setForm(prev => ({ ...prev, teaching_pace: value }))}
+          onChange={value => setForm(prev => ({ ...prev, teaching_pace: value }))}
           leftLabel="Too slow"
           middleLabel="Perfect"
           rightLabel="Too fast"
@@ -92,7 +94,7 @@ export function ClassReviewBlock({ onSubmit, onSkip, classId, isActive }: ClassR
           <StarRatingInput
             label="Overall Rating"
             value={form.overall_rating}
-            onChange={(value) => setForm(prev => ({ ...prev, overall_rating: value }))}
+            onChange={value => setForm(prev => ({ ...prev, overall_rating: value }))}
             maxStars={5}
             description="Your overall satisfaction with the class experience"
           />
@@ -100,7 +102,7 @@ export function ClassReviewBlock({ onSubmit, onSkip, classId, isActive }: ClassR
 
         <CommentField
           value={form.comment}
-          onChange={(value) => setForm(prev => ({ ...prev, comment: value }))}
+          onChange={value => setForm(prev => ({ ...prev, comment: value }))}
           label="Share Your Experience"
           description="Help others understand what to expect from this class"
           placeholder="Share your thoughts about the class structure, teaching methods, and overall experience..."
@@ -111,8 +113,8 @@ export function ClassReviewBlock({ onSubmit, onSkip, classId, isActive }: ClassR
         <Button variant="outline" onClick={onSkip} disabled={!isActive}>
           Skip
         </Button>
-        <Button 
-          onClick={handleSubmit} 
+        <Button
+          onClick={handleSubmit}
           disabled={!isActive || form.overall_rating === 0}
           className="px-8"
         >
@@ -121,4 +123,4 @@ export function ClassReviewBlock({ onSubmit, onSkip, classId, isActive }: ClassR
       </div>
     </Card>
   )
-} 
+}

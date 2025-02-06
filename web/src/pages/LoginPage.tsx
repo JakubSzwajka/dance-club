@@ -1,40 +1,47 @@
-import { useState } from 'react';
-import { useAuth } from '../lib/auth/AuthContext';
-import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from '../components/ui/card';
-import { Button } from '../components/ui/button';
-import { Input } from '../components/ui/input';
-import { Label } from '../components/ui/label';
-import { Alert, AlertDescription } from '../components/ui/alert';
-import { Container } from '../components/ui/container';
-import { Header } from '../components/domain/header';
-import { AxiosError } from 'axios';
+import { useState } from 'react'
+import { useAuth } from '../lib/auth/AuthContext'
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+  CardContent,
+  CardFooter,
+} from '../components/ui/card'
+import { Button } from '../components/ui/button'
+import { Input } from '../components/ui/input'
+import { Label } from '../components/ui/label'
+import { Alert, AlertDescription } from '../components/ui/alert'
+import { Container } from '../components/ui/container'
+import { Header } from '../components/domain/header'
+import { AxiosError } from 'axios'
 
 export function LoginPage() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
-  const { login } = useAuth();
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [error, setError] = useState('')
+  const { login } = useAuth()
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setError('');
+    e.preventDefault()
+    setError('')
     try {
-      await login(email, password);
+      await login(email, password)
     } catch (err) {
       if (err instanceof AxiosError) {
-        setError(err.response?.data?.message || 'Invalid email or password');
+        setError(err.response?.data?.message || 'Invalid email or password')
       } else {
-        setError('Invalid email or password');
+        setError('Invalid email or password')
       }
     }
-  };
+  }
 
   return (
     <div className="min-h-screen flex flex-col bg-background">
       <Header />
       <main className="flex-1 relative">
         {/* Background Image */}
-        <div 
+        <div
           className="absolute inset-0 z-0"
           style={{
             backgroundImage: 'url("/main_page.jpg")',
@@ -63,24 +70,28 @@ export function LoginPage() {
                     </Alert>
                   )}
                   <div className="space-y-2">
-                    <Label htmlFor="email" className="text-sm font-medium">Email</Label>
+                    <Label htmlFor="email" className="text-sm font-medium">
+                      Email
+                    </Label>
                     <Input
                       id="email"
                       type="email"
                       placeholder="name@example.com"
                       value={email}
-                      onChange={(e) => setEmail(e.target.value)}
+                      onChange={e => setEmail(e.target.value)}
                       required
                       className="h-11"
                     />
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="password" className="text-sm font-medium">Password</Label>
+                    <Label htmlFor="password" className="text-sm font-medium">
+                      Password
+                    </Label>
                     <Input
                       id="password"
                       type="password"
                       value={password}
-                      onChange={(e) => setPassword(e.target.value)}
+                      onChange={e => setPassword(e.target.value)}
                       required
                       className="h-11"
                     />
@@ -91,11 +102,9 @@ export function LoginPage() {
                     Sign in
                   </Button>
                   <div className="text-sm text-center space-y-2">
-                    <p className="text-muted-foreground">
-                      Don't have an account?
-                    </p>
-                    <a 
-                      href="/signup" 
+                    <p className="text-muted-foreground">Don't have an account?</p>
+                    <a
+                      href="/signup"
                       className="text-primary hover:text-primary/80 font-medium transition-colors"
                     >
                       Create an account
@@ -108,5 +117,5 @@ export function LoginPage() {
         </Container>
       </main>
     </div>
-  );
+  )
 }

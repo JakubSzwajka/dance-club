@@ -1,13 +1,13 @@
-import { Container } from "@/components/ui/container"
-import { InstructorCard } from "@/components/domain/instructor-card"
-import { usePublicInstructors } from "@/lib/api/public/index"
+import { Container } from '@/components/ui/container'
+import { InstructorCard } from '@/components/domain/instructor-card'
+import { usePublicInstructors } from '@/lib/api/public/index'
 import {
   Carousel,
   CarouselContent,
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
-} from "@/components/ui/carousel"
+} from '@/components/ui/carousel'
 
 export function FeaturedInstructorsSection() {
   const { data: instructors, isLoading: instructorsLoading } = usePublicInstructors()
@@ -24,25 +24,23 @@ export function FeaturedInstructorsSection() {
 
         {instructorsLoading ? (
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {[1, 2, 3].map((i) => (
+            {[1, 2, 3].map(i => (
               <div key={i} className="h-[300px] bg-muted animate-pulse rounded-lg" />
             ))}
           </div>
         ) : instructors && instructors.length > 0 ? (
           <Carousel
             opts={{
-              align: "start",
+              align: 'start',
               loop: true,
             }}
             className="w-full"
           >
             <CarouselContent>
-              {instructors.map((instructor) => (
+              {instructors.map(instructor => (
                 <CarouselItem key={instructor.id} className="md:basis-1/2 lg:basis-1/3">
                   <div className="p-1">
-                    <InstructorCard
-                      instructor={instructor}
-                    />
+                    <InstructorCard instructor={instructor} />
                   </div>
                 </CarouselItem>
               ))}
@@ -59,4 +57,4 @@ export function FeaturedInstructorsSection() {
       </Container>
     </section>
   )
-} 
+}

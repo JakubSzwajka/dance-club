@@ -1,18 +1,8 @@
-import { StarIcon } from "@heroicons/react/24/solid"
-import { 
-  QuestionMarkCircleIcon, 
-  InformationCircleIcon 
-} from "@heroicons/react/24/outline"
-import { cn } from "@/lib/utils"
-import { Slider } from "@/components/ui/slider"
-import { Label } from "@/components/ui/label"
-import { Textarea } from "@/components/ui/textarea"
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/components/ui/tooltip"
+import { StarIcon } from '@heroicons/react/24/solid'
+import { cn } from '@/lib/utils'
+import { Slider } from '@/components/ui/slider'
+import { Label } from '@/components/ui/label'
+import { Textarea } from '@/components/ui/textarea'
 
 interface ReviewSliderProps {
   value: number
@@ -25,49 +15,45 @@ interface ReviewSliderProps {
   className?: string
 }
 
-export function ReviewSlider({ 
-  value, 
+export function ReviewSlider({
+  value,
   onChange,
-  label, 
-  leftLabel, 
-  rightLabel, 
+  label,
+  leftLabel,
+  rightLabel,
   middleLabel,
   description,
-  className 
+  className,
 }: ReviewSliderProps) {
   // Convert -10 to 10 range to 0 to 100 for the slider
   const sliderValue = ((value + 10) / 20) * 100
 
   // Convert slider value (0-100) back to -10 to 10 range
   const handleSliderChange = (newValue: number[]) => {
-    const normalizedValue = ((newValue[0] / 100) * 20) - 10
+    const normalizedValue = (newValue[0] / 100) * 20 - 10
     onChange(normalizedValue)
   }
 
   // Calculate color based on distance from 0
   const absValue = Math.abs(value)
-  const color = absValue <= 2 ? 'bg-green-500' : 
-                absValue <= 5 ? 'bg-yellow-500' : 
-                'bg-red-500'
+  const color = absValue <= 2 ? 'bg-green-500' : absValue <= 5 ? 'bg-yellow-500' : 'bg-red-500'
 
   return (
-    <div className={cn("space-y-2", className)}>
+    <div className={cn('space-y-2', className)}>
       <div className="space-y-1">
         <Label className="text-base">{label}</Label>
-        {description && (
-          <p className="text-sm text-muted-foreground">{description}</p>
-        )}
+        {description && <p className="text-sm text-muted-foreground">{description}</p>}
       </div>
       <div className="relative pt-6">
-        <div className="absolute -top-1 left-1/2 -translate-x-1/2 text-sm font-medium text-muted-foreground">
+        {/* <div className="absolute -top-1 left-1/2 -translate-x-1/2 text-sm font-medium text-muted-foreground">
           {value.toFixed(1)}
-        </div>
+        </div> */}
         <Slider
           value={[sliderValue]}
           onValueChange={handleSliderChange}
           max={100}
           step={1}
-          className={cn("relative", color)}
+          className={cn('relative', color)}
         />
       </div>
       <div className="flex justify-between text-sm text-muted-foreground">
@@ -88,30 +74,28 @@ interface StarRatingInputProps {
   className?: string
 }
 
-export function StarRatingInput({ 
-  value, 
-  onChange, 
+export function StarRatingInput({
+  value,
+  onChange,
   label,
   description,
   maxStars = 10,
-  className 
+  className,
 }: StarRatingInputProps) {
   return (
-    <div className={cn("space-y-2", className)}>
+    <div className={cn('space-y-2', className)}>
       <div className="space-y-1">
         <Label className="text-base">{label}</Label>
-        {description && (
-          <p className="text-sm text-muted-foreground">{description}</p>
-        )}
+        {description && <p className="text-sm text-muted-foreground">{description}</p>}
       </div>
       <div className="flex items-center justify-between gap-4">
         <div className="flex items-center gap-1">
           {Array.from({ length: maxStars }).map((_, i) => (
-            <StarIcon 
+            <StarIcon
               key={i}
               className={cn(
-                "h-6 w-6 cursor-pointer transition-colors",
-                i < value ? "text-yellow-500" : "text-muted hover:text-yellow-200"
+                'h-6 w-6 cursor-pointer transition-colors',
+                i < value ? 'text-yellow-500' : 'text-muted hover:text-yellow-200'
               )}
               onClick={() => onChange(i + 1)}
             />
@@ -139,28 +123,24 @@ interface CommentFieldProps {
 export function CommentField({
   value,
   onChange,
-  label = "Additional Comments",
+  label = 'Additional Comments',
   description,
-  placeholder = "Share your thoughts and experience...",
-  className
+  placeholder = 'Share your thoughts and experience...',
+  className,
 }: CommentFieldProps) {
   return (
-    <div className={cn("space-y-2", className)}>
+    <div className={cn('space-y-2', className)}>
       <div className="space-y-1">
         <Label className="text-base">{label}</Label>
-        {description && (
-          <p className="text-sm text-muted-foreground">{description}</p>
-        )}
+        {description && <p className="text-sm text-muted-foreground">{description}</p>}
       </div>
       <Textarea
         value={value}
-        onChange={(e) => onChange(e.target.value)}
+        onChange={e => onChange(e.target.value)}
         placeholder={placeholder}
         className="min-h-[100px]"
       />
-      <div className="text-sm text-muted-foreground">
-        {value.length} / 1000 characters
-      </div>
+      <div className="text-sm text-muted-foreground">{value.length} / 1000 characters</div>
     </div>
   )
-} 
+}
