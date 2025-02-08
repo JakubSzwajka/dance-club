@@ -16,7 +16,7 @@ class Location(BaseModel):
     latitude = models.DecimalField(max_digits=9, decimal_places=6, null=True, blank=True)
     longitude = models.DecimalField(max_digits=9, decimal_places=6, null=True, blank=True)
     url = models.URLField(null=True, blank=True)
-
+    phone = models.CharField(max_length=255, null=True, blank=True)
     facilities = models.CharField(
         max_length=1000,
         choices=Facilities.choices,

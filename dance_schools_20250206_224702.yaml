@@ -1,0 +1,2003 @@
+metadata:
+  timestamp: '2025-02-06T22:46:59.888867'
+  location:
+    latitude: 51.1103
+    longitude: 17.0321
+  radius: 5000
+  keyword: dancing school
+places:
+- name: Street Dance Academy
+  place_id: ChIJ4VaWOQnCD0cR2Q7Y2mpMjn8
+  address: Nabycińska 19, Wrocław
+  location:
+    lat: 51.1096666
+    lng: 17.0166117
+  rating: 5
+  user_ratings_total: 153
+  types:
+  - point_of_interest
+  - school
+  - health
+  - establishment
+  details:
+    formatted_address: Nabycińska 19, 53-677 Wrocław, Poland
+    formatted_phone_number: 502 161 572
+    website: https://s-d-a.pl/
+    opening_hours:
+    - 'Monday: 3:00 – 9:30 PM'
+    - 'Tuesday: 3:00 – 9:30 PM'
+    - 'Wednesday: 3:00 – 9:30 PM'
+    - 'Thursday: 3:00 – 9:30 PM'
+    - 'Friday: 3:00 – 9:30 PM'
+    - 'Saturday: Closed'
+    - 'Sunday: Closed'
+    reviews:
+    - author_name: Kiryl Аnokhin
+      author_url: https://www.google.com/maps/contrib/118119241273635699493/reviews
+      language: en
+      original_language: en
+      profile_photo_url: https://lh3.googleusercontent.com/a-/ALV-UjUEAOZQl_7PK19g1zLbqkuI_7sqA4tWiB-jbUnuoiIWkKNr-ICA=s128-c0x00000000-cc-rp-mo-ba3
+      rating: 5
+      relative_time_description: a year ago
+      text: Dance instructors are friendly and passionate. A lot of styles (including
+        House ❤️), different kind of groups. I recommend!
+      time: 1684354378
+      translated: false
+    - author_name: YT A
+      author_url: https://www.google.com/maps/contrib/112018249141140999827/reviews
+      language: en
+      original_language: en
+      profile_photo_url: https://lh3.googleusercontent.com/a-/ALV-UjX750KYwSd6d72n-YolmoRiILrNeZW3LsFCU5WpQDpD_Cl8S8g9ew=s128-c0x00000000-cc-rp-mo-ba5
+      rating: 5
+      relative_time_description: 3 years ago
+      text: Really nice place!! Professor's are the best!!
+      time: 1631899417
+      translated: false
+    - author_name: Recepcja Sda
+      author_url: https://www.google.com/maps/contrib/114739431324414224039/reviews
+      language: en-US
+      original_language: pl
+      profile_photo_url: https://lh3.googleusercontent.com/a/ACg8ocK2oX7SFukQnBxsRcCIBx1_S-QQhP5IK6DWfDWKhrSSGcmj9g=s128-c0x00000000-cc-rp-mo
+      rating: 5
+      relative_time_description: 2 months ago
+      text: We invite you to all great classes. We guarantee a professional approach
+        and an amazing atmosphere!
+      time: 1732029346
+      translated: true
+    - author_name: Mariusz Gośka
+      author_url: https://www.google.com/maps/contrib/114682761223499549096/reviews
+      language: en-US
+      original_language: pl
+      profile_photo_url: https://lh3.googleusercontent.com/a-/ALV-UjWpXnVpOvdchBOYvpFVRrdik00kmirvTnb8w19pn_Kn4z1Io0Mjdw=s128-c0x00000000-cc-rp-mo-ba6
+      rating: 4
+      relative_time_description: a year ago
+      text: Nice dance school. First of all, there is a lack of ventilation, which
+        can be felt during classes, and the air conditioning is sometimes not turned
+        on in the summer. Everyone is super nice and polite :) I highly recommend
+        it!!!
+      time: 1704798894
+      translated: true
+    - author_name: Karolina Wendt
+      author_url: https://www.google.com/maps/contrib/115360975254344315285/reviews
+      language: en-US
+      original_language: pl
+      profile_photo_url: https://lh3.googleusercontent.com/a/ACg8ocKTK6Fxxvitn_L9DMhf1BjJv1qu94zedfqEuJ_dV2RMzOGnCQ=s128-c0x00000000-cc-rp-mo
+      rating: 5
+      relative_time_description: 3 years ago
+      text: I highly recommend SDA as a place to prepare for your first dance! Classes
+        with Michał always took place in a great atmosphere, and the choreography
+        was perfectly suited to us. When we didn't feel comfortable with a part of
+        the routine, Michał easily changed the choreography so that we felt comfortable
+        with it. It turned out brilliant and the guests were delighted with our first
+        dance :) Once again, I highly recommend it, there is no better place in Wrocław!
+        :)
+      time: 1630413127
+      translated: true
+- name: Szkoła tańca Tropical Dance Studios Wrocław
+  place_id: ChIJcxVSf2zpD0cRfZ_sH7YFxJg
+  address: Teatralna 10-12/piętro 3, Wrocław
+  location:
+    lat: 51.105489
+    lng: 17.0344999
+  rating: 4.9
+  user_ratings_total: 38
+  types:
+  - point_of_interest
+  - establishment
+  details:
+    formatted_address: Teatralna 10-12/piętro 3, 50-055 Wrocław, Poland
+    formatted_phone_number: 603 524 032
+    website: http://www.tropical-dance.pl/
+    opening_hours:
+    - 'Monday: 3:00 – 11:00 PM'
+    - 'Tuesday: 3:00 – 11:00 PM'
+    - 'Wednesday: 3:00 – 11:00 PM'
+    - 'Thursday: 3:00 – 11:00 PM'
+    - 'Friday: 3:00 – 11:00 PM'
+    - 'Saturday: 11:00 AM – 2:00 PM, 5:00 – 11:00 PM'
+    - 'Sunday: 2:00 – 5:00 PM'
+    reviews:
+    - author_name: Małgorzata Rudy
+      author_url: https://www.google.com/maps/contrib/106063597388770329211/reviews
+      language: en-US
+      original_language: pl
+      profile_photo_url: https://lh3.googleusercontent.com/a/ACg8ocLgdrNNCWpA8OabLXyFINZxErzowSDo6TWEeFDpkZ4cdYbqJw=s128-c0x00000000-cc-rp-mo
+      rating: 5
+      relative_time_description: a month ago
+      text: We go to tango lessons with Rafael. It is a very nice, intimate atmosphere.
+        During the first classes, the dance steps seemed impossible to repeat, but
+        in subsequent meetings it was better and now we have a lot of fun with the
+        classes. The trainer is very committed, we highly recommend him.
+      time: 1734635970
+      translated: true
+    - author_name: Małgorzata Dzieżba
+      author_url: https://www.google.com/maps/contrib/116184879726784539380/reviews
+      language: en-US
+      original_language: pl
+      profile_photo_url: https://lh3.googleusercontent.com/a-/ALV-UjXw0uOLOB16qBM_zYW9OO6p0qzQwnFYBtSB44BR-yTcD32xKX8=s128-c0x00000000-cc-rp-mo
+      rating: 5
+      relative_time_description: a month ago
+      text: We have been taking tango classes for several months and they are very
+        pleasant afternoons for us. Classes are in small groups, in a cozy room, and
+        most importantly, with a teacher focused on our dance. It's always fun and
+        we feel more and more confident on the dance floor. I highly recommend it!
+      time: 1734635454
+      translated: true
+    - author_name: Jaroslaw Czarzasty
+      author_url: https://www.google.com/maps/contrib/106326770216352880108/reviews
+      language: en-US
+      original_language: pl
+      profile_photo_url: https://lh3.googleusercontent.com/a/ACg8ocL6ess7Grm2pPeAr8mb5qUQuX0Q-dXXvJKJ5AwXcyrkOw-0IQ=s128-c0x00000000-cc-rp-mo
+      rating: 5
+      relative_time_description: a month ago
+      text: I am learning Argentine tango at this school with a teacher with extensive
+        experience who approaches classes with passion and humor. Lessons take place
+        in small groups in a nice and relaxed atmosphere in interesting rooms. I highly
+        recommend it
+      time: 1734643619
+      translated: true
+    - author_name: Ewa Dera
+      author_url: https://www.google.com/maps/contrib/113844491070866508871/reviews
+      language: en-US
+      original_language: pl
+      profile_photo_url: https://lh3.googleusercontent.com/a/ACg8ocJw611vJRxxQZl6e9deYsDc3_T0SlE1RdNkIDcLv4CWkjBcpg=s128-c0x00000000-cc-rp-mo
+      rating: 5
+      relative_time_description: 2 weeks ago
+      text: A super positive, intimate place, Rafael and Małgosia are infectious with
+        their passion for dancing, 🥰 fully professional classes with a lot of humor
+        😂. I am impressed by the peace when once again I mix up my steps and Rafael
+        explains and explains...😵‍💫 Best regards 💓💓
+      time: 1737386223
+      translated: true
+    - author_name: Rafał
+      author_url: https://www.google.com/maps/contrib/114025978595050481185/reviews
+      language: en-US
+      original_language: pl
+      profile_photo_url: https://lh3.googleusercontent.com/a/ACg8ocLJyhzW4D7FALneR76kc9yIN7FuUOMefRhZRhn2Es-Wx18f-Q=s128-c0x00000000-cc-rp-mo
+      rating: 5
+      relative_time_description: a month ago
+      text: I highly recommend Argentine tango classes. Charismatic host, excellent
+        atmosphere, humor, small groups, and... the best dance - tango!
+      time: 1734646420
+      translated: true
+- name: Dance Flow
+  place_id: ChIJV4kGUtrpD0cR0dZMu2AQLng
+  address: Rydygiera 15, Wrocław
+  location:
+    lat: 51.1186815
+    lng: 17.0336871
+  rating: 4.9
+  user_ratings_total: 296
+  types:
+  - point_of_interest
+  - school
+  - establishment
+  details:
+    formatted_address: Rydygiera 15, 50-249 Wrocław, Poland
+    formatted_phone_number: 783 952 086
+    website: http://www.danceflow.pl/
+    opening_hours:
+    - 'Monday: 4:00 – 10:00 PM'
+    - 'Tuesday: 4:00 – 10:00 PM'
+    - 'Wednesday: 4:00 – 10:00 PM'
+    - 'Thursday: 4:00 – 10:00 PM'
+    - 'Friday: 4:00 – 10:00 PM'
+    - 'Saturday: 11:30 AM – 4:00 PM'
+    - 'Sunday: 11:30 AM – 3:00 PM'
+    reviews:
+    - author_name: Art Syga
+      author_url: https://www.google.com/maps/contrib/106973864234828676642/reviews
+      language: en
+      original_language: en
+      profile_photo_url: https://lh3.googleusercontent.com/a-/ALV-UjXQh80RRbMWa7aGSZHnIuLFs3XpnQwbr10FipHYv1O3GgD8O-E=s128-c0x00000000-cc-rp-mo-ba3
+      rating: 4
+      relative_time_description: 4 years ago
+      text: Very good dance instructors but the venue is going through some refurbishment.
+      time: 1603273051
+      translated: false
+    - author_name: Nupur Tiwary
+      author_url: https://www.google.com/maps/contrib/115908545799768772151/reviews
+      language: en
+      original_language: en
+      profile_photo_url: https://lh3.googleusercontent.com/a-/ALV-UjWXQD1fdxeeYCw_YnfyXgCa3o5TzLwXzuiwkF_9p058FWlUc8Q=s128-c0x00000000-cc-rp-mo-ba3
+      rating: 4
+      relative_time_description: 3 years ago
+      text: Easy to book appointments; slow salsa solo dance was happy experience
+      time: 1625559629
+      translated: false
+    - author_name: M Mehedi Zaman
+      author_url: https://www.google.com/maps/contrib/111010204301425742078/reviews
+      language: en
+      original_language: en
+      profile_photo_url: https://lh3.googleusercontent.com/a-/ALV-UjWmq-pwRNlegLyUlwuQG7nJ9uauuaOOedJxp1VpcfRn7Bs3cSlw2Q=s128-c0x00000000-cc-rp-mo-ba2
+      rating: 5
+      relative_time_description: a year ago
+      text: Superb
+      time: 1692212689
+      translated: false
+    - author_name: Angelika Salamaga
+      author_url: https://www.google.com/maps/contrib/105486044298523497171/reviews
+      language: en-US
+      original_language: pl
+      profile_photo_url: https://lh3.googleusercontent.com/a-/ALV-UjUiqBuFvPpaGX4rHJmHepZSjsBwcgNJFDf229SKzRwiHBFe08Gs=s128-c0x00000000-cc-rp-mo-ba2
+      rating: 5
+      relative_time_description: 3 months ago
+      text: 'I highly recommend Dance Flow! We attended functional dance classes and
+        individual first dance lessons with Klara. Wonderful atmosphere, full professionalism
+        and commitment. Great adventure! And our first dance, thanks to Klara and
+        her tips, turned out wonderfully. '
+      time: 1730202592
+      translated: true
+    - author_name: Ania Jaruga
+      author_url: https://www.google.com/maps/contrib/101474496599231613234/reviews
+      language: en-US
+      original_language: pl
+      profile_photo_url: https://lh3.googleusercontent.com/a-/ALV-UjWh35cKllRbzq2igM9RqEFaBuqHkgwslZv8FrrT04nfPHWuC-sv=s128-c0x00000000-cc-rp-mo
+      rating: 5
+      relative_time_description: 2 weeks ago
+      text: 'I wholeheartedly recommend the Dance Flow dance school! The offer includes
+        something for everyone, there are many classes in various dances. The presenters
+        are always very professional and friendly.
+
+        Individual first dance classes with Klara deserve a separate recommendation.
+
+        If you want to dance beautifully at your wedding, thanks to these classes,
+        no matter what level you are at, it will be beautiful.
+
+        In our case, despite practically zero movement coordination in the dance,
+        the end result made the guests'' jaws drop, and now we have a beautiful souvenir!'
+      time: 1737186974
+      translated: true
+- name: Dance School No Limits
+  place_id: ChIJafNBVdrpD0cRHk32sYdK0bg
+  address: Tęczowa 25, Wrocław
+  location:
+    lat: 51.10624
+    lng: 17.0167777
+  rating: 4.6
+  user_ratings_total: 412
+  types:
+  - point_of_interest
+  - establishment
+  details:
+    formatted_address: Tęczowa 25, 53-601 Wrocław, Poland
+    formatted_phone_number: 786 187 159
+    website: http://www.nolimits.art.pl/
+    opening_hours:
+    - 'Monday: 11:00 AM – 10:30 PM'
+    - 'Tuesday: 11:00 AM – 10:30 PM'
+    - 'Wednesday: 11:00 AM – 10:30 PM'
+    - 'Thursday: 11:00 AM – 10:30 PM'
+    - 'Friday: 11:00 AM – 10:30 PM'
+    - 'Saturday: 9:30 AM – 6:00 PM'
+    - 'Sunday: 9:30 AM – 6:00 PM'
+    reviews:
+    - author_name: David Berger
+      author_url: https://www.google.com/maps/contrib/104634390257073524255/reviews
+      language: en
+      original_language: en
+      profile_photo_url: https://lh3.googleusercontent.com/a-/ALV-UjW4XmDbu9UbMrOjBpBfzAcoY69HvZnHT4rKF1-sPlMxIl0DGZMB=s128-c0x00000000-cc-rp-mo-ba6
+      rating: 4
+      relative_time_description: 8 years ago
+      text: Interested in learning to dance? This is a great place to do it! A little
+        crowded during some hours, but good teachers, and friendly staff!
+      time: 1467204304
+      translated: false
+    - author_name: André Novaes
+      author_url: https://www.google.com/maps/contrib/114354600730037274962/reviews
+      language: en
+      original_language: en
+      profile_photo_url: https://lh3.googleusercontent.com/a-/ALV-UjVREmSm0qZc7rZ2cbVsdEYhhiADlHscBGZB0-uIa7Vp3UX_1eIq=s128-c0x00000000-cc-rp-mo-ba3
+      rating: 5
+      relative_time_description: 3 years ago
+      text: Simply amazing! Excellent professors, very good environment, unique staff!
+      time: 1621451769
+      translated: false
+    - author_name: Dominika Liberda
+      author_url: https://www.google.com/maps/contrib/114426264052931303975/reviews
+      language: en-US
+      original_language: pl
+      profile_photo_url: https://lh3.googleusercontent.com/a/ACg8ocJgOHA1KCSc9REWoG2CCt3b2QZTjIY1_uorapfaQHK-6xLmuw=s128-c0x00000000-cc-rp-mo
+      rating: 1
+      relative_time_description: 2 months ago
+      text: I took 3 trial studies at the nolimits dance school and each time there
+        was a problem. At the beginning, the group did not open due to too few people
+        willing to join, but when I finally joined the group, it was overcrowded.
+        The next time the classes could not be started due to a system error, my partner
+        and I were supposed to be registered from the middle of the course that we
+        had started earlier, but we were kicked out. (It didn't work halfway through,
+        even though I asked at the beginning and it was supposed to be possible).
+        And finally, despite having an active pass, I was not allowed into the classes
+        because the package was apparently assigned to other classes (those from which
+        we were withdrawn) and had expired. I wasted a lot of time talking to the
+        consultant who assured me that I could use the package for other classes and
+        it would start when I went to the first class. I arrived and it turned out
+        that it had expired, so either the consultant or the receptionists were incompetent.
+      time: 1731923042
+      translated: true
+    - author_name: Michał Szudera
+      author_url: https://www.google.com/maps/contrib/116582439989482471936/reviews
+      language: en-US
+      original_language: pl
+      profile_photo_url: https://lh3.googleusercontent.com/a/ACg8ocKEvP7ZNU_O3yHuAMMg--xl4XmszIqmKmWT40qEE_7zDKizZQ=s128-c0x00000000-cc-rp-mo
+      rating: 1
+      relative_time_description: 2 months ago
+      text: 'I have been attending this dance school for a month. Szymon''s bachata
+        level is great, he conducts classes professionally. Unfortunately, recent
+        organizational situations on the part of the reception have influenced my
+        negative opinion and I am wondering whether to go to the competition.
+
+        I travel to classes by car, so I have to spend some time traveling... so a
+        week ago on Friday, I was surprised when I found out at the reception that
+        "salsa classes were canceled that day". I also found out that e-mails with
+        this message were sent... 60 minutes before the classes... I was not happy
+        with the situation but I went home.
+
+        A few days ago I received information that the group was disbanded and today
+        was the last class (photo). The classes were at 5 p.m. - to make sure the
+        classes would take place, I called the reception an hour before they started.
+
+        "Good morning, I am registered for solo salsa at 5 p.m., but a few days ago
+        I received an e-mail that today is the last class and the group will be closed.
+        I would like to make sure whether there are classes today or not?"
+
+        On the phone I heard "yes, the classes will take place today, but there is
+        an exceptional situation and there will be a replacement for the teacher -
+        the classes will be conducted by another person"
+
+        I asked if the accompanying person was not registered (and could not register
+        online because the group was blocked) if he could come and register on the
+        spot - the receptionist replied that of course he could.
+
+
+        After arriving there, it turned out that there were NO classes and nothing
+        was known about a replacement. They didn''t even send e-mails with information
+        - and sent the entire group of people home. For me it is absurd that the dance
+        school does not inform that the classes will not take place - even more -
+        it writes an e-mail that the classes WILL take place. And what''s worse -
+        an hour before the start, the reception ensures that the classes will take
+        place normally, and when someone arrives, they say "you can go to another
+        class in an hour."
+
+
+        It has absolutely nothing to do with professionalism. It would seem that in
+        such a situation some form of compensation would be offered (e.g. a voucher
+        for classes, which would not cost the school anything...) but it is better
+        to laugh in someone''s face that the classes will not take place.
+
+
+        This is my personal opinion, I only focused on the reception service - when
+        it comes to, for example, bachata which I go to, I recommend it. Unfortunately,
+        Google does not allow you to divide opinions into categories.'
+      time: 1732312659
+      translated: true
+    - author_name: Kamila Szecówka
+      author_url: https://www.google.com/maps/contrib/114964701446317167222/reviews
+      language: en-US
+      original_language: pl
+      profile_photo_url: https://lh3.googleusercontent.com/a/ACg8ocJ0X4m6qxYPhh2zHpZ9V_igDzPbtlooIDWLEHKy4wFHmgFEEQ=s128-c0x00000000-cc-rp-mo
+      rating: 1
+      relative_time_description: 5 months ago
+      text: I highly do not recommend the No Limits school for organizing a hen party.
+        I submitted the application on time, it was accepted, and just before the
+        date of the hen party (less than 3 days), after several attempts to contact
+        me (because I did not receive any information on this matter for 10 days),
+        we were refused the event. Very unprofessional behavior, considering that
+        in the meantime I did not receive any information regarding any problems with
+        the organization or even a proposal to change the type of dance/time of the
+        hen party. My friends and I were left out in the cold just before one of us
+        had such an important day.
+      time: 1725078997
+      translated: true
+- name: Pole Dance Wrocław - Royal Academy
+  place_id: ChIJKRUUwYzpD0cRhTsIWFZ36gA
+  address: Curie-Skłodowskiej 1/2. piętro, Wrocław
+  location:
+    lat: 51.11221889999999
+    lng: 17.0563825
+  rating: 5
+  user_ratings_total: 240
+  types:
+  - gym
+  - point_of_interest
+  - health
+  - establishment
+  details:
+    formatted_address: Curie-Skłodowskiej 1/2. piętro, 50-381 Wrocław, Poland
+    formatted_phone_number: 698 698 862
+    website: null
+    opening_hours:
+    - 'Monday: 3:00 – 10:00 PM'
+    - 'Tuesday: 3:00 – 10:00 PM'
+    - 'Wednesday: 3:00 – 10:00 PM'
+    - 'Thursday: 4:00 – 10:00 PM'
+    - 'Friday: 4:00 – 10:00 PM'
+    - 'Saturday: 10:00 AM – 12:00 PM'
+    - 'Sunday: Closed'
+    reviews:
+    - author_name: Κωνσταντίνα Μαράκη
+      author_url: https://www.google.com/maps/contrib/103638176501177035485/reviews
+      language: en
+      original_language: en
+      profile_photo_url: https://lh3.googleusercontent.com/a-/ALV-UjVPWO1Q6IEO4YtA70qcpqmtKOFuHYGwnXQ37xopoSPqGt0DUP_L=s128-c0x00000000-cc-rp-mo
+      rating: 5
+      relative_time_description: a year ago
+      text: Really clean and nice pole rooms and a lot of different pole options to
+        choose from. All the ladies working there are really polite and excellent
+        teachers with high level of pole knowledge and skills. You can also attend
+        free practices. Would definitely recommend! 10/10
+      time: 1704287327
+      translated: false
+    - author_name: Jolie V.
+      author_url: https://www.google.com/maps/contrib/105159052294412751000/reviews
+      language: en
+      original_language: en
+      profile_photo_url: https://lh3.googleusercontent.com/a/ACg8ocIrB3SsPeuKSRxV0bTy6oWBVrPLHc8xMhhGpYyEg9Hz1kWZDg=s128-c0x00000000-cc-rp-mo
+      rating: 5
+      relative_time_description: a year ago
+      text: I visited this studio during my stay in wroclaw and had a pole dance class
+        (exotic) there. I really enjoyed the class! It was well structured and as
+        the instructors also speaks English it was easy for me to follow. The studio
+        ist beautiful and bright. And the instructors are great! :)
+      time: 1698771374
+      translated: false
+    - author_name: carla silva
+      author_url: https://www.google.com/maps/contrib/113917673039071337733/reviews
+      language: en
+      original_language: en
+      profile_photo_url: https://lh3.googleusercontent.com/a/ACg8ocL-pU17xKzQ5GFjRQZ156CmRUp1-uyPrdVFvBpsMYYGu9uA7g=s128-c0x00000000-cc-rp-mo
+      rating: 5
+      relative_time_description: 8 months ago
+      text: 'Nice and cozy studio, with big rooms.
+
+        The teachers are very sweet and have a lot of experience.
+
+        Could have private lessons in English wich was really nice.
+
+        Recommend it 100% ☺️'
+      time: 1717442078
+      translated: false
+    - author_name: Xuefan Zhang
+      author_url: https://www.google.com/maps/contrib/106672709970425794720/reviews
+      language: en
+      original_language: en
+      profile_photo_url: https://lh3.googleusercontent.com/a-/ALV-UjXvbxS3lIpY42BE7_l_L4kB9TFH8ZtJcNshgyWPuCZC03ULGZaQ=s128-c0x00000000-cc-rp-mo
+      rating: 5
+      relative_time_description: 5 years ago
+      text: 'I was in town for vacation and Agata was so nice to accommodate me for
+        a drop-in. She advised me on what class to take based on skill level and number
+        of students! She taught an awesome class, going around with personal adjustments.
+        It was challenging but she made it feel super doable. The girls in the studio
+        were super nice too and helped each other out!!!
+
+        The only sad thing is that I wish you guys are in my city :p Thank you so
+        much for a great class!!!'
+      time: 1571690721
+      translated: false
+    - author_name: Antje Dahms
+      author_url: https://www.google.com/maps/contrib/113556648394035489255/reviews
+      language: en
+      original_language: en
+      profile_photo_url: https://lh3.googleusercontent.com/a/ACg8ocL12nje1CUqVh6P0-c2g3x29i2kY_IVeExx7maWVOfrtocIeA=s128-c0x00000000-cc-rp-mo
+      rating: 5
+      relative_time_description: 2 years ago
+      text: Royal Pole Dance Academy Wrocław is a super kindly Studio with an nice
+        atmosphere. The owner Agata was able to answer all of my questions before
+        I visited the studio for the first time. Every teacher could speak English
+        with me cause I’m from Germany. Every teacher supported me so much and I had
+        a really nice time there. Thank you Agata and year team for everything! :)
+      time: 1652030770
+      translated: false
+- name: West Coast SWING FEVER Wrocław WCS | Znajdź Swój Styl! Uwonij Westa!!! Be
+    Westies WrocLove & West Coast Swing we Wrocławiu.
+  place_id: ChIJAQBw4QrCD0cR4Yiwq3sa6t4
+  address: plac Orląt Lwowskich 20B, Wrocław
+  location:
+    lat: 51.1082754
+    lng: 17.0198196
+  rating: 5
+  user_ratings_total: 89
+  types:
+  - restaurant
+  - point_of_interest
+  - school
+  - food
+  - establishment
+  details:
+    formatted_address: plac Orląt Lwowskich 20B, 53-605 Wrocław, Poland
+    formatted_phone_number: 690 323 676
+    website: https://westcoastswingwroclaw.love/
+    opening_hours:
+    - 'Monday: Open 24 hours'
+    - 'Tuesday: Open 24 hours'
+    - 'Wednesday: Open 24 hours'
+    - 'Thursday: Open 24 hours'
+    - 'Friday: Open 24 hours'
+    - 'Saturday: Open 24 hours'
+    - 'Sunday: Open 24 hours'
+    reviews:
+    - author_name: Sanw Ruiz Ines
+      author_url: https://www.google.com/maps/contrib/108532055694515014060/reviews
+      language: en
+      original_language: en
+      profile_photo_url: https://lh3.googleusercontent.com/a-/ALV-UjXqK1XNCgHU050oq9JmXn_9zYCf6Q7O9h6dPQnu6TgDgMkSrcU=s128-c0x00000000-cc-rp-mo-ba3
+      rating: 5
+      relative_time_description: 2 months ago
+      text: I'm gonna be completely honest, this is a school to learn and enjoy. The
+        teacher is so nice and helpful, even knowing that I can only speak English,
+        they help me everytime. Lovely environment but, the most important, really
+        nice teachings school. I recommend everyone to go to the west coast swing
+        parties on Sunday, and if you need learn first a little, go to the clases
+        to later go with the teachers to learn and dance ❤️
+      time: 1732643438
+      translated: false
+    - author_name: Maciej Medlarski
+      author_url: https://www.google.com/maps/contrib/101765921695192539444/reviews
+      language: en-US
+      original_language: pl
+      profile_photo_url: https://lh3.googleusercontent.com/a/ACg8ocKBy_ZmTMgDvRJ_LX9oiQouMgmw3paSnyog14LKemNTs_gpwQ=s128-c0x00000000-cc-rp-mo
+      rating: 5
+      relative_time_description: a month ago
+      text: 'We wholeheartedly recommend the West Coast Swing school run by Radek
+        and Julia! From the first classes we could feel their passion for dance and
+        their unique approach to each participant. Trainers are very committed to
+        adapting instructions individually to the level and needs of students, which
+        allows for rapid development of skills in a friendly atmosphere.
+
+        Radek and Julia have impressive knowledge and experience, which they convey
+        in an understandable way and full of positive energy. Thanks to them, we not
+        only learned to dance, but also discovered the joy of moving to the rhythms
+        of West Coast Swing.
+
+
+        The most beautiful proof of their professionalism was the fabulous dance routine
+        they prepared for our wedding. Thanks to them, our first dance became an unforgettable
+        moment full of emotion that delighted all our guests.
+
+
+        We fully recommend the West Coast Swing school to anyone who wants to learn
+        to dance under the supervision of real masters in a warm atmosphere! ❤️'
+      time: 1735638332
+      translated: true
+    - author_name: Mags GQ
+      author_url: https://www.google.com/maps/contrib/102907051721943768351/reviews
+      language: en-US
+      original_language: pl
+      profile_photo_url: https://lh3.googleusercontent.com/a/ACg8ocKGXMYX8t7FNJDuyFg-Yi3aBqGIptS1subbsBz7vu4xrJCuVA=s128-c0x00000000-cc-rp-mo
+      rating: 5
+      relative_time_description: a month ago
+      text: 'West Coast Swing Fever in Wrocław is a dance school that has gained my
+        full approval. This is a place where passion for dance meets professionalism.
+        Regardless of your level of advancement, anyone who wants to learn to dance
+        will find something for themselves here. The teachers are not only talented,
+        but also patient and enthusiastic, which makes learning a pleasure.
+
+
+        The atmosphere at school is incredibly friendly and motivating. Both beginners
+        and more experienced dancers feel comfortable here, and classes are tailored
+        to the individual needs of participants. In addition, West Coast Swing Fever
+        offers numerous dance events and parties that allow you to put your acquired
+        skills into practice in a fun atmosphere.
+
+
+        If you are looking for a place that will combine passion for dance with a
+        professional approach, be sure to contact West Coast Swing Fever. Sign up
+        for lessons and see how much fun dancing can be!
+
+        It''s worth it, it''s worth it'
+      time: 1735803405
+      translated: true
+    - author_name: Mateusz Piłat
+      author_url: https://www.google.com/maps/contrib/110755206111738172848/reviews
+      language: en-US
+      original_language: pl
+      profile_photo_url: https://lh3.googleusercontent.com/a/ACg8ocK9NpZQff0r4xSYmos7Sebv953sN_T5utQz0NBDJvYpby0_zQ=s128-c0x00000000-cc-rp-mo
+      rating: 5
+      relative_time_description: a month ago
+      text: 'I''ve been going to toilet classes for 6 months and with a clear conscience
+        I can recommend this dance school to anyone! At first it was once a week,
+        but the teachers and students alike create a great atmosphere/community that
+        makes me want to go there more often! ;) Instructors are always willing to
+        explain, until very reluctant students (read: me) understand the material
+        ;)
+
+        The classes are conducted in a relaxed and at the same time very professional
+        way, so new skills are the result of good fun ;)
+
+        My friend, who has been dancing wcs for 5 years, said that I made a lot of
+        progress in a short time, so I recommend it! ;)'
+      time: 1735584768
+      translated: true
+    - author_name: Elżbieta Piotrowska
+      author_url: https://www.google.com/maps/contrib/117950427173881305567/reviews
+      language: en-US
+      original_language: pl
+      profile_photo_url: https://lh3.googleusercontent.com/a/ACg8ocJGjt4pkv84q7apB1dGZq5Sxhhd42ThTeR3uwk2NWa2pRIMRw=s128-c0x00000000-cc-rp-mo
+      rating: 5
+      relative_time_description: a month ago
+      text: Great place, worth recommending! Great instructors who have extensive
+        knowledge, passion for dance and over 20 years of experience, which distinguishes
+        this school from others. Classes are conducted in small groups, so you can
+        learn a lot more in a short time. Moreover, there is always a lot of humor
+        and good fun, and the friendly atmosphere fills you with positive energy for
+        the whole week and you can't wait for the next classes :)
+      time: 1734991747
+      translated: true
+- name: Dance Zone (dawniej Blackpool)
+  place_id: ChIJ4_DmEAvCD0cRy3PayBa5pIw
+  address: Świętego Antoniego 23, Wrocław
+  location:
+    lat: 51.10963479999999
+    lng: 17.0242238
+  rating: 5
+  user_ratings_total: 97
+  types:
+  - gym
+  - point_of_interest
+  - school
+  - health
+  - establishment
+  details:
+    formatted_address: Świętego Antoniego 23, 50-073 Wrocław, Poland
+    formatted_phone_number: 792 012 121
+    website: https://dance-zone.pl/
+    opening_hours:
+    - 'Monday: 10:00 AM – 10:00 PM'
+    - 'Tuesday: 10:00 AM – 10:00 PM'
+    - 'Wednesday: 10:00 AM – 10:00 PM'
+    - 'Thursday: 10:00 AM – 10:00 PM'
+    - 'Friday: 10:00 AM – 10:00 PM'
+    - 'Saturday: 11:00 AM – 8:00 PM'
+    - 'Sunday: Closed'
+    reviews:
+    - author_name: Stanislau Bruilo
+      author_url: https://www.google.com/maps/contrib/111514216387013369657/reviews
+      language: en
+      original_language: en
+      profile_photo_url: https://lh3.googleusercontent.com/a/ACg8ocJkFGbIAKLcFAd9F5fSjC0cUEe4Aco3WDbB7ClysxFQDtHHLg=s128-c0x00000000-cc-rp-mo
+      rating: 5
+      relative_time_description: a year ago
+      text: 'My wife and I were attending Dance Zone for about 6 months to prepare
+        first dance for our wedding. We were super lucky to have Joanna as our dancing
+        teacher, who put a lot of efforts, dedication, attention and funny moments
+        into our lessons. She’s extremely professional teacher, who’s passioned about
+        dancing.  She’s able to teach to start dancing to a person, who has zero skills
+        in it.
+
+
+        Joanna helped us to learn two performances: one is first dance, which was
+        so awesome and suprised a lot our guests; second one is a funny dance, which
+        we wanted to implement during the entrance to the wedding venue and again
+        she helped us a lot with that.
+
+
+        Apart from that Joanna is very supportive person, who helped us with some
+        non-dancing related items. She has extremely strong English communication
+        skills, which is really nice bonus, especially for people like us, who don’t
+        know Polish well.
+
+
+        Only positive emotions are left after our classes and we want to say a big
+        thanks for everything to Joanna. We can recommend Dance Zone to everyone☺️'
+      time: 1695023470
+      translated: false
+    - author_name: Yalcin Bican
+      author_url: https://www.google.com/maps/contrib/110248783016140071701/reviews
+      language: en
+      original_language: en
+      profile_photo_url: https://lh3.googleusercontent.com/a-/ALV-UjU88e2Y6oKHkoGFzufP4zmHXN-Gtrzd6SDcSewjJtddssvw5Fg3MQ=s128-c0x00000000-cc-rp-mo-ba4
+      rating: 5
+      relative_time_description: 6 years ago
+      text: I was 2 times there to take private lessons with my wife for our first
+        dance music. Even though it was a slow-turkish music, Asia was able provide
+        us excellent steps and observed our possible mistakes. I strongly recommend
+        this friendly place. The dancing school is near center, which makes easy to
+        commute.
+      time: 1540150657
+      translated: false
+    - author_name: Sebastian Ciesiółka
+      author_url: https://www.google.com/maps/contrib/105344767837030825653/reviews
+      language: en
+      original_language: en
+      profile_photo_url: https://lh3.googleusercontent.com/a/ACg8ocJKHvH9QGjwDv6VbfhcHPF3xH2msN2SMKJYg8A2HypUMJhUmQ=s128-c0x00000000-cc-rp-mo
+      rating: 5
+      relative_time_description: 6 years ago
+      text: 'Joanna showed me that even timber can dance ;)
+
+        Anna is focused on dance technique, she is crazy perfectionist. Keep going.
+
+        Thank you both very much.'
+      time: 1524164930
+      translated: false
+    - author_name: Paulina Drożdż
+      author_url: https://www.google.com/maps/contrib/107604901852874405904/reviews
+      language: en-US
+      original_language: pl
+      profile_photo_url: https://lh3.googleusercontent.com/a/ACg8ocKkyanw14kWCtQFW-QCREWcILxPk4fRYcxZo2PBJTFQsklYOw=s128-c0x00000000-cc-rp-mo-ba2
+      rating: 5
+      relative_time_description: 5 months ago
+      text: After booking the wedding date, the topic of the first dance immediately
+        came up, which terrified my fiancé. We decided that we needed to seek professional
+        help, so we found Asia and it was a bull's-eye. Her patience, persistence,
+        gentle approach and commitment made the first dance go smoothly on the wedding
+        day and we will remember it fondly. Moreover, thanks to learning functional
+        dance, in the meantime we learned to dance with each other at events such
+        as weddings.
+      time: 1725780339
+      translated: true
+    - author_name: Karolina Piecuch
+      author_url: https://www.google.com/maps/contrib/117522090519803204637/reviews
+      language: en-US
+      original_language: pl
+      profile_photo_url: https://lh3.googleusercontent.com/a/ACg8ocJZai_QhlDPfVxtjzjd0x9t7AaaYb1SoVrpf1b8oh9gYY9CLg=s128-c0x00000000-cc-rp-mo
+      rating: 5
+      relative_time_description: 4 months ago
+      text: We wholeheartedly recommend the Dance Zone dance school. Asia is a great
+        teacher. She created beautiful choreography for us, tailored to our skills.
+        Asia is full of passion and ingenuity. The lessons were in a nice atmosphere.
+        We recommend it to everyone because it's really worth it!
+      time: 1726687112
+      translated: true
+- name: SAKUN DANCE STUDIO
+  place_id: ChIJCXd_jNXDD0cRa1veWiKKmCk
+  address: Tęczowa 29, Wrocław
+  location:
+    lat: 51.1059543
+    lng: 17.0161945
+  rating: 4.6
+  user_ratings_total: 10
+  types:
+  - point_of_interest
+  - establishment
+  details:
+    formatted_address: Tęczowa 29, 53-601 Wrocław, Poland
+    formatted_phone_number: 574 493 035
+    website: null
+    opening_hours:
+    - 'Monday: 3:30 – 11:00 PM'
+    - 'Tuesday: 3:30 – 11:00 PM'
+    - 'Wednesday: 3:30 – 11:00 PM'
+    - 'Thursday: 3:30 – 11:00 PM'
+    - 'Friday: 3:30 – 11:00 PM'
+    - 'Saturday: 3:30 – 11:00 PM'
+    - 'Sunday: 3:30 – 11:00 PM'
+    reviews:
+    - author_name: Nataliia Yatsunova
+      author_url: https://www.google.com/maps/contrib/115732434369320152709/reviews
+      language: en-US
+      original_language: pl
+      profile_photo_url: https://lh3.googleusercontent.com/a/ACg8ocI-zCQMvdSLghuJbMiTlahuJLwGXQy6hUtnIlCHtrgFfW4_Hw=s128-c0x00000000-cc-rp-mo
+      rating: 5
+      relative_time_description: 3 years ago
+      text: I heartily recommend it. A great place for children and teenagers who
+        love dancing. Classes conducted at a high level, friendly atmosphere!
+      time: 1631178059
+      translated: true
+    - author_name: Maryna Veremchuk
+      author_url: https://www.google.com/maps/contrib/105284681415224970369/reviews
+      language: en-US
+      original_language: pl
+      profile_photo_url: https://lh3.googleusercontent.com/a-/ALV-UjVKqzCBLfJ_nnGMbnAuiidRFMBZMEn2b9YMvflwryToce_Ln2Zq=s128-c0x00000000-cc-rp-mo-ba3
+      rating: 5
+      relative_time_description: 3 years ago
+      text: I recommend the SAKUN DANCE STUDIO ballroom dancing school. Full professionalism!
+      time: 1628623440
+      translated: true
+    - author_name: Bartosz Lech
+      author_url: https://www.google.com/maps/contrib/105803168718301944514/reviews
+      language: en-US
+      original_language: pl
+      profile_photo_url: https://lh3.googleusercontent.com/a-/ALV-UjWyxAeIxHeMryfTIW03C3v7YGVUfHZ6BVqecoAfAcIPrk3XNvo=s128-c0x00000000-cc-rp-mo
+      rating: 5
+      relative_time_description: 3 years ago
+      text: I heartily recommend it! Full professionalism, committed trainers, great
+        atmosphere :)
+      time: 1629065113
+      translated: true
+    - author_name: Леонид Товсторебров
+      author_url: https://www.google.com/maps/contrib/115254912443633925570/reviews
+      language: en-US
+      original_language: uk
+      profile_photo_url: https://lh3.googleusercontent.com/a/ACg8ocJAadnLFMUMMMqu2cR3sJVwL5SPZjWTEydWSkxxU1uelzGrpQ=s128-c0x00000000-cc-rp-mo-ba4
+      rating: 5
+      relative_time_description: a year ago
+      text: Perfectly
+      time: 1705607308
+      translated: true
+    - author_name: Catherine Ochkas
+      author_url: https://www.google.com/maps/contrib/100805035011093945432/reviews
+      profile_photo_url: https://lh3.googleusercontent.com/a-/ALV-UjXa6mHpM3UfM221WixwA6KLY5uMIubj-hkwNznQP5A86cuInQVD9w=s128-c0x00000000-cc-rp-mo
+      rating: 1
+      relative_time_description: a year ago
+      text: ''
+      time: 1694374268
+      translated: false
+- name: WEST LOVE - West Coast Swing Wrocław
+  place_id: ChIJVV7zaRzDD0cRy3TTgRBz2uU
+  address: tutaj, Wrocław
+  location:
+    lat: 51.094487
+    lng: 17.015786
+  rating: 5
+  user_ratings_total: 62
+  types:
+  - point_of_interest
+  - establishment
+  details:
+    formatted_address: tutaj, 53-333 Wrocław, Poland
+    formatted_phone_number: 511 767 494
+    website: https://www.westlove.pl/
+    opening_hours:
+    - 'Monday: Open 24 hours'
+    - 'Tuesday: Open 24 hours'
+    - 'Wednesday: Open 24 hours'
+    - 'Thursday: Open 24 hours'
+    - 'Friday: Open 24 hours'
+    - 'Saturday: Open 24 hours'
+    - 'Sunday: Open 24 hours'
+    reviews:
+    - author_name: Катенька Яншина
+      author_url: https://www.google.com/maps/contrib/114664227386910189896/reviews
+      language: en
+      original_language: en
+      profile_photo_url: https://lh3.googleusercontent.com/a-/ALV-UjW8wBxdtuxTm-Chpea09v26kGqyhiiWALIm6mpVLBb_Ql8BOY8=s128-c0x00000000-cc-rp-mo
+      rating: 5
+      relative_time_description: a month ago
+      text: Absolutely love these teachers! The level of professionalism, the atmosphere,
+        the passion for dancing, the fuuuuun! Ania & Damian are great both as teachers
+        and as dancers! Happy to be able to learn from them :)
+      time: 1735030245
+      translated: false
+    - author_name: Szymon Gaertig
+      author_url: https://www.google.com/maps/contrib/106967936102541194629/reviews
+      language: en
+      original_language: en
+      profile_photo_url: https://lh3.googleusercontent.com/a/ACg8ocIkasc560MyjBajpXmFtptiDmhsqJ_uQCTRc4Qs4EKxVbnd6Y7p=s128-c0x00000000-cc-rp-mo
+      rating: 5
+      relative_time_description: a month ago
+      text: The best place to learn West Coast Swing in this part of Poland! The atmosphere
+        is amazing, and the lessons are always engaging and fun. Highly recommended
+        for anyone looking to learn or improve their dancing skills!
+      time: 1733951581
+      translated: false
+    - author_name: Duarte Peralta
+      author_url: https://www.google.com/maps/contrib/118262133294550175735/reviews
+      language: en
+      original_language: en
+      profile_photo_url: https://lh3.googleusercontent.com/a-/ALV-UjX_ZrnpbJlC66kio-ZhmC3LAQWsHWGkYVFvzkp1AA4zgtMIX_QLyw=s128-c0x00000000-cc-rp-mo-ba4
+      rating: 5
+      relative_time_description: a month ago
+      text: The best West Coast Swing experience in Wrocław. Great workshops, don't
+        miss their Carnival and Summer Chillout events, great times
+      time: 1734036869
+      translated: false
+    - author_name: Jacek Bosiacki
+      author_url: https://www.google.com/maps/contrib/102543092858621795983/reviews
+      language: en
+      original_language: en
+      profile_photo_url: https://lh3.googleusercontent.com/a-/ALV-UjXszdY1aEbpATo7U8Hq6YSSFZOZr5GnDVVWT17dl401DubBXdU=s128-c0x00000000-cc-rp-mo
+      rating: 5
+      relative_time_description: 3 years ago
+      text: This is the best opportunity in Wrocław to learn WCS. I actually started
+        6 years ago and I am still doing this! The dance is awesome and different
+        then any other dance I know. Definiately worth of trying!
+      time: 1637575619
+      translated: false
+    - author_name: Artur Ciołek
+      author_url: https://www.google.com/maps/contrib/117920527368638731378/reviews
+      language: en-US
+      original_language: pl
+      profile_photo_url: https://lh3.googleusercontent.com/a/ACg8ocI-X-BPXoAK9OqVu0jR6mSy8lJYA6W2DZ_yAHrQ3xUpDjBDuw=s128-c0x00000000-cc-rp-mo
+      rating: 5
+      relative_time_description: a month ago
+      text: 'Gumisie (Ania and Damian) are among the best West instructors in Poland.
+        Each group and individual class and weekend workshops are of a high standard
+        + there is room for a bit of joy and smiles. You can see that the knowledge
+        is well systematized and the way it is conveyed is understandable to everyone.
+        They willingly answer questions and prefer to break a given topic into its
+        first parts rather than leave it unexplained '
+      time: 1734347271
+      translated: true
+- name: JAYU Dance Company
+  place_id: ChIJ-9JbxMfpD0cR5s1ChOef6Gw
+  address: Henryka Sienkiewicza 8a, Wrocław
+  location:
+    lat: 51.1182309
+    lng: 17.044069
+  rating: 4.8
+  user_ratings_total: 38
+  types:
+  - point_of_interest
+  - establishment
+  details:
+    formatted_address: Henryka Sienkiewicza 8a, 50-335 Wrocław, Poland
+    formatted_phone_number: 667 666 615
+    website: https://jayu.pl/
+    opening_hours:
+    - 'Monday: 4:00 – 10:00 PM'
+    - 'Tuesday: 4:00 – 10:00 PM'
+    - 'Wednesday: 4:00 – 10:00 PM'
+    - 'Thursday: 4:00 – 10:00 PM'
+    - 'Friday: 4:00 – 10:00 PM'
+    - 'Saturday: Closed'
+    - 'Sunday: Closed'
+    reviews:
+    - author_name: Marta
+      author_url: https://www.google.com/maps/contrib/117710244008423139848/reviews
+      language: en-US
+      original_language: pl
+      profile_photo_url: https://lh3.googleusercontent.com/a/ACg8ocKSKSuJ4ZH6QLsUzqziKFjYsDKZNB1bSQCOQwerMbNHWrxGqQ=s128-c0x00000000-cc-rp-mo
+      rating: 5
+      relative_time_description: in the last week
+      text: 'The greatest place in Wrocław for every K-pop fan. Classes are conducted
+        in a friendly atmosphere by fantastic instructors who make every effort to
+        ensure that everyone, regardless of age and dance level, feels good and at
+        the same time develops their skills. In addition to K-pop classes, the school
+        offers classes in many other dance styles, such as hip hop, jazz and vouging,
+        as well as weekend workshops with Korean instructors who create choreographies
+        on a daily basis and cooperate with the largest K-pop bands. In addition,
+        students have many opportunities to participate in other activities organized
+        by the school - camps for children and adults, dance shows, and the recently
+        held first edition of the Korean festival.
+
+        The lovely atmosphere and the instructors'' involvement in the development
+        of this place make you want to be here and participate in such a wonderful
+        community as Jayu.'
+      time: 1738338975
+      translated: true
+    - author_name: Joanna Chorbińska
+      author_url: https://www.google.com/maps/contrib/109034411191495047745/reviews
+      language: en-US
+      original_language: pl
+      profile_photo_url: https://lh3.googleusercontent.com/a-/ALV-UjWyzv6mHqNdhzBNQpg9cX0oj4jqfQLjLnjYeEJFWuFcmDEi_gxK=s128-c0x00000000-cc-rp-mo
+      rating: 5
+      relative_time_description: in the last week
+      text: 'The perfect Dance School for every K-pop fan. Great atmosphere and a
+        wide selection of activities for people of all ages (including 18+). The instructors
+        are always nice and professionally prepared for classes. Every six months
+        there is an opportunity to take part in a casting and join one of the closed
+        groups that record covers on YouTube and participate in nationwide dance competitions.
+        In addition, the school organizes regular dance workshops to which it invites
+        famous Korean choreographers who have created choreographies for the biggest
+        K-pop stars.
+
+        The website is very clear, and every week there is a schedule of choreography
+        taught by scholars in specific classes.
+
+        An additional advantage is free parking
+
+        I recommend!'
+      time: 1738335780
+      translated: true
+    - author_name: Anna Kowalska
+      author_url: https://www.google.com/maps/contrib/105169555137377640136/reviews
+      language: en-US
+      original_language: pl
+      profile_photo_url: https://lh3.googleusercontent.com/a/ACg8ocKCL9E0t04eee8BeqhlMRtH5SQ1LuMSG0G9p1q0UbzqAiKAoA=s128-c0x00000000-cc-rp-mo
+      rating: 1
+      relative_time_description: a month ago
+      text: I do not recommend it if you want to sign up for dance classes that take
+        place once a week. The regulations state that the pass is valid for 28 days,
+        i.e. if the month is longer, despite the extension of the pass's validity,
+        you cannot use it because it expires the day before.
+      time: 1734362865
+      translated: true
+    - author_name: Mariusz K
+      author_url: https://www.google.com/maps/contrib/114524515810935129906/reviews
+      language: en-US
+      original_language: pl
+      profile_photo_url: https://lh3.googleusercontent.com/a/ACg8ocIaW0VOZRvliU0lxvAsji1K1Hq5kM9DZAuQRjyj-Sj-3o97JA=s128-c0x00000000-cc-rp-mo-ba3
+      rating: 3
+      relative_time_description: a week ago
+      text: My daughter participates in classes in this club... I used to be very
+        willing, but recently with less and less joy... After reaching a certain number
+        of "clients", I notice that the management tries much less than before...
+        remember... if it's too good, it's not always good it's good... you have to
+        maintain the level all the time, be verbal and conscientious... best regards
+      time: 1737939395
+      translated: true
+    - author_name: Alex Pieniążek
+      author_url: https://www.google.com/maps/contrib/103792115416632199351/reviews
+      language: en-US
+      original_language: pl
+      profile_photo_url: https://lh3.googleusercontent.com/a-/ALV-UjXM4eejMph-cxbCZUftvnTYe07KDSo4eOQfTJ0E0q--FCYF8pnW=s128-c0x00000000-cc-rp-mo
+      rating: 5
+      relative_time_description: in the last week
+      text: 'Great school and great instructors!
+
+        It''s wonderful to see Jayu developing dynamically! I go to classes with pleasure,
+        the atmosphere is great and you can dance with real pleasure and without stress
+        💛'
+      time: 1738352662
+      translated: true
+- name: K-licious Dance Company
+  place_id: ChIJMcDAHQvCD0cRXWLJZcQYioo
+  address: Góralska 5, Wrocław
+  location:
+    lat: 51.10906199999999
+    lng: 17.0023325
+  rating: 4.8
+  user_ratings_total: 21
+  types:
+  - point_of_interest
+  - establishment
+  details:
+    formatted_address: Góralska 5, 53-610 Wrocław, Poland
+    formatted_phone_number: 606 699 367
+    website: null
+    opening_hours:
+    - 'Monday: 6:30 – 9:30 PM'
+    - 'Tuesday: 6:30 – 9:00 PM'
+    - 'Wednesday: 6:30 – 9:00 PM'
+    - 'Thursday: 6:30 – 9:00 PM'
+    - 'Friday: 6:30 – 9:00 PM'
+    - 'Saturday: 6:30 – 9:00 PM'
+    - 'Sunday: 6:30 – 9:00 PM'
+    reviews:
+    - author_name: ANG
+      author_url: https://www.google.com/maps/contrib/107526808095982742615/reviews
+      language: en
+      original_language: en
+      profile_photo_url: https://lh3.googleusercontent.com/a/ACg8ocIP84Kg7KnKBuqZdNZ9VprFaOiIwnfrJVX65POdKVDivrm0rw=s128-c0x00000000-cc-rp-mo
+      rating: 1
+      relative_time_description: a year ago
+      text: The class was cancelled, no-one informed about it. Relation to clients
+        is awful
+      time: 1679151818
+      translated: false
+    - author_name: Dominika Szewczyk
+      author_url: https://www.google.com/maps/contrib/101169717695811190936/reviews
+      language: en-US
+      original_language: pl
+      profile_photo_url: https://lh3.googleusercontent.com/a/ACg8ocKsoPUDZNT4n93odNrzAjzlZ5gjFzWvbke727n1RmNj5rGKoQ=s128-c0x00000000-cc-rp-mo
+      rating: 5
+      relative_time_description: 4 years ago
+      text: 'I love the professionalism and passion that you can feel from the girls
+        from a mile away! The tons of positive energy and the amount of knowledge
+        you can acquire during classes are invaluable. Klicious is like a small, wonderful
+        family, you can feel it from the first moments.
+
+
+        I recommend expanding her circle '
+      time: 1599125662
+      translated: true
+    - author_name: Małgorzata Kudrawiec
+      author_url: https://www.google.com/maps/contrib/109977973351755552575/reviews
+      language: en-US
+      original_language: pl
+      profile_photo_url: https://lh3.googleusercontent.com/a/ACg8ocL7GF49mc9TAagAcTENt8EWvzlVmHQiH2W7UTKG3DQC2mSAPRQ=s128-c0x00000000-cc-rp-mo
+      rating: 5
+      relative_time_description: 4 years ago
+      text: At this school I developed passion and self-confidence in dancing! The
+        classes are conducted by experienced and knowledgeable people, and the atmosphere
+        is pleasant and family-friendly, I recommend it to everyone!
+      time: 1598994553
+      translated: true
+    - author_name: Maria Siemieniec
+      author_url: https://www.google.com/maps/contrib/117011907139568388445/reviews
+      language: en-US
+      original_language: pl
+      profile_photo_url: https://lh3.googleusercontent.com/a-/ALV-UjVNtHdEc0IEfVzKx9Lr6pvR75aXw-_pj2AumHOn4DQKzvJUKQhX=s128-c0x00000000-cc-rp-mo
+      rating: 5
+      relative_time_description: 4 years ago
+      text: Great dance school, great atmosphere and great professionalism. I recommend
+        it to anyone who would like to move a little, learn and have great fun!
+      time: 1611852793
+      translated: true
+    - author_name: Martyna Piotrowska
+      author_url: https://www.google.com/maps/contrib/106850760832635025423/reviews
+      language: en-US
+      original_language: pl
+      profile_photo_url: https://lh3.googleusercontent.com/a/ACg8ocL_3UIHVkjfoTnKvU-t8_7ZsMhgl0p6o_RGC7Dn0ruSK2yE=s128-c0x00000000-cc-rp-mo
+      rating: 5
+      relative_time_description: 4 years ago
+      text: I'm warning you, once you come here, you won't want to leave 😉 Wonderful
+        atmosphere, full professionalism. The presenters are infectious with passion
+        and great motivation. These are firecrackers, not women 🔥💜
+      time: 1611866609
+      translated: true
+- name: SALSA FEVER Dance School Wroclaw
+  place_id: ChIJcwuMS9C1EEcR-gpjDWN-D94
+  address: Stalowa 82, Wrocław
+  location:
+    lat: 51.10158819999999
+    lng: 16.9999042
+  rating: 4.7
+  user_ratings_total: 127
+  types:
+  - point_of_interest
+  - school
+  - establishment
+  details:
+    formatted_address: Stalowa 82, 53-441 Wrocław, Poland
+    formatted_phone_number: 888 777 040
+    website: https://www.salsafever.pl/
+    opening_hours:
+    - 'Monday: Open 24 hours'
+    - 'Tuesday: Open 24 hours'
+    - 'Wednesday: Open 24 hours'
+    - 'Thursday: Open 24 hours'
+    - 'Friday: Open 24 hours'
+    - 'Saturday: Open 24 hours'
+    - 'Sunday: Open 24 hours'
+    reviews:
+    - author_name: Sanw Ruiz Ines
+      author_url: https://www.google.com/maps/contrib/108532055694515014060/reviews
+      language: en
+      original_language: en
+      profile_photo_url: https://lh3.googleusercontent.com/a-/ALV-UjXqK1XNCgHU050oq9JmXn_9zYCf6Q7O9h6dPQnu6TgDgMkSrcU=s128-c0x00000000-cc-rp-mo-ba3
+      rating: 5
+      relative_time_description: a year ago
+      text: So lovely and amazing dance academy. The teachers are very kind and caring
+        for learn properly so nice. Some teachers don't speak English but is not a
+        problem, they try hard to explain and are really good dancers. Recommend at
+        least to try and han fun!!
+      time: 1682853753
+      translated: false
+    - author_name: Marta Malak
+      author_url: https://www.google.com/maps/contrib/111946995592360120058/reviews
+      language: en
+      original_language: en
+      profile_photo_url: https://lh3.googleusercontent.com/a-/ALV-UjU98MuedkMvDK57FmDJzx8boabc88En520uOAJNfTjvteMA9CCF=s128-c0x00000000-cc-rp-mo-ba4
+      rating: 5
+      relative_time_description: a year ago
+      text: Good place to dance salsa or bachata :)
+      time: 1697368421
+      translated: false
+    - author_name: Marce
+      author_url: https://www.google.com/maps/contrib/112496410645459179684/reviews
+      language: en-US
+      original_language: pl
+      profile_photo_url: https://lh3.googleusercontent.com/a/ACg8ocKlmWjJQUrrim50fY5o5dKXZVRC699Z_K1jE8K62z4XlEDnhg=s128-c0x00000000-cc-rp-mo
+      rating: 5
+      relative_time_description: a week ago
+      text: I highly recommend the school, especially Dominican bachata classes with
+        Damian. Great atmosphere, interesting facts about both dance and the Dominican
+        Republic itself - you can see that this is something she really likes, so
+        we feel that she is trying to instill in us the love for this dance. Apart
+        from that, a lot of fun and a very nice group of participants :)
+      time: 1737839048
+      translated: true
+    - author_name: ada szynczewska
+      author_url: https://www.google.com/maps/contrib/114227388029214433823/reviews
+      language: en-US
+      original_language: pl
+      profile_photo_url: https://lh3.googleusercontent.com/a-/ALV-UjUBBDVPo9mxWY36xjFUB6nY-Q18Avq7enzK-o4HxjoT_0SpkvN3=s128-c0x00000000-cc-rp-mo
+      rating: 5
+      relative_time_description: 2 weeks ago
+      text: I have been taking bachata classes for 3 months and I am satisfied with
+        the classes with Damian. Damian is a professional with a great passion for
+        traditional bachata and the Dominican Republic itself. During each class,
+        apart from new figures, we learn interesting facts about the island and the
+        Dominican people. Damian focuses primarily on practical dance skills, i.e.
+        conducting and feeling the music, which is also useful in other styles. There
+        is a family atmosphere during the classes, and the other participants are
+        very helpful in learning new steps. I can wholeheartedly recommend this dance
+        school.
+      time: 1737664428
+      translated: true
+    - author_name: Jakub
+      author_url: https://www.google.com/maps/contrib/117384104992078287465/reviews
+      language: en-US
+      original_language: pl
+      profile_photo_url: https://lh3.googleusercontent.com/a/ACg8ocLIH7C7bcS0uQSEyRt780SrjnrmnCVTvUJGeitso89oKVYMi4c=s128-c0x00000000-cc-rp-mo-ba5
+      rating: 3
+      relative_time_description: 2 weeks ago
+      text: 'From the technical side, I have no objections - the classes allowed me
+        to learn the basics of dance and acquire new skills. In my opinion, they lacked
+        energy and dynamics, which, combined with the lack of a stable group (frequent
+        absences of participants and lack of dancing partners), resulted in a lack
+        of comfort in learning.
+
+
+        I didn''t feel good during the classes, so I decided to end my participation
+        before completing the 3-month course (bachata).'
+      time: 1737195683
+      translated: true
+- name: Pole Dance Institute Wrocław
+  place_id: ChIJGcCFU9rpD0cR-IHhqNb_0KM
+  address: Henryka Sienkiewicza 8A, Wrocław
+  location:
+    lat: 51.1182513
+    lng: 17.044303
+  rating: 4.9
+  user_ratings_total: 217
+  types:
+  - gym
+  - point_of_interest
+  - health
+  - establishment
+  details:
+    formatted_address: Henryka Sienkiewicza 8A, 50-335 Wrocław, Poland
+    formatted_phone_number: 662 262 544
+    website: http://www.poledance-institute.pl/
+    opening_hours:
+    - 'Monday: 3:30 – 9:30 PM'
+    - 'Tuesday: 3:30 – 9:30 PM'
+    - 'Wednesday: 3:30 – 9:30 PM'
+    - 'Thursday: 3:30 – 9:30 PM'
+    - 'Friday: 3:30 – 10:00 PM'
+    - 'Saturday: 9:00 AM – 2:00 PM'
+    - 'Sunday: Closed'
+    reviews:
+    - author_name: A G
+      author_url: https://www.google.com/maps/contrib/115013342932485782692/reviews
+      language: en
+      original_language: en
+      profile_photo_url: https://lh3.googleusercontent.com/a/ACg8ocIWbyxAtZQut6qfkEBKOGFaggp4Ic7EeYzluq_pxhqWn3f0Ccs=s128-c0x00000000-cc-rp-mo
+      rating: 5
+      relative_time_description: 8 months ago
+      text: So happy to see improvements after each class. Very like the studio and
+        my instructor! Recommend
+      time: 1717002013
+      translated: false
+    - author_name: Viktoriya Abdeljalil
+      author_url: https://www.google.com/maps/contrib/112321148907788890872/reviews
+      language: en
+      original_language: en
+      profile_photo_url: https://lh3.googleusercontent.com/a-/ALV-UjWpORMrDjuslHN7l5ch_swe_68YSjtjU5S8_5Nfp1ddvpNwLXkP=s128-c0x00000000-cc-rp-mo
+      rating: 5
+      relative_time_description: 8 years ago
+      text: A very good school. Professionals trainers. Friendly, fun atmosphere.
+        Interesting and varied training. I like coming to class
+      time: 1480582614
+      translated: false
+    - author_name: Ксения Коляда
+      author_url: https://www.google.com/maps/contrib/103755157742742955170/reviews
+      language: en
+      original_language: en
+      profile_photo_url: https://lh3.googleusercontent.com/a-/ALV-UjV9bc_Efyq3MlXXFEWQUsbni98HRgNAvC8XCIgZFlFE4MwcR2Y=s128-c0x00000000-cc-rp-mo
+      rating: 5
+      relative_time_description: 8 months ago
+      text: The best pole dance studio in Wroclaw!
+      time: 1716573787
+      translated: false
+    - author_name: Pavlo Berdiuhin
+      author_url: https://www.google.com/maps/contrib/101376645562762471878/reviews
+      language: en
+      original_language: en
+      profile_photo_url: https://lh3.googleusercontent.com/a-/ALV-UjXMbbCcmg_0LAd5pS2NC1GLxxb9J7RliFK244XAG4mQH489Z_rA=s128-c0x00000000-cc-rp-mo
+      rating: 5
+      relative_time_description: 8 months ago
+      text: My daughters very like this place.
+      time: 1717509752
+      translated: false
+    - author_name: Mariya Gruzinova
+      author_url: https://www.google.com/maps/contrib/113049831139674432088/reviews
+      language: en
+      original_language: en
+      profile_photo_url: https://lh3.googleusercontent.com/a-/ALV-UjW3sXY3ke0csg8BsQG0E5AZFiahCLhqoJWcLAG2ufRCZWSTz8zg8Q=s128-c0x00000000-cc-rp-mo
+      rating: 5
+      relative_time_description: 8 months ago
+      text: Best of the best!
+      time: 1716573817
+      translated: false
+- name: Music & Motion Aerial Dance Studio
+  place_id: ChIJgSvxY_PCD0cR60D29TNRMjE
+  address: Powstańców Śląskich 159, Wrocław
+  location:
+    lat: 51.0845028
+    lng: 17.0104164
+  rating: 5
+  user_ratings_total: 33
+  types:
+  - gym
+  - point_of_interest
+  - health
+  - establishment
+  details:
+    formatted_address: Powstańców Śląskich 159, 53-138 Wrocław, Poland
+    formatted_phone_number: null
+    website: http://musicandmotion.pl/
+    opening_hours:
+    - 'Monday: 10:00 AM – 10:00 PM'
+    - 'Tuesday: 10:00 AM – 10:00 PM'
+    - 'Wednesday: 10:00 AM – 10:00 PM'
+    - 'Thursday: 10:00 AM – 10:00 PM'
+    - 'Friday: 10:00 AM – 10:00 PM'
+    - 'Saturday: 9:00 AM – 1:00 PM'
+    - 'Sunday: Closed'
+    reviews:
+    - author_name: Ane Sz
+      author_url: https://www.google.com/maps/contrib/115077408270190066615/reviews
+      language: en-US
+      original_language: pl
+      profile_photo_url: https://lh3.googleusercontent.com/a-/ALV-UjW9r_HVxjLq-KrQwiX_lgdHWsvIP5ikDFVMeJsdOkTK1RkZqnsO=s128-c0x00000000-cc-rp-mo-ba2
+      rating: 5
+      relative_time_description: 2 years ago
+      text: I've never been to a better school in my life. Empathetic professionalism
+        and very good organization. You can count on the help of instructors during
+        classes. Great atmosphere. Personally, I like the fact that multisport is
+        not supported - there are no crowds, and those attending the classes are more
+        engaged in them, they see how much and what they are paying for.
+      time: 1667505270
+      translated: true
+    - author_name: Ewa Tamioła
+      author_url: https://www.google.com/maps/contrib/106201362314533980861/reviews
+      language: en-US
+      original_language: pl
+      profile_photo_url: https://lh3.googleusercontent.com/a-/ALV-UjVD-pCalKLLEvN3Mg4zoxx9dlUQiIj0qzOvcvcIsJVH1Cqlzqwo=s128-c0x00000000-cc-rp-mo
+      rating: 5
+      relative_time_description: 2 years ago
+      text: 'A great place to take your first steps on tubing! The trainer is always
+        helpful, adjusts the figures to the capabilities of a given person, suggests
+        various ways to get into the figure and supports each training person.
+
+        Every beginner will feel taken care of, and experienced people won''t be bored
+        either! 😊'
+      time: 1655224632
+      translated: true
+    - author_name: Magda Packa
+      author_url: https://www.google.com/maps/contrib/107204852128480510910/reviews
+      language: en-US
+      original_language: pl
+      profile_photo_url: https://lh3.googleusercontent.com/a-/ALV-UjULVtZq27NjhczCQMhENJTWj-_uNFnjyQWLv8o-2WPUziM6cHIX=s128-c0x00000000-cc-rp-mo
+      rating: 5
+      relative_time_description: 3 years ago
+      text: 'I highly recommend the classes! It is true that there is no entry to
+        multi sport, but it is worth the price. On the plus side: the instructor''s
+        very individual approach, everyone has their own equipment during classes
+        (and not shared with another person). Additionally, you can always use the
+        equipment for a while after classes and, for example, take a photo or practice
+        your figure again. I am very pleased :)'
+      time: 1637148836
+      translated: true
+    - author_name: Lecę wysoko, lecę nisko
+      author_url: https://www.google.com/maps/contrib/114845783110228746299/reviews
+      language: en-US
+      original_language: pl
+      profile_photo_url: https://lh3.googleusercontent.com/a-/ALV-UjUCyY4dHUfJM0cBvElvLFvFvNYXivHjdNkwYTk5vgFLyQ5SGptaSQ=s128-c0x00000000-cc-rp-mo
+      rating: 5
+      relative_time_description: 3 years ago
+      text: Wow, I'm 12 years old, I've been going to pole dancing for 3 months, sashes
+        for 2 months and circus classes for a month, and I can really recommend it
+        wholeheartedly. Within a few months I was already advanced in pole dancing.
+        The trainer is very nice, during the classes I can go to the toilet at any
+        time, drink water, and even if I feel dizzy, etc., I can eat something.
+      time: 1614407895
+      translated: true
+    - author_name: Małgorzata Stanek
+      author_url: https://www.google.com/maps/contrib/108417677797485538611/reviews
+      language: en-US
+      original_language: pl
+      profile_photo_url: https://lh3.googleusercontent.com/a/ACg8ocL1PO5BIqScvOHgUY2CY82BVYKXxlKh4QcWdzUb5bPJIB_bEQ=s128-c0x00000000-cc-rp-mo
+      rating: 5
+      relative_time_description: 8 years ago
+      text: I attend sashes and zumba. A great instructor - she creates new systems
+        and configurations with great commitment and passion. Intimate atmosphere,
+        you can meet interesting people, all mass events do not compare to this place.
+        I recommend :)
+      time: 1470310410
+      translated: true
+- name: Emily Pole Dance School
+  place_id: ChIJS8jOTEDDD0cR94_y7spdfeY
+  address: Tadeusza Kościuszki 117/3u, Wrocław
+  location:
+    lat: 51.099531
+    lng: 17.044297
+  rating: 5
+  user_ratings_total: 16
+  types:
+  - point_of_interest
+  - establishment
+  details:
+    formatted_address: Tadeusza Kościuszki 117/3u, 50-442 Wrocław, Poland
+    formatted_phone_number: 669 844 777
+    website: https://instagram.com/emily.poledance.school?igshid=YmMyMTA2M2Y=
+    opening_hours:
+    - 'Monday: 4:00 – 10:00 PM'
+    - 'Tuesday: 4:00 – 10:00 PM'
+    - 'Wednesday: 4:00 – 10:00 PM'
+    - 'Thursday: 4:00 – 10:00 PM'
+    - 'Friday: 4:00 – 9:00 PM'
+    - 'Saturday: 10:00 AM – 4:00 PM'
+    - 'Sunday: 11:00 AM – 4:00 PM'
+    reviews:
+    - author_name: Валера Фанипон
+      author_url: https://www.google.com/maps/contrib/109619629132678174826/reviews
+      language: en-US
+      original_language: pl
+      profile_photo_url: https://lh3.googleusercontent.com/a/ACg8ocLEFhO7aAKho-c4YHkwgza1-bpp2VzWnDJs_OpI137-xNe4=s128-c0x00000000-cc-rp-mo
+      rating: 5
+      relative_time_description: 3 months ago
+      text: Incredibly nice studio, what I love most is the individual approach from
+        the instructors❤️🥰🔥
+      time: 1729533018
+      translated: true
+    - author_name: Ola Fasola
+      author_url: https://www.google.com/maps/contrib/111691927487564998198/reviews
+      language: en-US
+      original_language: pl
+      profile_photo_url: https://lh3.googleusercontent.com/a-/ALV-UjVuOI0ZWSi5nz64JtMo4T77DbXy2eUFNIpA0brXXNlRy_kWZfD9=s128-c0x00000000-cc-rp-mo
+      rating: 5
+      relative_time_description: a year ago
+      text: In general, the trainers are VERY NICE and they explain everything wonderfully
+        if you don't understand it, I personally have Mrs. Klaudia and she is great.
+        He always gives us time to practice our figure, and when necessary, he returns
+        to a specific moment that we did not understand. I love this place with all
+        my heart and I will never regret the time spent on travel and other matters.
+      time: 1698861260
+      translated: true
+    - author_name: Paulina Zarzycka
+      author_url: https://www.google.com/maps/contrib/109877721488704168535/reviews
+      language: en-US
+      original_language: pl
+      profile_photo_url: https://lh3.googleusercontent.com/a/ACg8ocJaiZ1pQjK1StmT0lG3nE1Z4Ak-j7SOh8tVUDsmR3r8s38E3w=s128-c0x00000000-cc-rp-mo-ba3
+      rating: 5
+      relative_time_description: 2 years ago
+      text: I recommend the school with all my heart 💕 The school was founded recently,
+        so brand new tubes, sashes, wheels. Beautifully decorated, reflecting the
+        character of this place 😁 Passionate instructors, with extensive knowledge
+        and commitment to their work. When I go to classes, I feel taken care of as
+        an individual, but also as a group developing under the supervision of the
+        trainer 😄 Once again, I highly recommend it! 👍
+      time: 1664799843
+      translated: true
+    - author_name: Barbara Wierzbicka
+      author_url: https://www.google.com/maps/contrib/101941333849652060468/reviews
+      language: en-US
+      original_language: pl
+      profile_photo_url: https://lh3.googleusercontent.com/a-/ALV-UjWRTDCdUIS1bshVPfv-C1IRb8As0Xki12pbEsGTooMjxbKRVBCj=s128-c0x00000000-cc-rp-mo
+      rating: 5
+      relative_time_description: a year ago
+      text: It's hard to fault anything. Emilia's school beats the biggest no-limits
+        competition. The rules are friendly, the rooms are not overcrowded, you can
+        do your homework whenever you want. Small school, but everything is as it
+        should be. Instructors at the highest level. I recommend Wednesday high heels.
+        :)
+      time: 1694687605
+      translated: true
+    - author_name: Marta Pysz
+      author_url: https://www.google.com/maps/contrib/105343451051032878053/reviews
+      language: en-US
+      original_language: pl
+      profile_photo_url: https://lh3.googleusercontent.com/a-/ALV-UjWzG4Lvel0zkyD_Rseb9_rXuleWVmBdB1HOsAzgTMe9ZZTc1lHGtg=s128-c0x00000000-cc-rp-mo
+      rating: 5
+      relative_time_description: a year ago
+      text: The best studio in all of Wrocław, nowhere else has such a homely atmosphere.
+        Instructor staff - full professionalism. I recommend it with all my heart
+        ❤️
+      time: 1679940651
+      translated: true
+- name: La Rosa Negra
+  place_id: ChIJXXURMwjCD0cRVyCw9ZzSros
+  address: Braniborska 14, Wrocław
+  location:
+    lat: 51.110585
+    lng: 17.013989
+  rating: 4.8
+  user_ratings_total: 259
+  types:
+  - point_of_interest
+  - establishment
+  details:
+    formatted_address: Braniborska 14, 53-680 Wrocław, Poland
+    formatted_phone_number: 536 917 536
+    website: http://larosanegra.wroclaw.pl/
+    opening_hours:
+    - 'Monday: 12:00 – 10:00 PM'
+    - 'Tuesday: 12:00 – 10:00 PM'
+    - 'Wednesday: 12:00 – 10:00 PM'
+    - 'Thursday: 12:00 – 10:00 PM'
+    - 'Friday: 12:00 – 10:00 PM'
+    - 'Saturday: Closed'
+    - 'Sunday: Closed'
+    reviews:
+    - author_name: Flow Biboux
+      author_url: https://www.google.com/maps/contrib/103315890754048379079/reviews
+      language: en
+      original_language: en
+      profile_photo_url: https://lh3.googleusercontent.com/a-/ALV-UjUlDxMbJMKB1ZNuUGOGG9PGeuIiLrnaVNbFw_5ikmrvbsSNRfu8=s128-c0x00000000-cc-rp-mo
+      rating: 1
+      relative_time_description: 6 months ago
+      text: 'Terrible expérience
+
+        I wanted to join tango class today
+
+        You need to sign up through a form online on a website only accessible in
+        polish...
+
+        Then the teacher contacted me by mail saying that if I want to join, I need
+        to come in couple.
+
+        I''m in holiday here so it was not very pleasant to ask people to come with
+        me and convince them.
+
+        Only to arrive for the lesson and being told the class was canceled...'
+      time: 1721230015
+      translated: false
+    - author_name: gambarimas87
+      author_url: https://www.google.com/maps/contrib/112604666704608328784/reviews
+      language: en
+      original_language: en
+      profile_photo_url: https://lh3.googleusercontent.com/a-/ALV-UjX0mjJp4kVObHTHc3s0l8sDqcIMD0Iv_TufXaSkr_LRiQA2JEE=s128-c0x00000000-cc-rp-mo
+      rating: 5
+      relative_time_description: 3 years ago
+      text: A great dancing school in Wroclaw  Poland. Many large classroom, very
+        well organized lessons  and good instructors. Recommended!
+      time: 1628264805
+      translated: false
+    - author_name: André Novaes
+      author_url: https://www.google.com/maps/contrib/114354600730037274962/reviews
+      language: en
+      original_language: en
+      profile_photo_url: https://lh3.googleusercontent.com/a-/ALV-UjVREmSm0qZc7rZ2cbVsdEYhhiADlHscBGZB0-uIa7Vp3UX_1eIq=s128-c0x00000000-cc-rp-mo-ba3
+      rating: 5
+      relative_time_description: 3 years ago
+      text: 'Perfect place and school to learn and dance, principally Bachata! Salsa
+        and Zouk also! : )'
+      time: 1626719964
+      translated: false
+    - author_name: eM eS
+      author_url: https://www.google.com/maps/contrib/101346642947913643208/reviews
+      language: en
+      original_language: en
+      profile_photo_url: https://lh3.googleusercontent.com/a/ACg8ocISgKZPFjCUUPMkIYmv_va0aohNaRYREM_TV6JUSsAhv1ZcoQ=s128-c0x00000000-cc-rp-mo
+      rating: 5
+      relative_time_description: 4 years ago
+      text: The very best dance school in Wroclaw. Teachers, atmosphere, interior
+        design...all top level
+      time: 1612215641
+      translated: false
+    - author_name: Olga Chernega
+      author_url: https://www.google.com/maps/contrib/109016478214564032289/reviews
+      language: en
+      original_language: en
+      profile_photo_url: https://lh3.googleusercontent.com/a-/ALV-UjUv5IrodiuboXPNmMb1fYSrxxN-F6Q_z8eytR9zvwWxF2XSaGab=s128-c0x00000000-cc-rp-mo
+      rating: 5
+      relative_time_description: a year ago
+      text: The best dance school in Wrocław.
+      time: 1692626094
+      translated: false
+- name: IGLICA School of Dance
+  place_id: ChIJvctSy3PCD0cRBdQNWPWQd30
+  address: Grabiszyńska 251D, Wrocław
+  location:
+    lat: 51.0969005
+    lng: 16.9846004
+  rating: 4.7
+  user_ratings_total: 62
+  types:
+  - point_of_interest
+  - establishment
+  details:
+    formatted_address: Grabiszyńska 251D, 53-234 Wrocław, Poland
+    formatted_phone_number: 71 342 39 13
+    website: http://www.tanieciglica.pl/
+    opening_hours:
+    - 'Monday: 3:00 – 10:00 PM'
+    - 'Tuesday: 3:00 – 10:00 PM'
+    - 'Wednesday: 3:00 – 10:00 PM'
+    - 'Thursday: 3:00 – 10:00 PM'
+    - 'Friday: 3:00 – 10:00 PM'
+    - 'Saturday: 10:00 AM – 1:00 PM'
+    - 'Sunday: Closed'
+    reviews:
+    - author_name: michele scardaci
+      author_url: https://www.google.com/maps/contrib/117445728264866118111/reviews
+      language: en
+      original_language: en
+      profile_photo_url: https://lh3.googleusercontent.com/a/ACg8ocJ_VDFfyhosgWB0duhy1hv3LSyEj4pQvTR_DRbmzpLMWCeHwA=s128-c0x00000000-cc-rp-mo-ba4
+      rating: 5
+      relative_time_description: 11 months ago
+      text: The best entertainment ever, if you like dancing and open to learn something
+        new that school will suits you.  No stress, only fun,  I strongly recommend
+        it.
+      time: 1709751547
+      translated: false
+    - author_name: Leszek Miller
+      author_url: https://www.google.com/maps/contrib/117193160777787033909/reviews
+      language: en-US
+      original_language: pl
+      profile_photo_url: https://lh3.googleusercontent.com/a/ACg8ocKgyU_sffxS0TjMAb4lHU0Suy8kKgHlFUA83Mqgxc-qnuxOcQ=s128-c0x00000000-cc-rp-mo
+      rating: 5
+      relative_time_description: 3 months ago
+      text: Great dance school. Everyone can learn dance skills here; from the youngest
+        to the oldest and at every level of advancement. I came to the club with my
+        partner, aged about 50, with the intention of learning basic steps for a month-long
+        course. Currently, we have been practicing for almost 17 years and winning
+        trophies at the most important dance tournaments.
+      time: 1728572448
+      translated: true
+    - author_name: Мира Попова
+      author_url: https://www.google.com/maps/contrib/100735549333459406331/reviews
+      language: en-US
+      original_language: pl
+      profile_photo_url: https://lh3.googleusercontent.com/a/ACg8ocIaZPfCK9iykBRUEeZJi9b-BoBiXBNYL2O6roevxxsXfgRCuA=s128-c0x00000000-cc-rp-mo
+      rating: 1
+      relative_time_description: 5 months ago
+      text: school is terrible! teachers are shouting all the time. they do unfair
+        things. she used to be a coach, she kept pissing me off from all the shame!
+        especially when in the group we danced singles before the rest, she kept forcing
+        me to be the first. I told her that I didn't want to be the first because
+        I didn't remember the dance. She didn't pay attention. Horrible trainer! Another
+        part - the children are terrible. I arrived in November 2023 right away. they
+        didn't like meyag. I didn't do anything to them. I went through it for two
+        years. and I never found any friends. there were still many situations. if
+        you don't want to resist the urge to dance and remember dancing as something
+        not pleasant - don't sign up
+      time: 1725476812
+      translated: true
+    - author_name: Grazyna Martusewicz
+      author_url: https://www.google.com/maps/contrib/114071603573534780299/reviews
+      language: en-US
+      original_language: pl
+      profile_photo_url: https://lh3.googleusercontent.com/a/ACg8ocLK-oY2TnFKTCwkYdlv1m5YZIMExNY8DnFl8zvz3M-YndbSFA=s128-c0x00000000-cc-rp-mo
+      rating: 5
+      relative_time_description: 3 months ago
+      text: Great school and dance club. Great instructors and training conditions.
+        We were infected with passion for dancing and from the dance course we reached
+        the finals of the Polish Championships :)
+      time: 1728587189
+      translated: true
+    - author_name: Mateusz Jahdgd
+      author_url: https://www.google.com/maps/contrib/106079743608408014237/reviews
+      language: en-US
+      original_language: pl
+      profile_photo_url: https://lh3.googleusercontent.com/a/ACg8ocIWzhD53M0bQ7Y-HFQd6E4Z9R8RacGL0D612GWXQrKmFLjZUw=s128-c0x00000000-cc-rp-mo
+      rating: 1
+      relative_time_description: 3 months ago
+      text: Terrible, poor attitude towards children. Only money, money. Mrs. Gosia
+        is one of the worst dance teachers we have ever had. Absolutely No!
+      time: 1730378088
+      translated: true
+- name: Szkoła Tańca Egurrola Dance Studio Wrocław
+  place_id: ChIJZ3V87mrCD0cR1a51JJVraHY
+  address: Powstańców Śląskich 95, Wrocław
+  location:
+    lat: 51.0941734
+    lng: 17.0193386
+  rating: 4.2
+  user_ratings_total: 70
+  types:
+  - point_of_interest
+  - school
+  - establishment
+  details:
+    formatted_address: Powstańców Śląskich 95, 53-332 Wrocław, Poland
+    formatted_phone_number: 601 539 539
+    website: https://egurrola.com/lokalizacje/szkola-tanca-wroclaw/
+    opening_hours:
+    - 'Monday: 10:00 AM – 10:00 PM'
+    - 'Tuesday: 10:00 AM – 10:00 PM'
+    - 'Wednesday: 10:00 AM – 10:00 PM'
+    - 'Thursday: 10:00 AM – 10:00 PM'
+    - 'Friday: 10:00 AM – 10:00 PM'
+    - 'Saturday: 9:00 AM – 7:00 PM'
+    - 'Sunday: 10:00 AM – 4:00 PM'
+    reviews:
+    - author_name: Ireneusz Kokawski
+      author_url: https://www.google.com/maps/contrib/107437310579126677514/reviews
+      language: en
+      original_language: en
+      profile_photo_url: https://lh3.googleusercontent.com/a-/ALV-UjU-RLkWGdIATuxCU8lRwQS6e3cdBZNlOEsUXOjnJIkShT8AQ6Es=s128-c0x00000000-cc-rp-mo
+      rating: 5
+      relative_time_description: 2 years ago
+      text: SUPCIO !!!
+      time: 1665596635
+      translated: false
+    - author_name: Paweł
+      author_url: https://www.google.com/maps/contrib/105693952476587983136/reviews
+      language: en-US
+      original_language: pl
+      profile_photo_url: https://lh3.googleusercontent.com/a/ACg8ocKA8Ozq6gCk-6_eTcg7_3qsLmkbyzQvI5BaKHPSJUi-KwjqHw=s128-c0x00000000-cc-rp-mo-ba4
+      rating: 1
+      relative_time_description: 8 months ago
+      text: 'It''s supposed to be pleasant during classes - and that''s all there
+        is to it. Unfortunately, groups merge very often, the trainer is often absent
+        and classes are postponed to other dates (often different days). There is
+        not even an attempt to swap assistants to keep the day the same. Merging groups
+        means that 7-year-old children dance together with 3-year-olds... :/ overall,
+        very poor organization and it is clear that many things are not well done.
+        I have the impression that the only thing that matters is obtaining funds
+        and there is no commitment to maintaining at least a relative level of organization
+        of classes.
+
+        This is so discouraging that I doubt we will decide to take part in, for example,
+        summer camps or further classes next year.'
+      time: 1717229219
+      translated: true
+    - author_name: Rock kock
+      author_url: https://www.google.com/maps/contrib/116076417468751445483/reviews
+      language: en-US
+      original_language: pl
+      profile_photo_url: https://lh3.googleusercontent.com/a/ACg8ocIlUOs_P-jn-dW0ikM5HY5uh8QRV6R_v-9uj50memetkBx45A=s128-c0x00000000-cc-rp-mo
+      rating: 5
+      relative_time_description: 7 months ago
+      text: Since the opening, my child has been attending classes at Egurrola dance
+        studio Wrocław. I have always heard very positive words directed towards the
+        trainers and the entire place and the atmosphere between peers and teachers.
+        All smaller performances or larger events ended with successes and happy memories
+        with lots of happy stories. I don't understand the attitude of some people
+        in other opinions, because I think they say things that are not entirely true
+        and turn things that don't cause any major problems for anyone into unpleasant
+        ones.
+      time: 1720638665
+      translated: true
+    - author_name: Magdalena Potocka
+      author_url: https://www.google.com/maps/contrib/112927012967533667374/reviews
+      language: en-US
+      original_language: pl
+      profile_photo_url: https://lh3.googleusercontent.com/a-/ALV-UjWOUUbuncOIJXLcEPcbOEp49Lkot4-JIlfrb7CM6Q_c3SNR7iTK=s128-c0x00000000-cc-rp-mo-ba4
+      rating: 1
+      relative_time_description: 7 months ago
+      text: 'I advise against it. No contact with the trainer. Arrangements are made
+        with minor participants on Messenger, without any information to the parents
+        (we are the ones who sign the contract, bring the child and PAY). Once I tried
+        to ask the coach about the time of the performance, and she closed the door
+        in my face. Even though I asked the reception to tell the trainer that we
+        expected contact on key issues, nothing changed. The highlight is the trainer''s
+        complaints that the child is doing his homework (and we confirmed the date),
+        and in addition, she was directing her complaints at the child who did not
+        know how to defend himself.
+
+
+        The reception employs polite people, but we often received text messages saying
+        "we remind you that training...", when in fact it was the first information
+        that reached us, and not any reminder. I also don''t know if it is very professional
+        that, while waiting for the end of the class, I can listen closely to a loud
+        conversation about who paid and who did not pay for a certain trip (names
+        and surnames are mentioned).
+
+
+        I do not and will not trust this school anymore.'
+      time: 1719002471
+      translated: true
+    - author_name: Kasia Składzień
+      author_url: https://www.google.com/maps/contrib/118056882451971295173/reviews
+      language: en-US
+      original_language: pl
+      profile_photo_url: https://lh3.googleusercontent.com/a/ACg8ocLaFbzYPohWGC4plYtNxAG6ezK969BbfbwOc5ECaZ71aqfJXw=s128-c0x00000000-cc-rp-mo
+      rating: 5
+      relative_time_description: 7 months ago
+      text: The school offers great opportunities for development, which is provided
+        in many different forms. The atmosphere during every class is great. The contact
+        with the coaches is very good, there are no communication problems. I recommend!!!
+      time: 1720639176
+      translated: true
+- name: Hashtag Pole Dance
+  place_id: ChIJeZ8ms7npD0cRKLTCjXGwGaM
+  address: Jedności Narodowej 203, Wrocław
+  location:
+    lat: 51.1280219
+    lng: 17.053921
+  rating: 4.9
+  user_ratings_total: 130
+  types:
+  - point_of_interest
+  - establishment
+  details:
+    formatted_address: Jedności Narodowej 203, 50-304 Wrocław, Poland
+    formatted_phone_number: 502 203 984
+    website: https://hashtagpoledance.pl/
+    opening_hours:
+    - 'Monday: 4:00 – 10:00 PM'
+    - 'Tuesday: 4:00 – 10:00 PM'
+    - 'Wednesday: 4:00 – 10:00 PM'
+    - 'Thursday: 4:00 – 10:00 PM'
+    - 'Friday: 4:00 – 10:00 PM'
+    - 'Saturday: Closed'
+    - 'Sunday: Closed'
+    reviews:
+    - author_name: Anastasiya Khe
+      author_url: https://www.google.com/maps/contrib/112319670951273378648/reviews
+      language: en
+      original_language: en
+      profile_photo_url: https://lh3.googleusercontent.com/a/ACg8ocIHDh37G-OFBM9CVRCtWSgtbuApZ70ts1C4aBLffeK9ZgHrjiM=s128-c0x00000000-cc-rp-mo-ba4
+      rating: 5
+      relative_time_description: 6 months ago
+      text: I love the atmosphere! The lessons are really fun and the teachers are
+        nice. Would be nice to have napkins to disinfect the poles.
+      time: 1722196762
+      translated: false
+    - author_name: Amelia Nowak
+      author_url: https://www.google.com/maps/contrib/107684827963596858910/reviews
+      language: pl
+      original_language: pl
+      profile_photo_url: https://lh3.googleusercontent.com/a-/ALV-UjVy5szJeBf9HzOHzQ5obwD0gC7Hx6QDZ3TuxLAt5zli5wdIJQ=s128-c0x00000000-cc-rp-mo
+      rating: 5
+      relative_time_description: 2 months ago
+      text: 'W Hashtagu zaczęłam swoją przygodę z pole dance od samego zera i jestem
+        wdzięczna, że mogłam zacząć w tak cudownym, inspirującym i wspierającym miejscu
+        🥹🥹.
+
+        Kocham chodzić tutaj na zajęcia, zawsze sama myśl o treningu mnie cieszy,
+        za każdym razem wychodzę stąd ze świeżym umysłem i dawką energii. Atmosfera
+        jest mega przyjazna i komfortowa, jak w domu tylko takim z szatnią i rurami.
+        Instruktorzy są pełni profesjonalizmu oraz pasji. Każde zajęcia to świetna
+        zabawa połączona z intensywnym treningiem 💪🔥🏋️‍♀️.
+
+        Dodam jeszcze że można sobie zrobić pyszną kawkę i zawsze mają coś dobrego
+        do przegryzienia ☕🍪.
+
+        Sprzęt jest nowoczesny, wystrój i styl przepiękny, sale są przestronne i czyste,
+        co sprawia, że treningi odbywają się w komfortowych warunkach.
+
+        Polecam to studio każdemu, kto chce spróbować czegoś nowego, rozwijać swoją
+        siłę i gibkość, a przy okazji zyskać pewność siebie i pokazać samemu sobie
+        ile jest się w stanie zrobić. Nie ważne na jakim się jest poziomie– tutaj
+        znajdziesz wsparcie i motywację na każdym etapie swojej przygody z pole dance!
+        👯‍♀️💞🤸‍♀️'
+      time: 1733690012
+      translated: false
+    - author_name: Wiktoria Brzęczek
+      author_url: https://www.google.com/maps/contrib/116943294605090006523/reviews
+      language: en-US
+      original_language: pl
+      profile_photo_url: https://lh3.googleusercontent.com/a/ACg8ocLNfTR1dH24MITYRiZ1iY2WxBmbO_uy9hOIbZlDYEeJDeQ1HQ=s128-c0x00000000-cc-rp-mo
+      rating: 5
+      relative_time_description: 3 months ago
+      text: I took my first classes completely by accident, but it turned out to be
+        one of the best accidents of my life. The place itself is very aesthetic and
+        pleasing to the eye, and the atmosphere there makes you feel incredibly comfortable.
+        The entire team is so passionate about tubing that it makes you want to come
+        back. Classes with Nina are a hit, because you can learn not only complicated
+        figures, but also the flow that makes the whole thing more effective, but
+        you can also count on great support and attention to detail :) I recommend
+        it to everyone, I didn't think so that I will like pole dancing so much, but
+        thanks to the hashtag classes, I can't imagine it being any different now
+      time: 1729621050
+      translated: true
+    - author_name: Agnieszka Czuchajewska
+      author_url: https://www.google.com/maps/contrib/105939594822111221091/reviews
+      language: en-US
+      original_language: pl
+      profile_photo_url: https://lh3.googleusercontent.com/a-/ALV-UjWOJsHlOULdfzgZRlJ3WfqFhMIjHSbBo8KZRNXrHHWveScZlbGw=s128-c0x00000000-cc-rp-mo
+      rating: 5
+      relative_time_description: a month ago
+      text: 'I recommend Hashtag Pole Dance to everyone who feels tempted to try it,
+        but wonders "Is it for me? Will I be able to handle it? How will I feel if
+        I am completely new to the subject?"
+
+
+        The girls who run this place create a fantastic atmosphere from the first
+        contact - you immediately feel welcome, even though you don''t know anyone
+        yet :)
+
+        Moreover, they teach very well - from the basics, step by step. You can feel
+        the progress from month to month.
+
+
+        The best answer to the question whether this sport is for me is to answer
+        for yourself. But Hashtag certainly provides great conditions to find out
+        😊'
+      time: 1733845102
+      translated: true
+    - author_name: avi Pppp
+      author_url: https://www.google.com/maps/contrib/114165316996210780818/reviews
+      language: en-US
+      original_language: pl
+      profile_photo_url: https://lh3.googleusercontent.com/a-/ALV-UjWJZAqjAc5t4k838PabTK748PFhcqPiJgFRhL1YkBn2kxVT8lEj=s128-c0x00000000-cc-rp-mo-ba2
+      rating: 5
+      relative_time_description: 4 months ago
+      text: Yesterday I attended my first "Pole dance from scratch" class with the
+        trainer Ada and I really liked it, the instructor showed how to perform a
+        given figure and helped when someone needed protection. After stretching with
+        the instructors Patrycja and Nina, I noticed the effects after the first class,
+        just a few hours after the exercises I started to "feel" all the stretched
+        parts, even the abdominal muscles. Hashtag Pole Dance is a very cool place
+        where you can combine complementary training with pole dancing :)
+      time: 1726085737
+      translated: true
+- name: Pole Dance House
+  place_id: ChIJ883AeoDDD0cRuw2eTc7KlEU
+  address: Nyska 79, Wrocław
+  location:
+    lat: 51.0841049
+    lng: 17.0525542
+  rating: 4.9
+  user_ratings_total: 59
+  types:
+  - point_of_interest
+  - establishment
+  details:
+    formatted_address: Nyska 79, 50-505 Wrocław, Poland
+    formatted_phone_number: 888 692 243
+    website: https://www.poledancehouse.com/
+    opening_hours:
+    - 'Monday: 6:00 – 9:00 PM'
+    - 'Tuesday: 5:00 – 9:00 PM'
+    - 'Wednesday: 5:00 – 9:00 PM'
+    - 'Thursday: 6:00 – 9:00 PM'
+    - 'Friday: 7:00 – 9:00 PM'
+    - 'Saturday: Closed'
+    - 'Sunday: Closed'
+    reviews:
+    - author_name: Aleksandra Maury
+      author_url: https://www.google.com/maps/contrib/107728289686159518619/reviews
+      language: en-US
+      original_language: pl
+      profile_photo_url: https://lh3.googleusercontent.com/a-/ALV-UjXyJ3GBQk0G_R3NeOMyR5-6vWunT6zUN5vXt8mxc88P2QY8O3Qi=s128-c0x00000000-cc-rp-mo
+      rating: 5
+      relative_time_description: in the last week
+      text: A great place and the best instructors ❤️ I recommend it to anyone who
+        wants to start their adventure with pole dancing or aerial sports;)
+      time: 1738688231
+      translated: true
+    - author_name: Angelina Guzniczak
+      author_url: https://www.google.com/maps/contrib/109488723361206833609/reviews
+      language: en-US
+      original_language: pl
+      profile_photo_url: https://lh3.googleusercontent.com/a-/ALV-UjU_EghW-WyCDFozqj7ftEIhvcaNI_U7LwsqusJVpFWypZhwpAI=s128-c0x00000000-cc-rp-mo
+      rating: 5
+      relative_time_description: a year ago
+      text: 'When it comes to pole dancing, Patryk and Mateusz are simply irreplaceable.
+        These are two fearless souls who not only provide incredible fun, but also
+        show the world that pole dancing is not only the domain of one gender! 😄 As
+        a regular visitor to their school, I must admit that it is not only a great
+        training for the body, but also for the spirit. Pole dancing gives me self-confidence,
+        lots of laughter and friendships for life, all thanks to Patryk and Mateusz,
+        who together with us destroy all stereotypes. Pole Dance House is a place
+        where everyone can feel comfortable and amazing! I love you all for the wonderful
+        atmosphere we create together. Our school is not only a place where we improve
+        our pole skills, but also a place where we create a real family.
+
+
+        Therefore, if you are considering pole dancing, don''t waste your time - Patryk
+        and Mateusz will teach you how to be a real superstar on the pole! 🌟🚀'
+      time: 1695840440
+      translated: true
+    - author_name: Ada Pawlik
+      author_url: https://www.google.com/maps/contrib/117028168087989510188/reviews
+      language: en-US
+      original_language: pl
+      profile_photo_url: https://lh3.googleusercontent.com/a/ACg8ocJmpVwu78vtSP1U2ly2PPKXdCKTjqSmqwItn9PGWF5HS8JGBQ=s128-c0x00000000-cc-rp-mo
+      rating: 5
+      relative_time_description: a year ago
+      text: I am happy and extremely grateful that I could come to such a wonderful
+        place. This is my first and, I think, last Pole Dance school where I have
+        been practicing for 1.5 years. The atmosphere in the classes is really great,
+        instructors Patryk and Mateusz are demanding trainers, but at the same time
+        great people. There are no better or worse people here, everyone gets the
+        same amount of attention and help when needed. Before coming to the classes,
+        I was very afraid that I wouldn't be able to cope and that I would be left
+        behind from the group, nothing could be further from the truth. Now it's my
+        favorite place, thanks to which I gained self-confidence, a bigger bicep :D,
+        and most importantly, I met valuable people who share a common passion:) I
+        recommend it with all my heart!
+      time: 1702074512
+      translated: true
+    - author_name: Kinga Niwińska
+      author_url: https://www.google.com/maps/contrib/108435921285459127614/reviews
+      language: en-US
+      original_language: pl
+      profile_photo_url: https://lh3.googleusercontent.com/a/ACg8ocKCeUDoX8BlAf7s_9hiKyQHmnrBgBe9F_aehqbgBj5Qk-XwBA=s128-c0x00000000-cc-rp-mo
+      rating: 5
+      relative_time_description: a month ago
+      text: I highly recommend it, I always feel very comfortable there in terms of
+        the atmosphere and I gain a lot of knowledge from the classes, I love coming
+        there ❤️
+      time: 1734518811
+      translated: true
+    - author_name: Anastasia Taras
+      author_url: https://www.google.com/maps/contrib/107190638894115577546/reviews
+      language: en-US
+      original_language: pl
+      profile_photo_url: https://lh3.googleusercontent.com/a-/ALV-UjX83b3NHGgbAJuoNxRG8akiclQWNvtGRJW8wwmM2YgECe3UEQGZDg=s128-c0x00000000-cc-rp-mo
+      rating: 5
+      relative_time_description: a year ago
+      text: Pole Dance House is amazing. The trainers are professional and helpful,
+        and the atmosphere is friendly. I feel safe and develop my skills. I highly
+        recommend it!
+      time: 1688193709
+      translated: true

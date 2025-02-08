@@ -25,4 +25,4 @@ reseed:
 	uv run manage.py makemigrations
 	uv run manage.py migrate
 	DJANGO_SUPERUSER_PASSWORD=Test1234! DJANGO_SUPERUSER_EMAIL=szwajkajakub@gmail.com uv run manage.py createsuperuser --noinput
-	uv run manage.py seed_test_data
+	uv run manage.py seed_test_data_google --yaml-file ../dance_schools_20250206_224702.yaml
