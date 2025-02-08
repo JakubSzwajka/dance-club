@@ -40,9 +40,9 @@ jobs:
 
       - name: Run linting
         run: | 
-          pwd
-          ls
-          make ci
+          uv run ruff check --fix
+          uv run ruff format 
+          uv run pyright .
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
