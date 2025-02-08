@@ -16,6 +16,7 @@ on:
 
 jobs:
   backend:
+    name: 🏗️ Backend
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -32,7 +33,7 @@ jobs:
       - name: Install dependencies
         run: |
           pip install uv
-          uv sync
+          uv sync --extra dev
 
       - name: Run linting
         run: make ci
@@ -74,6 +75,7 @@ jobs:
           docker logs backend-test
 
   web:
+    name: 🎨 Frontend
     runs-on: ubuntu-latest
     defaults:
       run:
