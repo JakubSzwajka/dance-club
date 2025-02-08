@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Optional
 from ninja import Router
 from classes.schemas.dance_class import DanceClassSchema
 from classes.schemas.location import LocationSchema
@@ -16,11 +16,15 @@ review_stats_service = ReviewStatsService()
 @router.get('/locations', response=List[LocationSchema], auth=None)
 def get_locations(
     request,
-    has_active_classes: bool = True
+    has_active_classes: bool = True,
+    latitude: Optional[float] = None,
+    longitude: Optional[float] = None
 ) -> List[LocationSchema]:
     """Get locations, optionally filtered to those with active classes"""
     return location_search_engine.get_locations(
-        has_active_classes=has_active_classes
+        has_active_classes=has_active_classes,
+        latitude=latitude,
+        longitude=longitude
     )
 
 @router.get('/locations/{location_id}', response=LocationSchema, auth=None)
