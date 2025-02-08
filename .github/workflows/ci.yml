@@ -37,7 +37,9 @@ jobs:
           uv sync --extra dev
 
       - name: Run linting
-        run: make ci
+        run: | 
+          uv venv
+          make ci
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
