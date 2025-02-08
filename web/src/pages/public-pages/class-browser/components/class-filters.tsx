@@ -127,10 +127,7 @@ export function ClassFilters({
 
           <div className="space-y-2">
             <label className="text-sm font-medium">Dance Style</label>
-            <Select
-              value={selectedStyle}
-              onValueChange={value => updateFilters({ style: value })}
-            >
+            <Select value={selectedStyle} onValueChange={value => updateFilters({ style: value })}>
               <SelectTrigger>
                 <SelectValue placeholder="Select style" />
               </SelectTrigger>
@@ -146,10 +143,7 @@ export function ClassFilters({
 
           <div className="space-y-2">
             <label className="text-sm font-medium">Level</label>
-            <Select
-              value={selectedLevel}
-              onValueChange={value => updateFilters({ level: value })}
-            >
+            <Select value={selectedLevel} onValueChange={value => updateFilters({ level: value })}>
               <SelectTrigger>
                 <SelectValue placeholder="Select level" />
               </SelectTrigger>
@@ -243,4 +237,4 @@ export function ClassFilters({
       </Card>
     </div>
   )
-} 
+}

@@ -10,7 +10,6 @@ import {
 import { useNavigate, useSearch } from '@tanstack/react-router'
 import { ClassFilters, ClassSearchParams } from './components/class-filters'
 
-// Main Class Browser Component
 export function ClassBrowser() {
   const navigate = useNavigate()
   const search = useSearch({ from: '/classes' }) as ClassSearchParams
@@ -45,6 +44,7 @@ export function ClassBrowser() {
     })
   }
 
+  const { data: locations } = usePublicLocations()
   const { data: instructors } = usePublicInstructors()
   const { data: classes } = usePublicClasses(
     selectedInstructor,
@@ -56,7 +56,6 @@ export function ClassBrowser() {
     selectedMinRating ? parseFloat(selectedMinRating) : undefined,
     selectedSortBy
   )
-  const { data: locations } = usePublicLocations()
   const { data: metadata } = useMetadata()
   const danceStyles = metadata?.dance_styles
 
@@ -80,40 +79,44 @@ export function ClassBrowser() {
 
       <Container>
         <div className="py-8">
-          <div className="grid grid-cols-[280px,1fr] gap-8">
-            {/* Filters Section */}
-            <ClassFilters
-              search={search}
-              updateFilters={updateFilters}
-              onClearAll={() => navigate({ to: '/classes' })}
-              instructors={instructors}
-              locations={locations}
-              danceStyles={danceStyles}
-            />
+          <div className="relative">
+            {/* Filters Section - Floating sidebar */}
+            <div className="absolute left-0 top-0 w-[280px]">
+              <ClassFilters
+                search={search}
+                updateFilters={updateFilters}
+                onClearAll={() => navigate({ to: '/classes' })}
+                instructors={instructors}
+                locations={locations}
+                danceStyles={danceStyles}
+              />
+            </div>
 
-            {/* Classes List */}
-            <div className="space-y-6">
-              {classes?.map(danceClass => (
-                <ClassItem
-                  key={danceClass.id}
-                  danceClass={danceClass}
-                  onDetailsClick={id => {
-                    navigate({
-                      to: '/classes/$classId',
-                      params: { classId: id },
-                    })
-                  }}
-                />
-              ))}
+            {/* Content Section - Full width with left margin for sidebar */}
+            <div className="ml-[300px]">
+              <div className="space-y-6">
+                {classes?.map(danceClass => (
+                  <ClassItem
+                    key={danceClass.id}
+                    danceClass={danceClass}
+                    onDetailsClick={id => {
+                      navigate({
+                        to: '/classes/$classId',
+                        params: { classId: id },
+                      })
+                    }}
+                  />
+                ))}
 
-              {classes?.length === 0 && (
-                <div className="text-center py-12">
-                  <h3 className="text-lg font-semibold">No classes found</h3>
-                  <p className="text-muted-foreground mt-2">
-                    Try adjusting your filters to see more classes
-                  </p>
-                </div>
-              )}
+                {classes?.length === 0 && (
+                  <div className="text-center py-12">
+                    <h3 className="text-lg font-semibold">No classes found</h3>
+                    <p className="text-muted-foreground mt-2">
+                      Try adjusting your filters to see more classes
+                    </p>
+                  </div>
+                )}
+              </div>
             </div>
           </div>
         </div>

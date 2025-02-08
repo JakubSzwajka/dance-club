@@ -5,14 +5,17 @@ export function usePublicLocations(
   latitude: number | null = null,
   longitude: number | null = null
 ) {
-  return $api.useQuery('get', '/api/public/locations', {
-    params: {
-      query: {
-        has_active_classes: hasActiveClasses,
-        latitude: latitude,
-        longitude: longitude,
+  return $api.useQuery(
+    'get',
+    '/api/public/locations',
+    {
+      params: {
+        query: {
+          has_active_classes: hasActiveClasses,
+          latitude: latitude,
+          longitude: longitude,
+        },
       },
-    },
     },
     {
       enabled: !!latitude && !!longitude,

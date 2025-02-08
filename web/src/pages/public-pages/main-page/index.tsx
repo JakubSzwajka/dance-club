@@ -4,19 +4,26 @@ import { FeaturedInstructorsSection } from './components/FeaturedInstructorsSect
 import { FeaturesSection } from './components/FeaturesSection'
 import { CTASection } from './components/CTASection'
 import { useEffect, useState } from 'react'
-import { usePublicLocations } from '@/lib/api/public'
+import { usePublicLocations, usePublicClasses } from '@/lib/api/public'
 import { SchoolsNearbyMap } from '@/components/domain/locations-map'
+import { components } from '@/lib/api/schema'
+
+type LocationSchema = components['schemas']['LocationSchema']
+type DanceClassSchema = components['schemas']['DanceClassSchema']
+type LocationWithClasses = LocationSchema & { classes: DanceClassSchema[] }
 
 export function HomePage() {
   const [latitude, setLatitude] = useState<number>(0)
   const [longitude, setLongitude] = useState<number>(0)
-  
+  const [locationsWithClasses, setLocationsWithClasses] = useState<LocationWithClasses[]>([])
 
   const { data: locations, isLoading: isLoadingLocations } = usePublicLocations(
     true,
     latitude,
     longitude
   )
+
+  const { data: classes } = usePublicClasses()
 
   useEffect(() => {
     if ('geolocation' in navigator) {
@@ -34,12 +41,39 @@ export function HomePage() {
     }
   }, [])
 
+  useEffect(() => {
+    if (!locations || !classes) return
+
+    const locationsMap = new Map<string, LocationWithClasses>()
+
+    // Initialize locations with empty classes arrays
+    locations.forEach(location => {
+      locationsMap.set(location.id, { ...location, classes: [] })
+    })
+
+    // Add classes to their respective locations
+    classes.forEach(danceClass => {
+      if (danceClass.location) {
+        const locationId = danceClass.location.id
+        const location = locationsMap.get(locationId)
+        if (location) {
+          location.classes.push(danceClass)
+        }
+      }
+    })
+
+    setLocationsWithClasses(Array.from(locationsMap.values()))
+  }, [locations, classes])
+
   return (
     <div className="min-h-screen bg-background">
       <Header />
       <HeroSection />
       <FeaturedInstructorsSection />
-      <SchoolsNearbyMap locations={locations || []} isLoadingLocations={isLoadingLocations} />
+      <SchoolsNearbyMap
+        locationsWithClasses={locationsWithClasses}
+        isLoadingLocations={isLoadingLocations}
+      />
       <FeaturesSection />
       <CTASection />
     </div>
