@@ -1,6 +1,5 @@
 import { Card } from '@/components/ui/card'
 import { Map, Marker } from '@vis.gl/react-google-maps'
-import { usePublicLocations } from '@/lib/api/public/locations'
 import { useState, useEffect } from 'react'
 import { Badge } from '@/components/ui/badge'
 import { ExternalLink, MapPin } from 'lucide-react'
@@ -10,12 +9,11 @@ import { components } from '@/lib/api/schema'
 
 type LocationSchema = components['schemas']['LocationSchema']
 export function SchoolsNearbyMap({
-  userLocation,
+  locations,
+  isLoadingLocations,
 }: {
-  userLocation: {
-    latitude: number
-    longitude: number
-  }
+  locations: LocationSchema[]
+  isLoadingLocations: boolean
 }) {
   const [selectedLocation, setSelectedLocation] = useState<LocationSchema | null>(null)
   const [locationsCenter, setLocationsCenter] = useState<{
@@ -23,11 +21,6 @@ export function SchoolsNearbyMap({
     longitude: number
   } | null>(null)
 
-  const { data: locations, isLoading: isLoadingLocations } = usePublicLocations(
-    true,
-    userLocation.latitude,
-    userLocation.longitude
-  )
   const navigate = useNavigate()
 
   const handleLocationClick = (location: LocationSchema) => {

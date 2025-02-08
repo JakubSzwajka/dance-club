@@ -4,11 +4,19 @@ import { FeaturedInstructorsSection } from './components/FeaturedInstructorsSect
 import { FeaturesSection } from './components/FeaturesSection'
 import { CTASection } from './components/CTASection'
 import { useEffect, useState } from 'react'
-import { SchoolsNearbyMap } from './components/SchoolsNearbyMap'
+import { usePublicLocations } from '@/lib/api/public'
+import { SchoolsNearbyMap } from '@/components/domain/locations-map'
 
 export function HomePage() {
   const [latitude, setLatitude] = useState<number>(0)
   const [longitude, setLongitude] = useState<number>(0)
+  
+
+  const { data: locations, isLoading: isLoadingLocations } = usePublicLocations(
+    true,
+    latitude,
+    longitude
+  )
 
   useEffect(() => {
     if ('geolocation' in navigator) {
@@ -31,7 +39,7 @@ export function HomePage() {
       <Header />
       <HeroSection />
       <FeaturedInstructorsSection />
-      {latitude && longitude && <SchoolsNearbyMap userLocation={{ latitude, longitude }} />}
+      <SchoolsNearbyMap locations={locations || []} isLoadingLocations={isLoadingLocations} />
       <FeaturesSection />
       <CTASection />
     </div>

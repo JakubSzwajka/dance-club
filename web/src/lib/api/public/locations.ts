@@ -13,7 +13,11 @@ export function usePublicLocations(
         longitude: longitude,
       },
     },
-  })
+    },
+    {
+      enabled: !!latitude && !!longitude,
+    }
+  )
 }
 
 export function usePublicLocation(id: string) {
