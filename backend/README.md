@@ -6,7 +6,7 @@ Django-based backend using SQLite for development (no additional database setup 
 
 1. Install Python 3.13
 2. Install uv: `pip install uv`
-3. Install dependencies: `uv pip install --system`
+3. Install dependencies: `uv venv && uv sync`
 
 ## Development
 

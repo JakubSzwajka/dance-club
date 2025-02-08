@@ -17,10 +17,12 @@ RUN apt-get update && apt-get install -y \
 
 # Install Python dependencies
 COPY pyproject.toml uv.lock ./
-RUN pip install --no-cache-dir uv && uv pip install --system
+RUN pip install --no-cache-dir uv && uv venv && uv sync --frozen
 
 # Copy project files
 COPY . .
 
+EXPOSE 8000
+
 # Run reseed and serve using make commands
-CMD make reseed && make serve
+CMD make serve-docker
