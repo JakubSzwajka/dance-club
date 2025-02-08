@@ -20,7 +20,7 @@ interface ClassReviewForm {
   comment: string
 }
 
-export function ClassReviewBlock({ onSubmit, onSkip, classId, isActive }: ClassReviewBlockProps) {
+export function ClassReviewBlock({ onSubmit, onSkip, isActive }: ClassReviewBlockProps) {
   const [form, setForm] = useState<ClassReviewForm>({
     group_size: 0,
     level: 0,

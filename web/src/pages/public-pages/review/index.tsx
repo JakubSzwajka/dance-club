@@ -254,8 +254,7 @@ export function ReviewPage() {
                 id="submit-section"
                 data-section-id="submit"
                 className={`transition-all duration-500 opacity-100 translate-y-0 ${currentStep === 'submit' ? 'scale-100' : 'scale-95 opacity-50'}`}
-              >
-              </div>
+              ></div>
             </div>
           </div>
         </div>

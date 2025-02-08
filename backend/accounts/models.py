@@ -5,27 +5,29 @@ from classes.schemas.user_schema import InstructorPublicSchema, UserPublicSchema
 from mydanceclub.models import generate_uuid
 
 
-class UserManager(DjangoUserManager):
-    def create_user(self, email, password=None, **extra_fields):
+class UserManager(DjangoUserManager):  # type: ignore
+    def create_user(self, email=None, password=None, **kwargs):  # type: ignore
         if not email:
             raise ValueError("The Email field must be set")
         email = self.normalize_email(email)
-        if "username" in extra_fields:
-            del extra_fields["username"]
-        user = self.model(email=email, **extra_fields)
+        if "username" in kwargs:
+            del kwargs["username"]
+        user = self.model(email=email, **kwargs)
         user.set_password(password)
         user.save(using=self._db)
         return user
 
-    def create_superuser(self, email, password=None, **extra_fields):
-        extra_fields.setdefault("is_staff", True)
-        extra_fields.setdefault("is_superuser", True)
-        return self.create_user(email, password, **extra_fields)
+    def create_superuser(self, email=None, password=None, **kwargs):  # type: ignore
+        kwargs.setdefault("is_staff", True)
+        kwargs.setdefault("is_superuser", True)
+        if "username" in kwargs:
+            del kwargs["username"]
+        return self.create_user(email, password, **kwargs)
 
 
 class User(AbstractUser):
-    id = models.CharField(primary_key=True, max_length=36, default=generate_uuid)
     username = None
+    id = models.CharField(primary_key=True, max_length=36, default=generate_uuid)
     email = models.EmailField(_("email address"), unique=True)
     """Custom user model for MyDanceClub platform."""
 

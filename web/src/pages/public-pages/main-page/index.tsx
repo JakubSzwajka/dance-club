@@ -11,18 +11,18 @@ export function HomePage() {
   const [longitude, setLongitude] = useState<number>(0)
 
   useEffect(() => {
-    if ("geolocation" in navigator) {
+    if ('geolocation' in navigator) {
       navigator.geolocation.getCurrentPosition(
-        (position) => {
+        position => {
           setLatitude(position.coords.latitude)
           setLongitude(position.coords.longitude)
         },
-        (error) => {
-          console.error("Error getting geolocation:", error)
+        error => {
+          console.error('Error getting geolocation:', error)
         }
       )
     } else {
-      console.error("Geolocation is not supported by this browser")
+      console.error('Geolocation is not supported by this browser')
     }
   }, [])
 

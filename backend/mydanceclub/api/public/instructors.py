@@ -4,7 +4,7 @@ from classes.schemas.dance_class import DanceClassSchema
 from classes.schemas.user_schema import InstructorPublicSchema
 from classes.services.instructor_public_manager import InstructorPublicManagerService
 from classes.services.class_search_engine import ClassSearchEngineService
-from reviews.schemas.response import ReviewInstructorStatsSchema
+from reviews.schemas.response import ReviewAggregatedInstructorStatsSchema
 from reviews.services.stats_service import ReviewStatsService
 
 router = Router()
@@ -37,9 +37,11 @@ def get_instructor_classes(
 
 @router.get(
     "/instructors/{instructor_id}/stats",
-    response=ReviewInstructorStatsSchema,
+    response=ReviewAggregatedInstructorStatsSchema,
     auth=None,
 )
-def get_instructor_stats(request, instructor_id: str) -> ReviewInstructorStatsSchema:
+def get_instructor_stats(
+    request, instructor_id: str
+) -> ReviewAggregatedInstructorStatsSchema:
     """Get stats for an instructor"""
     return stats_service.get_instructor_stats(instructor_id)

@@ -27,7 +27,6 @@ export function LocationReviewBlock({
   onSubmit,
   onSkip,
   onBack,
-  locationId,
   isActive,
 }: LocationReviewBlockProps) {
   const [form, setForm] = useState<LocationReviewForm>({

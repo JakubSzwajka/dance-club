@@ -20,10 +20,33 @@ dependencies = [
 
 [dependency-groups]
 dev = [
+    "django-types>=0.20.0",
     "googlemaps>=4.10.0",
+    "pyright>=1.1.393",
     "pytest>=8.3.4",
     "pytest-django>=4.9.0",
     "pyyaml>=6.0.2",
     "requests>=2.32.3",
     "ruff>=0.9.4",
 ]
+
+
+[tool.pyright]
+ignore = [
+    ".venv",
+    "**/*.pyi",
+    "**/__pycache__",
+    "**/__init__.py",
+    "**/__init__.pyi",
+    "**/__init__.pyc",
+    "**/__init__.pyo",
+    "**/__init__.pyd",
+    "**/migrations",
+    "**/seed_test_data_*.py",
+    
+]
+# https://github.com/microsoft/pyright/blob/main/docs/configuration.md
+# https://github.com/microsoft/pyright/blob/main/docs/configuration.md#configuration-file
+# https://github.com/microsoft/pyright/blob/main/docs/configuration.md#configuration-file
+
+

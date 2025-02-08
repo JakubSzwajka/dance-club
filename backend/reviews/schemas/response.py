@@ -1,53 +1,14 @@
 from datetime import datetime
-from typing import List, Optional
+from typing import List
 from ninja import Schema
-from pydantic import Field
 
 
-class ReviewLocationStatsSchema(Schema):
-    cleanness: float
-    general_look: float
-    acustic_quality: float
-    additional_facilities: float
-    temperature: float
-    lighting: float
-    avg_rating: float
-
-
-class ReviewDanceClassStatsSchema(Schema):
-    group_size: float
-    level: float
-    engagement: float
-    teaching_pace: float
-    avg_rating: float
-
-
-class ReviewInstructorStatsSchema(Schema):
-    move_breakdown: float
-    individual_approach: float
-    posture_correction_ability: float
-    communication_and_feedback: float
-    patience_and_encouragement: float
-    motivation_and_energy: float
-    avg_rating: float
-
-
-# ------------------------------------------------------------
-
-
-class ReviewResponseSchema(Schema):
+class BaseReviewSchema(Schema):
     id: str
+    author_name: str
+    comment: str
     created_at: datetime
     updated_at: datetime
-    overall_rating: int
-    comment: str
-
-    instructor_stats: ReviewInstructorStatsSchema
-    location_stats: ReviewLocationStatsSchema
-    dance_class_stats: ReviewDanceClassStatsSchema
-
-    author_name: Optional[str]
-    verified: bool = Field(False)
 
     def get_relative_time(self) -> str:
         """Returns a human-readable relative time string"""
@@ -70,6 +31,53 @@ class ReviewResponseSchema(Schema):
             return f"{minutes} minute{'s' if minutes != 1 else ''} ago"
         else:
             return "just now"
+
+
+class ReviewAggregatedLocationStatsSchema(Schema):
+    cleanness: float
+    general_look: float
+    acustic_quality: float
+    additional_facilities: float
+    temperature: float
+    lighting: float
+    avg_rating: float
+
+
+class ReviewLocationStatsSchema(BaseReviewSchema, ReviewAggregatedLocationStatsSchema):
+    pass
+
+
+class ReviewAggregatedDanceClassStatsSchema(Schema):
+    group_size: float
+    level: float
+    engagement: float
+    teaching_pace: float
+    avg_rating: float
+
+
+class ReviewDanceClassStatsSchema(
+    BaseReviewSchema, ReviewAggregatedDanceClassStatsSchema
+):
+    pass
+
+
+class ReviewAggregatedInstructorStatsSchema(Schema):
+    move_breakdown: float
+    individual_approach: float
+    posture_correction_ability: float
+    communication_and_feedback: float
+    patience_and_encouragement: float
+    motivation_and_energy: float
+    avg_rating: float
+
+
+class ReviewInstructorStatsSchema(
+    BaseReviewSchema, ReviewAggregatedInstructorStatsSchema
+):
+    pass
+
+
+# ------------------------------------------------------------
 
 
 class ReviewListSchema[T](Schema):

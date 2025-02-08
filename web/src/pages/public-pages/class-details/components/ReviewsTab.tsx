@@ -18,7 +18,7 @@ function StarRating({ rating }: { rating: number }) {
   )
 }
 
-function ReviewCard({ review }: { review: components['schemas']['ReviewResponseSchema'] }) {
+function ReviewCard({ review }: { review: components['schemas']['ReviewDanceClassStatsSchema'] }) {
   return (
     <Card>
       <CardContent className="py-4">
@@ -29,7 +29,7 @@ function ReviewCard({ review }: { review: components['schemas']['ReviewResponseS
               <div className="font-medium">{review.author_name}</div>
               <div className="text-sm text-muted-foreground">{review.created_at}</div>
             </div>
-            <StarRating rating={review.overall_rating} />
+            <StarRating rating={review.avg_rating} />
           </div>
           <p className="text-sm">{review.comment}</p>
         </div>

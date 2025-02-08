@@ -3,7 +3,6 @@ import { Button } from '@/components/ui/button'
 import { useNavigate } from '@tanstack/react-router'
 import { SkillLevelBadge } from '@/components/domain/skill-level-badge'
 import { InstructorPill } from '@/components/domain/instructor-pill'
-import { ClockIcon } from '@heroicons/react/24/outline'
 import { components } from '@/lib/api/schema'
 
 interface ClassesSectionProps {
@@ -36,7 +35,7 @@ export function ClassesSection({ classes }: ClassesSectionProps) {
 
               <div className="flex flex-col gap-2 mb-4">
                 <InstructorPill instructor={cls.instructor} />
-                {cls.schedule?.map((schedule, index) => (
+                {/* {cls.schedule?.map((schedule, index) => (
                   <div
                     key={index}
                     className="flex items-center gap-2 text-sm text-muted-foreground"
@@ -46,7 +45,7 @@ export function ClassesSection({ classes }: ClassesSectionProps) {
                       {schedule.day_of_week}, {schedule.start_time} - {schedule.end_time}
                     </span>
                   </div>
-                ))}
+                ))} */}
               </div>
 
               <p className="text-sm text-muted-foreground line-clamp-2 mb-4">{cls.description}</p>

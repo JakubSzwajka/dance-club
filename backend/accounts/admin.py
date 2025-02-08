@@ -35,13 +35,8 @@ class CustomUserAdmin(UserAdmin, ModelAdmin):
             else obj.email[0].upper(),
         )
 
-    avatar_display.short_description = ""
-
     def get_full_name(self, obj):
         return obj.get_full_name() or obj.email
-
-    get_full_name.short_description = "Name"
-    get_full_name.admin_order_field = "first_name"
 
     # Fields to show in the edit form
     fieldsets = (

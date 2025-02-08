@@ -1,16 +1,18 @@
 from django.db.models import Avg
 from reviews.models import InstructorReview, DanceClassReview, LocationReview
 from reviews.schemas.response import (
-    ReviewDanceClassStatsSchema,
-    ReviewInstructorStatsSchema,
-    ReviewLocationStatsSchema,
+    ReviewAggregatedDanceClassStatsSchema,
+    ReviewAggregatedInstructorStatsSchema,
+    ReviewAggregatedLocationStatsSchema,
 )
 
 
 class ReviewStatsService:
-    def get_location_stats(self, location_id: str) -> ReviewLocationStatsSchema:
+    def get_location_stats(
+        self, location_id: str
+    ) -> ReviewAggregatedLocationStatsSchema:
         location_reviews = LocationReview.objects.filter(location_id=location_id)
-        return ReviewLocationStatsSchema(
+        return ReviewAggregatedLocationStatsSchema(
             cleanness=location_reviews.aggregate(Avg("cleanness"))["cleanness__avg"]
             or 0.0,
             general_look=location_reviews.aggregate(Avg("general_look"))[
@@ -37,11 +39,13 @@ class ReviewStatsService:
             or 0.0,
         )
 
-    def get_dance_class_stats(self, dance_class_id: str) -> ReviewDanceClassStatsSchema:
+    def get_dance_class_stats(
+        self, dance_class_id: str
+    ) -> ReviewAggregatedDanceClassStatsSchema:
         dance_class_reviews = DanceClassReview.objects.filter(
             dance_class_id=dance_class_id
         )
-        return ReviewDanceClassStatsSchema(
+        return ReviewAggregatedDanceClassStatsSchema(
             group_size=dance_class_reviews.aggregate(Avg("group_size"))[
                 "group_size__avg"
             ]
@@ -61,11 +65,13 @@ class ReviewStatsService:
             or 0.0,
         )
 
-    def get_instructor_stats(self, instructor_id: str) -> ReviewInstructorStatsSchema:
+    def get_instructor_stats(
+        self, instructor_id: str
+    ) -> ReviewAggregatedInstructorStatsSchema:
         instructor_reviews = InstructorReview.objects.filter(
             instructor_id=instructor_id
         )
-        return ReviewInstructorStatsSchema(
+        return ReviewAggregatedInstructorStatsSchema(
             move_breakdown=instructor_reviews.aggregate(Avg("move_breakdown"))[
                 "move_breakdown__avg"
             ]

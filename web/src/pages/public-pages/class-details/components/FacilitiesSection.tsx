@@ -45,7 +45,7 @@ export function FacilitiesSection({ locationId }: FacilitiesSectionProps) {
             <MetricWithIcon icon={BuildingOffice2Icon} label="Facilities">
               <div className="space-y-3 mt-2">
                 <div className="flex flex-wrap gap-2">
-                  {facilities.map(feature => (
+                  {location?.facilities.map(feature => (
                     <Badge key={feature} variant="outline">
                       {feature}
                     </Badge>
@@ -57,7 +57,7 @@ export function FacilitiesSection({ locationId }: FacilitiesSectionProps) {
           <CardContent>
             <MetricWithIcon icon={CreditCardIcon} label="Accepted Sports Cards">
               <div className="flex flex-wrap gap-4 mt-4">
-                {sportsCards.map(card => (
+                {location?.sports_card.map(card => (
                   <Badge key={card} variant="outline">
                     {card}
                   </Badge>

@@ -4,7 +4,7 @@ from classes.schemas.dance_class import DanceClassSchema
 from classes.schemas.location import LocationSchema
 from classes.services.location_search_engine import LocationSearchEngineService
 from classes.services.class_search_engine import ClassSearchEngineService
-from reviews.schemas.response import ReviewLocationStatsSchema
+from reviews.schemas.response import ReviewAggregatedLocationStatsSchema
 from reviews.services.stats_service import ReviewStatsService
 from ..private.types import AuthenticatedRequest
 
@@ -43,8 +43,12 @@ def get_location_classes(
 
 
 @router.get(
-    "/locations/{location_id}/stats", response=ReviewLocationStatsSchema, auth=None
+    "/locations/{location_id}/stats",
+    response=ReviewAggregatedLocationStatsSchema,
+    auth=None,
 )
-def get_location_stats(request, location_id: str) -> ReviewLocationStatsSchema:
+def get_location_stats(
+    request, location_id: str
+) -> ReviewAggregatedLocationStatsSchema:
     """Get stats for a location"""
     return review_stats_service.get_location_stats(location_id)

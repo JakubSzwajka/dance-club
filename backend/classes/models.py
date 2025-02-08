@@ -8,8 +8,6 @@ from shared.const import ClassType, DanceStyle, Facilities, SkillLevel, SportsCa
 
 
 class Location(BaseModel):
-    """Model for storing locations where events can take place"""
-
     google_place_id = models.CharField(
         max_length=255, null=True, blank=True, unique=True
     )
@@ -108,11 +106,6 @@ class DanceClass(BaseModel):
         blank=True,
         related_name="classes",
     )
-
-    class Meta:
-        db_table = "dance_classes"
-        verbose_name = "Dance Class"
-        verbose_name_plural = "Dance Classes"
 
     def __str__(self):
         return f"{self.name} - {self.level}"

@@ -4,7 +4,11 @@ from ninja import Router
 from classes.schemas.dance_class import DanceClassSchema
 from classes.services.class_search_engine import ClassSearchEngineService
 from reviews.services.stats_service import ReviewStatsService
-from reviews.schemas.response import ReviewDanceClassStatsSchema, ReviewListSchema
+from reviews.schemas.response import (
+    ReviewAggregatedDanceClassStatsSchema,
+    ReviewDanceClassStatsSchema,
+    ReviewListSchema,
+)
 from reviews.services.review_manager import ReviewManagerService
 
 router = Router()
@@ -47,19 +51,23 @@ def get_class(request, class_id: str) -> DanceClassSchema:
 @router.get(
     "/classes/{class_id}/stats", response=ReviewDanceClassStatsSchema, auth=None
 )
-def get_class_stats(request, class_id: str) -> ReviewDanceClassStatsSchema:
+def get_class_stats(request, class_id: str) -> ReviewAggregatedDanceClassStatsSchema:
     """Get comprehensive review statistics for a class"""
     return stats_service.get_dance_class_stats(class_id)
 
 
-@router.get("/classes/{class_id}/reviews", response=ReviewListSchema, auth=None)
+@router.get(
+    "/classes/{class_id}/reviews",
+    response=ReviewListSchema[ReviewDanceClassStatsSchema],
+    auth=None,
+)
 def get_class_reviews(
     request,
     class_id: str,
     page: int = 1,
     page_size: int = 10,
     sort_by: Optional[str] = None,  # Keep basic sorting for UI flexibility
-) -> ReviewListSchema:
+) -> ReviewListSchema[ReviewDanceClassStatsSchema]:
     """Get paginated reviews for a specific class"""
     return review_manager.get_class_reviews_paginated(
         class_id=class_id, page=page, page_size=page_size, sort_by=sort_by

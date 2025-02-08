@@ -2,7 +2,7 @@ from django.core.management.base import BaseCommand
 from django.contrib.auth import get_user_model
 from django.utils import timezone
 from classes.models import Location, Facilities, SportsCard, DanceClass
-from reviews.models import Review, LocationReview, DanceClassReview, InstructorReview
+from reviews.models import LocationReview, DanceClassReview, InstructorReview
 from faker import Faker
 from random import sample, randint, random, uniform
 from rich.console import Console
@@ -73,14 +73,22 @@ def create_location_review_from_google(location, review_data, user=None):
     # Convert Google's 5-star rating to our 1-10 scale
     rating_multiplier = 2
     base_rating = review_data.get("rating", 3) * rating_multiplier
+    created_at = datetime.fromtimestamp(
+        review_data.get("time", timezone.now().timestamp())
+    )
+    is_verified = bool(random() > 0.3)  # 70% chance of verification
+    anonymous_name = review_data.get("author_name", fake.name())
 
     # Create a dummy instructor and class for this location if needed
     instructor = create_dummy_instructor(location)
     dance_class = create_dummy_class(location, instructor)
 
     # Create facilities review
-    facilities_stats = LocationReview.objects.create(
+    LocationReview.objects.create(
         location=location,
+        user=user,
+        anonymous_name=anonymous_name,
+        is_verified=is_verified,
         cleanness=min(10, max(1, base_rating + randint(-1, 1))),
         general_look=min(10, max(1, base_rating + randint(-1, 1))),
         acustic_quality=min(10, max(1, base_rating + randint(-1, 1))),
@@ -89,22 +97,30 @@ def create_location_review_from_google(location, review_data, user=None):
         lighting=min(10, max(1, base_rating + randint(-2, 2))),
         overall_rating=review_data.get("rating", 3),
         comment=review_data.get("text", ""),
+        created_at=created_at,
     )
 
     # Create dance class review
-    dance_class_stats = DanceClassReview.objects.create(
+    DanceClassReview.objects.create(
         dance_class=dance_class,
+        user=user,
+        anonymous_name=anonymous_name,
+        is_verified=is_verified,
         group_size=uniform(-10, 10),
         level=uniform(-10, 10),
         engagement=randint(1, 10),
         teaching_pace=uniform(-10, 10),
         overall_rating=review_data.get("rating", 3),
         comment=review_data.get("text", ""),
+        created_at=created_at,
     )
 
     # Create instructor review
-    instructor_stats = InstructorReview.objects.create(
+    InstructorReview.objects.create(
         instructor=instructor,
+        user=user,
+        anonymous_name=anonymous_name,
+        is_verified=is_verified,
         move_breakdown=uniform(-10, 10),
         individual_approach=uniform(-10, 10),
         posture_correction_ability=randint(1, 10),
@@ -113,22 +129,8 @@ def create_location_review_from_google(location, review_data, user=None):
         motivation_and_energy=randint(1, 10),
         overall_rating=review_data.get("rating", 3),
         comment=review_data.get("text", ""),
+        created_at=created_at,
     )
-
-    # Create main review with all components
-    review = Review.objects.create(
-        user=user,
-        anonymous_name=review_data.get("author_name", fake.name()),
-        is_verified=bool(random() > 0.3),  # 70% chance of verification
-        facilities_stats=facilities_stats,
-        dance_class_stats=dance_class_stats,
-        instructor_stats=instructor_stats,
-        created_at=datetime.fromtimestamp(
-            review_data.get("time", timezone.now().timestamp())
-        ),
-    )
-
-    return review
 
 
 class Command(BaseCommand):

@@ -98,13 +98,13 @@ export function ClassDetailsPage() {
       </Container>
 
       {/* Facilities Section */}
-      {/* <Container>
+      <Container>
         {classDetails.location && (
           <FacilitiesSection 
             locationId={classDetails.location.id}
           />
         )}
-      </Container> */}
+      </Container>
 
       {/* Tabs Section */}
       <Container>

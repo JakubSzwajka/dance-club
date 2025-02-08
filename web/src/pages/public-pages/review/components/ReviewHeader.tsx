@@ -15,9 +15,7 @@ interface ReviewHeaderProps {
   steps: Step[]
 }
 
-export function ReviewHeader({
-  classDetails,
-}: ReviewHeaderProps) {
+export function ReviewHeader({ classDetails }: ReviewHeaderProps) {
   return (
     <div className="bg-muted/30 border-b">
       <Container>
@@ -26,8 +24,8 @@ export function ReviewHeader({
             <h1 className="text-3xl font-bold mb-3">Share Your Dance Journey</h1>
             <div className="space-y-3">
               <p className="text-muted-foreground text-lg">
-                Your experience is invaluable to the dance community. By sharing your insights,
-                you help fellow dancers find the perfect class and inspire instructors to excel.
+                Your experience is invaluable to the dance community. By sharing your insights, you
+                help fellow dancers find the perfect class and inspire instructors to excel.
               </p>
               {classDetails && (
                 <div className="flex items-center gap-2 text-lg">

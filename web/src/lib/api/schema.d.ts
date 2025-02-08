@@ -470,6 +470,10 @@ export interface components {
         SportsCard: "multisport" | "medicover" | "ok_system" | "benefit" | "fitprofit" | "other";
         /** ReviewDanceClassStatsSchema */
         ReviewDanceClassStatsSchema: {
+            /** Id */
+            id: string;
+            /** Author Name */
+            author_name: string;
             /** Group Size */
             group_size: number;
             /** Level */
@@ -480,11 +484,23 @@ export interface components {
             teaching_pace: number;
             /** Avg Rating */
             avg_rating: number;
+            /** Comment */
+            comment: string;
+            /**
+             * Created At
+             * Format: date-time
+             */
+            created_at: string;
+            /**
+             * Updated At
+             * Format: date-time
+             */
+            updated_at: string;
         };
-        /** ReviewListSchema */
-        ReviewListSchema: {
+        /** ReviewListSchema[ReviewDanceClassStatsSchema] */
+        ReviewListSchema_ReviewDanceClassStatsSchema_: {
             /** Items */
-            items: unknown[];
+            items: components["schemas"]["ReviewDanceClassStatsSchema"][];
             /** Total */
             total: number;
             /** Page */
@@ -813,7 +829,7 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["ReviewListSchema"];
+                    "application/json": components["schemas"]["ReviewListSchema_ReviewDanceClassStatsSchema_"];
                 };
             };
         };

@@ -11,6 +11,28 @@ from .schemas.response import (
 
 
 class DanceClassReview(BaseModel):
+    user = models.ForeignKey(
+        User,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="dance_class_reviews",
+        help_text="The user submitting the review. Can be null for anonymous reviews",
+    )
+    anonymous_name = models.CharField(
+        max_length=100,
+        null=True,
+        blank=True,
+        help_text="Display name for anonymous reviews. Required if user is not provided",
+    )
+
+    is_verified = models.BooleanField(
+        default=False,
+        help_text="Indicates whether the review has been verified by staff",
+    )
+
+    # ------------------------------------------
+
     dance_class = models.ForeignKey(
         DanceClass,
         on_delete=models.CASCADE,
@@ -43,21 +65,53 @@ class DanceClassReview(BaseModel):
         help_text="General comments and observations about the dance class experience"
     )
 
+    def get_author_name(self) -> str:
+        if self.user:
+            return self.user.first_name + " " + self.user.last_name
+        return self.anonymous_name or "Unknown"
+
     def to_schema(self) -> ReviewDanceClassStatsSchema:
         return ReviewDanceClassStatsSchema(
+            id=self.id,
             group_size=self.group_size,
             level=self.level,
             engagement=self.engagement,
             teaching_pace=self.teaching_pace,
             avg_rating=self.overall_rating,
+            updated_at=self.updated_at,
+            author_name=self.get_author_name(),
+            comment=self.comment,
+            created_at=self.created_at,
         )
 
 
 class InstructorReview(BaseModel):
+    user = models.ForeignKey(
+        User,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="instructor_reviews",
+        help_text="The user submitting the review. Can be null for anonymous reviews",
+    )
+    anonymous_name = models.CharField(
+        max_length=100,
+        null=True,
+        blank=True,
+        help_text="Display name for anonymous reviews. Required if user is not provided",
+    )
+
+    is_verified = models.BooleanField(
+        default=False,
+        help_text="Indicates whether the review has been verified by staff",
+    )
+
+    # ------------------------------------------
+
     instructor = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
-        related_name="instructor_reviews",
+        related_name="reviews",
         help_text="The instructor being reviewed",
     )
     move_breakdown = models.FloatField(
@@ -93,8 +147,18 @@ class InstructorReview(BaseModel):
         help_text="General comments and observations about the dance class experience"
     )
 
+    def get_author_name(self) -> str:
+        if self.user:
+            return self.user.first_name + " " + self.user.last_name
+        return self.anonymous_name or "Unknown"
+
     def to_schema(self) -> ReviewInstructorStatsSchema:
         return ReviewInstructorStatsSchema(
+            id=self.id,
+            author_name=self.get_author_name(),
+            comment=self.comment,
+            created_at=self.created_at,
+            updated_at=self.updated_at,
             move_breakdown=self.move_breakdown,
             individual_approach=self.individual_approach,
             posture_correction_ability=self.posture_correction_ability,
@@ -106,10 +170,31 @@ class InstructorReview(BaseModel):
 
 
 class LocationReview(BaseModel):
+    user = models.ForeignKey(
+        User,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="location_reviews",
+        help_text="The user submitting the review. Can be null for anonymous reviews",
+    )
+    anonymous_name = models.CharField(
+        max_length=100,
+        null=True,
+        blank=True,
+        help_text="Display name for anonymous reviews. Required if user is not provided",
+    )
+
+    is_verified = models.BooleanField(
+        default=False,
+        help_text="Indicates whether the review has been verified by staff",
+    )
+    # ------------------------------------------
+
     location = models.ForeignKey(
         Location,
         on_delete=models.CASCADE,
-        related_name="facilities_reviews",
+        related_name="reviews",
         help_text="The location being reviewed",
     )
     cleanness = models.FloatField(
@@ -145,8 +230,18 @@ class LocationReview(BaseModel):
         help_text="General comments and observations about the dance class experience"
     )
 
+    def get_author_name(self) -> str:
+        if self.user:
+            return self.user.first_name + " " + self.user.last_name
+        return self.anonymous_name or "Unknown"
+
     def to_schema(self) -> ReviewLocationStatsSchema:
         return ReviewLocationStatsSchema(
+            id=self.id,
+            author_name=self.get_author_name(),
+            comment=self.comment,
+            created_at=self.created_at,
+            updated_at=self.updated_at,
             cleanness=self.cleanness,
             general_look=self.general_look,
             acustic_quality=self.acustic_quality,
@@ -155,46 +250,3 @@ class LocationReview(BaseModel):
             lighting=self.lighting,
             avg_rating=self.overall_rating,
         )
-
-
-class Review(BaseModel):
-    user = models.ForeignKey(
-        User,
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        related_name="reviews",
-        help_text="The user submitting the review. Can be null for anonymous reviews",
-    )
-    anonymous_name = models.CharField(
-        max_length=100,
-        null=True,
-        blank=True,
-        help_text="Display name for anonymous reviews. Required if user is not provided",
-    )
-
-    is_verified = models.BooleanField(
-        default=False,
-        help_text="Indicates whether the review has been verified by staff",
-    )
-
-    instructor_stats = models.OneToOneField(
-        InstructorReview,
-        on_delete=models.CASCADE,
-        related_name="review",
-        help_text="Review of the instructor's teaching approach",
-    )
-
-    dance_class_stats = models.OneToOneField(
-        DanceClassReview,
-        on_delete=models.CASCADE,
-        related_name="review",
-        help_text="Review of the dance class experience",
-    )
-
-    facilities_stats = models.OneToOneField(
-        LocationReview,
-        on_delete=models.CASCADE,
-        related_name="review",
-        help_text="Review of the supporting facilities and amenities",
-    )

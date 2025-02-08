@@ -1,6 +1,10 @@
 import { $api } from '../queryClient'
 
-export function usePublicLocations(hasActiveClasses: boolean = true, latitude: number | null = null, longitude: number | null = null) {
+export function usePublicLocations(
+  hasActiveClasses: boolean = true,
+  latitude: number | null = null,
+  longitude: number | null = null
+) {
   return $api.useQuery('get', '/api/public/locations', {
     params: {
       query: {

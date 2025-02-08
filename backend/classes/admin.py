@@ -62,5 +62,3 @@ class LocationAdmin(ModelAdmin):
             url = f"https://www.google.com/maps?q={obj.latitude},{obj.longitude}"
             return format_html('<a href="{}" target="_blank">View on Map</a>', url)
         return "No coordinates"
-
-    show_map_link.short_description = "Map"
