@@ -1,14 +1,8 @@
-from typing import List, Optional
-from django.db.models import Avg, Count, Q
-from django.core.paginator import Paginator
-from reviews.models import (
-    Review,
-    DanceClassReview
-)
-from reviews.schemas.response import (
-    ReviewDanceClassStatsSchema,
-    ReviewListSchema
-)
+from typing import Optional
+from reviews.models import DanceClassReview
+from reviews.schemas.response import ReviewDanceClassStatsSchema, ReviewListSchema
+
+
 class ReviewManagerService:
     def get_class_reviews_paginated(
         self,
@@ -22,14 +16,14 @@ class ReviewManagerService:
 
         # Apply sorting
         if sort_by:
-            if sort_by == 'date_desc':
-                queryset = queryset.order_by('-created_at')
-            elif sort_by == 'date_asc':
-                queryset = queryset.order_by('created_at')
-            elif sort_by == 'rating_desc':
-                queryset = queryset.order_by('-overall_rating')
-            elif sort_by == 'rating_asc':
-                queryset = queryset.order_by('overall_rating')
+            if sort_by == "date_desc":
+                queryset = queryset.order_by("-created_at")
+            elif sort_by == "date_asc":
+                queryset = queryset.order_by("created_at")
+            elif sort_by == "rating_desc":
+                queryset = queryset.order_by("-overall_rating")
+            elif sort_by == "rating_asc":
+                queryset = queryset.order_by("overall_rating")
 
         # Calculate pagination
         total = queryset.count()
@@ -46,5 +40,5 @@ class ReviewManagerService:
             page=page,
             pages=total_pages,
             has_next=page < total_pages,
-            has_prev=page > 1
+            has_prev=page > 1,
         )

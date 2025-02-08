@@ -6,6 +6,7 @@ from ninja import Schema
 from classes.schemas.user_schema import InstructorPublicSchema
 from classes.schemas.location import LocationSchema
 
+
 class CreateDanceClassSchema(Schema):
     name: str
     description: str
@@ -15,6 +16,7 @@ class CreateDanceClassSchema(Schema):
     end_date: Date
     location: Optional[LocationSchema]
     style: str
+
 
 class DanceClassSchema(CreateDanceClassSchema):
     id: str

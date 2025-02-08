@@ -1,5 +1,5 @@
 from datetime import datetime
-from typing import List, Optional, TypeVar
+from typing import List, Optional
 from ninja import Schema
 from pydantic import Field
 
@@ -32,8 +32,8 @@ class ReviewInstructorStatsSchema(Schema):
     avg_rating: float
 
 
-
 # ------------------------------------------------------------
+
 
 class ReviewResponseSchema(Schema):
     id: str
@@ -48,9 +48,6 @@ class ReviewResponseSchema(Schema):
 
     author_name: Optional[str]
     verified: bool = Field(False)
-
-
-
 
     def get_relative_time(self) -> str:
         """Returns a human-readable relative time string"""
@@ -74,6 +71,7 @@ class ReviewResponseSchema(Schema):
         else:
             return "just now"
 
+
 class ReviewListSchema[T](Schema):
     items: List[T]
     total: int
@@ -81,4 +79,3 @@ class ReviewListSchema[T](Schema):
     pages: int
     has_next: bool
     has_prev: bool
-

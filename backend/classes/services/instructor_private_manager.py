@@ -1,8 +1,9 @@
 from typing import List
 from classes.models import DanceClass
-from classes.schemas.dance_class import  CreateDanceClassSchema, DanceClassSchema
+from classes.schemas.dance_class import CreateDanceClassSchema, DanceClassSchema
 from classes.schemas.instructor import InstructorStatsSchema
 from django.db.models import Sum, Avg
+
 
 class InstructorPrivateManagerService:
     def get_classes_by_instructor(self, instructor_id: str) -> List[DanceClassSchema]:
@@ -17,11 +18,19 @@ class InstructorPrivateManagerService:
         classes = DanceClass.objects.filter(instructor_id=instructor_id)
         return InstructorStatsSchema(
             total_classes=classes.count(),
-            total_students=classes.aggregate(total_students=Sum('current_capacity'))['total_students'] or 0,
-            average_capacity=classes.aggregate(average_capacity=Avg('current_capacity'))['average_capacity'] or 0,
+            total_students=classes.aggregate(total_students=Sum("current_capacity"))[
+                "total_students"
+            ]
+            or 0,
+            average_capacity=classes.aggregate(
+                average_capacity=Avg("current_capacity")
+            )["average_capacity"]
+            or 0,
         )
 
-    def create_class(self, instructor_id: str, class_data: CreateDanceClassSchema) -> DanceClassSchema:
+    def create_class(
+        self, instructor_id: str, class_data: CreateDanceClassSchema
+    ) -> DanceClassSchema:
         class_ = DanceClass.objects.create(
             instructor_id=instructor_id,
             name=class_data.name,

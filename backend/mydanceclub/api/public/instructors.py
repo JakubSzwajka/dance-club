@@ -12,22 +12,34 @@ instructor_manager = InstructorPublicManagerService()
 class_search_engine = ClassSearchEngineService()
 stats_service = ReviewStatsService()
 
-@router.get('/instructors', response=List[InstructorPublicSchema], auth=None)
+
+@router.get("/instructors", response=List[InstructorPublicSchema], auth=None)
 def get_instructors(request) -> List[InstructorPublicSchema]:
     """Get all instructors"""
     return instructor_manager.get_instructors()
 
-@router.get('/instructors/{instructor_id}', response=InstructorPublicSchema, auth=None)
+
+@router.get("/instructors/{instructor_id}", response=InstructorPublicSchema, auth=None)
 def get_instructor(request, instructor_id: str) -> InstructorPublicSchema:
     """Get an instructor by ID"""
     return instructor_manager.get_instructor_by_id(instructor_id)
 
-@router.get('/instructors/{instructor_id}/classes', response=List[DanceClassSchema], auth=None)
-def get_instructor_classes(request, instructor_id: str, include_past: bool = False) -> List[DanceClassSchema]:
+
+@router.get(
+    "/instructors/{instructor_id}/classes", response=List[DanceClassSchema], auth=None
+)
+def get_instructor_classes(
+    request, instructor_id: str, include_past: bool = False
+) -> List[DanceClassSchema]:
     """Get all classes by an instructor"""
     return class_search_engine.get_classes_by_instructor(instructor_id, include_past)
 
-@router.get('/instructors/{instructor_id}/stats', response=ReviewInstructorStatsSchema, auth=None)
+
+@router.get(
+    "/instructors/{instructor_id}/stats",
+    response=ReviewInstructorStatsSchema,
+    auth=None,
+)
 def get_instructor_stats(request, instructor_id: str) -> ReviewInstructorStatsSchema:
     """Get stats for an instructor"""
     return stats_service.get_instructor_stats(instructor_id)

@@ -56,7 +56,6 @@ class CreateDanceClassSchema(Schema):
     location: Optional[LocationSchema] = None
 
 
-
 class CreateRecurringScheduleSchema(Schema):
     day_of_week: int
     start_time: time
@@ -75,7 +74,7 @@ class CreateSpecialScheduleSchema(Schema):
     date: Date
     start_time: time
     end_time: time
-    status: str = 'scheduled'
+    status: str = "scheduled"
     replaced_schedule_id: Optional[int] = None
     replaced_schedule_date: Optional[Date] = None
     note: Optional[str] = None

@@ -36,6 +36,7 @@ class FacilitiesSchema(Schema):
 
 class ReviewSchema(Schema):
     """Full review information returned to frontend"""
+
     id: str
     dance_class_id: str
     user_id: Optional[str]
@@ -52,6 +53,7 @@ class ReviewSchema(Schema):
 
 class ReviewStatsSchema(Schema):
     """Aggregated review statistics"""
+
     average_rating: float
     total_reviews: int
     verified_reviews: int
@@ -64,6 +66,7 @@ class ReviewStatsSchema(Schema):
 
 class ReviewCreateSchema(Schema):
     """Schema for creating a new review"""
+
     user_id: Optional[str]
     anonymous_name: Optional[str]
     overall_rating: int
@@ -76,6 +79,7 @@ class ReviewCreateSchema(Schema):
 
 class ReviewListSchema(Schema):
     """Paginated list of reviews"""
+
     items: List[ReviewSchema]
     total: int
     page: int

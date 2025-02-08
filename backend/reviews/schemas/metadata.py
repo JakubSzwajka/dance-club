@@ -8,10 +8,12 @@ from reviews.constants import (
     VERIFICATION_METHODS,
 )
 
+
 class MetadataSchema(Schema):
     dance_styles: List[DanceStyle]
     skill_levels: List[SkillLevel]
     sports_cards: List[SportsCard]
+
 
 class ReviewMetadataSchema(Schema):
     temperature_options: List[str] = TEMPERATURE_OPTIONS
@@ -25,38 +27,26 @@ class ReviewMetadataSchema(Schema):
             "2": "Fair",
             "3": "Good",
             "4": "Very Good",
-            "5": "Excellent"
-        }
+            "5": "Excellent",
+        },
     }
     teaching_style_scale: dict = {
         "min": 0,
         "max": 100,
-        "labels": {
-            "left": "Structured",
-            "right": "Casual"
-        }
+        "labels": {"left": "Structured", "right": "Casual"},
     }
     feedback_approach_scale: dict = {
         "min": 0,
         "max": 100,
-        "labels": {
-            "left": "Verbal",
-            "right": "Hands-on"
-        }
+        "labels": {"left": "Verbal", "right": "Hands-on"},
     }
     pace_scale: dict = {
         "min": 0,
         "max": 100,
-        "labels": {
-            "left": "Methodical",
-            "right": "Fast-paced"
-        }
+        "labels": {"left": "Methodical", "right": "Fast-paced"},
     }
     music_style_scale: dict = {
         "min": 0,
         "max": 100,
-        "labels": {
-            "left": "Classical",
-            "right": "Modern"
-        }
+        "labels": {"left": "Classical", "right": "Modern"},
     }

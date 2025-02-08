@@ -4,7 +4,6 @@ from typing import Optional, List
 from shared.const import Facilities, SportsCard
 
 
-
 class LocationSchema(Schema):
     id: str
     name: str
@@ -14,6 +13,7 @@ class LocationSchema(Schema):
     url: Optional[str] = None
     facilities: List[Facilities]
     sports_card: List[SportsCard]
+
 
 class LocationStatsSchema(Schema):
     total_classes: int

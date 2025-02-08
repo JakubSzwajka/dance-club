@@ -1,7 +1,6 @@
 from ninja import Schema
 from datetime import datetime
 from decimal import Decimal
-from typing import Optional, List
 from classes.schemas.user_schema import UserPublicSchema
 from classes.schemas.location import LocationSchema
 
@@ -13,6 +12,7 @@ class CreateLocationSchema(Schema):
     longitude: float
     google_place_id: str
     url: str
+
 
 class CreateSpecialEventSchema(Schema):
     name: str

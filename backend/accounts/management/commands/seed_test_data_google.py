@@ -4,9 +4,15 @@ from django.utils import timezone
 from classes.models import Location, Facilities, SportsCard, DanceClass
 from reviews.models import Review, LocationReview, DanceClassReview, InstructorReview
 from faker import Faker
-from random import sample, randint, random, choice, uniform
+from random import sample, randint, random, uniform
 from rich.console import Console
-from rich.progress import Progress, SpinnerColumn, TextColumn, BarColumn, TaskProgressColumn
+from rich.progress import (
+    Progress,
+    SpinnerColumn,
+    TextColumn,
+    BarColumn,
+    TaskProgressColumn,
+)
 from rich.table import Table
 from rich.panel import Panel
 import yaml
@@ -17,10 +23,12 @@ User = get_user_model()
 fake = Faker()
 console = Console()
 
+
 def generate_avatar_url(name: str) -> str:
     """Generate a consistent avatar URL using Dicebear API"""
     style = "avataaars"
     return f"https://api.dicebear.com/7.x/{style}/svg?seed={name.replace(' ', '')}"
+
 
 def create_dummy_instructor(location):
     """Create a dummy instructor for the location"""
@@ -31,13 +39,14 @@ def create_dummy_instructor(location):
         email=f"instructor_{location.id}_{randint(1, 1000)}@example.com",
         first_name=first_name,
         last_name=last_name,
-        role='instructor',
+        role="instructor",
         profile_picture_url=generate_avatar_url(full_name),
-        is_active=True
+        is_active=True,
     )
     instructor.set_password("password123")
     instructor.save()
     return instructor
+
 
 def create_dummy_class(location, instructor):
     """Create a dummy class for the location and instructor"""
@@ -48,21 +57,22 @@ def create_dummy_class(location, instructor):
         name=f"Dance Class at {location.name}",
         description=fake.paragraph(),
         instructor=instructor,
-        level='beginner',
-        style='other',
-        formation_type='group',
+        level="beginner",
+        style="other",
+        formation_type="group",
         duration=60,
         price=randint(1500, 5000) / 100,
         start_date=start_date,
         end_date=end_date,
-        location=location
+        location=location,
     )
+
 
 def create_location_review_from_google(location, review_data, user=None):
     """Create a location review from Google Places review data"""
     # Convert Google's 5-star rating to our 1-10 scale
     rating_multiplier = 2
-    base_rating = review_data.get('rating', 3) * rating_multiplier
+    base_rating = review_data.get("rating", 3) * rating_multiplier
 
     # Create a dummy instructor and class for this location if needed
     instructor = create_dummy_instructor(location)
@@ -77,8 +87,8 @@ def create_location_review_from_google(location, review_data, user=None):
         additional_facilities=min(10, max(1, base_rating + randint(-1, 1))),
         temperature=min(10, max(1, base_rating + randint(-2, 2))),
         lighting=min(10, max(1, base_rating + randint(-2, 2))),
-        overall_rating=review_data.get('rating', 3),
-        comment=review_data.get('text', '')
+        overall_rating=review_data.get("rating", 3),
+        comment=review_data.get("text", ""),
     )
 
     # Create dance class review
@@ -88,8 +98,8 @@ def create_location_review_from_google(location, review_data, user=None):
         level=uniform(-10, 10),
         engagement=randint(1, 10),
         teaching_pace=uniform(-10, 10),
-        overall_rating=review_data.get('rating', 3),
-        comment=review_data.get('text', '')
+        overall_rating=review_data.get("rating", 3),
+        comment=review_data.get("text", ""),
     )
 
     # Create instructor review
@@ -101,43 +111,50 @@ def create_location_review_from_google(location, review_data, user=None):
         communication_and_feedback=randint(1, 10),
         patience_and_encouragement=randint(1, 10),
         motivation_and_energy=randint(1, 10),
-        overall_rating=review_data.get('rating', 3),
-        comment=review_data.get('text', '')
+        overall_rating=review_data.get("rating", 3),
+        comment=review_data.get("text", ""),
     )
 
     # Create main review with all components
     review = Review.objects.create(
         user=user,
-        anonymous_name=review_data.get('author_name', fake.name()),
+        anonymous_name=review_data.get("author_name", fake.name()),
         is_verified=bool(random() > 0.3),  # 70% chance of verification
         facilities_stats=facilities_stats,
         dance_class_stats=dance_class_stats,
         instructor_stats=instructor_stats,
-        created_at=datetime.fromtimestamp(review_data.get('time', timezone.now().timestamp()))
+        created_at=datetime.fromtimestamp(
+            review_data.get("time", timezone.now().timestamp())
+        ),
     )
 
     return review
 
+
 class Command(BaseCommand):
-    help = 'Seeds the database with data from Google Places API'
+    help = "Seeds the database with data from Google Places API"
 
     def add_arguments(self, parser):
         parser.add_argument(
-            '--yaml-file',
+            "--yaml-file",
             type=str,
-            help='Path to the YAML file with Google Places data',
-            required=True
+            help="Path to the YAML file with Google Places data",
+            required=True,
         )
 
     def handle(self, *args, **kwargs):
-        yaml_file = kwargs['yaml_file']
+        yaml_file = kwargs["yaml_file"]
         if not Path(yaml_file).exists():
             console.print(f"[red]Error: File {yaml_file} not found[/red]")
             return
 
-        console.print(Panel.fit("🌱 Starting Database Seeding from Google Places", style="bold green"))
+        console.print(
+            Panel.fit(
+                "🌱 Starting Database Seeding from Google Places", style="bold green"
+            )
+        )
 
-        with open(yaml_file, 'r', encoding='utf-8') as file:
+        with open(yaml_file, "r", encoding="utf-8") as file:
             data = yaml.safe_load(file)
 
         with Progress(
@@ -145,29 +162,31 @@ class Command(BaseCommand):
             TextColumn("[progress.description]{task.description}"),
             BarColumn(),
             TaskProgressColumn(),
-            console=console
+            console=console,
         ) as progress:
             # Create locations and their reviews
             locations_task = progress.add_task(
                 "[cyan]Creating locations from Google Places...",
-                total=len(data.get('places', []))
+                total=len(data.get("places", [])),
             )
 
             locations = []
             total_reviews = 0
 
-            for place in data.get('places', []):
+            for place in data.get("places", []):
                 # Create location
-                location_data = place.get('details', {})
-                location_coords = place.get('location', {})
+                location_data = place.get("details", {})
+                location_coords = place.get("location", {})
 
                 location = Location.objects.create(
-                    name=place.get('name', ''),
-                    address=location_data.get('formatted_address', place.get('address', '')),
-                    latitude=location_coords.get('lat', 0),
-                    longitude=location_coords.get('lng', 0),
-                    url=location_data.get('website', ''),
-                    phone=location_data.get('formatted_phone_number', '')
+                    name=place.get("name", ""),
+                    address=location_data.get(
+                        "formatted_address", place.get("address", "")
+                    ),
+                    latitude=location_coords.get("lat", 0),
+                    longitude=location_coords.get("lng", 0),
+                    url=location_data.get("website", ""),
+                    phone=location_data.get("formatted_phone_number", ""),
                 )
 
                 # Set random facilities and sports cards (similar to original seeding)
@@ -184,11 +203,11 @@ class Command(BaseCommand):
                 locations.append(location)
 
                 # Create reviews from Google data
-                reviews_data = location_data.get('reviews', [])
+                reviews_data = location_data.get("reviews", [])
                 if reviews_data:
                     reviews_task = progress.add_task(
                         f"[cyan]Creating reviews for {location.name}...",
-                        total=len(reviews_data)
+                        total=len(reviews_data),
                     )
 
                     for review_data in reviews_data:
@@ -199,7 +218,11 @@ class Command(BaseCommand):
                 progress.advance(locations_task)
 
         # Show summary
-        table = Table(title="Google Places Seeding Summary", show_header=True, header_style="bold magenta")
+        table = Table(
+            title="Google Places Seeding Summary",
+            show_header=True,
+            header_style="bold magenta",
+        )
         table.add_column("Entity", style="cyan")
         table.add_column("Count", justify="right", style="green")
 
@@ -208,4 +231,6 @@ class Command(BaseCommand):
 
         console.print("\n")
         console.print(table)
-        console.print("\n✨ [bold green]Database seeding from Google Places completed successfully![/bold green]")
+        console.print(
+            "\n✨ [bold green]Database seeding from Google Places completed successfully![/bold green]"
+        )

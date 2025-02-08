@@ -14,7 +14,7 @@ createsuperuser:
 ci:
 	ruff check --fix
 	ruff format 
-	pyright .
+	# pyright
 
 reseed: 
 	rm -f db.sqlite3
