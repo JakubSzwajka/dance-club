@@ -40,6 +40,8 @@ jobs:
 
       - name: Run linting
         run: | 
+          pwd
+          ls
           make ci
 
       - name: Set up Docker Buildx
