@@ -5,7 +5,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { components } from '@/lib/api/schema'
 
 interface InstructorCardProps {
-  instructor: components['schemas']['UserPublicSchema']
+  instructor: components['schemas']['InstructorPublicSchema']
 }
 
 export function InstructorCard({ instructor }: InstructorCardProps) {

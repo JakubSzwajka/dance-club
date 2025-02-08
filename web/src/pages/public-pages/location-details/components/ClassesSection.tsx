@@ -34,7 +34,7 @@ export function ClassesSection({ classes }: ClassesSectionProps) {
               </div>
 
               <div className="flex flex-col gap-2 mb-4">
-                <InstructorPill instructor={cls.instructor} />
+                {cls.instructor && <InstructorPill instructor={cls.instructor} />}
                 {/* {cls.schedule?.map((schedule, index) => (
                   <div
                     key={index}

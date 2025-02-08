@@ -2,8 +2,6 @@ import { Outlet, createRootRoute, createRoute, createRouter } from '@tanstack/re
 import { LoginPage } from './pages/LoginPage'
 import { SignupPage } from './pages/SignupPage'
 import { AuthProvider, useAuth } from './lib/auth/AuthContext'
-import { QueryClientProvider } from '@tanstack/react-query'
-import { queryClient } from './lib/api/queryClient'
 import { Toaster } from './components/ui/toaster'
 import { APIProvider } from '@vis.gl/react-google-maps'
 import { HomePage } from './pages/public-pages/main-page'
@@ -16,12 +14,10 @@ import { ReviewPage } from './pages/public-pages/review'
 const rootRoute = createRootRoute({
   component: () => (
     <APIProvider apiKey={'AIzaSyC7k8QnpwiMJvLbJ39P4yJOHBjIvDPckSk'}>
-      <QueryClientProvider client={queryClient}>
         <AuthProvider>
           <Outlet />
           <Toaster />
         </AuthProvider>
-      </QueryClientProvider>
     </APIProvider>
   ),
 })

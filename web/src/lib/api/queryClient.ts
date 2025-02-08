@@ -15,7 +15,6 @@ export const queryClient = new QueryClient({
         }
         return failureCount < 3
       },
-      useErrorBoundary: true,
     },
     mutations: {
       retry: (failureCount, error) => {
@@ -24,7 +23,6 @@ export const queryClient = new QueryClient({
         }
         return failureCount < 1
       },
-      useErrorBoundary: true,
     },
   },
 })

@@ -7,7 +7,7 @@ interface ActiveFiltersProps {
   selectedStyle?: string
   selectedLevel?: string
   selectedLocation?: string
-  instructors: components['schemas']['UserPublicSchema'][]
+  instructors: components['schemas']['InstructorPublicSchema'][]
   locations: components['schemas']['LocationSchema'][]
   onClearInstructor: () => void
   onClearStyle: () => void
