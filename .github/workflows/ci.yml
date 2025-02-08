@@ -33,6 +33,7 @@ jobs:
       - name: Install dependencies
         run: |
           pip install uv
+          uv venv
           uv sync --extra dev
 
       - name: Run linting
