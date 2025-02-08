@@ -49,7 +49,9 @@ def get_class(request, class_id: str) -> DanceClassSchema:
 
 
 @router.get(
-    "/classes/{class_id}/stats", response=ReviewAggregatedDanceClassStatsSchema, auth=None
+    "/classes/{class_id}/stats",
+    response=ReviewAggregatedDanceClassStatsSchema,
+    auth=None,
 )
 def get_class_stats(request, class_id: str) -> ReviewAggregatedDanceClassStatsSchema:
     """Get comprehensive review statistics for a class"""

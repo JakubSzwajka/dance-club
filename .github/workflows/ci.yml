@@ -32,7 +32,7 @@ jobs:
       - name: Install dependencies
         run: |
           pip install uv
-          uv pip install --system ruff pyright
+          uv sync
 
       - name: Run linting
         run: make ci
