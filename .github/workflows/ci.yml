@@ -25,20 +25,22 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+        with:
+          version: 0.5.29
+      
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.13'
+          python-version-file: 'pyproject.toml'
 
       - name: Install dependencies
         run: |
-          pip install uv
-          uv venv
           uv sync --extra dev
 
       - name: Run linting
         run: | 
-          uv venv
           make ci
 
       - name: Set up Docker Buildx
