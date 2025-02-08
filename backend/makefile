@@ -2,10 +2,8 @@ serve:
 	uv run manage.py runserver
 
 serve-docker:
-	make makemigrations
 	make migrate
 	DJANGO_SUPERUSER_PASSWORD=Test1234! DJANGO_SUPERUSER_EMAIL=szwajkajakub@gmail.com DJANGO_SUPERUSER_USERNAME=admin-szwajka uv run manage.py createsuperuser --noinput
-	uv run manage.py seed_test_data_google --yaml-file ./dance_schools_20250206_224702.yaml
 	uv run manage.py runserver 0.0.0.0:8000
 
 makemigrations:
