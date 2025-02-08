@@ -73,8 +73,13 @@ export function SchoolsNearbyMap({
             lng: locationsCenter.longitude,
           }}
           defaultZoom={13}
-          gestureHandling="greedy"
+          gestureHandling={'cooperative'}
           mapId="location-map"
+          disableDefaultUI={false}
+          scrollwheel={false}
+          draggable={true}
+          keyboardShortcuts={false}
+          disableDoubleClickZoom={true}
         >
           {locations?.map(
             location =>

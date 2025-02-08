@@ -1,6 +1,7 @@
 from django.core.management.base import BaseCommand
 from django.contrib.auth import get_user_model
 from django.utils import timezone
+from django.db import connection
 from classes.models import Location, Facilities, SportsCard, DanceClass
 from reviews.models import LocationReview, DanceClassReview, InstructorReview
 from faker import Faker
@@ -22,6 +23,14 @@ from pathlib import Path
 User = get_user_model()
 fake = Faker()
 console = Console()
+
+
+def truncate_string(text: str | None, max_length: int) -> str:
+    """Truncate string to max_length characters and handle None values"""
+    if text is None:
+        return ""
+    text_str = str(text)  # Convert to string in case it's a number or other type
+    return (text_str[:max_length - 3] + "...") if len(text_str) > max_length else text_str
 
 
 def generate_avatar_url(name: str) -> str:
@@ -54,8 +63,8 @@ def create_dummy_class(location, instructor):
     end_date = start_date + timedelta(days=90)
 
     return DanceClass.objects.create(
-        name=f"Dance Class at {location.name}",
-        description=fake.paragraph(),
+        name=truncate_string(f"Dance Class at {location.name}", 100),
+        description=truncate_string(fake.paragraph(), 500),
         instructor=instructor,
         level="beginner",
         style="other",
@@ -77,7 +86,7 @@ def create_location_review_from_google(location, review_data, user=None):
         review_data.get("time", timezone.now().timestamp())
     )
     is_verified = bool(random() > 0.3)  # 70% chance of verification
-    anonymous_name = review_data.get("author_name", fake.name())
+    anonymous_name = truncate_string(review_data.get("author_name", fake.name()), 100)
 
     # Create a dummy instructor and class for this location if needed
     instructor = create_dummy_instructor(location)
@@ -96,7 +105,7 @@ def create_location_review_from_google(location, review_data, user=None):
         temperature=min(10, max(1, base_rating + randint(-2, 2))),
         lighting=min(10, max(1, base_rating + randint(-2, 2))),
         overall_rating=review_data.get("rating", 3),
-        comment=review_data.get("text", ""),
+        comment=truncate_string(review_data.get("text") or "", 1000),
         created_at=created_at,
     )
 
@@ -111,7 +120,7 @@ def create_location_review_from_google(location, review_data, user=None):
         engagement=randint(1, 10),
         teaching_pace=uniform(-10, 10),
         overall_rating=review_data.get("rating", 3),
-        comment=review_data.get("text", ""),
+        comment=truncate_string(review_data.get("text") or "", 1000),
         created_at=created_at,
     )
 
@@ -128,7 +137,7 @@ def create_location_review_from_google(location, review_data, user=None):
         patience_and_encouragement=randint(1, 10),
         motivation_and_energy=randint(1, 10),
         overall_rating=review_data.get("rating", 3),
-        comment=review_data.get("text", ""),
+        comment=truncate_string(review_data.get("text") or "", 1000),
         created_at=created_at,
     )
 
@@ -148,6 +157,14 @@ class Command(BaseCommand):
         yaml_file = kwargs["yaml_file"]
         if not Path(yaml_file).exists():
             console.print(f"[red]Error: File {yaml_file} not found[/red]")
+            return
+
+        # Test database connection
+        try:
+            connection.ensure_connection()
+        except Exception as e:
+            console.print(f"[red]Error: Could not connect to database: {str(e)}[/red]")
+            console.print("[yellow]Hint: Make sure your DATABASE_URL is correct in .env file[/yellow]")
             return
 
         console.print(
@@ -181,14 +198,17 @@ class Command(BaseCommand):
                 location_coords = place.get("location", {})
 
                 location = Location.objects.create(
-                    name=place.get("name", ""),
-                    address=location_data.get(
-                        "formatted_address", place.get("address", "")
+                    name=truncate_string(place.get("name") or "", 100),
+                    address=truncate_string(
+                        location_data.get("formatted_address")
+                        or place.get("address")
+                        or "",
+                        200
                     ),
-                    latitude=location_coords.get("lat", 0),
-                    longitude=location_coords.get("lng", 0),
-                    url=location_data.get("website", ""),
-                    phone=location_data.get("formatted_phone_number", ""),
+                    latitude=float(location_coords.get("lat", 0)),
+                    longitude=float(location_coords.get("lng", 0)),
+                    url=truncate_string(location_data.get("website") or "", 200),
+                    phone=truncate_string(location_data.get("formatted_phone_number") or "", 20),
                 )
 
                 # Set random facilities and sports cards (similar to original seeding)
@@ -208,7 +228,7 @@ class Command(BaseCommand):
                 reviews_data = location_data.get("reviews", [])
                 if reviews_data:
                     reviews_task = progress.add_task(
-                        f"[cyan]Creating reviews for {location.name}...",
+                        f"[cyan]Creating reviews for {truncate_string(location.name, 50)}...",
                         total=len(reviews_data),
                     )
 
