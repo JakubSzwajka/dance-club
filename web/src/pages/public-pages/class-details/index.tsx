@@ -99,11 +99,7 @@ export function ClassDetailsPage() {
 
       {/* Facilities Section */}
       <Container>
-        {classDetails.location && (
-          <FacilitiesSection 
-            locationId={classDetails.location.id}
-          />
-        )}
+        {classDetails.location && <FacilitiesSection locationId={classDetails.location.id} />}
       </Container>
 
       {/* Tabs Section */}

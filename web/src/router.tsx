@@ -1,7 +1,7 @@
 import { Outlet, createRootRoute, createRoute, createRouter } from '@tanstack/react-router'
 import { LoginPage } from './pages/LoginPage'
 import { SignupPage } from './pages/SignupPage'
-import { AuthProvider, useAuth } from './lib/auth/AuthContext'
+import { AuthProvider } from './lib/auth/AuthContext'
 import { Toaster } from './components/ui/toaster'
 import { APIProvider } from '@vis.gl/react-google-maps'
 import { HomePage } from './pages/public-pages/main-page'
@@ -10,36 +10,18 @@ import { ClassDetailsPage as PublicClassDetailsPage } from './pages/public-pages
 import { InstructorDetailsPage } from './pages/public-pages/instructor-details'
 import { LocationDetailsPage } from './pages/public-pages/location-details'
 import { ReviewPage } from './pages/public-pages/review'
+import { ProtectedLayout } from './components/layouts/ProtectedLayout'
 
 const rootRoute = createRootRoute({
   component: () => (
     <APIProvider apiKey={'AIzaSyC7k8QnpwiMJvLbJ39P4yJOHBjIvDPckSk'}>
-        <AuthProvider>
-          <Outlet />
-          <Toaster />
-        </AuthProvider>
+      <AuthProvider>
+        <Outlet />
+        <Toaster />
+      </AuthProvider>
     </APIProvider>
   ),
 })
-
-function ProtectedLayout() {
-  const { isAuthenticated, isLoading } = useAuth()
-
-  if (isLoading) {
-    return (
-      <div className="flex items-center justify-center min-h-screen">
-        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary"></div>
-      </div>
-    )
-  }
-
-  if (!isAuthenticated) {
-    // window.location.href = '/login';
-    return null
-  }
-
-  return <Outlet />
-}
 
 const protectedLayout = createRoute({
   getParentRoute: () => rootRoute,
@@ -64,18 +46,6 @@ const classBrowserDetailsRoute = createRoute({
   path: '/classes/$classId',
   component: PublicClassDetailsPage,
 })
-
-// const eventBrowseRoute = createRoute({
-//   getParentRoute: () => rootRoute,
-//   path: '/events',
-//   component: EventBrowser,
-// });
-
-// const eventBrowseDetailsRoute = createRoute({
-//   getParentRoute: () => rootRoute,
-//   path: '/events/$eventId',
-//   component: PublicEventDetailsPage,
-// });
 
 const instructorProfileDetailsRoute = createRoute({
   getParentRoute: () => rootRoute,

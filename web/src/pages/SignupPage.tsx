@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useAuth } from '../lib/auth/AuthContext'
+import { useAuth } from '../lib/auth/authHooks'
 import {
   Card,
   CardHeader,
@@ -36,15 +36,20 @@ export function SignupPage() {
       return
     }
 
-    try {
-      await signup(email, password, role)
-    } catch (_err) {
-      toast({
-        title: 'Error',
-        description: 'Something went wrong. Please try again.',
-        variant: 'destructive',
+    signup(email, password, role)
+      .then(() => {
+        toast({
+          title: 'Success',
+          description: 'Account created successfully. Please login.',
+        })
       })
-    }
+      .catch(() => {
+        toast({
+          title: 'Error',
+          description: 'Something went wrong. Please try again.',
+          variant: 'destructive',
+        })
+      })
   }
 
   return (

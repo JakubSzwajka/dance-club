@@ -1,30 +1,9 @@
-import { createContext, useContext, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { UserPrivateSchema, useCurrentUser, useLogin, useSignup } from '../api/auth'
 import { useNavigate, useRouter } from '@tanstack/react-router'
 import { useQueryClient } from '@tanstack/react-query'
 import { api } from '../api/api'
-
-type AuthContextType = {
-  user: UserPrivateSchema | null
-  isLoading: boolean
-  isAuthenticated: boolean
-  setUser: (user: UserPrivateSchema | null) => void
-  getToken: () => string | null
-  setToken: (token: string) => void
-  logout: () => void
-  login: (email: string, password: string) => Promise<void>
-  signup: (email: string, password: string, role: 'student' | 'instructor') => Promise<void>
-}
-
-const AuthContext = createContext<AuthContextType | null>(null)
-
-export function useAuth() {
-  const context = useContext(AuthContext)
-  if (!context) {
-    throw new Error('useAuth must be used within an AuthProvider')
-  }
-  return context
-}
+import { AuthContext } from './authHooks'
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<UserPrivateSchema | null>(null)

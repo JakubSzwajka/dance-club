@@ -18,9 +18,7 @@ export function HeroSection({ classDetails }: HeroSectionProps) {
 
       <div className="grid grid-cols-1 sm:grid-cols-1 gap-4 text-sm text-muted-foreground mb-6">
         <div className="flex items-center gap-2">
-          {classDetails.instructor && (
-            <InstructorPill instructor={classDetails.instructor} />
-          )}
+          {classDetails.instructor && <InstructorPill instructor={classDetails.instructor} />}
         </div>
         <div className="flex items-center gap-2">
           <LocationPill location={classDetails.location} />

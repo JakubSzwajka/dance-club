@@ -1,6 +1,6 @@
 import { Button } from '../ui/button'
 import { Container } from '../ui/container'
-import { useAuth } from '../../lib/auth/AuthContext'
+import { useAuth } from '../../lib/auth/authHooks'
 import { useNavigate } from '@tanstack/react-router'
 import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar'
 import {
