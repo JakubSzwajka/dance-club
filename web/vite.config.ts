@@ -9,4 +9,7 @@ export default defineConfig({
       '@': path.resolve(__dirname, './src'),
     },
   },
+  preview: {
+    allowedHosts: ['dance-club-production.up.railway.app']
+  }
 })
