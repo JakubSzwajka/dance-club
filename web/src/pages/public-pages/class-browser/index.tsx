@@ -5,7 +5,7 @@ import {
   usePublicClasses,
   useMetadata,
   usePublicInstructors,
-  usePublicLocations,
+  usePublicLocationsNearby,
 } from '@/lib/api/public/index'
 import { useNavigate, useSearch } from '@tanstack/react-router'
 import { ClassFilters, ClassSearchParams } from './components/class-filters'
@@ -44,7 +44,7 @@ export function ClassBrowser() {
     })
   }
 
-  const { data: locations } = usePublicLocations()
+  const { data: locations } = usePublicLocationsNearby()
   const { data: instructors } = usePublicInstructors()
   const { data: classes } = usePublicClasses(
     selectedInstructor,

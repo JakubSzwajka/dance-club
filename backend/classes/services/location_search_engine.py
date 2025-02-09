@@ -11,6 +11,10 @@ class LocationSearchEngineService:
         has_active_classes: bool = True,
         latitude: Optional[float] = None,
         longitude: Optional[float] = None,
+        dance_style: Optional[str] = None,
+        level: Optional[str] = None,
+        min_classes: Optional[int] = None,
+        min_rating: Optional[float] = None,
     ) -> List[LocationSchema]:
         locations = Location.objects.all()
         if has_active_classes:
@@ -32,6 +36,16 @@ class LocationSearchEngineService:
                 & models.Q(longitude__lte=longitude + lng_degree_delta)
                 & models.Q(longitude__gte=longitude - lng_degree_delta)
             )
+
+        if dance_style:
+            locations = locations.filter(classes__style__icontains=dance_style)
+        if level:
+            locations = locations.filter(classes__level__icontains=level)
+        if min_classes:
+            locations = locations.filter(classes__count__gte=min_classes)
+        if min_rating:
+            locations = locations.filter(classes__rating__gte=min_rating)
+
         return [location.to_schema() for location in locations]
 
     def get_location_by_id(self, location_id: str) -> LocationSchema:

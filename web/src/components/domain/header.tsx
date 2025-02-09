@@ -86,10 +86,12 @@ export function Header() {
               </DropdownMenu>
             ) : (
               <>
-                <Button variant="ghost" onClick={() => navigate({ to: '/login' })}>
+                <Button variant="ghost" disabled className="cursor-not-allowed opacity-50">
                   Sign in
                 </Button>
-                <Button onClick={() => navigate({ to: '/signup' })}>Sign up</Button>
+                <Button disabled className="cursor-not-allowed opacity-50">
+                  Sign up
+                </Button>
               </>
             )}
           </nav>

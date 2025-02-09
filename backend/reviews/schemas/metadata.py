@@ -7,12 +7,14 @@ from reviews.constants import (
     WAITING_AREA_OPTIONS,
     VERIFICATION_METHODS,
 )
+from shared.const import Facilities
 
 
 class MetadataSchema(Schema):
     dance_styles: List[DanceStyle]
     skill_levels: List[SkillLevel]
     sports_cards: List[SportsCard]
+    facilities: List[Facilities]
 
 
 class ReviewMetadataSchema(Schema):

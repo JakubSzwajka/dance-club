@@ -34,10 +34,10 @@ export function HeroSection() {
           <div className="mt-12 flex gap-6">
             <Button
               size="lg"
-              className="text-lg px-8 py-6 shadow-lg hover:shadow-xl transition-all hover:scale-105"
-              onClick={() => navigate({ to: '/signup' })}
+              disabled
+              className="text-lg px-8 py-6 shadow-lg cursor-not-allowed opacity-50"
             >
-              Join Now
+              Join Now (coming soon)
             </Button>
             <Button
               size="lg"

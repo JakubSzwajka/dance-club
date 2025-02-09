@@ -20,10 +20,42 @@ def get_locations(
     has_active_classes: bool = True,
     latitude: Optional[float] = None,
     longitude: Optional[float] = None,
+    dance_style: Optional[str] = None,
+    level: Optional[str] = None,
+    min_classes: Optional[int] = None,
+    min_rating: Optional[float] = None,
 ) -> List[LocationSchema]:
     """Get locations, optionally filtered to those with active classes"""
     return location_search_engine.get_locations(
-        has_active_classes=has_active_classes, latitude=latitude, longitude=longitude
+        has_active_classes=has_active_classes,
+        latitude=latitude,
+        longitude=longitude,
+        dance_style=dance_style,
+        level=level,
+        min_classes=min_classes,
+        min_rating=min_rating,
+    )
+
+@router.get("/locations/nearby", response=List[LocationSchema], auth=None)
+def get_locations_nearby(
+    request,
+    has_active_classes: bool = True,
+    latitude: Optional[float] = None,
+    longitude: Optional[float] = None,
+    dance_style: Optional[str] = None,
+    level: Optional[str] = None,
+    min_classes: Optional[int] = None,
+    min_rating: Optional[float] = None,
+) -> List[LocationSchema]:
+    """Get locations, optionally filtered to those with active classes"""
+    return location_search_engine.get_locations(
+        has_active_classes=has_active_classes,
+        latitude=latitude,
+        longitude=longitude,
+        dance_style=dance_style,
+        level=level,
+        min_classes=min_classes,
+        min_rating=min_rating,
     )
 
 

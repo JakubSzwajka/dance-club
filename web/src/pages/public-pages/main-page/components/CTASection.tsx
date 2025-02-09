@@ -1,6 +1,12 @@
 import { Button } from '@/components/ui/button'
 import { Container } from '@/components/ui/container'
 import { useNavigate } from '@tanstack/react-router'
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from '@/components/ui/tooltip'
 
 export function CTASection() {
   const navigate = useNavigate()
@@ -14,9 +20,20 @@ export function CTASection() {
             Join our community today and get access to exclusive events, special workshops, and
             connect with other dance enthusiasts.
           </p>
-          <Button size="lg" onClick={() => navigate({ to: '/signup' })}>
-            Sign Up Now
-          </Button>
+          <TooltipProvider>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <div>
+                  <Button size="lg" disabled className="cursor-not-allowed opacity-50">
+                    Sign Up Now
+                  </Button>
+                </div>
+              </TooltipTrigger>
+              <TooltipContent>
+                <p>Coming soon!</p>
+              </TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
         </div>
       </Container>
     </section>

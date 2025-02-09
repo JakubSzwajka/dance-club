@@ -1,19 +1,27 @@
 import { $api } from '../queryClient'
 
-export function usePublicLocations(
+export function usePublicLocationsNearby(
   hasActiveClasses: boolean = true,
   latitude: number | null = null,
-  longitude: number | null = null
+  longitude: number | null = null,
+  danceStyle: string | null = null,
+  level: string | null = null,
+  minClasses: number | null = null,
+  minRating: number | null = null,
 ) {
   return $api.useQuery(
     'get',
-    '/api/public/locations',
+    '/api/public/locations/nearby',
     {
       params: {
         query: {
           has_active_classes: hasActiveClasses,
           latitude: latitude,
           longitude: longitude,
+          dance_style: danceStyle,
+          level: level,
+          min_classes: minClasses,
+          min_rating: minRating,
         },
       },
     },
