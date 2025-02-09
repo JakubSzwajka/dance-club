@@ -996,7 +996,12 @@ export interface operations {
                 dance_style?: string | null;
                 level?: string | null;
                 min_classes?: number | null;
-                min_rating?: number | null;
+                min_location_rating?: number | null;
+                min_instructor_rating?: number | null;
+                min_class_rating?: number | null;
+                radius_km?: number | null;
+                facility?: string | null;
+                sports_card?: string | null;
             };
             header?: never;
             path?: never;

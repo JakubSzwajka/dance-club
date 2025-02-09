@@ -8,7 +8,7 @@ import {
   usePublicClasses,
   useMetadata,
   usePublicInstructors,
-  usePublicLocationsNearby,
+  usePublicLocations,
 } from '@/lib/api/public/index'
 import { useNavigate, useSearch } from '@tanstack/react-router'
 import { ClassFilters, ClassSearchParams } from './components/class-filters'
@@ -48,7 +48,14 @@ export function ClassBrowser() {
     })
   }
 
-  const { data: locations } = usePublicLocationsNearby()
+  const { data: locations } = usePublicLocations({
+    min_classes: 1,
+    radius_km: 10,
+    dance_style: selectedStyle,
+    level: selectedLevel,
+    min_location_rating: selectedMinRating ? parseFloat(selectedMinRating) : undefined,
+    sports_card: selectedLocation,
+  })
   const { data: instructors } = usePublicInstructors()
   const { data: classes, isLoading: isLoadingClasses } = usePublicClasses(
     selectedInstructor,

@@ -16,6 +16,7 @@ export interface LocationSearchParams {
   sportsCard?: SportsCard
   lat?: string
   lng?: string
+  radiusKm?: string
 }
 
 export const WARSAW_COORDINATES = {
@@ -33,4 +34,5 @@ export type LocationsSearchValidation = {
   sportsCard?: SportsCard
   lat?: string
   lng?: string
+  radiusKm?: string
 } 

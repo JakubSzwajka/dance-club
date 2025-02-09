@@ -18,22 +18,18 @@ review_stats_service = ReviewStatsService()
 def get_locations(
     request,
     has_active_classes: bool = True,
-    latitude: Optional[float] = None,
-    longitude: Optional[float] = None,
     dance_style: Optional[str] = None,
     level: Optional[str] = None,
     min_classes: Optional[int] = None,
     min_rating: Optional[float] = None,
 ) -> List[LocationSchema]:
     """Get locations, optionally filtered to those with active classes"""
-    return location_search_engine.get_locations(
+    return location_search_engine.get_locations_nearby(
         has_active_classes=has_active_classes,
-        latitude=latitude,
-        longitude=longitude,
         dance_style=dance_style,
         level=level,
         min_classes=min_classes,
-        min_rating=min_rating,
+        min_location_rating=min_rating,
     )
 
 @router.get("/locations/nearby", response=List[LocationSchema], auth=None)
@@ -45,17 +41,25 @@ def get_locations_nearby(
     dance_style: Optional[str] = None,
     level: Optional[str] = None,
     min_classes: Optional[int] = None,
-    min_rating: Optional[float] = None,
+    min_location_rating: Optional[float] = None,
+    min_instructor_rating: Optional[float] = None,
+    min_class_rating: Optional[float] = None,
+    radius_km: Optional[float] = None,
+    facility: Optional[str] = None,
+    sports_card: Optional[str] = None,
 ) -> List[LocationSchema]:
     """Get locations, optionally filtered to those with active classes"""
-    return location_search_engine.get_locations(
+    return location_search_engine.get_locations_nearby(
         has_active_classes=has_active_classes,
         latitude=latitude,
         longitude=longitude,
         dance_style=dance_style,
         level=level,
         min_classes=min_classes,
-        min_rating=min_rating,
+        min_location_rating=min_location_rating,
+        radius_km=radius_km,
+        facility=facility,
+        sports_card=sports_card,
     )
 
 

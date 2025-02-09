@@ -1,6 +1,6 @@
 import { Card } from '@/components/ui/card'
 import { Map, AdvancedMarker } from '@vis.gl/react-google-maps'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import { useNavigate, useSearch } from '@tanstack/react-router'
 import { Loader } from '@/components/ui/loader'
 import { usePublicLocationsNearby, useMetadata } from '@/lib/api/public'
@@ -8,11 +8,12 @@ import { LocationCard } from './components/LocationCard'
 import { LocationSchema, LocationSearchParams, LocationWithClasses, WARSAW_COORDINATES } from './types'
 import { LocationFilters } from './components/LocationFilters'
 
-
 function SchoolsNearbyMap() {
   const navigate = useNavigate()
-  const search = useSearch({ from: '/' }) as LocationSearchParams
-
+  const urlSearch = useSearch({ from: '/' }) as LocationSearchParams
+  
+  // Local state for filters to prevent URL updates on every change
+  const [filters, setFilters] = useState<LocationSearchParams>(urlSearch)
   const [selectedLocation, setSelectedLocation] = useState<LocationWithClasses | null>(null)
   const [coordinates, setCoordinates] = useState({
     latitude: WARSAW_COORDINATES.latitude,
@@ -27,25 +28,25 @@ function SchoolsNearbyMap() {
   const sportsCardOptions = metadata?.sports_cards || []
   const facilityOptions = metadata?.facilities || []
 
-  // Update URL with new filters
-  const updateFilters = (updates: Partial<LocationSearchParams>) => {
-    const newSearch = {
-      ...search,
-      ...updates,
-    }
+  // Debounced filter updates to URL
+  useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      // Remove undefined values
+      const newSearch = { ...filters }
+      Object.keys(newSearch).forEach(key => {
+        if (newSearch[key as keyof LocationSearchParams] === undefined) {
+          delete newSearch[key as keyof LocationSearchParams]
+        }
+      })
 
-    // Remove undefined values
-    Object.keys(newSearch).forEach(key => {
-      if (newSearch[key as keyof LocationSearchParams] === undefined) {
-        delete newSearch[key as keyof LocationSearchParams]
-      }
-    })
+      navigate({
+        to: '/',
+        search: newSearch,
+      })
+    }, 500) // 500ms debounce
 
-    navigate({
-      to: '/',
-      search: newSearch,
-    })
-  }
+    return () => clearTimeout(timeoutId)
+  }, [filters, navigate])
 
   // Get user location with fallback to Warsaw
   useEffect(() => {
@@ -66,7 +67,11 @@ function SchoolsNearbyMap() {
               latitude: newLat,
               longitude: newLng,
             })
-            updateFilters({ lat: newLat.toString(), lng: newLng.toString() })
+            setFilters(prev => ({
+              ...prev,
+              lat: newLat.toString(),
+              lng: newLng.toString(),
+            }))
           }
           setIsLoadingGeolocation(false)
           setHasInitializedLocation(true)
@@ -75,12 +80,13 @@ function SchoolsNearbyMap() {
           if (!abortController.signal.aborted) {
             console.error('Error getting geolocation:', error)
             // Fallback to Warsaw coordinates if geolocation fails
-            if (!search.lat || !search.lng) {
+            if (!filters.lat || !filters.lng) {
               setCoordinates(WARSAW_COORDINATES)
-              updateFilters({
+              setFilters(prev => ({
+                ...prev,
                 lat: WARSAW_COORDINATES.latitude.toString(),
                 lng: WARSAW_COORDINATES.longitude.toString(),
-              })
+              }))
             }
             setIsLoadingGeolocation(false)
             setHasInitializedLocation(true)
@@ -97,40 +103,25 @@ function SchoolsNearbyMap() {
     }
   }, [])
 
-  
   // Load locations based on filters
-  const { data: locations, isLoading: isLoadingLocations } = usePublicLocationsNearby(
-    hasInitializedLocation, // Only start loading when we have initial location
-    coordinates.latitude,
-    coordinates.longitude,
-    search.danceStyle,
-    search.level,
-    search.minClasses ? parseInt(search.minClasses) : undefined,
-    search.minRating ? parseFloat(search.minRating) : undefined
-)
+  const { data: locations, isLoading: isLoadingLocations } = usePublicLocationsNearby({
+    latitude: coordinates.latitude,
+    longitude: coordinates.longitude,
+    dance_style: filters.danceStyle,
+    level: filters.level,
+    min_classes: filters.minClasses ? parseInt(filters.minClasses) : undefined,
+    min_location_rating: filters.minRating ? parseFloat(filters.minRating) : undefined,
+    radius_km: filters.radiusKm ? parseFloat(filters.radiusKm) : undefined,
+    facility: filters.facility,
+    sports_card: filters.sportsCard,
+  })
 
-    useEffect(() => {
-      if (locations && locations.length > 0 && hasInitializedLocation) {
-        // Calculate average latitude and longitude
-        const avgCoordinates = locations.reduce(
-          (acc, location) => {
-            if (location.latitude && location.longitude) {
-              acc.latitude += Number(location.latitude)
-              acc.longitude += Number(location.longitude)
-            }
-            return acc
-          },
-          { latitude: 0, longitude: 0 }
-        )
 
-        const newCenter = {
-          latitude: avgCoordinates.latitude / locations.length,
-          longitude: avgCoordinates.longitude / locations.length
-        }
-
-        setCoordinates(newCenter)
-      }
-    }, [locations, hasInitializedLocation])
+  // Memoize map center to prevent unnecessary re-renders
+  const mapCenter = useMemo(() => ({
+    lat: coordinates.latitude,
+    lng: coordinates.longitude,
+  }), [coordinates.latitude, coordinates.longitude])
 
   const handleLocationClick = (location: LocationSchema) => {
     navigate({
@@ -138,6 +129,22 @@ function SchoolsNearbyMap() {
       params: { locationId: location.id },
     })
   }
+
+  // Memoize the map component to prevent re-renders when only markers change
+  const MapComponent = useMemo(() => (
+    <Map
+      defaultCenter={mapCenter}
+      defaultZoom={13}
+      gestureHandling={'cooperative'}
+      mapId="location-map"
+      disableDefaultUI={false}
+      scrollwheel={false}
+      draggable={true}
+      keyboardShortcuts={false}
+      disableDoubleClickZoom={true}
+      className="h-full w-full"
+    />
+  ), [mapCenter])
 
   return (
     <div className="hidden md:block">
@@ -154,55 +161,29 @@ function SchoolsNearbyMap() {
         </div>
       </section>
 
-      {(isLoadingGeolocation || isLoadingLocations || !hasInitializedLocation) ? (
+      {(isLoadingGeolocation || !hasInitializedLocation) ? (
         <Card className="h-[600px]">
-          <Loader className="h-full" text="Loading map and locations..." size="lg" />
+          <Loader className="h-full" text="Loading map..." size="lg" />
         </Card>
       ) : (
         <div className="relative h-[600px]">
-          {/* Filters Section */}
-          <div className="absolute left-4 top-4 z-10 w-[280px]">
-            <LocationFilters
-              search={search}
-              updateFilters={updateFilters}
-              onClearAll={() => navigate({ to: '/', search: {} })}
-              danceStyles={danceStyles}
-              facilityOptions={facilityOptions}
-              sportsCardOptions={sportsCardOptions}
-            />
-          </div>
-
           {/* Map Section */}
           <Card className="overflow-hidden h-full">
             <div className="h-full w-full relative">
-              <Map
-                defaultCenter={{
-                  lat: coordinates.latitude,
-                  lng: coordinates.longitude,
-                }}
-                defaultZoom={13}
-                gestureHandling={'cooperative'}
-                mapId="location-map"
-                disableDefaultUI={false}
-                scrollwheel={false}
-                draggable={true}
-                keyboardShortcuts={false}
-                disableDoubleClickZoom={true}
-                className="h-full w-full"
-              >
-                {locations?.map(
-                  location =>
-                    location.latitude &&
-                    location.longitude && (
-                      <div key={location.id}>
-                        <AdvancedMarker
-                          position={{ lat: Number(location.latitude), lng: Number(location.longitude) }}
-                          onClick={() => setSelectedLocation(location as LocationWithClasses)}
-                        />
-                      </div>
-                    )
-                )}
-              </Map>
+              {MapComponent}
+              
+              {/* Markers Layer */}
+              {locations?.map(
+                location =>
+                  location.latitude &&
+                  location.longitude && (
+                    <AdvancedMarker
+                      key={location.id}
+                      position={{ lat: Number(location.latitude), lng: Number(location.longitude) }}
+                      onClick={() => setSelectedLocation(location as LocationWithClasses)}
+                    />
+                  )
+              )}
 
               {selectedLocation && (
                 <LocationCard
@@ -211,8 +192,27 @@ function SchoolsNearbyMap() {
                   onLocationClick={handleLocationClick}
                 />
               )}
+
+              {/* Loading overlay for locations */}
+              {isLoadingLocations && (
+                <div className="absolute inset-0 bg-background/50 flex items-center justify-center">
+                  <Loader text="Updating results..." size="lg" />
+                </div>
+              )}
             </div>
           </Card>
+
+          {/* Filters Section */}
+          <div className="absolute left-4 top-4 z-10">
+            <LocationFilters
+              search={filters}
+              updateFilters={(updates) => setFilters(prev => ({ ...prev, ...updates }))}
+              onClearAll={() => setFilters({})}
+              danceStyles={danceStyles}
+              facilityOptions={facilityOptions}
+              sportsCardOptions={sportsCardOptions}
+            />
+          </div>
         </div>
       )}
     </div>
