@@ -1,7 +1,7 @@
 import { useParams } from '@tanstack/react-router'
 import { Container } from '@/components/ui/container'
 import { Header } from '@/components/domain/header'
-import { usePublicLocation, usePublicLocationClasses } from '@/lib/api/public'
+import { usePublicLocation, usePublicClasses } from '@/lib/api/public'
 import { HeroSection } from './components/HeroSection'
 import { MapSection } from './components/MapSection'
 import { ClassesSection } from './components/ClassesSection'
@@ -9,8 +9,15 @@ import { ClassesSection } from './components/ClassesSection'
 export function LocationDetailsPage() {
   const { locationId } = useParams({ from: '/locations/$locationId' })
   const { data: location, isLoading } = usePublicLocation(locationId)
-  const { data: locationClasses } = usePublicLocationClasses(locationId)
-
+  const { data: classes } = usePublicClasses(
+    null,
+    locationId,
+    null,
+    null,
+    null,
+    null,
+    null
+  )
   if (isLoading || !location) {
     return (
       <div className="min-h-screen bg-background">
@@ -50,7 +57,7 @@ export function LocationDetailsPage() {
       <Container>
         <div className="py-8">
           <h2 className="text-2xl font-semibold mb-6">Regular Classes</h2>
-          <ClassesSection classes={locationClasses || []} />
+          <ClassesSection classes={classes || []} />
         </div>
       </Container>
     </div>

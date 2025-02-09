@@ -8,7 +8,7 @@ import { QuickInfoCard } from './components/QuickInfoCard'
 import { InstructorTab } from './components/InstructorTab'
 import { ReviewsTab } from './components/ReviewsTab'
 import { Button } from '@/components/ui/button'
-import { useState } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { Card } from '@/components/ui/card'
 import { ReviewStatsSection } from './components/ReviewStatsSection'
 import { FacilitiesSection } from './components/FacilitiesSection'
@@ -17,7 +17,30 @@ export function ClassDetailsPage() {
   const { classId } = useParams({ from: '/classes/$classId' })
   const { data: classDetails, isLoading } = usePublicClass(classId)
   const [isExpanded, setIsExpanded] = useState(false)
+  const [needsTruncation, setNeedsTruncation] = useState(false)
+  const contentRef = useRef<HTMLDivElement>(null)
   const navigate = useNavigate()
+
+  useEffect(() => {
+    const checkTruncation = () => {
+      if (contentRef.current) {
+        // Get the line height and total height
+        const styles = window.getComputedStyle(contentRef.current)
+        const lineHeight = parseInt(styles.lineHeight)
+        const height = contentRef.current.scrollHeight
+        
+        // 4 lines + some buffer for safety
+        const maxHeight = lineHeight * 4 + 8
+        
+        setNeedsTruncation(height > maxHeight)
+      }
+    }
+
+    checkTruncation()
+    // Add resize listener to recheck on window resize
+    window.addEventListener('resize', checkTruncation)
+    return () => window.removeEventListener('resize', checkTruncation)
+  }, [classDetails])
 
   if (isLoading || !classDetails || !classDetails.instructor || !classDetails.location) {
     return (
@@ -70,20 +93,25 @@ export function ClassDetailsPage() {
         <div className="py-8">
           <h2 className="text-2xl font-semibold mb-4">About This Class</h2>
           <Card className="p-6 bg-muted/30">
-            <div className={`prose prose-slate max-w-none ${!isExpanded ? 'line-clamp-4' : ''}`}>
+            <div
+              ref={contentRef}
+              className={`prose prose-slate max-w-none ${!isExpanded ? 'line-clamp-4' : ''}`}
+            >
               {classDetails.description.split('\n\n').map((paragraph, index) => (
                 <p key={index} className="whitespace-pre-line mb-4 last:mb-0">
                   {paragraph}
                 </p>
               ))}
             </div>
-            <Button
-              variant="ghost"
-              className="mt-4 w-full hover:bg-muted"
-              onClick={() => setIsExpanded(!isExpanded)}
-            >
-              {isExpanded ? 'Show Less' : 'Read More'}
-            </Button>
+            {needsTruncation && (
+              <Button
+                variant="ghost"
+                className="mt-4 w-full hover:bg-muted"
+                onClick={() => setIsExpanded(!isExpanded)}
+              >
+                {isExpanded ? 'Show Less' : 'Read More'}
+              </Button>
+            )}
           </Card>
         </div>
       </Container>

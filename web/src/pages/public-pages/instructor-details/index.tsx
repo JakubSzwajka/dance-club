@@ -2,11 +2,12 @@ import { useParams } from '@tanstack/react-router'
 import { Container } from '@/components/ui/container'
 import { Header } from '@/components/domain/header'
 import { HeroSection } from './components/HeroSection'
-import { TeachingSchedule } from './components/TeachingSchedule'
 import { Card } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { useState } from 'react'
 import { usePublicInstructor, usePublicInstructorClasses } from '@/lib/api/public/index'
+import { ClassItem } from '@/components/domain/class-item'
+import { useNavigate } from '@tanstack/react-router'
 // import { ReviewsSection } from "./components/ReviewsSection"
 
 export function InstructorDetailsPage() {
@@ -14,6 +15,7 @@ export function InstructorDetailsPage() {
   const { data: instructor, isLoading } = usePublicInstructor(instructorId)
   const { data: instructorClasses } = usePublicInstructorClasses(instructorId)
   const [isExpanded, setIsExpanded] = useState(false)
+  const navigate = useNavigate()
 
   if (isLoading || !instructor) {
     return (
@@ -67,11 +69,32 @@ export function InstructorDetailsPage() {
         </div>
       </Container>
 
-      {/* Teaching Schedule */}
+      {/* Classes Section */}
       <Container>
         <div className="py-8">
           <h2 className="text-2xl font-semibold mb-6">Regular Classes</h2>
-          <TeachingSchedule classes={instructorClasses || []} />
+          {instructorClasses && instructorClasses.length > 0 ? (
+            <div className="space-y-4">
+              {instructorClasses.map(danceClass => (
+                <ClassItem
+                  key={danceClass.id}
+                  danceClass={danceClass}
+                  onDetailsClick={id => {
+                    navigate({
+                      to: '/classes/$classId',
+                      params: { classId: id },
+                    })
+                  }}
+                />
+              ))}
+            </div>
+          ) : (
+            <Card className="p-6">
+              <p className="text-center text-muted-foreground">
+                No regular classes scheduled at the moment.
+              </p>
+            </Card>
+          )}
         </div>
       </Container>
     </div>

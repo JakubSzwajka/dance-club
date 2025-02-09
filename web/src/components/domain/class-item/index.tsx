@@ -88,18 +88,18 @@ export function ClassItem({ danceClass, onDetailsClick }: ClassItemProps) {
             <div className="space-y-2 min-w-0">
               <div className="flex items-center gap-2 text-muted-foreground">
                 <CalendarDays className="w-4 h-4 shrink-0" />
-                <span className="truncate">{formatDate(danceClass.start_date)}</span>
-              </div>
-              <div className="flex items-center gap-2 text-muted-foreground">
-                <Clock className="w-4 h-4 shrink-0" />
-                <span className="truncate">
-                  {formatTime(danceClass.start_date)} - {formatTime(danceClass.end_date)}
-                </span>
+                  <span className="truncate">{formatDate(danceClass.start_date)}</span>
+                </div>
+                <div className="flex items-center gap-2 text-muted-foreground">
+                  <Clock className="w-4 h-4 shrink-0" />
+                  <span className="truncate">
+                    {formatTime(danceClass.start_date)} - {formatTime(danceClass.end_date)}
+                  </span>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
     </Card>
   )
-}
+} 

@@ -1,6 +1,6 @@
 import { Container } from '@/components/ui/container'
 import { Header } from '@/components/domain/header'
-import { ClassItem } from './components/class-item'
+import { ClassItem } from '@/components/domain/class-item'
 import { Loader } from '@/components/ui/loader'
 import { Button } from '@/components/ui/button'
 import { SlidersHorizontal } from 'lucide-react'
@@ -12,7 +12,6 @@ import {
 } from '@/lib/api/public/index'
 import { useNavigate, useSearch } from '@tanstack/react-router'
 import { ClassFilters, ClassSearchParams } from './components/class-filters'
-import { cn } from '@/lib/utils'
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
 
 export function ClassBrowser() {

@@ -52,7 +52,7 @@ class User(AbstractUser):
         verbose_name="user permissions",
     )
     role = models.CharField(max_length=20, choices=ROLE_CHOICES, default="student")
-    phone = models.CharField(max_length=15, blank=True)
+    phone = models.CharField(max_length=30, blank=True)
     bio = models.TextField(blank=True)
     profile_picture = models.ImageField(
         upload_to="profile_pictures/", null=True, blank=True

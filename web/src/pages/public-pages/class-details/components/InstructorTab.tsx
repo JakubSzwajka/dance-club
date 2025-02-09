@@ -1,4 +1,4 @@
-import { ClassItem } from '../../class-browser/components/class-item'
+import { ClassItem } from '@/components/domain/class-item'
 import { useNavigate } from '@tanstack/react-router'
 import { InstructorCard } from '@/components/domain/instructor-card'
 import { components } from '@/lib/api/schema'
