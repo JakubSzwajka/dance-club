@@ -17,6 +17,39 @@ export function HomePage() {
   const [longitude, setLongitude] = useState<number>(0)
   const [locationsWithClasses, setLocationsWithClasses] = useState<LocationWithClasses[]>([])
 
+  // Add AbortController for cleanup
+  useEffect(() => {
+    const abortController = new AbortController()
+
+    if ('geolocation' in navigator) {
+      const timeoutId = setTimeout(() => {
+        navigator.geolocation.getCurrentPosition(
+          position => {
+            if (
+              Math.abs(position.coords.latitude - latitude) > 0.001 ||
+              Math.abs(position.coords.longitude - longitude) > 0.001
+            ) {
+              setLatitude(position.coords.latitude)
+              setLongitude(position.coords.longitude)
+            }
+          },
+          error => {
+            if (!abortController.signal.aborted) {
+              console.error('Error getting geolocation:', error)
+            }
+          }
+        )
+      }, 1000) // 1 second debounce
+
+      return () => {
+        abortController.abort()
+        clearTimeout(timeoutId)
+      }
+    } else {
+      console.error('Geolocation is not supported by this browser')
+    }
+  }, [latitude, longitude])
+
   const { data: locations, isLoading: isLoadingLocations } = usePublicLocations(
     true,
     latitude,
@@ -24,22 +57,6 @@ export function HomePage() {
   )
 
   const { data: classes } = usePublicClasses()
-
-  useEffect(() => {
-    if ('geolocation' in navigator) {
-      navigator.geolocation.getCurrentPosition(
-        position => {
-          setLatitude(position.coords.latitude)
-          setLongitude(position.coords.longitude)
-        },
-        error => {
-          console.error('Error getting geolocation:', error)
-        }
-      )
-    } else {
-      console.error('Geolocation is not supported by this browser')
-    }
-  }, [])
 
   useEffect(() => {
     if (!locations || !classes) return
@@ -70,6 +87,20 @@ export function HomePage() {
       <Header />
       <HeroSection />
       <FeaturedInstructorsSection />
+
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div className="text-center">
+          <h2 className="text-3xl font-bold tracking-tight mb-3">Find Dance Schools Near You</h2>
+          <p className="text-lg text-muted-foreground">
+            Browse our interactive map to discover dance schools and classes in your area. You can also{' '}
+            <a href="/classes" className="text-primary hover:underline">
+              explore our complete class catalog
+            </a>{' '}
+            to find the perfect dance class for you.
+          </p>
+        </div>
+      </section>
+
       <SchoolsNearbyMap
         locationsWithClasses={locationsWithClasses}
         isLoadingLocations={isLoadingLocations}

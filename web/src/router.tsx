@@ -14,7 +14,7 @@ import { ProtectedLayout } from './components/layouts/ProtectedLayout'
 
 const rootRoute = createRootRoute({
   component: () => (
-    <APIProvider apiKey={'AIzaSyC7k8QnpwiMJvLbJ39P4yJOHBjIvDPckSk'}>
+    <APIProvider apiKey={import.meta.env.VITE_GOOGLE_MAPS_API_KEY}>
       <AuthProvider>
         <Outlet />
         <Toaster />

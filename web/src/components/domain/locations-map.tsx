@@ -97,7 +97,7 @@ export function SchoolsNearbyMap({
   }
 
   return (
-    <div className="relative h-full">
+    <div className="relative h-[600px]">
       {/* Filters Section */}
       <div className="absolute left-4 top-4 z-10 w-[280px]">
         <Card className="p-6">

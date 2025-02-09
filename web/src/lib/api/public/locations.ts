@@ -19,6 +19,9 @@ export function usePublicLocations(
     },
     {
       enabled: !!latitude && !!longitude,
+      staleTime: 1000 * 60 * 5, // 5 minutes
+      retry: false, // Don't retry failed requests
+      networkMode: 'online', // Only make requests when online
     }
   )
 }
