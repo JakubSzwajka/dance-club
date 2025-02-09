@@ -2,6 +2,8 @@ import { Container } from '@/components/ui/container'
 import { Header } from '@/components/domain/header'
 import { ClassItem } from './components/class-item'
 import { Loader } from '@/components/ui/loader'
+import { Button } from '@/components/ui/button'
+import { SlidersHorizontal } from 'lucide-react'
 import {
   usePublicClasses,
   useMetadata,
@@ -10,6 +12,8 @@ import {
 } from '@/lib/api/public/index'
 import { useNavigate, useSearch } from '@tanstack/react-router'
 import { ClassFilters, ClassSearchParams } from './components/class-filters'
+import { cn } from '@/lib/utils'
+import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
 
 export function ClassBrowser() {
   const navigate = useNavigate()
@@ -60,6 +64,17 @@ export function ClassBrowser() {
   const { data: metadata } = useMetadata()
   const danceStyles = metadata?.dance_styles
 
+  const FiltersContent = () => (
+    <ClassFilters
+      search={search}
+      updateFilters={updateFilters}
+      onClearAll={() => navigate({ to: '/classes' })}
+      instructors={instructors}
+      locations={locations}
+      danceStyles={danceStyles}
+    />
+  )
+
   return (
     <div className="min-h-screen bg-background">
       <Header />
@@ -80,21 +95,33 @@ export function ClassBrowser() {
 
       <Container>
         <div className="py-8">
-          <div className="relative">
-            {/* Filters Section - Floating sidebar */}
-            <div className="absolute left-0 top-0 w-[280px]">
-              <ClassFilters
-                search={search}
-                updateFilters={updateFilters}
-                onClearAll={() => navigate({ to: '/classes' })}
-                instructors={instructors}
-                locations={locations}
-                danceStyles={danceStyles}
-              />
+          {/* Mobile Filter Button */}
+          <div className="lg:hidden mb-6">
+            <Sheet>
+              <SheetTrigger asChild>
+                <Button variant="outline" className="w-full">
+                  <SlidersHorizontal className="w-4 h-4 mr-2" />
+                  Filters
+                </Button>
+              </SheetTrigger>
+              <SheetContent side="left" className="w-[300px] sm:w-[400px]">
+                <div className="py-6">
+                  <FiltersContent />
+                </div>
+              </SheetContent>
+            </Sheet>
+          </div>
+
+          <div className="lg:grid lg:grid-cols-[280px_1fr] lg:gap-8">
+            {/* Desktop Filters */}
+            <div className="hidden lg:block">
+              <div className="sticky top-8">
+                <FiltersContent />
+              </div>
             </div>
 
-            {/* Content Section - Full width with left margin for sidebar */}
-            <div className="ml-[300px]">
+            {/* Classes List */}
+            <div className="min-w-0">
               <div className="space-y-6">
                 {isLoadingClasses ? (
                   <div className="py-12">

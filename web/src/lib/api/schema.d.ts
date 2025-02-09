@@ -436,6 +436,8 @@ export interface components {
             instructor: components["schemas"]["InstructorPublicSchema"] | null;
             /** Duration */
             duration: number;
+            /** Avg Rating */
+            avg_rating: number | null;
         };
         /**
          * Facilities

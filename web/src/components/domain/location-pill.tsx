@@ -15,7 +15,7 @@ export function LocationPill({ location }: LocationPillProps) {
 
   return (
     <div
-      className={`flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground cursor-pointer`}
+      className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground cursor-pointer min-w-0"
       onClick={() =>
         navigate({
           to: '/locations/$locationId',
@@ -23,8 +23,8 @@ export function LocationPill({ location }: LocationPillProps) {
         })
       }
     >
-      <MapPinIcon className="h-4 w-4" />
-      <span>{location.name}</span>
+      <MapPinIcon className="h-4 w-4 shrink-0" />
+      <span className="truncate">{location.name}</span>
     </div>
   )
 }

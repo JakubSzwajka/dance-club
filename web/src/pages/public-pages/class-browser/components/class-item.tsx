@@ -1,6 +1,5 @@
 import { Card } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
-import { CalendarDays, Clock, ChevronRight } from 'lucide-react'
+import { ChevronRight, Star, CalendarDays, Clock } from 'lucide-react'
 import { formatDate, formatTime } from '@/lib/utils'
 import { components } from '@/lib/api/schema'
 import { InstructorPill } from '@/components/domain/instructor-pill'
@@ -30,17 +29,33 @@ export function ClassItem({ danceClass, onDetailsClick }: ClassItemProps) {
     text: 'text-primary',
   }
 
+  const handlePillClick = (e: React.MouseEvent) => {
+    e.stopPropagation()
+  }
+
   return (
-    <Card className="overflow-hidden hover:border-primary/50 transition-colors">
-      <div className="p-6">
-        <div className="space-y-4">
-          <div className="flex items-start justify-between gap-6">
-            <div>
-              <div className="flex items-center gap-3 mb-2">
-                <h3 className="text-xl font-semibold">{danceClass.name}</h3>
+    <Card 
+      className="w-full overflow-hidden hover:border-primary/50 transition-colors cursor-pointer group"
+      onClick={() => onDetailsClick?.(danceClass.id)}
+    >
+      <div className="p-4">
+        <div className="space-y-3">
+          {/* Header Section */}
+          <div className="flex items-start gap-4">
+            <div className="min-w-0 flex-1">
+              <div className="flex flex-wrap items-center gap-2 mb-1">
+                <h3 className="text-lg font-semibold truncate group-hover:text-primary transition-colors">{danceClass.name}</h3>
+                {danceClass.avg_rating !== null && danceClass.avg_rating > 0 && (
+                  <div className="flex items-center gap-1 text-sm text-muted-foreground shrink-0">
+                    <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
+                    <span>{danceClass.avg_rating.toFixed(1)}</span>
+                  </div>
+                )}
+              </div>
+              <div className="flex flex-wrap gap-2 items-center">
                 <div
                   className={cn(
-                    'text-xs font-medium px-2.5 py-1 rounded-full',
+                    'text-xs font-medium px-2.5 py-1 rounded-full shrink-0',
                     levelColor.bg,
                     levelColor.text
                   )}
@@ -48,38 +63,39 @@ export function ClassItem({ danceClass, onDetailsClick }: ClassItemProps) {
                   {danceClass.level}
                 </div>
               </div>
-              <p className="text-muted-foreground line-clamp-2">{danceClass.description}</p>
             </div>
-
-            <Button
-              variant="ghost"
-              className="gap-2"
-              onClick={() => onDetailsClick?.(danceClass.id)}
-            >
-              View Details
-              <ChevronRight className="w-4 h-4" />
-            </Button>
+            <ChevronRight className="w-4 h-4 text-muted-foreground group-hover:text-primary transition-colors shrink-0" />
           </div>
 
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-6">
-              {danceClass.instructor && <InstructorPill instructor={danceClass.instructor} />}
-              {danceClass.location && <LocationPill location={danceClass.location} />}
-              <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                <CalendarDays className="w-4 h-4" />
-                <span>{formatDate(danceClass.start_date)}</span>
+          {/* Description */}
+          <p className="text-sm text-muted-foreground line-clamp-2">{danceClass.description}</p>
+
+          {/* Info Grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
+            <div className="space-y-2 min-w-0">
+              {danceClass.instructor && (
+                <div className="flex items-center gap-2 overflow-hidden" onClick={handlePillClick}>
+                  <InstructorPill instructor={danceClass.instructor} />
+                </div>
+              )}
+              {danceClass.location && (
+                <div className="flex items-center gap-2 overflow-hidden" onClick={handlePillClick}>
+                  <LocationPill location={danceClass.location} />
+                </div>
+              )}
+            </div>
+            
+            <div className="space-y-2 min-w-0">
+              <div className="flex items-center gap-2 text-muted-foreground">
+                <CalendarDays className="w-4 h-4 shrink-0" />
+                <span className="truncate">{formatDate(danceClass.start_date)}</span>
               </div>
-              <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                <Clock className="w-4 h-4" />
-                <span>
+              <div className="flex items-center gap-2 text-muted-foreground">
+                <Clock className="w-4 h-4 shrink-0" />
+                <span className="truncate">
                   {formatTime(danceClass.start_date)} - {formatTime(danceClass.end_date)}
                 </span>
               </div>
-            </div>
-            <div className="text-lg font-semibold ml-6">
-              {typeof danceClass.price === 'number'
-                ? `$${danceClass.price.toFixed(2)}`
-                : danceClass.price}
             </div>
           </div>
         </div>

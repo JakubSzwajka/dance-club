@@ -5,7 +5,7 @@ from mydanceclub.models import BaseModel
 from classes.schemas.location import LocationSchema
 from classes.schemas.dance_class import DanceClassSchema
 from shared.const import ClassType, DanceStyle, Facilities, SkillLevel, SportsCard
-
+from django.db.models import Avg
 
 class Location(BaseModel):
     google_place_id = models.CharField(
@@ -111,6 +111,7 @@ class DanceClass(BaseModel):
         return f"{self.name} - {self.level}"
 
     def to_schema(self) -> DanceClassSchema:
+        reviews = getattr(self, 'reviews', None)
         return DanceClassSchema(
             id=self.id,
             name=self.name,
@@ -126,4 +127,5 @@ class DanceClass(BaseModel):
             updated_at=self.updated_at,
             style=self.style,
             instructor=self.instructor.to_instructor_schema(),
+            avg_rating=reviews.aggregate(Avg('overall_rating'))['overall_rating__avg'] if reviews else None,
         )

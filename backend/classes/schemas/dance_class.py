@@ -26,3 +26,4 @@ class DanceClassSchema(CreateDanceClassSchema):
     instructor: Optional[InstructorPublicSchema]
     location: Optional[LocationSchema]
     duration: int
+    avg_rating: Optional[float]
