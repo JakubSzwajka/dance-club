@@ -1,6 +1,5 @@
 import { Button } from '@/components/ui/button'
 import { Container } from '@/components/ui/container'
-import { useNavigate } from '@tanstack/react-router'
 import {
   Tooltip,
   TooltipContent,
@@ -9,7 +8,6 @@ import {
 } from '@/components/ui/tooltip'
 
 export function CTASection() {
-  const navigate = useNavigate()
 
   return (
     <section className="py-16">

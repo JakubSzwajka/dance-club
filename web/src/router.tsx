@@ -11,8 +11,6 @@ import { InstructorDetailsPage } from './pages/public-pages/instructor-details'
 import { LocationDetailsPage } from './pages/public-pages/location-details'
 import { ReviewPage } from './pages/public-pages/review'
 import { ProtectedLayout } from './components/layouts/ProtectedLayout'
-import { LocationsPage } from './pages/public-pages/locations'
-import { components } from './lib/api/schema'
 
 const rootRoute = createRootRoute({
   component: () => (
