@@ -85,7 +85,7 @@ def create_instructor_pool(num_instructors: int = 10) -> list:
 def create_dummy_classes_for_instructor(location, instructor, num_classes: int | None = None):
     """Create multiple dummy classes for an instructor at a location"""
     if num_classes is None:
-        num_classes = randint(2, 5)
+        num_classes = randint(1, 2)
 
     classes = []
     dance_styles = ["ballroom", "latin", "salsa", "tango", "other"]
