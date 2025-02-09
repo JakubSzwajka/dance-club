@@ -1,6 +1,7 @@
 import { Container } from '@/components/ui/container'
 import { Header } from '@/components/domain/header'
 import { ClassItem } from './components/class-item'
+import { Loader } from '@/components/ui/loader'
 import {
   usePublicClasses,
   useMetadata,
@@ -46,7 +47,7 @@ export function ClassBrowser() {
 
   const { data: locations } = usePublicLocationsNearby()
   const { data: instructors } = usePublicInstructors()
-  const { data: classes } = usePublicClasses(
+  const { data: classes, isLoading: isLoadingClasses } = usePublicClasses(
     selectedInstructor,
     selectedLocation,
     selectedStyle,
@@ -95,26 +96,34 @@ export function ClassBrowser() {
             {/* Content Section - Full width with left margin for sidebar */}
             <div className="ml-[300px]">
               <div className="space-y-6">
-                {classes?.map(danceClass => (
-                  <ClassItem
-                    key={danceClass.id}
-                    danceClass={danceClass}
-                    onDetailsClick={id => {
-                      navigate({
-                        to: '/classes/$classId',
-                        params: { classId: id },
-                      })
-                    }}
-                  />
-                ))}
-
-                {classes?.length === 0 && (
-                  <div className="text-center py-12">
-                    <h3 className="text-lg font-semibold">No classes found</h3>
-                    <p className="text-muted-foreground mt-2">
-                      Try adjusting your filters to see more classes
-                    </p>
+                {isLoadingClasses ? (
+                  <div className="py-12">
+                    <Loader size="lg" text="Loading classes..." />
                   </div>
+                ) : (
+                  <>
+                    {classes?.map(danceClass => (
+                      <ClassItem
+                        key={danceClass.id}
+                        danceClass={danceClass}
+                        onDetailsClick={id => {
+                          navigate({
+                            to: '/classes/$classId',
+                            params: { classId: id },
+                          })
+                        }}
+                      />
+                    ))}
+
+                    {classes?.length === 0 && (
+                      <div className="text-center py-12">
+                        <h3 className="text-lg font-semibold">No classes found</h3>
+                        <p className="text-muted-foreground mt-2">
+                          Try adjusting your filters to see more classes
+                        </p>
+                      </div>
+                    )}
+                  </>
                 )}
               </div>
             </div>
