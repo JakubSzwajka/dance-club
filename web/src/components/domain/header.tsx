@@ -9,41 +9,11 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '../ui/dropdown-menu'
-import { useEffect, useState } from 'react'
 import { cn } from '@/lib/utils'
 
 export function Header() {
   const { logout, isAuthenticated, user } = useAuth()
   const navigate = useNavigate()
-  const [isVisible, setIsVisible] = useState(true)
-  const [lastScrollY, setLastScrollY] = useState(0)
-
-  useEffect(() => {
-    const controlNavbar = () => {
-      if (typeof window !== 'undefined') {
-        const currentScrollY = window.scrollY
-
-        // Show header when:
-        // 1. Scrolling up
-        // 2. At the top of the page
-        if (currentScrollY < lastScrollY || currentScrollY < 10) {
-          setIsVisible(true)
-        }
-        // Hide header when scrolling down and not at the top
-        else if (currentScrollY > 10 && currentScrollY > lastScrollY) {
-          setIsVisible(false)
-        }
-
-        setLastScrollY(currentScrollY)
-      }
-    }
-
-    window.addEventListener('scroll', controlNavbar)
-
-    return () => {
-      window.removeEventListener('scroll', controlNavbar)
-    }
-  }, [lastScrollY])
 
   // Get user's initials for avatar fallback
   const getInitials = () => {
@@ -54,9 +24,7 @@ export function Header() {
   return (
     <header
       className={cn(
-        'sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60',
-        'transition-transform duration-200',
-        !isVisible && '-translate-y-full'
+        'fixed top-0 left-0 right-0 z-[100] border-b bg-background'
       )}
     >
       <Container>
