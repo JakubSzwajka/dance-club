@@ -4,7 +4,13 @@ export function FeaturesSection() {
   return (
     <section className="py-16 bg-muted/50">
       <Container>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="text-center mb-12">
+          <h2 className="text-3xl font-bold tracking-tight mb-3">Everything You Need to Start Dancing</h2>
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+            Discover the perfect dance school with comprehensive information and tools to make your choice easier.
+          </p>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           <div className="space-y-4">
             <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center">
               <svg
@@ -24,9 +30,10 @@ export function FeaturesSection() {
             </div>
             <h3 className="text-xl font-semibold">Expert Instructors</h3>
             <p className="text-muted-foreground">
-              Learn from professional dancers with years of teaching experience
+              Learn from professional dancers with years of teaching experience. Each instructor profile includes detailed background and teaching style.
             </p>
           </div>
+
           <div className="space-y-4">
             <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center">
               <svg
@@ -46,9 +53,10 @@ export function FeaturesSection() {
             </div>
             <h3 className="text-xl font-semibold">Multiple Locations</h3>
             <p className="text-muted-foreground">
-              Find classes and events at convenient locations near you
+              Find classes at convenient locations with detailed information about facilities, amenities, and accessibility.
             </p>
           </div>
+
           <div className="space-y-4">
             <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center">
               <svg
@@ -68,7 +76,76 @@ export function FeaturesSection() {
             </div>
             <h3 className="text-xl font-semibold">All Skill Levels</h3>
             <p className="text-muted-foreground">
-              From beginners to advanced dancers, we have classes for everyone
+              From beginners to advanced dancers, find classes tailored to your experience level with clear progression paths.
+            </p>
+          </div>
+
+          <div className="space-y-4">
+            <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-6 w-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                />
+              </svg>
+            </div>
+            <h3 className="text-xl font-semibold">Verified Reviews</h3>
+            <p className="text-muted-foreground">
+              Make informed decisions with detailed reviews covering instructors, class quality, facilities, and overall experience.
+            </p>
+          </div>
+
+          <div className="space-y-4">
+            <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-6 w-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"
+                />
+              </svg>
+            </div>
+            <h3 className="text-xl font-semibold">Sports Card Support</h3>
+            <p className="text-muted-foreground">
+              Use your MultiSport, Medicover, or other sports cards at participating locations. Easy filtering by card type.
+            </p>
+          </div>
+
+          <div className="space-y-4">
+            <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-6 w-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"
+                />
+              </svg>
+            </div>
+            <h3 className="text-xl font-semibold">Detailed Information</h3>
+            <p className="text-muted-foreground">
+              Access comprehensive details about class schedules, pricing, facilities, amenities, and special requirements.
             </p>
           </div>
         </div>

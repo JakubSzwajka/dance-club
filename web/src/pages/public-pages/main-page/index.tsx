@@ -4,15 +4,17 @@ import { FeaturedInstructorsSection } from './components/FeaturedInstructorsSect
 import { FeaturesSection } from './components/FeaturesSection'
 import { CTASection } from './components/CTASection'
 import { SchoolsNearbyMap } from '@/components/domain/locations-map/index'
-
+import { HowItWorksSection } from './components/HowItWorksSection'
+import { TrendingClassesSection } from './components/TrendingClassesSection'
 
 export function HomePage() {
-
   return (
     <div className="min-h-screen bg-background">
       <Header />
       <HeroSection />
+      <HowItWorksSection />
       <FeaturedInstructorsSection />
+      <TrendingClassesSection />
       <SchoolsNearbyMap/>
       <FeaturesSection />
       <CTASection />

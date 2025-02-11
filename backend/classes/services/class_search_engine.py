@@ -7,6 +7,7 @@ from datetime import date
 
 
 class ClassSearchEngineService:
+
     def get_classes_near_location(
         self,
         latitude: float,
@@ -112,3 +113,11 @@ class ClassSearchEngineService:
         """Get a single class by ID"""
         dance_class = DanceClass.objects.get(id=class_id)
         return dance_class.to_schema()
+
+    def get_trending_classes(self) -> List[DanceClassSchema]:
+        """Get trending classes"""
+        classes = DanceClass.objects.annotate(
+            avg_rating=Avg("reviews__overall_rating"),
+            review_count=Count("reviews"),
+        ).order_by("-avg_rating", "-review_count", "-created_at")[:10]
+        return [cls.to_schema() for cls in classes]

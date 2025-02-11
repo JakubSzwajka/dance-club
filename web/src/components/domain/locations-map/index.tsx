@@ -28,7 +28,7 @@ function SchoolsNearbyMap() {
   const sportsCardOptions = metadata?.sports_cards || []
   const facilityOptions = metadata?.facilities || []
 
-  // Debounced filter updates to URL
+  // Update URL without navigation
   useEffect(() => {
     const timeoutId = setTimeout(() => {
       // Remove undefined values
@@ -39,14 +39,21 @@ function SchoolsNearbyMap() {
         }
       })
 
-      navigate({
-        to: '/',
-        search: newSearch,
+      // Create the new URL with search params
+      const searchParams = new URLSearchParams()
+      Object.entries(newSearch).forEach(([key, value]) => {
+        if (value !== undefined && value !== '') {
+          searchParams.set(key, value.toString())
+        }
       })
+
+      // Update URL without causing a navigation
+      const newUrl = window.location.pathname + (searchParams.toString() ? `?${searchParams.toString()}` : '')
+      window.history.replaceState({}, '', newUrl)
     }, 500) // 500ms debounce
 
     return () => clearTimeout(timeoutId)
-  }, [filters, navigate])
+  }, [filters])
 
   // Get user location with fallback to Warsaw
   useEffect(() => {
@@ -116,12 +123,40 @@ function SchoolsNearbyMap() {
     sports_card: filters.sportsCard,
   })
 
+  // Calculate center point of all locations
+  const mapCenter = useMemo(() => {
+    if (!locations || locations.length === 0) {
+      return {
+        lat: coordinates.latitude,
+        lng: coordinates.longitude,
+      }
+    }
 
-  // Memoize map center to prevent unnecessary re-renders
-  const mapCenter = useMemo(() => ({
-    lat: coordinates.latitude,
-    lng: coordinates.longitude,
-  }), [coordinates.latitude, coordinates.longitude])
+    const validLocations = locations.filter(
+      location => location.latitude && location.longitude
+    )
+
+    if (validLocations.length === 0) {
+      return {
+        lat: coordinates.latitude,
+        lng: coordinates.longitude,
+      }
+    }
+
+    const sumLat = validLocations.reduce(
+      (sum, location) => sum + Number(location.latitude),
+      0
+    )
+    const sumLng = validLocations.reduce(
+      (sum, location) => sum + Number(location.longitude),
+      0
+    )
+
+    return {
+      lat: sumLat / validLocations.length,
+      lng: sumLng / validLocations.length,
+    }
+  }, [locations, coordinates])
 
   const handleLocationClick = (location: LocationSchema) => {
     navigate({
@@ -139,7 +174,6 @@ function SchoolsNearbyMap() {
       mapId="location-map"
       disableDefaultUI={false}
       scrollwheel={false}
-      draggable={true}
       keyboardShortcuts={false}
       disableDoubleClickZoom={true}
       className="h-full w-full"

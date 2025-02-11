@@ -26,6 +26,10 @@ export function usePublicClasses(
   })
 }
 
+export function useTrendingClasses() {
+  return $api.useQuery('get', '/api/public/classes/trending')
+}
+
 export function usePublicClass(id: string) {
   return $api.useQuery('get', '/api/public/classes/{class_id}', {
     params: {

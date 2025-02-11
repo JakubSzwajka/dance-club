@@ -42,6 +42,11 @@ def get_classes(
     )
 
 
+@router.get("/classes/trending", response=List[DanceClassSchema], auth=None)
+def get_trending_classes(request) -> List[DanceClassSchema]:
+    """Get all trending classes"""
+    return class_search_engine.get_trending_classes()
+
 @router.get("/classes/{class_id}", response=DanceClassSchema, auth=None)
 def get_class(request, class_id: str) -> DanceClassSchema:
     """Get a class by ID"""

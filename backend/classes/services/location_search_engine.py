@@ -88,13 +88,17 @@ class LocationSearchEngineService:
             locations = locations.filter(classes__isnull=False).distinct()
 
         if dance_style:
-            locations = locations.filter(classes__style__icontains=dance_style)
+            dance_styles = dance_style.split(',')
+            locations = locations.filter(classes__style__in=dance_styles)
         if level:
-            locations = locations.filter(classes__level__icontains=level)
+            levels = level.split(',')
+            locations = locations.filter(classes__level__in=levels)
         if facility:
-            locations = locations.filter(facilities__icontains=facility)
+            facilities = facility.split(',')
+            locations = locations.filter(facilities__in=facilities)
         if sports_card:
-            locations = locations.filter(sports_card__icontains=sports_card)
+            sports_cards = sports_card.split(',')
+            locations = locations.filter(sports_card__in=sports_cards)
 
         # Add annotations for class count and average rating
         locations = locations.annotate(

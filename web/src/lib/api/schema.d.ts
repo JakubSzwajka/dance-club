@@ -75,6 +75,26 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/public/classes/trending": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Get Trending Classes
+         * @description Get all trending classes
+         */
+        get: operations["mydanceclub_api_public_classes_get_trending_classes"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/public/classes/{class_id}": {
         parameters: {
             query?: never;
@@ -801,6 +821,26 @@ export interface operations {
             };
         };
     };
+    mydanceclub_api_public_classes_get_trending_classes: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["DanceClassSchema"][];
+                };
+            };
+        };
+    };
     mydanceclub_api_public_classes_get_class: {
         parameters: {
             query?: never;
@@ -963,8 +1003,6 @@ export interface operations {
         parameters: {
             query?: {
                 has_active_classes?: boolean;
-                latitude?: number | null;
-                longitude?: number | null;
                 dance_style?: string | null;
                 level?: string | null;
                 min_classes?: number | null;
