@@ -24,7 +24,7 @@ interface StepProps {
   badge?: 'premium' | 'business'
 }
 
-function Step({ icon, title, description, features, benefits, isPro, badge }: StepProps) {
+function Step({ icon, title, description, features, benefits, badge }: StepProps) {
   return (
     <div className="flex flex-col h-full bg-background rounded-lg border p-6">
       <div className="flex flex-col items-center text-center mb-6">
