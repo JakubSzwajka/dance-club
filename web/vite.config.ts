@@ -10,6 +10,6 @@ export default defineConfig({
     },
   },
   preview: {
-    allowedHosts: ['dance-club-production.up.railway.app'],
+    allowedHosts: ['www.mydancedna.com', 'mydancedna.com', 'www.mydancedna.pl', 'mydancedna.pl'],
   },
 })
