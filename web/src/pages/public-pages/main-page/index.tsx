@@ -1,7 +1,6 @@
 import { Header } from '@/components/domain/header'
 import { HeroSection } from './components/HeroSection'
 import { FeaturedInstructorsSection } from './components/FeaturedInstructorsSection'
-import { FeaturesSection } from './components/FeaturesSection'
 import { CTASection } from './components/CTASection'
 import { SchoolsNearbyMap } from '@/components/domain/locations-map/index'
 import { HowItWorksSection } from './components/HowItWorksSection'
@@ -16,7 +15,6 @@ export function HomePage() {
       <FeaturedInstructorsSection />
       <TrendingClassesSection />
       <SchoolsNearbyMap/>
-      <FeaturesSection />
       <CTASection />
     </div>
   )
