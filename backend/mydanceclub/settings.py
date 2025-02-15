@@ -50,6 +50,8 @@ INSTALLED_APPS = [
     "accounts",
     "classes",
     "reviews",
+    "schools",
+    "instructors",
     "corsheaders",
 ]
 
