@@ -8,6 +8,7 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
+  DropdownMenuSeparator,
 } from '../ui/dropdown-menu'
 import { cn } from '@/lib/utils'
 
@@ -46,18 +47,24 @@ export function Header() {
                   </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end" className="w-56">
-                  {/* <DropdownMenuItem onClick={() => navigate({ to: '/profile-settings' })}>
-                    Profile Settings
-                  </DropdownMenuItem> */}
+                  <DropdownMenuItem onClick={() => navigate({ to: '/instructor-panel' })}>
+                    Instructor Panel
+                  </DropdownMenuItem>
+                  <DropdownMenuSeparator />
                   <DropdownMenuItem onClick={logout}>Sign out</DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
             ) : (
               <>
-                <Button variant="ghost" disabled className="cursor-not-allowed opacity-50">
+                <Button 
+                  variant="ghost" 
+                  onClick={() => navigate({ to: '/login' })}
+                >
                   Sign in
                 </Button>
-                <Button disabled className="cursor-not-allowed opacity-50">
+                <Button 
+                  onClick={() => navigate({ to: '/signup' })}
+                >
                   Sign up
                 </Button>
               </>

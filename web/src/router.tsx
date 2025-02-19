@@ -11,13 +11,29 @@ import { InstructorDetailsPage } from './pages/public-pages/instructor-details'
 import { LocationDetailsPage } from './pages/public-pages/location-details'
 import { ReviewPage } from './pages/public-pages/review'
 import { ProtectedLayout } from './components/layouts/ProtectedLayout'
+import { InstructorPanelLayout } from './components/layouts/InstructorPanelLayout'
+import { DashboardPage } from './pages/instructor-panel/dashboard/index'
+import { ThemeProvider } from './context/theme-context'
+import { GeneralSettings } from './pages/instructor-panel/settings/general'
+import { NotificationSettings } from './pages/instructor-panel/settings/notifications'
+import { TeachingSettings } from './pages/instructor-panel/settings/teaching'
+import { ClassesPage } from './pages/instructor-panel/classes'
+import { CreateClassPage } from './pages/instructor-panel/classes/new'
+import { ClassDetailsPage } from './pages/instructor-panel/classes/$classId'
+import { ClassSchedulePage } from './pages/instructor-panel/classes/$classId/schedule'
+import { EditClassPage } from './pages/instructor-panel/classes/$classId/edit'
+import { StudentsPage } from './pages/instructor-panel/students'
+import { StudentDetailsPage } from './pages/instructor-panel/students/$studentId'
+import { SchedulePage } from './pages/instructor-panel/schedule'
 
 const rootRoute = createRootRoute({
   component: () => (
     <APIProvider apiKey={import.meta.env.VITE_GOOGLE_MAPS_API_KEY}>
       <AuthProvider>
-        <Outlet />
-        <Toaster />
+        <ThemeProvider>
+          <Outlet />
+          <Toaster />
+        </ThemeProvider>
       </AuthProvider>
     </APIProvider>
   ),
@@ -84,6 +100,84 @@ const signupRoute = createRoute({
   component: SignupPage,
 })
 
+const instructorPanelLayout = createRoute({
+  getParentRoute: () => rootRoute,
+  id: 'instructor-panel',
+  component: InstructorPanelLayout,
+})
+
+const instructorDashboardRoute = createRoute({
+  getParentRoute: () => instructorPanelLayout,
+  path: '/instructor-panel',
+  component: DashboardPage,
+})
+
+const instructorGeneralSettingsRoute = createRoute({
+  getParentRoute: () => instructorPanelLayout,
+  path: '/instructor-panel/settings-general',
+  component: GeneralSettings,
+})
+
+const instructorNotificationSettingsRoute = createRoute({
+  getParentRoute: () => instructorPanelLayout,
+  path: '/instructor-panel/settings-notifications',
+  component: NotificationSettings,
+})
+
+const instructorTeachingSettingsRoute = createRoute({
+  getParentRoute: () => instructorPanelLayout,
+  path: '/instructor-panel/settings-teaching',
+  component: TeachingSettings,
+})
+
+const instructorClassesRoute = createRoute({
+  getParentRoute: () => instructorPanelLayout,
+  path: '/instructor-panel/classes',
+  component: ClassesPage,
+})
+
+const instructorCreateClassRoute = createRoute({
+  getParentRoute: () => instructorPanelLayout,
+  path: '/instructor-panel/classes/new',
+  component: CreateClassPage,
+})
+
+const instructorClassDetailsRoute = createRoute({
+  getParentRoute: () => instructorPanelLayout,
+  path: '/instructor-panel/classes/$classId',
+  component: ClassDetailsPage,
+})
+
+const instructorClassScheduleRoute = createRoute({
+  getParentRoute: () => instructorPanelLayout,
+  path: '/instructor-panel/classes/$classId/schedule',
+  component: ClassSchedulePage,
+})
+
+const instructorClassEditRoute = createRoute({
+  getParentRoute: () => instructorPanelLayout,
+  path: '/instructor-panel/classes/$classId/edit',
+  component: EditClassPage,
+})
+
+const instructorStudentsRoute = createRoute({
+  getParentRoute: () => instructorPanelLayout,
+  path: '/instructor-panel/students',
+  component: StudentsPage,
+})
+
+const instructorStudentDetailsRoute = createRoute({
+  getParentRoute: () => instructorPanelLayout,
+  path: '/instructor-panel/students/$studentId',
+  component: StudentDetailsPage,
+})
+
+const instructorScheduleRoute = createRoute({
+  getParentRoute: () => instructorPanelLayout,
+  path: '/instructor-panel/schedule',
+  component: SchedulePage,
+})
+
 const routeTree = rootRoute.addChildren([
   protectedLayout.addChildren([
     // instructorDashboardRoute,
@@ -95,6 +189,21 @@ const routeTree = rootRoute.addChildren([
     // createClassRoute,
     // classDetailsRoute,
     // classScheduleRoute,
+  ]),
+  instructorPanelLayout.addChildren([
+    instructorDashboardRoute,
+    instructorGeneralSettingsRoute,
+    instructorNotificationSettingsRoute,
+    instructorTeachingSettingsRoute,
+    instructorClassesRoute,
+    instructorCreateClassRoute,
+    instructorClassDetailsRoute,
+    instructorClassScheduleRoute,
+    instructorClassEditRoute,
+    instructorStudentsRoute,
+    instructorStudentDetailsRoute,
+    instructorScheduleRoute,
+    // More instructor panel routes will be added here later
   ]),
   indexRoute,
   classBrowserRoute,
