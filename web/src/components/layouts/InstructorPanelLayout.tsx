@@ -5,7 +5,7 @@ import { Header } from './instructor-panel/header'
 import { ProfileDropdown } from './instructor-panel/profile-dropdown'
 import { SidebarProvider } from '../ui/sidebar'
 import { ThemeSwitch } from '../theme-switch'
-
+import { Separator } from '../ui/separator'
 export function InstructorPanelLayout() {
     const { isAuthenticated, isLoading } = useAuth()
 
@@ -22,7 +22,6 @@ export function InstructorPanelLayout() {
     }
 
     return (
-
         <div className="flex h-screen overflow-hidden">
             <SidebarProvider>
                 <AppSidebar />
@@ -34,9 +33,10 @@ export function InstructorPanelLayout() {
                             <ProfileDropdown />
                         </div>
                     </Header>
+                    <Separator />
                     <main className="flex-1 overflow-auto">
-                        <div className="container mx-auto p-6">
-                                <Outlet />
+                        <div className="container mx-auto p-6 pt-0">
+                            <Outlet />
                         </div>
                     </main>
                 </div>

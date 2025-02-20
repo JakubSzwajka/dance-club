@@ -127,63 +127,63 @@ export function MonthView({ currentDate }: MonthViewProps) {
         ))}
 
         {/* Calendar days */}
-        {calendarDays.map((day, index) => {
-          const dayClasses = getClassesForDay(day)
-          const isCurrentMonth = isSameMonth(day, currentDate)
-          const isCurrentDay = isToday(day)
-          const hasMoreClasses = dayClasses.length > MAX_VISIBLE_CLASSES
+          {calendarDays.map((day, index) => {
+            const dayClasses = getClassesForDay(day)
+            const isCurrentMonth = isSameMonth(day, currentDate)
+            const isCurrentDay = isToday(day)
+            const hasMoreClasses = dayClasses.length > MAX_VISIBLE_CLASSES
 
-          return (
-            <div
-              key={index}
+            return (
+              <div
+                key={index}
               className={`min-h-[120px] bg-background p-2 cursor-pointer hover:bg-muted/50 transition-colors relative
-                ${!isCurrentMonth ? "text-muted-foreground" : ""}
-                ${selectedDay && day.toDateString() === selectedDay.toDateString() 
-                  ? "bg-blue-50 dark:bg-blue-950/20 shadow-[inset_0_0_12px_rgba(59,130,246,0.2)]" 
-                  : ""
-                }
-              `}
-              onClick={() => handleDayClick(day)}
-            >
-              <div className="flex justify-between items-center mb-1">
-                <span
-                  className={`text-sm inline-flex items-center justify-center
-                    ${isCurrentDay 
-                      ? "font-bold text-lg text-blue-600 dark:text-blue-400"
-                      : ""
-                    }`}
-                >
-                  {format(day, "d")}
-                </span>
-                {dayClasses.length > 0 && isCurrentMonth && (
-                  <span className="text-xs text-muted-foreground">
-                    {dayClasses.length} classes
-                  </span>
-                )}
-              </div>
-              <div className="space-y-1">
-                {dayClasses.slice(0, MAX_VISIBLE_CLASSES).map((class_) => (
-                  <div
-                    key={class_.id}
-                    className={`text-xs p-1 rounded truncate
-                      ${class_.type === "private" 
-                        ? "bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400"
-                        : "bg-primary/10 text-primary dark:bg-primary/30"
+                  ${!isCurrentMonth ? "text-muted-foreground" : ""}
+                  ${selectedDay && day.toDateString() === selectedDay.toDateString() 
+                    ? "bg-blue-50 dark:bg-blue-950/20 shadow-[inset_0_0_12px_rgba(59,130,246,0.2)]" 
+                    : ""
+                  }
+                `}
+                onClick={() => handleDayClick(day)}
+              >
+                <div className="flex justify-between items-center mb-1">
+                  <span
+                    className={`text-sm inline-flex items-center justify-center
+                      ${isCurrentDay 
+                        ? "font-bold text-lg text-blue-600 dark:text-blue-400"
+                        : ""
                       }`}
                   >
-                    <div className="font-medium truncate">{class_.name}</div>
-                    <div className="text-[10px] opacity-80">{class_.time}</div>
-                  </div>
-                ))}
-                {hasMoreClasses && (
-                  <div className="text-xs text-muted-foreground text-center">
-                    {dayClasses.length - MAX_VISIBLE_CLASSES} more...
-                  </div>
-                )}
+                    {format(day, "d")}
+                  </span>
+                  {dayClasses.length > 0 && isCurrentMonth && (
+                    <span className="text-xs text-muted-foreground">
+                      {dayClasses.length} classes
+                    </span>
+                  )}
+                </div>
+                <div className="space-y-1">
+                  {dayClasses.slice(0, MAX_VISIBLE_CLASSES).map((class_) => (
+                    <div
+                      key={class_.id}
+                      className={`text-xs p-1 rounded truncate
+                        ${class_.type === "private" 
+                          ? "bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400"
+                          : "bg-primary/10 text-primary dark:bg-primary/30"
+                        }`}
+                    >
+                      <div className="font-medium truncate">{class_.name}</div>
+                      <div className="text-[10px] opacity-80">{class_.time}</div>
+                    </div>
+                  ))}
+                  {hasMoreClasses && (
+                    <div className="text-xs text-muted-foreground text-center">
+                      {dayClasses.length - MAX_VISIBLE_CLASSES} more...
+                    </div>
+                  )}
+                </div>
               </div>
-            </div>
-          )
-        })}
+            )
+          })}
       </div>
 
       <Drawer open={isDrawerOpen} onOpenChange={setIsDrawerOpen}>
