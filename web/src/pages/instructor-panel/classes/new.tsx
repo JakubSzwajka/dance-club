@@ -1,8 +1,8 @@
-import { zodResolver } from "@hookform/resolvers/zod"
-import { useForm } from "react-hook-form"
-import { z } from "zod"
-import { useNavigate } from "@tanstack/react-router"
-import { Button } from "@/components/ui/button"
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useForm } from 'react-hook-form'
+import { z } from 'zod'
+import { useNavigate } from '@tanstack/react-router'
+import { Button } from '@/components/ui/button'
 import {
   Form,
   FormControl,
@@ -11,59 +11,53 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
+} from '@/components/ui/form'
+import { Input } from '@/components/ui/input'
+import { Textarea } from '@/components/ui/textarea'
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select"
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card"
-import { Separator } from "@/components/ui/separator"
+} from '@/components/ui/select'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { Separator } from '@/components/ui/separator'
 
 const classFormSchema = z.object({
   name: z.string().min(2, {
-    message: "Name must be at least 2 characters.",
+    message: 'Name must be at least 2 characters.',
   }),
   description: z.string().min(10, {
-    message: "Description must be at least 10 characters.",
+    message: 'Description must be at least 10 characters.',
   }),
-  level: z.enum(["beginner", "intermediate", "advanced"]),
-  type: z.enum(["group", "private", "workshop"]),
+  level: z.enum(['beginner', 'intermediate', 'advanced']),
+  type: z.enum(['group', 'private', 'workshop']),
   capacity: z.string().min(1, {
-    message: "Please enter the class capacity.",
+    message: 'Please enter the class capacity.',
   }),
   price: z.string().min(1, {
-    message: "Please enter the class price.",
+    message: 'Please enter the class price.',
   }),
   duration: z.string().min(1, {
-    message: "Please enter the class duration.",
+    message: 'Please enter the class duration.',
   }),
   location: z.string().min(1, {
-    message: "Please enter the class location.",
+    message: 'Please enter the class location.',
   }),
 })
 
 type ClassFormValues = z.infer<typeof classFormSchema>
 
 const defaultValues: Partial<ClassFormValues> = {
-  name: "",
-  description: "",
-  level: "beginner",
-  type: "group",
-  capacity: "20",
-  price: "25",
-  duration: "60",
-  location: "",
+  name: '',
+  description: '',
+  level: 'beginner',
+  type: 'group',
+  capacity: '20',
+  price: '25',
+  duration: '60',
+  location: '',
 }
 
 export function CreateClassPage() {
@@ -86,9 +80,7 @@ export function CreateClassPage() {
           <Card>
             <CardHeader>
               <CardTitle>Class Details</CardTitle>
-              <CardDescription>
-                Enter the details of your new class
-              </CardDescription>
+              <CardDescription>Enter the details of your new class</CardDescription>
             </CardHeader>
             <CardContent className="space-y-6">
               <Separator />
@@ -96,9 +88,7 @@ export function CreateClassPage() {
               <div className="grid grid-cols-5 gap-6">
                 <div className="col-span-2">
                   <h4 className="text-sm font-medium">Basic Information</h4>
-                  <p className="text-sm text-muted-foreground">
-                    The core details of your class
-                  </p>
+                  <p className="text-sm text-muted-foreground">The core details of your class</p>
                 </div>
                 <div className="col-span-3 space-y-4">
                   <FormField
@@ -110,9 +100,7 @@ export function CreateClassPage() {
                         <FormControl>
                           <Input placeholder="e.g., Salsa Beginners" {...field} />
                         </FormControl>
-                        <FormDescription>
-                          The name of your dance class
-                        </FormDescription>
+                        <FormDescription>The name of your dance class</FormDescription>
                         <FormMessage />
                       </FormItem>
                     )}
@@ -171,9 +159,7 @@ export function CreateClassPage() {
                               <SelectItem value="advanced">Advanced</SelectItem>
                             </SelectContent>
                           </Select>
-                          <FormDescription>
-                            The skill level required for this class
-                          </FormDescription>
+                          <FormDescription>The skill level required for this class</FormDescription>
                           <FormMessage />
                         </FormItem>
                       )}
@@ -197,9 +183,7 @@ export function CreateClassPage() {
                               <SelectItem value="workshop">Workshop</SelectItem>
                             </SelectContent>
                           </Select>
-                          <FormDescription>
-                            The format of the class
-                          </FormDescription>
+                          <FormDescription>The format of the class</FormDescription>
                           <FormMessage />
                         </FormItem>
                       )}
@@ -229,9 +213,7 @@ export function CreateClassPage() {
                           <FormControl>
                             <Input type="number" min="1" {...field} />
                           </FormControl>
-                          <FormDescription>
-                            Maximum students
-                          </FormDescription>
+                          <FormDescription>Maximum students</FormDescription>
                           <FormMessage />
                         </FormItem>
                       )}
@@ -246,9 +228,7 @@ export function CreateClassPage() {
                           <FormControl>
                             <Input type="number" min="0" step="0.01" {...field} />
                           </FormControl>
-                          <FormDescription>
-                            Price per class
-                          </FormDescription>
+                          <FormDescription>Price per class</FormDescription>
                           <FormMessage />
                         </FormItem>
                       )}
@@ -263,9 +243,7 @@ export function CreateClassPage() {
                           <FormControl>
                             <Input type="number" min="15" step="15" {...field} />
                           </FormControl>
-                          <FormDescription>
-                            Class length
-                          </FormDescription>
+                          <FormDescription>Class length</FormDescription>
                           <FormMessage />
                         </FormItem>
                       )}
@@ -281,9 +259,7 @@ export function CreateClassPage() {
                         <FormControl>
                           <Input placeholder="e.g., Studio A" {...field} />
                         </FormControl>
-                        <FormDescription>
-                          Where the class will be held
-                        </FormDescription>
+                        <FormDescription>Where the class will be held</FormDescription>
                         <FormMessage />
                       </FormItem>
                     )}
@@ -297,7 +273,7 @@ export function CreateClassPage() {
                 <Button
                   type="button"
                   variant="outline"
-                  onClick={() => navigate({ to: "/instructor-panel/classes" })}
+                  onClick={() => navigate({ to: '/instructor-panel/classes' })}
                 >
                   Cancel
                 </Button>
@@ -309,4 +285,4 @@ export function CreateClassPage() {
       </Form>
     </div>
   )
-} 
+}

@@ -1,14 +1,8 @@
-import { zodResolver } from "@hookform/resolvers/zod"
-import { useForm } from "react-hook-form"
-import { z } from "zod"
-import { Button } from "@/components/ui/button"
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card"
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useForm } from 'react-hook-form'
+import { z } from 'zod'
+import { Button } from '@/components/ui/button'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import {
   Form,
   FormControl,
@@ -17,23 +11,23 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
-import { Separator } from "@/components/ui/separator"
+} from '@/components/ui/form'
+import { Input } from '@/components/ui/input'
+import { Textarea } from '@/components/ui/textarea'
+import { Separator } from '@/components/ui/separator'
 
 const generalSettingsSchema = z.object({
   fullName: z.string().min(2, {
-    message: "Name must be at least 2 characters.",
+    message: 'Name must be at least 2 characters.',
   }),
   email: z.string().email({
-    message: "Please enter a valid email address.",
+    message: 'Please enter a valid email address.',
   }),
   phone: z.string().min(10, {
-    message: "Please enter a valid phone number.",
+    message: 'Please enter a valid phone number.',
   }),
   bio: z.string().min(10, {
-    message: "Bio must be at least 10 characters.",
+    message: 'Bio must be at least 10 characters.',
   }),
   language: z.string(),
   timezone: z.string(),
@@ -42,12 +36,12 @@ const generalSettingsSchema = z.object({
 type GeneralSettingsValues = z.infer<typeof generalSettingsSchema>
 
 const defaultValues: Partial<GeneralSettingsValues> = {
-  fullName: "",
-  email: "",
-  phone: "",
-  bio: "",
-  language: "en",
-  timezone: "UTC",
+  fullName: '',
+  email: '',
+  phone: '',
+  bio: '',
+  language: 'en',
+  timezone: 'UTC',
 }
 
 export function GeneralSettings() {
@@ -63,7 +57,6 @@ export function GeneralSettings() {
 
   return (
     <div className="space-y-6">
-      
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
           <Card>
@@ -74,14 +67,12 @@ export function GeneralSettings() {
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-6">
-            <Separator />
+              <Separator />
               {/* Basic Information Section */}
               <div className="grid grid-cols-5 gap-6">
                 <div className="col-span-2">
                   <h4 className="text-sm font-medium">Basic Information</h4>
-                  <p className="text-sm text-muted-foreground">
-                    Your public profile information
-                  </p>
+                  <p className="text-sm text-muted-foreground">Your public profile information</p>
                 </div>
                 <div className="col-span-3 space-y-4">
                   <FormField
@@ -93,9 +84,7 @@ export function GeneralSettings() {
                         <FormControl>
                           <Input placeholder="John Doe" {...field} />
                         </FormControl>
-                        <FormDescription>
-                          This is your public display name
-                        </FormDescription>
+                        <FormDescription>This is your public display name</FormDescription>
                         <FormMessage />
                       </FormItem>
                     )}
@@ -130,9 +119,7 @@ export function GeneralSettings() {
               <div className="grid grid-cols-5 gap-6">
                 <div className="col-span-2">
                   <h4 className="text-sm font-medium">Contact Information</h4>
-                  <p className="text-sm text-muted-foreground">
-                    How others can reach you
-                  </p>
+                  <p className="text-sm text-muted-foreground">How others can reach you</p>
                 </div>
                 <div className="col-span-3 space-y-4">
                   <div className="grid gap-4 sm:grid-cols-2">
@@ -145,9 +132,7 @@ export function GeneralSettings() {
                           <FormControl>
                             <Input type="email" placeholder="john@example.com" {...field} />
                           </FormControl>
-                          <FormDescription>
-                            Your primary contact email
-                          </FormDescription>
+                          <FormDescription>Your primary contact email</FormDescription>
                           <FormMessage />
                         </FormItem>
                       )}
@@ -162,9 +147,7 @@ export function GeneralSettings() {
                           <FormControl>
                             <Input type="tel" placeholder="+1 (555) 000-0000" {...field} />
                           </FormControl>
-                          <FormDescription>
-                            Your contact phone number
-                          </FormDescription>
+                          <FormDescription>Your contact phone number</FormDescription>
                           <FormMessage />
                         </FormItem>
                       )}
@@ -194,9 +177,7 @@ export function GeneralSettings() {
                           <FormControl>
                             <Input {...field} />
                           </FormControl>
-                          <FormDescription>
-                            Your preferred language
-                          </FormDescription>
+                          <FormDescription>Your preferred language</FormDescription>
                           <FormMessage />
                         </FormItem>
                       )}
@@ -211,9 +192,7 @@ export function GeneralSettings() {
                           <FormControl>
                             <Input {...field} />
                           </FormControl>
-                          <FormDescription>
-                            Your local timezone
-                          </FormDescription>
+                          <FormDescription>Your local timezone</FormDescription>
                           <FormMessage />
                         </FormItem>
                       )}
@@ -233,4 +212,4 @@ export function GeneralSettings() {
       </Form>
     </div>
   )
-} 
+}

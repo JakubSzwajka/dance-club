@@ -23,11 +23,7 @@ export function Header() {
   }
 
   return (
-    <header
-      className={cn(
-        'fixed top-0 left-0 right-0 z-[100] border-b bg-background'
-      )}
-    >
+    <header className={cn('fixed top-0 left-0 right-0 z-[100] border-b bg-background')}>
       <Container>
         <div className="flex h-16 items-center justify-between">
           <div className="flex items-center space-x-4">
@@ -56,17 +52,10 @@ export function Header() {
               </DropdownMenu>
             ) : (
               <>
-                <Button 
-                  variant="ghost" 
-                  onClick={() => navigate({ to: '/login' })}
-                >
+                <Button variant="ghost" onClick={() => navigate({ to: '/login' })}>
                   Sign in
                 </Button>
-                <Button 
-                  onClick={() => navigate({ to: '/signup' })}
-                >
-                  Sign up
-                </Button>
+                <Button onClick={() => navigate({ to: '/signup' })}>Sign up</Button>
               </>
             )}
           </nav>

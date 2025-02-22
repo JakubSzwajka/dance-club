@@ -1,5 +1,12 @@
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card'
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '@/components/ui/table'
 
 // Mock data - in real app this would come from API
 const upcomingClasses = [
@@ -35,7 +42,7 @@ export function UpcomingClasses() {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {upcomingClasses.map((class_) => (
+            {upcomingClasses.map(class_ => (
               <TableRow key={class_.id}>
                 <TableCell className="font-medium">{class_.name}</TableCell>
                 <TableCell>{class_.date}</TableCell>
@@ -43,7 +50,9 @@ export function UpcomingClasses() {
                 <TableCell>
                   <div className="text-sm">
                     <div>{class_.confirmedReservations} confirmed</div>
-                    <div className="text-muted-foreground">{class_.pendingReservations} pending</div>
+                    <div className="text-muted-foreground">
+                      {class_.pendingReservations} pending
+                    </div>
                   </div>
                 </TableCell>
                 <TableCell className="text-right">{class_.rating} ⭐️</TableCell>
@@ -54,4 +63,4 @@ export function UpcomingClasses() {
       </CardContent>
     </Card>
   )
-} 
+}

@@ -1,5 +1,5 @@
-import * as React from "react"
-import { Link } from "@tanstack/react-router"
+import * as React from 'react'
+import { Link } from '@tanstack/react-router'
 import {
   Table,
   TableBody,
@@ -7,79 +7,79 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table"
+} from '@/components/ui/table'
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select"
-import { Input } from "@/components/ui/input"
-import { Button } from "@/components/ui/button"
-import { SearchIcon } from "lucide-react"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+} from '@/components/ui/select'
+import { Input } from '@/components/ui/input'
+import { Button } from '@/components/ui/button'
+import { SearchIcon } from 'lucide-react'
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 
 // Mock data - in real app this would come from API
 const students = [
   {
-    id: "1",
-    name: "Alice Smith",
-    email: "alice@example.com",
-    avatar: "/avatars/alice.jpg",
-    joinedDate: "2023-09-15",
+    id: '1',
+    name: 'Alice Smith',
+    email: 'alice@example.com',
+    avatar: '/avatars/alice.jpg',
+    joinedDate: '2023-09-15',
     totalClasses: 45,
     activeClasses: 2,
     shareContact: true,
-    phone: "+1 (555) 000-0000",
-    lastActive: "2024-02-15",
-    preferredStyles: ["Salsa", "Bachata"],
-    level: "intermediate",
+    phone: '+1 (555) 000-0000',
+    lastActive: '2024-02-15',
+    preferredStyles: ['Salsa', 'Bachata'],
+    level: 'intermediate',
   },
   {
-    id: "2",
-    name: "Bob Johnson",
-    email: "bob@example.com",
-    avatar: "/avatars/bob.jpg",
-    joinedDate: "2024-01-01",
+    id: '2',
+    name: 'Bob Johnson',
+    email: 'bob@example.com',
+    avatar: '/avatars/bob.jpg',
+    joinedDate: '2024-01-01',
     totalClasses: 12,
     activeClasses: 1,
     shareContact: false,
     phone: null,
-    lastActive: "2024-02-14",
-    preferredStyles: ["Salsa"],
-    level: "beginner",
+    lastActive: '2024-02-14',
+    preferredStyles: ['Salsa'],
+    level: 'beginner',
   },
   // Add more mock data as needed
 ]
 
 export function StudentsTable() {
-  const [search, setSearch] = React.useState("")
-  const [filter, setFilter] = React.useState("all")
+  const [search, setSearch] = React.useState('')
+  const [filter, setFilter] = React.useState('all')
 
-  const filteredStudents = students.filter((student) => {
-    const matchesSearch = 
+  const filteredStudents = students.filter(student => {
+    const matchesSearch =
       student.name.toLowerCase().includes(search.toLowerCase()) ||
       student.email.toLowerCase().includes(search.toLowerCase())
-    const matchesFilter = filter === "all" || student.level === filter
+    const matchesFilter = filter === 'all' || student.level === filter
     return matchesSearch && matchesFilter
   })
 
   const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleDateString("en-US", {
-      year: "numeric",
-      month: "short",
-      day: "numeric",
+    return new Date(dateString).toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric',
     })
   }
 
   const calculateMembership = (joinedDate: string) => {
     const joined = new Date(joinedDate)
     const now = new Date()
-    const diffMonths = (now.getFullYear() - joined.getFullYear()) * 12 + 
-      (now.getMonth() - joined.getMonth())
-    
-    if (diffMonths < 1) return "New member"
+    const diffMonths =
+      (now.getFullYear() - joined.getFullYear()) * 12 + (now.getMonth() - joined.getMonth())
+
+    if (diffMonths < 1) return 'New member'
     if (diffMonths < 12) return `${diffMonths} months`
     const years = Math.floor(diffMonths / 12)
     const months = diffMonths % 12
@@ -95,7 +95,7 @@ export function StudentsTable() {
             placeholder="Search students..."
             className="pl-8"
             value={search}
-            onChange={(e) => setSearch(e.target.value)}
+            onChange={e => setSearch(e.target.value)}
           />
         </div>
         <Select value={filter} onValueChange={setFilter}>
@@ -125,7 +125,7 @@ export function StudentsTable() {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {filteredStudents.map((student) => (
+            {filteredStudents.map(student => (
               <TableRow key={student.id}>
                 <TableCell>
                   <div className="flex items-center gap-2">
@@ -135,9 +135,7 @@ export function StudentsTable() {
                     </Avatar>
                     <div>
                       <div className="font-medium">{student.name}</div>
-                      <div className="text-sm text-muted-foreground">
-                        {student.email}
-                      </div>
+                      <div className="text-sm text-muted-foreground">{student.email}</div>
                     </div>
                   </div>
                 </TableCell>
@@ -152,31 +150,23 @@ export function StudentsTable() {
                 <TableCell>
                   <div className="text-sm">
                     <div>{student.totalClasses} total</div>
-                    <div className="text-muted-foreground">
-                      {student.activeClasses} active
-                    </div>
+                    <div className="text-muted-foreground">{student.activeClasses} active</div>
                   </div>
                 </TableCell>
                 <TableCell>
                   {student.shareContact ? (
                     <div className="text-sm">
                       <div className="text-green-600">Public</div>
-                      <div className="text-muted-foreground">
-                        {student.phone}
-                      </div>
+                      <div className="text-muted-foreground">{student.phone}</div>
                     </div>
                   ) : (
-                    <div className="text-sm text-muted-foreground">
-                      Private
-                    </div>
+                    <div className="text-sm text-muted-foreground">Private</div>
                   )}
                 </TableCell>
-                <TableCell>
-                  {formatDate(student.lastActive)}
-                </TableCell>
+                <TableCell>{formatDate(student.lastActive)}</TableCell>
                 <TableCell>
                   <div className="flex gap-1">
-                    {student.preferredStyles.map((style) => (
+                    {student.preferredStyles.map(style => (
                       <span
                         key={style}
                         className="inline-flex items-center rounded-full px-2 py-1 text-xs font-medium bg-primary/10"
@@ -203,4 +193,4 @@ export function StudentsTable() {
       </div>
     </div>
   )
-} 
+}

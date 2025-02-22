@@ -1,7 +1,7 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { StudentStats } from "./components/student-stats"
-import { StudentsTable } from "./components/students-table"
-import { InviteStudents } from "./components/invite-students"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { StudentStats } from './components/student-stats'
+import { StudentsTable } from './components/students-table'
+import { InviteStudents } from './components/invite-students'
 
 export function StudentsPage() {
   return (
@@ -21,9 +21,7 @@ export function StudentsPage() {
       <Card>
         <CardHeader>
           <CardTitle>Student Directory</CardTitle>
-          <CardDescription>
-            View and manage all your students
-          </CardDescription>
+          <CardDescription>View and manage all your students</CardDescription>
         </CardHeader>
         <CardContent>
           <StudentsTable />

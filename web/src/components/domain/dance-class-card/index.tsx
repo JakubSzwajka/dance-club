@@ -34,13 +34,13 @@ export function DanceClassCard({ danceClass }: DanceClassCardProps) {
         <div className="flex justify-between items-start">
           <div>
             <h3 className="font-semibold text-lg">{danceClass.name}</h3>
-            {danceClass.instructor && (
-              <InstructorPill instructor={danceClass.instructor} />
-            )}
+            {danceClass.instructor && <InstructorPill instructor={danceClass.instructor} />}
           </div>
           <div className="flex gap-2">
             <Badge variant="secondary">{danceClass.style}</Badge>
-            <div className={`text-xs font-medium px-2.5 py-1 rounded-full ${levelColor.bg} ${levelColor.text}`}>
+            <div
+              className={`text-xs font-medium px-2.5 py-1 rounded-full ${levelColor.bg} ${levelColor.text}`}
+            >
               {danceClass.level}
             </div>
           </div>
@@ -73,4 +73,4 @@ export function DanceClassCard({ danceClass }: DanceClassCardProps) {
       </CardContent>
     </Card>
   )
-} 
+}

@@ -1,56 +1,49 @@
-import * as React from "react"
-import { Bar, BarChart, CartesianGrid, XAxis, YAxis, ResponsiveContainer, Tooltip } from "recharts"
+import * as React from 'react'
+import { Bar, BarChart, CartesianGrid, XAxis, YAxis, ResponsiveContainer, Tooltip } from 'recharts'
 
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select"
-import { StarIcon } from "@heroicons/react/24/solid"
+} from '@/components/ui/select'
 
 // Mock data - in real app this would come from API
 const classData = [
-  { 
-    name: "Salsa Beginners",
+  {
+    name: 'Salsa Beginners',
     totalReservations: 145,
     averageRating: 4.8,
     totalReviews: 89,
   },
   {
-    name: "Bachata Intermediate",
+    name: 'Bachata Intermediate',
     totalReservations: 98,
     averageRating: 4.9,
     totalReviews: 62,
   },
   {
-    name: "Salsa Advanced",
+    name: 'Salsa Advanced',
     totalReservations: 76,
     averageRating: 4.7,
     totalReviews: 45,
   },
   {
-    name: "Bachata Beginners",
+    name: 'Bachata Beginners',
     totalReservations: 132,
     averageRating: 4.6,
     totalReviews: 78,
   },
   {
-    name: "Kizomba Beginners",
+    name: 'Kizomba Beginners',
     totalReservations: 65,
     averageRating: 4.5,
     totalReviews: 34,
   },
   {
-    name: "Salsa Intermediate",
+    name: 'Salsa Intermediate',
     totalReservations: 112,
     averageRating: 4.8,
     totalReviews: 67,
@@ -58,14 +51,14 @@ const classData = [
 ]
 
 export function AnalyticsClassPopularity() {
-  const [sortBy, setSortBy] = React.useState("reservations")
-  
+  const [sortBy, setSortBy] = React.useState('reservations')
+
   // Sort data based on selected criteria
   const sortedData = React.useMemo(() => {
     const data = [...classData]
-    if (sortBy === "reservations") {
+    if (sortBy === 'reservations') {
       return data.sort((a, b) => b.totalReservations - a.totalReservations)
-    } else if (sortBy === "rating") {
+    } else if (sortBy === 'rating') {
       return data.sort((a, b) => b.averageRating - a.averageRating)
     }
     return data
@@ -76,15 +69,10 @@ export function AnalyticsClassPopularity() {
       <CardHeader className="flex items-center gap-2 space-y-0 border-b py-5 sm:flex-row">
         <div className="grid flex-1 gap-1 text-center sm:text-left">
           <CardTitle>Class Popularity</CardTitle>
-          <CardDescription>
-            Comparing performance across different class types
-          </CardDescription>
+          <CardDescription>Comparing performance across different class types</CardDescription>
         </div>
         <Select value={sortBy} onValueChange={setSortBy}>
-          <SelectTrigger
-            className="w-[160px] rounded-lg sm:ml-auto"
-            aria-label="Sort by"
-          >
+          <SelectTrigger className="w-[160px] rounded-lg sm:ml-auto" aria-label="Sort by">
             <SelectValue placeholder="Sort by" />
           </SelectTrigger>
           <SelectContent className="rounded-xl">
@@ -115,7 +103,7 @@ export function AnalyticsClassPopularity() {
                 yAxisId="reservations"
                 tickLine={false}
                 axisLine={false}
-                tickFormatter={(value) => `${value}`}
+                tickFormatter={value => `${value}`}
               />
               <YAxis
                 yAxisId="rating"
@@ -123,7 +111,7 @@ export function AnalyticsClassPopularity() {
                 domain={[0, 5]}
                 tickLine={false}
                 axisLine={false}
-                tickFormatter={(value) => `${value}★`}
+                tickFormatter={value => `${value}★`}
               />
               <Tooltip
                 content={({ active, payload, label }) => {
@@ -141,7 +129,8 @@ export function AnalyticsClassPopularity() {
                           <div className="flex items-center gap-2">
                             <div className="h-2 w-2 rounded-full bg-yellow-500" />
                             <span className="text-sm text-muted-foreground">
-                              {payload[1].value} rating ({sortedData.find(d => d.name === label)?.totalReviews} reviews)
+                              {payload[1].value} rating (
+                              {sortedData.find(d => d.name === label)?.totalReviews} reviews)
                             </span>
                           </div>
                         </div>
@@ -169,4 +158,4 @@ export function AnalyticsClassPopularity() {
       </CardContent>
     </Card>
   )
-} 
+}

@@ -34,7 +34,7 @@ export function ClassItem({ danceClass, onDetailsClick }: ClassItemProps) {
   }
 
   return (
-    <Card 
+    <Card
       className="w-full overflow-hidden hover:border-primary/50 transition-colors cursor-pointer group"
       onClick={() => onDetailsClick?.(danceClass.id)}
     >
@@ -44,7 +44,9 @@ export function ClassItem({ danceClass, onDetailsClick }: ClassItemProps) {
           <div className="flex items-start gap-4">
             <div className="min-w-0 flex-1">
               <div className="flex flex-wrap items-center gap-2 mb-1">
-                <h3 className="text-lg font-semibold truncate group-hover:text-primary transition-colors">{danceClass.name}</h3>
+                <h3 className="text-lg font-semibold truncate group-hover:text-primary transition-colors">
+                  {danceClass.name}
+                </h3>
                 {danceClass.avg_rating !== null && danceClass.avg_rating > 0 && (
                   <div className="flex items-center gap-1 text-sm text-muted-foreground shrink-0">
                     <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
@@ -84,22 +86,22 @@ export function ClassItem({ danceClass, onDetailsClick }: ClassItemProps) {
                 </div>
               )}
             </div>
-            
+
             <div className="space-y-2 min-w-0">
               <div className="flex items-center gap-2 text-muted-foreground">
                 <CalendarDays className="w-4 h-4 shrink-0" />
-                  <span className="truncate">{formatDate(danceClass.start_date)}</span>
-                </div>
-                <div className="flex items-center gap-2 text-muted-foreground">
-                  <Clock className="w-4 h-4 shrink-0" />
-                  <span className="truncate">
-                    {formatTime(danceClass.start_date)} - {formatTime(danceClass.end_date)}
-                  </span>
-                </div>
+                <span className="truncate">{formatDate(danceClass.start_date)}</span>
+              </div>
+              <div className="flex items-center gap-2 text-muted-foreground">
+                <Clock className="w-4 h-4 shrink-0" />
+                <span className="truncate">
+                  {formatTime(danceClass.start_date)} - {formatTime(danceClass.end_date)}
+                </span>
               </div>
             </div>
           </div>
         </div>
+      </div>
     </Card>
   )
-} 
+}

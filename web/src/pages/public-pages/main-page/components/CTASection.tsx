@@ -1,14 +1,8 @@
 import { Button } from '@/components/ui/button'
 import { Container } from '@/components/ui/container'
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from '@/components/ui/tooltip'
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
 
 export function CTASection() {
-
   return (
     <section className="py-16">
       <Container>
@@ -22,9 +16,7 @@ export function CTASection() {
             <Tooltip>
               <TooltipTrigger asChild>
                 <div>
-                  <Button size="lg" disabled className="cursor-not-allowed opacity-50">
-                    Sign Up Now
-                  </Button>
+                  <Button size="lg">Sign Up Now</Button>
                 </div>
               </TooltipTrigger>
               <TooltipContent>

@@ -33,11 +33,11 @@ function Step({ icon, title, description, features, benefits, badge }: StepProps
             {icon}
           </div>
           {badge && (
-            <div className={`absolute -top-1 -right-1 text-xs font-medium px-2 py-0.5 rounded-full ${
-              badge === 'premium' 
-                ? 'bg-emerald-500 text-white' 
-                : 'bg-yellow-500 text-white'
-            }`}>
+            <div
+              className={`absolute -top-1 -right-1 text-xs font-medium px-2 py-0.5 rounded-full ${
+                badge === 'premium' ? 'bg-emerald-500 text-white' : 'bg-yellow-500 text-white'
+              }`}
+            >
               {badge === 'premium' ? 'Premium' : 'Business'}
             </div>
           )}
@@ -45,7 +45,7 @@ function Step({ icon, title, description, features, benefits, badge }: StepProps
         <h3 className="text-xl font-semibold mb-2">{title}</h3>
         <p className="text-sm text-muted-foreground">{description}</p>
       </div>
-      
+
       {features && (
         <div className="mt-auto">
           <ul className="space-y-2 text-sm text-muted-foreground">
@@ -87,8 +87,8 @@ export function HowItWorksSection() {
         <div className="text-center mb-16">
           <h2 className="text-4xl font-bold tracking-tight mb-4">How MyDanceClub Works</h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-8">
-            Whether you're looking for dance classes or running a dance school, we've got you covered.
-            Choose your path to see how our platform can help you.
+            Whether you're looking for dance classes or running a dance school, we've got you
+            covered. Choose your path to see how our platform can help you.
           </p>
 
           <Tabs defaultValue="students" className="w-full">
@@ -275,7 +275,8 @@ export function HowItWorksSection() {
         <div className="mt-16 text-center">
           <h3 className="text-2xl font-semibold mb-4">Ready to Start?</h3>
           <p className="text-muted-foreground mb-8">
-            Join our community of dancers and dance schools to find your perfect match or grow your business.
+            Join our community of dancers and dance schools to find your perfect match or grow your
+            business.
           </p>
           <div className="flex gap-4 justify-center">
             <a
@@ -295,4 +296,4 @@ export function HowItWorksSection() {
       </Container>
     </section>
   )
-} 
+}

@@ -119,4 +119,4 @@ export function LocationCard({ location, onClose, onLocationClick }: LocationCar
       </div>
     </div>
   )
-} 
+}

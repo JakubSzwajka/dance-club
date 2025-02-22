@@ -1,6 +1,6 @@
-import * as React from "react"
-import { addDays, startOfWeek, endOfWeek, format, isToday } from "date-fns"
-import { Button } from "@/components/ui/button"
+import * as React from 'react'
+import { addDays, startOfWeek, endOfWeek, format, isToday } from 'date-fns'
+import { Button } from '@/components/ui/button'
 import {
   Drawer,
   DrawerContent,
@@ -8,12 +8,12 @@ import {
   DrawerTitle,
   DrawerDescription,
   DrawerFooter,
-} from "@/components/ui/drawer"
-import { ScrollArea } from "@/components/ui/scroll-area"
-import { MapPinIcon, ClockIcon, UsersIcon } from "lucide-react"
+} from '@/components/ui/drawer'
+import { ScrollArea } from '@/components/ui/scroll-area'
+import { MapPinIcon, ClockIcon, UsersIcon } from 'lucide-react'
 
 // Reuse the mock data from month-view
-import { mockClasses } from "./mock-data.ts"
+import { mockClasses } from './mock-data.ts'
 
 type WeekViewProps = {
   currentDate: Date
@@ -43,10 +43,10 @@ export function WeekView({ currentDate }: WeekViewProps) {
     if (date.getDay() === 0 || date.getDay() === 6) {
       return []
     }
-    
+
     return mockClasses
       .filter((class_: any) => {
-        const [startHour] = class_.time.split(" - ")[0].split(":")
+        const [startHour] = class_.time.split(' - ')[0].split(':')
         return parseInt(startHour) === hour
       })
       .sort(() => Math.random() - 0.5)
@@ -58,7 +58,7 @@ export function WeekView({ currentDate }: WeekViewProps) {
     setIsDrawerOpen(true)
   }
 
-  const selectedSlotClasses = selectedSlot 
+  const selectedSlotClasses = selectedSlot
     ? getClassesForTimeSlot(selectedSlot.day, selectedSlot.hour)
     : []
 
@@ -68,28 +68,25 @@ export function WeekView({ currentDate }: WeekViewProps) {
         {/* Time column */}
         <div className="bg-background">
           <div className="h-10" /> {/* Empty cell for alignment */}
-          {HOURS.map((hour) => (
-            <div
-              key={hour}
-              className="h-20 border-t p-2 text-sm text-muted-foreground"
-            >
-              {format(new Date().setHours(hour), "ha")}
+          {HOURS.map(hour => (
+            <div key={hour} className="h-20 border-t p-2 text-sm text-muted-foreground">
+              {format(new Date().setHours(hour), 'ha')}
             </div>
           ))}
         </div>
 
         {/* Days columns */}
-        {weekDays.map((day) => (
+        {weekDays.map(day => (
           <div key={day.toISOString()} className="bg-background">
             <div className="h-10 p-2 text-center">
-              <div className="font-medium">
-                {format(day, "EEE")}
-              </div>
-              <div className={`text-sm ${isToday(day) ? "text-primary font-bold" : "text-muted-foreground"}`}>
-                {format(day, "d")}
+              <div className="font-medium">{format(day, 'EEE')}</div>
+              <div
+                className={`text-sm ${isToday(day) ? 'text-primary font-bold' : 'text-muted-foreground'}`}
+              >
+                {format(day, 'd')}
               </div>
             </div>
-            {HOURS.map((hour) => {
+            {HOURS.map(hour => {
               const classes = getClassesForTimeSlot(day, hour)
               return (
                 <div
@@ -101,9 +98,10 @@ export function WeekView({ currentDate }: WeekViewProps) {
                     <div
                       key={class_.id}
                       className={`text-xs p-1 rounded truncate h-full
-                        ${class_.type === "private" 
-                          ? "bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400"
-                          : "bg-primary/10 text-primary dark:bg-primary/30"
+                        ${
+                          class_.type === 'private'
+                            ? 'bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400'
+                            : 'bg-primary/10 text-primary dark:bg-primary/30'
                         }`}
                     >
                       <div className="font-medium truncate">{class_.name}</div>
@@ -122,13 +120,10 @@ export function WeekView({ currentDate }: WeekViewProps) {
           <div className="mx-auto w-full max-w-4xl">
             <DrawerHeader>
               <DrawerTitle>
-                Classes for {selectedSlot ? format(selectedSlot.day, "EEEE, MMMM d") : ""} at {
-                  selectedSlot ? format(new Date().setHours(selectedSlot.hour), "ha") : ""
-                }
+                Classes for {selectedSlot ? format(selectedSlot.day, 'EEEE, MMMM d') : ''} at{' '}
+                {selectedSlot ? format(new Date().setHours(selectedSlot.hour), 'ha') : ''}
               </DrawerTitle>
-              <DrawerDescription>
-                {selectedSlotClasses.length} classes scheduled
-              </DrawerDescription>
+              <DrawerDescription>{selectedSlotClasses.length} classes scheduled</DrawerDescription>
             </DrawerHeader>
             <ScrollArea className="h-[50vh] px-4">
               <div className="space-y-4 pb-4">
@@ -136,9 +131,10 @@ export function WeekView({ currentDate }: WeekViewProps) {
                   <div
                     key={class_.id}
                     className={`p-4 rounded-lg border
-                      ${class_.type === "private"
-                        ? "bg-blue-50 border-blue-200 dark:bg-blue-900/10 dark:border-blue-900/20"
-                        : "bg-primary/5 border-primary/10"
+                      ${
+                        class_.type === 'private'
+                          ? 'bg-blue-50 border-blue-200 dark:bg-blue-900/10 dark:border-blue-900/20'
+                          : 'bg-primary/5 border-primary/10'
                       }`}
                   >
                     <div className="flex justify-between items-start mb-2">
@@ -146,10 +142,12 @@ export function WeekView({ currentDate }: WeekViewProps) {
                         <h3 className="font-semibold">{class_.name}</h3>
                         <p className="text-sm text-muted-foreground">{class_.description}</p>
                       </div>
-                      <div className={`px-2 py-1 rounded text-xs font-medium
-                        ${class_.type === "private"
-                          ? "bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400"
-                          : "bg-primary/10 text-primary"
+                      <div
+                        className={`px-2 py-1 rounded text-xs font-medium
+                        ${
+                          class_.type === 'private'
+                            ? 'bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400'
+                            : 'bg-primary/10 text-primary'
                         }`}
                       >
                         {class_.type}
@@ -166,12 +164,12 @@ export function WeekView({ currentDate }: WeekViewProps) {
                       </div>
                       <div className="flex items-center gap-2">
                         <UsersIcon className="h-4 w-4 text-muted-foreground" />
-                        <span>{class_.enrolled}/{class_.capacity} students</span>
+                        <span>
+                          {class_.enrolled}/{class_.capacity} students
+                        </span>
                       </div>
                     </div>
-                    <div className="mt-2 text-sm font-medium">
-                      Instructor: {class_.instructor}
-                    </div>
+                    <div className="mt-2 text-sm font-medium">Instructor: {class_.instructor}</div>
                   </div>
                 ))}
               </div>
@@ -184,4 +182,4 @@ export function WeekView({ currentDate }: WeekViewProps) {
       </Drawer>
     </>
   )
-} 
+}

@@ -35,4 +35,4 @@ export type LocationsSearchValidation = {
   lat?: string
   lng?: string
   radiusKm?: string
-} 
+}

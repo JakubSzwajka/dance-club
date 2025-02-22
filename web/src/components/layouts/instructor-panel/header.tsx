@@ -8,13 +8,7 @@ interface HeaderProps extends React.HTMLAttributes<HTMLElement> {
   ref?: React.Ref<HTMLElement>
 }
 
-
-export const Header = ({
-  className,
-  fixed,
-  children,
-  ...props
-}: HeaderProps) => {
+export const Header = ({ className, fixed, children, ...props }: HeaderProps) => {
   const [offset, setOffset] = React.useState(0)
 
   React.useEffect(() => {
@@ -39,8 +33,8 @@ export const Header = ({
       )}
       {...props}
     >
-      <SidebarTrigger variant='outline' className='scale-125 sm:scale-100' />
-      <Separator orientation='vertical' className='h-6' />
+      <SidebarTrigger variant="outline" className="scale-125 sm:scale-100" />
+      <Separator orientation="vertical" className="h-6" />
       {children}
     </header>
   )

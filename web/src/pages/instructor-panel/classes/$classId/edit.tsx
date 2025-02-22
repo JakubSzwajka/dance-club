@@ -1,8 +1,8 @@
-import { zodResolver } from "@hookform/resolvers/zod"
-import { useForm } from "react-hook-form"
-import { z } from "zod"
-import { useNavigate, useParams } from "@tanstack/react-router"
-import { Button } from "@/components/ui/button"
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useForm } from 'react-hook-form'
+import { z } from 'zod'
+import { useNavigate, useParams } from '@tanstack/react-router'
+import { Button } from '@/components/ui/button'
 import {
   Form,
   FormControl,
@@ -11,46 +11,40 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
+} from '@/components/ui/form'
+import { Input } from '@/components/ui/input'
+import { Textarea } from '@/components/ui/textarea'
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select"
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card"
-import { Separator } from "@/components/ui/separator"
-import { useEffect } from "react"
+} from '@/components/ui/select'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { Separator } from '@/components/ui/separator'
+import { useEffect } from 'react'
 
 const classFormSchema = z.object({
   name: z.string().min(2, {
-    message: "Name must be at least 2 characters.",
+    message: 'Name must be at least 2 characters.',
   }),
   description: z.string().min(10, {
-    message: "Description must be at least 10 characters.",
+    message: 'Description must be at least 10 characters.',
   }),
-  level: z.enum(["beginner", "intermediate", "advanced"]),
-  type: z.enum(["group", "private", "workshop"]),
+  level: z.enum(['beginner', 'intermediate', 'advanced']),
+  type: z.enum(['group', 'private', 'workshop']),
   capacity: z.string().min(1, {
-    message: "Please enter the class capacity.",
+    message: 'Please enter the class capacity.',
   }),
   price: z.string().min(1, {
-    message: "Please enter the class price.",
+    message: 'Please enter the class price.',
   }),
   duration: z.string().min(1, {
-    message: "Please enter the class duration.",
+    message: 'Please enter the class duration.',
   }),
   location: z.string().min(1, {
-    message: "Please enter the class location.",
+    message: 'Please enter the class location.',
   }),
 })
 
@@ -58,18 +52,21 @@ type ClassFormValues = z.infer<typeof classFormSchema>
 
 // Mock data - in real app this would come from API
 const mockClassDetails: ClassFormValues = {
-  name: "Salsa Beginners",
-  description: "Perfect introduction to Salsa dancing. Learn the basic steps, rhythm, and essential moves.",
-  level: "beginner" as const,
-  type: "group" as const,
-  capacity: "20",
-  price: "25",
-  duration: "90",
-  location: "Studio A",
+  name: 'Salsa Beginners',
+  description:
+    'Perfect introduction to Salsa dancing. Learn the basic steps, rhythm, and essential moves.',
+  level: 'beginner' as const,
+  type: 'group' as const,
+  capacity: '20',
+  price: '25',
+  duration: '90',
+  location: 'Studio A',
 }
 
 export function EditClassPage() {
-  const { classId } = useParams({ from: "/instructor-panel/instructor-panel/classes/$classId/edit" })
+  const { classId } = useParams({
+    from: '/instructor-panel/instructor-panel/classes/$classId/edit',
+  })
   const navigate = useNavigate()
   const form = useForm<ClassFormValues>({
     resolver: zodResolver(classFormSchema),
@@ -79,27 +76,24 @@ export function EditClassPage() {
   // In real app, fetch class details and update form
   useEffect(() => {
     // Simulating API call
-    console.log("Fetching class details for ID:", classId)
+    console.log('Fetching class details for ID:', classId)
     // form.reset(fetchedClassDetails)
   }, [classId])
 
   function onSubmit(data: ClassFormValues) {
-    console.log("Updating class:", classId, data)
+    console.log('Updating class:', classId, data)
     // TODO: Handle form submission
     // navigate({ to: "/instructor-panel/classes/$classId", params: { classId } })
   }
 
   return (
     <div className="space-y-6">
-
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
           <Card>
             <CardHeader>
               <CardTitle>Class Details</CardTitle>
-              <CardDescription>
-                Update the details of your class
-              </CardDescription>
+              <CardDescription>Update the details of your class</CardDescription>
             </CardHeader>
             <CardContent className="space-y-6">
               <Separator />
@@ -107,9 +101,7 @@ export function EditClassPage() {
               <div className="grid grid-cols-5 gap-6">
                 <div className="col-span-2">
                   <h4 className="text-sm font-medium">Basic Information</h4>
-                  <p className="text-sm text-muted-foreground">
-                    The core details of your class
-                  </p>
+                  <p className="text-sm text-muted-foreground">The core details of your class</p>
                 </div>
                 <div className="col-span-3 space-y-4">
                   <FormField
@@ -121,9 +113,7 @@ export function EditClassPage() {
                         <FormControl>
                           <Input placeholder="e.g., Salsa Beginners" {...field} />
                         </FormControl>
-                        <FormDescription>
-                          The name of your dance class
-                        </FormDescription>
+                        <FormDescription>The name of your dance class</FormDescription>
                         <FormMessage />
                       </FormItem>
                     )}
@@ -182,9 +172,7 @@ export function EditClassPage() {
                               <SelectItem value="advanced">Advanced</SelectItem>
                             </SelectContent>
                           </Select>
-                          <FormDescription>
-                            The skill level required for this class
-                          </FormDescription>
+                          <FormDescription>The skill level required for this class</FormDescription>
                           <FormMessage />
                         </FormItem>
                       )}
@@ -208,9 +196,7 @@ export function EditClassPage() {
                               <SelectItem value="workshop">Workshop</SelectItem>
                             </SelectContent>
                           </Select>
-                          <FormDescription>
-                            The format of the class
-                          </FormDescription>
+                          <FormDescription>The format of the class</FormDescription>
                           <FormMessage />
                         </FormItem>
                       )}
@@ -240,9 +226,7 @@ export function EditClassPage() {
                           <FormControl>
                             <Input type="number" min="1" {...field} />
                           </FormControl>
-                          <FormDescription>
-                            Maximum students
-                          </FormDescription>
+                          <FormDescription>Maximum students</FormDescription>
                           <FormMessage />
                         </FormItem>
                       )}
@@ -257,9 +241,7 @@ export function EditClassPage() {
                           <FormControl>
                             <Input type="number" min="0" step="0.01" {...field} />
                           </FormControl>
-                          <FormDescription>
-                            Price per class
-                          </FormDescription>
+                          <FormDescription>Price per class</FormDescription>
                           <FormMessage />
                         </FormItem>
                       )}
@@ -274,9 +256,7 @@ export function EditClassPage() {
                           <FormControl>
                             <Input type="number" min="15" step="15" {...field} />
                           </FormControl>
-                          <FormDescription>
-                            Class length
-                          </FormDescription>
+                          <FormDescription>Class length</FormDescription>
                           <FormMessage />
                         </FormItem>
                       )}
@@ -292,9 +272,7 @@ export function EditClassPage() {
                         <FormControl>
                           <Input placeholder="e.g., Studio A" {...field} />
                         </FormControl>
-                        <FormDescription>
-                          Where the class will be held
-                        </FormDescription>
+                        <FormDescription>Where the class will be held</FormDescription>
                         <FormMessage />
                       </FormItem>
                     )}
@@ -308,7 +286,9 @@ export function EditClassPage() {
                 <Button
                   type="button"
                   variant="outline"
-                  onClick={() => navigate({ to: "/instructor-panel/classes/$classId", params: { classId } })}
+                  onClick={() =>
+                    navigate({ to: '/instructor-panel/classes/$classId', params: { classId } })
+                  }
                 >
                   Cancel
                 </Button>
@@ -320,4 +300,4 @@ export function EditClassPage() {
       </Form>
     </div>
   )
-} 
+}

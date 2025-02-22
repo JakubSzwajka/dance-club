@@ -7,40 +7,40 @@ import { SidebarProvider } from '../ui/sidebar'
 import { ThemeSwitch } from '../theme-switch'
 import { Separator } from '../ui/separator'
 export function InstructorPanelLayout() {
-    const { isAuthenticated, isLoading } = useAuth()
+  const { isAuthenticated, isLoading } = useAuth()
 
-    if (isLoading) {
-        return (
-            <div className="flex items-center justify-center min-h-screen">
-                <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary"></div>
-            </div>
-        )
-    }
-
-    if (!isAuthenticated) {
-        return null
-    }
-
+  if (isLoading) {
     return (
-        <div className="flex h-screen overflow-hidden">
-            <SidebarProvider>
-                <AppSidebar />
-                <div className="flex-1 flex flex-col overflow-hidden">
-                    <Header >
-                        {/* <TopNav links={topNav} /> */}
-                        <div className='ml-auto flex items-center space-x-4'>
-                            <ThemeSwitch />
-                            <ProfileDropdown />
-                        </div>
-                    </Header>
-                    <Separator />
-                    <main className="flex-1 overflow-auto">
-                        <div className="container mx-auto p-6 pt-0">
-                            <Outlet />
-                        </div>
-                    </main>
-                </div>
-            </SidebarProvider>
-        </div>
+      <div className="flex items-center justify-center min-h-screen">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary"></div>
+      </div>
     )
-} 
+  }
+
+  if (!isAuthenticated) {
+    return null
+  }
+
+  return (
+    <div className="flex h-screen overflow-hidden">
+      <SidebarProvider>
+        <AppSidebar />
+        <div className="flex-1 flex flex-col overflow-hidden">
+          <Header>
+            {/* <TopNav links={topNav} /> */}
+            <div className="ml-auto flex items-center space-x-4">
+              <ThemeSwitch />
+              <ProfileDropdown />
+            </div>
+          </Header>
+          <Separator />
+          <main className="flex-1 overflow-auto">
+            <div className="container mx-auto p-6 pt-2">
+              <Outlet />
+            </div>
+          </main>
+        </div>
+      </SidebarProvider>
+    </div>
+  )
+}

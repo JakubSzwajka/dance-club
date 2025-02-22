@@ -11,4 +11,4 @@ export function Analytics() {
       {/* More analytics sections can be added here */}
     </div>
   )
-} 
+}

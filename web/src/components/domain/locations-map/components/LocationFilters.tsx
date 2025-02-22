@@ -38,12 +38,20 @@ export function LocationFilters({
 }: LocationFiltersProps) {
   const [isExpanded, setIsExpanded] = useState(false)
 
-  const FilterLabel = ({ children, isActive }: { children: React.ReactNode; isActive: boolean }) => (
+  const FilterLabel = ({
+    children,
+    isActive,
+  }: {
+    children: React.ReactNode
+    isActive: boolean
+  }) => (
     <div className="flex items-center justify-between">
-      <Label className={cn(
-        "text-sm",
-        isActive ? "font-bold text-primary" : "font-medium text-foreground"
-      )}>
+      <Label
+        className={cn(
+          'text-sm',
+          isActive ? 'font-bold text-primary' : 'font-medium text-foreground'
+        )}
+      >
         {children}
       </Label>
       {isActive && <Check className="h-3 w-3 text-primary" />}
@@ -88,7 +96,7 @@ export function LocationFilters({
                   <input
                     type="checkbox"
                     checked={getSelectedValues(search.danceStyle).includes(style)}
-                    onChange={(e) => {
+                    onChange={e => {
                       e.preventDefault()
                       const current = getSelectedValues(search.danceStyle)
                       const updated = current.includes(style)
@@ -106,11 +114,7 @@ export function LocationFilters({
         {search.danceStyle && (
           <div className="flex flex-wrap gap-2 mt-2">
             {getSelectedValues(search.danceStyle).map(style => (
-              <Badge
-                key={style}
-                variant="secondary"
-                className="flex items-center gap-1"
-              >
+              <Badge key={style} variant="secondary" className="flex items-center gap-1">
                 {style}
                 <X
                   className="h-3 w-3 cursor-pointer"
@@ -149,7 +153,7 @@ export function LocationFilters({
                   <input
                     type="checkbox"
                     checked={getSelectedValues(search.level).includes(level.toLowerCase())}
-                    onChange={(e) => {
+                    onChange={e => {
                       e.preventDefault()
                       const current = getSelectedValues(search.level)
                       const updated = current.includes(level.toLowerCase())
@@ -167,11 +171,7 @@ export function LocationFilters({
         {search.level && (
           <div className="flex flex-wrap gap-2 mt-2">
             {getSelectedValues(search.level).map(level => (
-              <Badge
-                key={level}
-                variant="secondary"
-                className="flex items-center gap-1"
-              >
+              <Badge key={level} variant="secondary" className="flex items-center gap-1">
                 {level}
                 <X
                   className="h-3 w-3 cursor-pointer"
@@ -210,7 +210,7 @@ export function LocationFilters({
                   <input
                     type="checkbox"
                     checked={getSelectedValues(search.sportsCard).includes(card)}
-                    onChange={(e) => {
+                    onChange={e => {
                       e.preventDefault()
                       const current = getSelectedValues(search.sportsCard)
                       const updated = current.includes(card)
@@ -228,11 +228,7 @@ export function LocationFilters({
         {search.sportsCard && (
           <div className="flex flex-wrap gap-2 mt-2">
             {getSelectedValues(search.sportsCard).map(card => (
-              <Badge
-                key={card}
-                variant="secondary"
-                className="flex items-center gap-1"
-              >
+              <Badge key={card} variant="secondary" className="flex items-center gap-1">
                 {card.replace('_', ' ')}
                 <X
                   className="h-3 w-3 cursor-pointer"
@@ -300,7 +296,7 @@ export function LocationFilters({
                   <input
                     type="checkbox"
                     checked={getSelectedValues(search.facility).includes(facility)}
-                    onChange={(e) => {
+                    onChange={e => {
                       e.preventDefault()
                       const current = getSelectedValues(search.facility)
                       const updated = current.includes(facility)
@@ -318,16 +314,14 @@ export function LocationFilters({
         {search.facility && (
           <div className="flex flex-wrap gap-2 mt-2">
             {getSelectedValues(search.facility).map(facility => (
-              <Badge
-                key={facility}
-                variant="secondary"
-                className="flex items-center gap-1"
-              >
+              <Badge key={facility} variant="secondary" className="flex items-center gap-1">
                 {facility.replace('_', ' ')}
                 <X
                   className="h-3 w-3 cursor-pointer"
                   onClick={() => {
-                    const newFacilities = getSelectedValues(search.facility).filter(f => f !== facility)
+                    const newFacilities = getSelectedValues(search.facility).filter(
+                      f => f !== facility
+                    )
                     updateFilters({ facility: newFacilities.join(',') as Facilities })
                   }}
                 />
@@ -351,10 +345,12 @@ export function LocationFilters({
   )
 
   return (
-    <div className={cn(
-      "relative transition-all duration-300 ease-in-out",
-      isExpanded ? "w-[600px]" : "w-[280px]"
-    )}>
+    <div
+      className={cn(
+        'relative transition-all duration-300 ease-in-out',
+        isExpanded ? 'w-[600px]' : 'w-[280px]'
+      )}
+    >
       <Card className="p-6 shadow-lg">
         <div className="flex items-center justify-between mb-4">
           <h2 className="text-lg font-semibold">Location Filters</h2>
@@ -364,10 +360,12 @@ export function LocationFilters({
             onClick={() => setIsExpanded(!isExpanded)}
             className="hover:bg-transparent"
           >
-            <ChevronRight className={cn(
-              "h-5 w-5 transition-transform duration-300",
-              isExpanded && "rotate-180"
-            )} />
+            <ChevronRight
+              className={cn(
+                'h-5 w-5 transition-transform duration-300',
+                isExpanded && 'rotate-180'
+              )}
+            />
           </Button>
         </div>
 
@@ -376,14 +374,16 @@ export function LocationFilters({
           <div className="w-[240px] flex-shrink-0">
             <BasicFilters />
           </div>
-          
+
           {/* Advanced filters with smooth width transition */}
-          <div className={cn(
-            "ml-6 transition-all duration-300 ease-in-out",
-            isExpanded 
-              ? "w-[240px] opacity-100 translate-x-0" 
-              : "w-0 opacity-0 -translate-x-4 pointer-events-none"
-          )}>
+          <div
+            className={cn(
+              'ml-6 transition-all duration-300 ease-in-out',
+              isExpanded
+                ? 'w-[240px] opacity-100 translate-x-0'
+                : 'w-0 opacity-0 -translate-x-4 pointer-events-none'
+            )}
+          >
             <div className="w-[240px]">
               <AdvancedFilters />
             </div>
@@ -396,4 +396,4 @@ export function LocationFilters({
       </Card>
     </div>
   )
-} 
+}

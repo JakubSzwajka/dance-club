@@ -15,7 +15,7 @@ export function StatsCards() {
           <p className="text-xs text-muted-foreground">+4% from last month</p>
         </CardContent>
       </Card>
-      
+
       <Card>
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
           <CardTitle className="text-sm font-medium">Hours Dancing</CardTitle>
@@ -50,4 +50,4 @@ export function StatsCards() {
       </Card>
     </div>
   )
-} 
+}

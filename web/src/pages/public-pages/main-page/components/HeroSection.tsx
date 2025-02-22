@@ -32,12 +32,8 @@ export function HeroSection() {
             talented instructors. Start your dance journey today!
           </p>
           <div className="mt-12 flex gap-6">
-            <Button
-              size="lg"
-              disabled
-              className="text-lg px-8 py-6 shadow-lg cursor-not-allowed opacity-50"
-            >
-              Join Now (coming soon)
+            <Button size="lg" className="text-lg px-8 py-6 shadow-lg">
+              Join Now
             </Button>
             <Button
               size="lg"

@@ -1,12 +1,6 @@
-import * as React from "react"
-import { Link } from "@tanstack/react-router"
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card"
+import * as React from 'react'
+import { Link } from '@tanstack/react-router'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import {
   Table,
   TableBody,
@@ -14,73 +8,73 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
+} from '@/components/ui/table'
+import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select"
-import { PlusIcon, SearchIcon } from "lucide-react"
+} from '@/components/ui/select'
+import { PlusIcon, SearchIcon } from 'lucide-react'
 
 // Mock data - in real app this would come from API
 const classes = [
   {
-    id: "1",
-    name: "Salsa Beginners",
-    level: "Beginner",
-    type: "Group",
-    schedule: "Monday, 18:00",
-    location: "Studio A",
+    id: '1',
+    name: 'Salsa Beginners',
+    level: 'Beginner',
+    type: 'Group',
+    schedule: 'Monday, 18:00',
+    location: 'Studio A',
     capacity: 20,
     enrolled: 15,
-    status: "Active",
+    status: 'Active',
   },
   {
-    id: "2",
-    name: "Bachata Intermediate",
-    level: "Intermediate",
-    type: "Group",
-    schedule: "Tuesday, 19:00",
-    location: "Studio B",
+    id: '2',
+    name: 'Bachata Intermediate',
+    level: 'Intermediate',
+    type: 'Group',
+    schedule: 'Tuesday, 19:00',
+    location: 'Studio B',
     capacity: 15,
     enrolled: 12,
-    status: "Active",
+    status: 'Active',
   },
   {
-    id: "3",
-    name: "Private Salsa",
-    level: "Advanced",
-    type: "Private",
-    schedule: "On Demand",
-    location: "Studio C",
+    id: '3',
+    name: 'Private Salsa',
+    level: 'Advanced',
+    type: 'Private',
+    schedule: 'On Demand',
+    location: 'Studio C',
     capacity: 2,
     enrolled: 1,
-    status: "Active",
+    status: 'Active',
   },
   {
-    id: "4",
-    name: "Kizomba Beginners",
-    level: "Beginner",
-    type: "Group",
-    schedule: "Wednesday, 20:00",
-    location: "Studio A",
+    id: '4',
+    name: 'Kizomba Beginners',
+    level: 'Beginner',
+    type: 'Group',
+    schedule: 'Wednesday, 20:00',
+    location: 'Studio A',
     capacity: 15,
     enrolled: 8,
-    status: "Draft",
+    status: 'Draft',
   },
 ]
 
 export function ClassesPage() {
-  const [search, setSearch] = React.useState("")
-  const [filter, setFilter] = React.useState("all")
+  const [search, setSearch] = React.useState('')
+  const [filter, setFilter] = React.useState('all')
 
-  const filteredClasses = classes.filter((class_) => {
+  const filteredClasses = classes.filter(class_ => {
     const matchesSearch = class_.name.toLowerCase().includes(search.toLowerCase())
-    const matchesFilter = filter === "all" || class_.status.toLowerCase() === filter
+    const matchesFilter = filter === 'all' || class_.status.toLowerCase() === filter
     return matchesSearch && matchesFilter
   })
 
@@ -89,9 +83,7 @@ export function ClassesPage() {
       <div className="flex justify-between items-center">
         <div>
           <h3 className="text-lg font-medium">Classes</h3>
-          <p className="text-sm text-muted-foreground">
-            Manage your dance classes and schedules
-          </p>
+          <p className="text-sm text-muted-foreground">Manage your dance classes and schedules</p>
         </div>
         <Button asChild>
           <Link to="/instructor-panel/classes/new">
@@ -104,9 +96,7 @@ export function ClassesPage() {
       <Card>
         <CardHeader>
           <CardTitle>Your Classes</CardTitle>
-          <CardDescription>
-            View and manage all your dance classes
-          </CardDescription>
+          <CardDescription>View and manage all your dance classes</CardDescription>
         </CardHeader>
         <CardContent>
           <div className="flex items-center gap-4 mb-6">
@@ -116,7 +106,7 @@ export function ClassesPage() {
                 placeholder="Search classes..."
                 className="pl-8"
                 value={search}
-                onChange={(e) => setSearch(e.target.value)}
+                onChange={e => setSearch(e.target.value)}
               />
             </div>
             <Select value={filter} onValueChange={setFilter}>
@@ -147,7 +137,7 @@ export function ClassesPage() {
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {filteredClasses.map((class_) => (
+                {filteredClasses.map(class_ => (
                   <TableRow key={class_.id}>
                     <TableCell className="font-medium">
                       <Link
@@ -166,23 +156,21 @@ export function ClassesPage() {
                       {class_.enrolled}/{class_.capacity}
                     </TableCell>
                     <TableCell>
-                      <div className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium
+                      <div
+                        className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium
                         ${
-                          class_.status === "Active"
-                            ? "bg-green-100 text-green-700 dark:bg-green-700/20 dark:text-green-500"
-                            : class_.status === "Draft"
-                            ? "bg-yellow-100 text-yellow-700 dark:bg-yellow-700/20 dark:text-yellow-500"
-                            : "bg-gray-100 text-gray-700 dark:bg-gray-700/20 dark:text-gray-500"
-                        }`}>
+                          class_.status === 'Active'
+                            ? 'bg-green-100 text-green-700 dark:bg-green-700/20 dark:text-green-500'
+                            : class_.status === 'Draft'
+                              ? 'bg-yellow-100 text-yellow-700 dark:bg-yellow-700/20 dark:text-yellow-500'
+                              : 'bg-gray-100 text-gray-700 dark:bg-gray-700/20 dark:text-gray-500'
+                        }`}
+                      >
                         {class_.status}
                       </div>
                     </TableCell>
                     <TableCell className="text-right">
-                      <Button
-                        variant="ghost"
-                        size="sm"
-                        asChild
-                      >
+                      <Button variant="ghost" size="sm" asChild>
                         <Link
                           to="/instructor-panel/classes/$classId"
                           params={{ classId: class_.id }}

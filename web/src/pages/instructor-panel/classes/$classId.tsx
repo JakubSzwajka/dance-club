@@ -1,14 +1,8 @@
-import * as React from "react"
-import { Link, useParams } from "@tanstack/react-router"
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import * as React from 'react'
+import { Link, useParams } from '@tanstack/react-router'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { Button } from '@/components/ui/button'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import {
   Table,
   TableBody,
@@ -16,85 +10,86 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table"
-import { CalendarIcon, MapPinIcon, UsersIcon, ClockIcon } from "lucide-react"
-import { WeeklyScheduleDisplay } from "@/components/schedule/weekly-schedule-display"
+} from '@/components/ui/table'
+import { CalendarIcon, MapPinIcon, UsersIcon, ClockIcon } from 'lucide-react'
+import { WeeklyScheduleDisplay } from '@/components/schedule/weekly-schedule-display'
 
 // Mock data - in real app this would come from API
 const classDetails = {
-  id: "1",
-  name: "Salsa Beginners",
-  description: "Perfect introduction to Salsa dancing. Learn the basic steps, rhythm, and essential moves.",
-  level: "Beginner",
-  type: "Group",
-  location: "Studio A",
+  id: '1',
+  name: 'Salsa Beginners',
+  description:
+    'Perfect introduction to Salsa dancing. Learn the basic steps, rhythm, and essential moves.',
+  level: 'Beginner',
+  type: 'Group',
+  location: 'Studio A',
   capacity: 20,
   enrolled: 15,
-  status: "Active",
+  status: 'Active',
   price: 25,
   duration: 90,
   instructor: {
-    id: "1",
-    name: "John Doe",
-    image: "https://api.dicebear.com/7.x/avataaars/svg?seed=John",
+    id: '1',
+    name: 'John Doe',
+    image: 'https://api.dicebear.com/7.x/avataaars/svg?seed=John',
   },
   students: [
     {
-      id: "1",
-      name: "Alice Smith",
-      email: "alice@example.com",
-      joinedDate: "2024-01-15",
-      attendance: "85%",
+      id: '1',
+      name: 'Alice Smith',
+      email: 'alice@example.com',
+      joinedDate: '2024-01-15',
+      attendance: '85%',
     },
     {
-      id: "2",
-      name: "Bob Johnson",
-      email: "bob@example.com",
-      joinedDate: "2024-01-20",
-      attendance: "90%",
+      id: '2',
+      name: 'Bob Johnson',
+      email: 'bob@example.com',
+      joinedDate: '2024-01-20',
+      attendance: '90%',
     },
   ],
   upcomingClasses: [
     {
-      id: "1",
-      date: "2024-02-19",
-      time: "18:00 - 19:30",
+      id: '1',
+      date: '2024-02-19',
+      time: '18:00 - 19:30',
       confirmedStudents: 12,
-      status: "Scheduled",
+      status: 'Scheduled',
     },
     {
-      id: "2",
-      date: "2024-02-26",
-      time: "18:00 - 19:30",
+      id: '2',
+      date: '2024-02-26',
+      time: '18:00 - 19:30',
       confirmedStudents: 10,
-      status: "Scheduled",
+      status: 'Scheduled',
     },
   ],
-  startDate: new Date("2024-02-01"),
-  endDate: new Date("2024-05-31"),
+  startDate: new Date('2024-02-01'),
+  endDate: new Date('2024-05-31'),
   schedule: [
     {
-      id: "1",
-      day: "monday",
-      startTime: "18:00",
-      endTime: "19:30",
+      id: '1',
+      day: 'monday',
+      startTime: '18:00',
+      endTime: '19:30',
     },
     {
-      id: "2",
-      day: "wednesday",
-      startTime: "19:00",
-      endTime: "20:30",
+      id: '2',
+      day: 'wednesday',
+      startTime: '19:00',
+      endTime: '20:30',
     },
   ],
 }
 
 export function ClassDetailsPage() {
-  const { classId } = useParams({from: "/instructor-panel/instructor-panel/classes/$classId"})
-  const [activeTab, setActiveTab] = React.useState("overview")
+  const { classId } = useParams({ from: '/instructor-panel/instructor-panel/classes/$classId' })
+  const [activeTab, setActiveTab] = React.useState('overview')
 
   // In real app, fetch class details based on classId
   React.useEffect(() => {
-    console.log("Fetch class details for ID:", classId)
+    console.log('Fetch class details for ID:', classId)
   }, [classId])
 
   return (
@@ -102,30 +97,16 @@ export function ClassDetailsPage() {
       <div className="flex justify-between items-center">
         <div>
           <h3 className="text-lg font-medium">{classDetails.name}</h3>
-          <p className="text-sm text-muted-foreground">
-            Manage class details and students
-          </p>
+          <p className="text-sm text-muted-foreground">Manage class details and students</p>
         </div>
         <div className="flex gap-2">
-          <Button
-            variant="outline"
-            asChild
-          >
-            <Link
-              to="/instructor-panel/classes/$classId/edit"
-              params={{ classId }}
-            >
+          <Button variant="outline" asChild>
+            <Link to="/instructor-panel/classes/$classId/edit" params={{ classId }}>
               Edit Class Details
             </Link>
           </Button>
-          <Button
-            variant="outline"
-            asChild
-          >
-            <Link
-              to="/instructor-panel/classes/$classId/schedule"
-              params={{ classId }}
-            >
+          <Button variant="outline" asChild>
+            <Link to="/instructor-panel/classes/$classId/schedule" params={{ classId }}>
               Manage Schedule
             </Link>
           </Button>
@@ -219,9 +200,7 @@ export function ClassDetailsPage() {
             <TabsContent value="overview" className="space-y-4">
               <div className="space-y-4">
                 <h4 className="text-sm font-medium">About this Class</h4>
-                <p className="text-sm text-muted-foreground">
-                  {classDetails.description}
-                </p>
+                <p className="text-sm text-muted-foreground">{classDetails.description}</p>
                 <div className="grid gap-4 md:grid-cols-2">
                   <div>
                     <h4 className="text-sm font-medium mb-2">Class Schedule</h4>
@@ -271,15 +250,8 @@ export function ClassDetailsPage() {
                       Weekly recurring schedule for this class
                     </p>
                   </div>
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    asChild
-                  >
-                    <Link
-                      to="/instructor-panel/classes/$classId/schedule"
-                      params={{ classId }}
-                    >
+                  <Button variant="outline" size="sm" asChild>
+                    <Link to="/instructor-panel/classes/$classId/schedule" params={{ classId }}>
                       Edit Schedule
                     </Link>
                   </Button>
@@ -304,7 +276,7 @@ export function ClassDetailsPage() {
                       </TableRow>
                     </TableHeader>
                     <TableBody>
-                      {classDetails.upcomingClasses.map((session) => (
+                      {classDetails.upcomingClasses.map(session => (
                         <TableRow key={session.id}>
                           <TableCell className="font-medium">{session.date}</TableCell>
                           <TableCell>{session.time}</TableCell>
@@ -315,7 +287,9 @@ export function ClassDetailsPage() {
                             </div>
                           </TableCell>
                           <TableCell className="text-right">
-                            <Button variant="ghost" size="sm">Manage</Button>
+                            <Button variant="ghost" size="sm">
+                              Manage
+                            </Button>
                           </TableCell>
                         </TableRow>
                       ))}
@@ -337,14 +311,16 @@ export function ClassDetailsPage() {
                   </TableRow>
                 </TableHeader>
                 <TableBody>
-                  {classDetails.students.map((student) => (
+                  {classDetails.students.map(student => (
                     <TableRow key={student.id}>
                       <TableCell className="font-medium">{student.name}</TableCell>
                       <TableCell>{student.email}</TableCell>
                       <TableCell>{student.joinedDate}</TableCell>
                       <TableCell>{student.attendance}</TableCell>
                       <TableCell className="text-right">
-                        <Button variant="ghost" size="sm">View Profile</Button>
+                        <Button variant="ghost" size="sm">
+                          View Profile
+                        </Button>
                       </TableCell>
                     </TableRow>
                   ))}
@@ -356,4 +332,4 @@ export function ClassDetailsPage() {
       </Card>
     </div>
   )
-} 
+}

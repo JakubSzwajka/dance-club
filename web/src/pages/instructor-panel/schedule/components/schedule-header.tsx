@@ -1,1 +1,1 @@
-// Component removed as it's no longer needed 
+// Component removed as it's no longer needed

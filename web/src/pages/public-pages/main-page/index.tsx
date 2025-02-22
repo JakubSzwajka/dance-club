@@ -14,7 +14,7 @@ export function HomePage() {
       <HowItWorksSection />
       <FeaturedInstructorsSection />
       <TrendingClassesSection />
-      <SchoolsNearbyMap/>
+      <SchoolsNearbyMap />
       <CTASection />
     </div>
   )

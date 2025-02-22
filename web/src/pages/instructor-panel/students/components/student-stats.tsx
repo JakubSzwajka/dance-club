@@ -1,12 +1,12 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { UsersIcon, UserPlusIcon, ClockIcon, StarIcon } from "lucide-react"
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { UsersIcon, UserPlusIcon, ClockIcon, StarIcon } from 'lucide-react'
 
 // Mock data - in real app this would come from API
 const stats = {
   totalStudents: 245,
   newThisMonth: 12,
-  averageAttendance: "85%",
-  averageRetention: "7.5 months",
+  averageAttendance: '85%',
+  averageRetention: '7.5 months',
 }
 
 export function StudentStats() {
@@ -19,9 +19,7 @@ export function StudentStats() {
         </CardHeader>
         <CardContent>
           <div className="text-2xl font-bold">{stats.totalStudents}</div>
-          <p className="text-xs text-muted-foreground">
-            +{stats.newThisMonth} from last month
-          </p>
+          <p className="text-xs text-muted-foreground">+{stats.newThisMonth} from last month</p>
         </CardContent>
       </Card>
 
@@ -32,9 +30,7 @@ export function StudentStats() {
         </CardHeader>
         <CardContent>
           <div className="text-2xl font-bold">{stats.newThisMonth}</div>
-          <p className="text-xs text-muted-foreground">
-            This month
-          </p>
+          <p className="text-xs text-muted-foreground">This month</p>
         </CardContent>
       </Card>
 
@@ -45,9 +41,7 @@ export function StudentStats() {
         </CardHeader>
         <CardContent>
           <div className="text-2xl font-bold">{stats.averageAttendance}</div>
-          <p className="text-xs text-muted-foreground">
-            Per class
-          </p>
+          <p className="text-xs text-muted-foreground">Per class</p>
         </CardContent>
       </Card>
 
@@ -58,11 +52,9 @@ export function StudentStats() {
         </CardHeader>
         <CardContent>
           <div className="text-2xl font-bold">{stats.averageRetention}</div>
-          <p className="text-xs text-muted-foreground">
-            Per student
-          </p>
+          <p className="text-xs text-muted-foreground">Per student</p>
         </CardContent>
       </Card>
     </div>
   )
-} 
+}

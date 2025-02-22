@@ -1,9 +1,9 @@
-import * as React from "react"
-import { useParams } from "@tanstack/react-router"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import * as React from 'react'
+import { useParams } from '@tanstack/react-router'
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
+import { Button } from '@/components/ui/button'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import {
   Table,
   TableBody,
@@ -11,92 +11,94 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table"
-import { Mail as EnvelopeIcon, Phone as PhoneIcon } from "lucide-react"
+} from '@/components/ui/table'
+import { Mail as EnvelopeIcon, Phone as PhoneIcon } from 'lucide-react'
 
 // Mock data - in real app this would come from API
 const studentDetails = {
-  id: "1",
-  name: "Alice Smith",
-  email: "alice@example.com",
-  avatar: "/avatars/alice.jpg",
-  joinedDate: "2023-09-15",
+  id: '1',
+  name: 'Alice Smith',
+  email: 'alice@example.com',
+  avatar: '/avatars/alice.jpg',
+  joinedDate: '2023-09-15',
   totalClasses: 45,
   activeClasses: 2,
   shareContact: true,
-  phone: "+1 (555) 000-0000",
-  lastActive: "2024-02-15",
-  preferredStyles: ["Salsa", "Bachata"],
-  level: "intermediate",
-  notes: "Excellent progress in Salsa. Shows natural rhythm and dedication.",
-  attendance: "85%",
+  phone: '+1 (555) 000-0000',
+  lastActive: '2024-02-15',
+  preferredStyles: ['Salsa', 'Bachata'],
+  level: 'intermediate',
+  notes: 'Excellent progress in Salsa. Shows natural rhythm and dedication.',
+  attendance: '85%',
   upcomingClasses: [
     {
-      id: "1",
-      name: "Salsa Intermediate",
-      date: "2024-02-20",
-      time: "18:00",
-      instructor: "John Doe",
+      id: '1',
+      name: 'Salsa Intermediate',
+      date: '2024-02-20',
+      time: '18:00',
+      instructor: 'John Doe',
     },
     {
-      id: "2",
-      name: "Bachata Beginners",
-      date: "2024-02-22",
-      time: "19:30",
-      instructor: "Maria Garcia",
+      id: '2',
+      name: 'Bachata Beginners',
+      date: '2024-02-22',
+      time: '19:30',
+      instructor: 'Maria Garcia',
     },
   ],
   classHistory: [
     {
-      id: "1",
-      name: "Salsa Beginners",
-      date: "2024-02-15",
-      attendance: "Attended",
-      instructor: "John Doe",
-      notes: "Great participation",
+      id: '1',
+      name: 'Salsa Beginners',
+      date: '2024-02-15',
+      attendance: 'Attended',
+      instructor: 'John Doe',
+      notes: 'Great participation',
     },
     {
-      id: "2",
-      name: "Bachata Beginners",
-      date: "2024-02-13",
-      attendance: "Missed",
-      instructor: "Maria Garcia",
-      notes: "Notified in advance",
+      id: '2',
+      name: 'Bachata Beginners',
+      date: '2024-02-13',
+      attendance: 'Missed',
+      instructor: 'Maria Garcia',
+      notes: 'Notified in advance',
     },
   ],
   progress: [
     {
-      skill: "Salsa Basic Steps",
-      level: "Advanced",
-      lastAssessed: "2024-02-01",
+      skill: 'Salsa Basic Steps',
+      level: 'Advanced',
+      lastAssessed: '2024-02-01',
     },
     {
-      skill: "Bachata Timing",
-      level: "Intermediate",
-      lastAssessed: "2024-02-01",
+      skill: 'Bachata Timing',
+      level: 'Intermediate',
+      lastAssessed: '2024-02-01',
     },
     {
-      skill: "Partner Work",
-      level: "Intermediate",
-      lastAssessed: "2024-02-01",
+      skill: 'Partner Work',
+      level: 'Intermediate',
+      lastAssessed: '2024-02-01',
     },
   ],
 }
 
 export function StudentDetailsPage() {
-  const { studentId } = useParams({ from: "/instructor-panel/instructor-panel/students/$studentId" })
-  const [activeTab, setActiveTab] = React.useState("overview")
+  const { studentId } = useParams({
+    from: '/instructor-panel/instructor-panel/students/$studentId',
+  })
+  const [activeTab, setActiveTab] = React.useState('overview')
 
   // In real app, fetch student details based on studentId
   React.useEffect(() => {
-    console.log("Fetch student details for ID:", studentId)
+    console.log('Fetch student details for ID:', studentId)
   }, [studentId])
 
   const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleDateString("en-US", {
-      year: "numeric",
-      month: "short",
-      day: "numeric",
+    return new Date(dateString).toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric',
     })
   }
 
@@ -175,7 +177,7 @@ export function StudentDetailsPage() {
               <div>
                 <h4 className="text-sm font-medium mb-2">Preferred Styles</h4>
                 <div className="flex gap-2">
-                  {studentDetails.preferredStyles.map((style) => (
+                  {studentDetails.preferredStyles.map(style => (
                     <span
                       key={style}
                       className="inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium bg-primary/10"
@@ -198,7 +200,7 @@ export function StudentDetailsPage() {
                     </TableRow>
                   </TableHeader>
                   <TableBody>
-                    {studentDetails.upcomingClasses.map((class_) => (
+                    {studentDetails.upcomingClasses.map(class_ => (
                       <TableRow key={class_.id}>
                         <TableCell className="font-medium">{class_.name}</TableCell>
                         <TableCell>{formatDate(class_.date)}</TableCell>
@@ -223,25 +225,23 @@ export function StudentDetailsPage() {
                   </TableRow>
                 </TableHeader>
                 <TableBody>
-                  {studentDetails.classHistory.map((class_) => (
+                  {studentDetails.classHistory.map(class_ => (
                     <TableRow key={class_.id}>
                       <TableCell className="font-medium">{class_.name}</TableCell>
                       <TableCell>{formatDate(class_.date)}</TableCell>
                       <TableCell>
                         <span
                           className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium ${
-                            class_.attendance === "Attended"
-                              ? "bg-green-100 text-green-700 dark:bg-green-700/20 dark:text-green-500"
-                              : "bg-red-100 text-red-700 dark:bg-red-700/20 dark:text-red-500"
+                            class_.attendance === 'Attended'
+                              ? 'bg-green-100 text-green-700 dark:bg-green-700/20 dark:text-green-500'
+                              : 'bg-red-100 text-red-700 dark:bg-red-700/20 dark:text-red-500'
                           }`}
                         >
                           {class_.attendance}
                         </span>
                       </TableCell>
                       <TableCell>{class_.instructor}</TableCell>
-                      <TableCell className="text-muted-foreground">
-                        {class_.notes}
-                      </TableCell>
+                      <TableCell className="text-muted-foreground">{class_.notes}</TableCell>
                     </TableRow>
                   ))}
                 </TableBody>
@@ -258,17 +258,17 @@ export function StudentDetailsPage() {
                   </TableRow>
                 </TableHeader>
                 <TableBody>
-                  {studentDetails.progress.map((item) => (
+                  {studentDetails.progress.map(item => (
                     <TableRow key={item.skill}>
                       <TableCell className="font-medium">{item.skill}</TableCell>
                       <TableCell>
                         <span
                           className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium ${
-                            item.level === "Advanced"
-                              ? "bg-green-100 text-green-700 dark:bg-green-700/20 dark:text-green-500"
-                              : item.level === "Intermediate"
-                              ? "bg-yellow-100 text-yellow-700 dark:bg-yellow-700/20 dark:text-yellow-500"
-                              : "bg-blue-100 text-blue-700 dark:bg-blue-700/20 dark:text-blue-500"
+                            item.level === 'Advanced'
+                              ? 'bg-green-100 text-green-700 dark:bg-green-700/20 dark:text-green-500'
+                              : item.level === 'Intermediate'
+                                ? 'bg-yellow-100 text-yellow-700 dark:bg-yellow-700/20 dark:text-yellow-500'
+                                : 'bg-blue-100 text-blue-700 dark:bg-blue-700/20 dark:text-blue-500'
                           }`}
                         >
                           {item.level}
@@ -292,4 +292,4 @@ export function StudentDetailsPage() {
       </Card>
     </div>
   )
-} 
+}

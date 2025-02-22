@@ -2,17 +2,9 @@ import {
   HomeIcon,
   CalendarIcon,
   UsersIcon,
-  Cog6ToothIcon,
   AcademicCapIcon,
-  ClockIcon,
   BellIcon,
   UserCircleIcon,
-  BuildingOffice2Icon,
-  WrenchScrewdriverIcon,
-  CurrencyDollarIcon,
-  DocumentChartBarIcon,
-  ChartBarIcon,
-  MapPinIcon,
 } from '@heroicons/react/24/outline'
 import type { SidebarData } from '../types'
 
@@ -27,7 +19,7 @@ export const sidebarData: SidebarData = {
       name: 'My Dance DNA',
       logo: AcademicCapIcon,
       plan: 'Instructor Panel',
-    }
+    },
   ],
   navGroups: [
     {
@@ -56,30 +48,30 @@ export const sidebarData: SidebarData = {
       ],
     },
     {
-        title: 'Instructor Profile Management',
-        items: [
+      title: 'Instructor Profile Management',
+      items: [
         {
           title: 'Profile',
           url: '/instructor-panel/settings-teaching',
           icon: AcademicCapIcon,
         },
-        ],
-    },
-    {
-      title: 'Studio Management',
-      items: [
-        {
-          title: 'Locations',
-          url: '/instructor-panel/studio/locations',
-          icon: MapPinIcon,
-        },
-        {
-          title: 'Analytics',
-          url: '/instructor-panel/studio/analytics',
-          icon: ChartBarIcon,
-        },
       ],
     },
+    // {
+    //   title: 'Studio Management',
+    //   items: [
+    //     {
+    //       title: 'Locations',
+    //       url: '/instructor-panel/studio/locations',
+    //       icon: MapPinIcon,
+    //     },
+    //     {
+    //       title: 'Analytics',
+    //       url: '/instructor-panel/studio/analytics',
+    //       icon: ChartBarIcon,
+    //     },
+    //   ],
+    // },
     {
       title: 'Settings',
       items: [

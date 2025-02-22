@@ -1,14 +1,8 @@
-import { zodResolver } from "@hookform/resolvers/zod"
-import { useForm } from "react-hook-form"
-import { z } from "zod"
-import { Button } from "@/components/ui/button"
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card"
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useForm } from 'react-hook-form'
+import { z } from 'zod'
+import { Button } from '@/components/ui/button'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import {
   Form,
   FormControl,
@@ -17,40 +11,40 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form"
-import { Input } from "@/components/ui/input"
+} from '@/components/ui/form'
+import { Input } from '@/components/ui/input'
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select"
-import { Textarea } from "@/components/ui/textarea"
-import { Separator } from "@/components/ui/separator"
+} from '@/components/ui/select'
+import { Textarea } from '@/components/ui/textarea'
+import { Separator } from '@/components/ui/separator'
 
 const teachingSettingsSchema = z.object({
-  experienceLevel: z.enum(["beginner", "intermediate", "advanced", "all"]),
+  experienceLevel: z.enum(['beginner', 'intermediate', 'advanced', 'all']),
   maxStudentsPerClass: z.string(),
   preferredDanceStyles: z.string(),
   teachingExperience: z.string(),
   certifications: z.string(),
   specialties: z.string(),
-  classFormat: z.enum(["group", "private", "both"]),
+  classFormat: z.enum(['group', 'private', 'both']),
   pricePerHour: z.string(),
 })
 
 type TeachingSettingsValues = z.infer<typeof teachingSettingsSchema>
 
 const defaultValues: Partial<TeachingSettingsValues> = {
-  experienceLevel: "all",
-  maxStudentsPerClass: "20",
-  preferredDanceStyles: "Salsa, Bachata",
-  teachingExperience: "10 years",
-  certifications: "International Dance Teachers Association (IDTA)",
-  specialties: "Salsa on1, Bachata Sensual",
-  classFormat: "both",
-  pricePerHour: "50",
+  experienceLevel: 'all',
+  maxStudentsPerClass: '20',
+  preferredDanceStyles: 'Salsa, Bachata',
+  teachingExperience: '10 years',
+  certifications: 'International Dance Teachers Association (IDTA)',
+  specialties: 'Salsa on1, Bachata Sensual',
+  classFormat: 'both',
+  pricePerHour: '50',
 }
 
 export function TeachingSettings() {
@@ -66,15 +60,12 @@ export function TeachingSettings() {
 
   return (
     <div className="space-y-6">
-      
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
           <Card>
             <CardHeader>
               <CardTitle>Teaching Profile</CardTitle>
-              <CardDescription>
-                Set up your teaching profile and preferences
-              </CardDescription>
+              <CardDescription>Set up your teaching profile and preferences</CardDescription>
             </CardHeader>
             <CardContent className="space-y-6">
               <Separator />
@@ -198,9 +189,7 @@ export function TeachingSettings() {
                         <FormControl>
                           <Input placeholder="e.g., Salsa, Bachata" {...field} />
                         </FormControl>
-                        <FormDescription>
-                          Separate styles with commas
-                        </FormDescription>
+                        <FormDescription>Separate styles with commas</FormDescription>
                         <FormMessage />
                       </FormItem>
                     )}
@@ -215,9 +204,7 @@ export function TeachingSettings() {
                         <FormControl>
                           <Input placeholder="e.g., Salsa on1, Bachata Sensual" {...field} />
                         </FormControl>
-                        <FormDescription>
-                          List your dance specialties
-                        </FormDescription>
+                        <FormDescription>List your dance specialties</FormDescription>
                         <FormMessage />
                       </FormItem>
                     )}
@@ -285,4 +272,4 @@ export function TeachingSettings() {
       </Form>
     </div>
   )
-} 
+}

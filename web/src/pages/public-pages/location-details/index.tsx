@@ -9,15 +9,7 @@ import { ClassesSection } from './components/ClassesSection'
 export function LocationDetailsPage() {
   const { locationId } = useParams({ from: '/locations/$locationId' })
   const { data: location, isLoading } = usePublicLocation(locationId)
-  const { data: classes } = usePublicClasses(
-    null,
-    locationId,
-    null,
-    null,
-    null,
-    null,
-    null
-  )
+  const { data: classes } = usePublicClasses(null, locationId, null, null, null, null, null)
   if (isLoading || !location) {
     return (
       <div className="min-h-screen bg-background">

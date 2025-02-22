@@ -1,7 +1,8 @@
 import { $api } from '../queryClient'
 import { operations } from '../schema'
 
-type LocationSearchParams = operations['mydanceclub_api_public_locations_get_locations_nearby']['parameters']['query']
+type LocationSearchParams =
+  operations['mydanceclub_api_public_locations_get_locations_nearby']['parameters']['query']
 
 export function usePublicLocationsNearby(params: LocationSearchParams) {
   return $api.useQuery(
@@ -22,18 +23,12 @@ export function usePublicLocationsNearby(params: LocationSearchParams) {
 }
 
 export function usePublicLocations(params: LocationSearchParams) {
-  return $api.useQuery(
-    'get',
-    '/api/public/locations',
-    {
-      params: {
-        query: params,
-      },
+  return $api.useQuery('get', '/api/public/locations', {
+    params: {
+      query: params,
     },
-  )
+  })
 }
-
-
 
 export function usePublicLocation(id: string) {
   return $api.useQuery('get', '/api/public/locations/{location_id}', {

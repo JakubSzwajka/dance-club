@@ -1,5 +1,12 @@
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card'
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '@/components/ui/table'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 
 // Mock data - in real app this would come from API
@@ -53,7 +60,7 @@ export function RecentFeedback() {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {recentFeedback.map((feedback) => (
+            {recentFeedback.map(feedback => (
               <TableRow key={feedback.id}>
                 <TableCell>
                   <div className="flex items-center gap-2">
@@ -71,9 +78,7 @@ export function RecentFeedback() {
                 <TableCell className="max-w-[300px]">
                   <p className="truncate">{feedback.comment}</p>
                 </TableCell>
-                <TableCell className="text-right text-muted-foreground">
-                  {feedback.date}
-                </TableCell>
+                <TableCell className="text-right text-muted-foreground">{feedback.date}</TableCell>
               </TableRow>
             ))}
           </TableBody>
@@ -81,4 +86,4 @@ export function RecentFeedback() {
       </CardContent>
     </Card>
   )
-} 
+}

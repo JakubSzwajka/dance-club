@@ -28,10 +28,10 @@ export function ClassDetailsPage() {
         const styles = window.getComputedStyle(contentRef.current)
         const lineHeight = parseInt(styles.lineHeight)
         const height = contentRef.current.scrollHeight
-        
+
         // 4 lines + some buffer for safety
         const maxHeight = lineHeight * 4 + 8
-        
+
         setNeedsTruncation(height > maxHeight)
       }
     }
