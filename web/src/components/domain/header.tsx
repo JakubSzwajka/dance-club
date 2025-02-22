@@ -11,6 +11,7 @@ import {
   DropdownMenuSeparator,
 } from '../ui/dropdown-menu'
 import { cn } from '@/lib/utils'
+import { ThemeSwitch } from '../theme-switch'
 
 export function Header() {
   const { logout, isAuthenticated, user } = useAuth()
@@ -32,6 +33,7 @@ export function Header() {
             </div>
           </div>
           <nav className="flex items-center space-x-4">
+            <ThemeSwitch />
             {isAuthenticated ? (
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
